@@ -1,45 +1,39 @@
-import React, { FC } from 'react';
 import { useTranslation } from 'react-i18next';
 
-import { Delete, Edit, Flag } from '@mui/icons-material';
+import { Delete, Edit } from '@mui/icons-material';
 import { ListItemIcon, ListItemText, Menu, MenuItem } from '@mui/material';
 
-import { APP_ACTIONS_TYPES } from '@/config/appActionsTypes';
-import { MUTATION_KEYS, useMutation } from '@/config/queryClient';
-
-import { useAppDataContext } from '../context/AppDataContext';
-import { useCommentContext } from '../context/CommentContext';
-import { useReviewContext } from '../context/ReviewContext';
+import { AppActionsType } from '@/config/appActions';
+import { CommentAppData } from '@/config/appData';
+import { mutations } from '@/config/queryClient';
 
 type Props = {
   open: boolean;
   menuAnchorEl: null | HTMLElement;
   onClose: () => void;
-  onClickFlag?: () => void;
+  onEdit: (id: string) => void;
+  // onClickFlag?: () => void;
   showDelete?: boolean;
   showEdit?: boolean;
-  showFlag?: boolean;
+  // showFlag?: boolean;
+  comment: CommentAppData;
 };
 
-const CommentActions: FC<Props> = ({
+const CommentActions = ({
   open,
   menuAnchorEl,
   onClose,
-  onClickFlag,
+  onEdit,
+  // onClickFlag,
   showDelete = true,
   showEdit = true,
-  showFlag = true,
-}) => {
+  // showFlag = true,
+  comment,
+}: Props): JSX.Element => {
   const { t } = useTranslation();
-  const comment = useCommentContext();
-  const { editComment } = useReviewContext();
-  const { deleteAppData } = useAppDataContext();
-  const { mutate: postAction } = useMutation<
-    unknown,
-    unknown,
-    { data: unknown; type: string }
-  >(MUTATION_KEYS.POST_APP_ACTION);
-
+  const { mutate: deleteAppData } = mutations.useDeleteAppData();
+  const { mutate: postAction } = mutations.usePostAppAction();
+  console.debug(open, showEdit, showDelete);
   return (
     <Menu
       MenuListProps={{ dense: true }}
@@ -59,10 +53,11 @@ const CommentActions: FC<Props> = ({
       {showEdit && (
         <MenuItem
           onClick={() => {
-            editComment(comment.id);
+            // todo: add editing signal
+            onEdit(comment.id);
             postAction({
               data: { comment },
-              type: APP_ACTIONS_TYPES.EDIT_COMMENT,
+              type: AppActionsType.Edit,
             });
             onClose();
           }}
@@ -79,7 +74,7 @@ const CommentActions: FC<Props> = ({
             deleteAppData({ id: comment.id });
             postAction({
               data: { comment },
-              type: APP_ACTIONS_TYPES.DELETE_COMMENT,
+              type: AppActionsType.Delete,
             });
             onClose();
           }}
@@ -90,13 +85,13 @@ const CommentActions: FC<Props> = ({
           <ListItemText>{t('Delete')}</ListItemText>
         </MenuItem>
       )}
-      {showFlag && (
+      {/* {showFlag && (
         <MenuItem
           onClick={() => {
             onClickFlag?.();
             postAction({
-              data: { comment },
-              type: APP_ACTIONS_TYPES.REPORT_COMMENT,
+              data: { comment: comment.toJS() },
+              type: AppActionsType.re,
             });
             onClose();
           }}
@@ -106,7 +101,7 @@ const CommentActions: FC<Props> = ({
           </ListItemIcon>
           <ListItemText>{t('Report')}</ListItemText>
         </MenuItem>
-      )}
+      )} */}
     </Menu>
   );
 };

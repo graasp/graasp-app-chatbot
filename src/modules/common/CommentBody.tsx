@@ -1,6 +1,5 @@
-import React, { FC, PropsWithChildren, ReactElement } from 'react';
+import { FC, PropsWithChildren, ReactNode } from 'react';
 import ReactMarkdown from 'react-markdown';
-import { CodeProps } from 'react-markdown/lib/ast-to-react';
 
 import { styled } from '@mui/material';
 
@@ -8,7 +7,7 @@ import { Highlight, themes } from 'prism-react-renderer';
 import remarkBreaks from 'remark-breaks';
 import remarkGfm from 'remark-gfm';
 
-import { BIG_BORDER_RADIUS } from '@/config/layout';
+import { BIG_BORDER_RADIUS } from '@/constants';
 
 const StyledReactMarkdown = styled(ReactMarkdown)(({ theme }) => ({
   '& .prism-code': {
@@ -72,20 +71,17 @@ const StyledReactMarkdown = styled(ReactMarkdown)(({ theme }) => ({
 type Props = {
   children: string;
 };
-
-const renderCode = ({
-  inline,
-  className: classNameInit,
-  children: codeContent,
-  ...props
-}: CodeProps): ReactElement => {
-  const match = /language-(\w+)/.exec(classNameInit || '');
-  return !inline && match ? (
+function code(props: {
+  className?: string;
+  children?: ReactNode;
+}): JSX.Element {
+  const { className: language, children, ...rest } = props;
+  const match = /language-(\w+)/.exec(language || '');
+  return match ? (
     <Highlight
+      code={String(children).replace(/\n$/, '')}
       theme={themes.vsLight}
-      code={String(codeContent).replace(/\n$/, '')}
-      language={match[1]}
-      {...props}
+      language={match[1] as string}
     >
       {({ className, style, tokens, getLineProps, getTokenProps }) => (
         <div className={className} style={style}>
@@ -112,19 +108,16 @@ const renderCode = ({
       )}
     </Highlight>
   ) : (
-    <code className={classNameInit} {...props}>
-      {codeContent}
+    <code className={language} {...rest}>
+      {children}
     </code>
   );
-};
+}
 
 const CommentBody: FC<PropsWithChildren<Props>> = ({ children }) => (
   <StyledReactMarkdown
-    linkTarget="_blank"
     remarkPlugins={[remarkGfm, remarkBreaks]}
-    components={{
-      code: renderCode,
-    }}
+    components={{ code }}
   >
     {children}
   </StyledReactMarkdown>

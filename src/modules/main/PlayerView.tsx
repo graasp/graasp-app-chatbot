@@ -1,23 +1,33 @@
-import { Box, Typography } from '@mui/material';
+import { Box } from '@mui/material';
 
 import { useLocalContext } from '@graasp/apps-query-client';
+import { UUID } from '@graasp/sdk';
 
+import { CommentData } from '@/config/appData';
 import { hooks } from '@/config/queryClient';
 import { PLAYER_VIEW_CY } from '@/config/selectors';
+import ChatbotPrompt from '@/modules/common/ChatbotPrompt';
+import CommentThread from '@/modules/common/CommentThread';
 
-const PlayerView = (): JSX.Element => {
-  const { permission } = useLocalContext();
-  const { data: appContext } = hooks.useAppContext();
-  const members = appContext?.members;
+type Props = {
+  id?: UUID;
+};
+
+const PlayerView = ({ id }: Props): JSX.Element => {
+  const { data: appData } = hooks.useAppData<CommentData>();
+
+  let { memberId } = useLocalContext();
+  if (id) {
+    memberId = id;
+  }
+
+  const comments = appData?.filter((res) => res.creator?.id === memberId);
 
   return (
-    <div data-cy={PLAYER_VIEW_CY}>
-      Player as {permission}
-      <Box p={2}>
-        <Typography>Members</Typography>
-        <pre>{JSON.stringify(members, null, 2)}</pre>
-      </Box>
-    </div>
+    <Box sx={{ px: 10 }} data-cy={PLAYER_VIEW_CY}>
+      <ChatbotPrompt id={memberId} />
+      <CommentThread>{comments}</CommentThread>
+    </Box>
   );
 };
 export default PlayerView;

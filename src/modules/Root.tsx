@@ -24,7 +24,7 @@ import { defaultMockContext, mockMembers } from '@/mocks/db';
 import Loader from '@/modules/common/Loader';
 import { useObjectState } from '@/utils/hooks';
 
-import App from './main/App';
+import App from './App';
 
 // declare the module to enable theme modification
 declare module '@mui/material/styles' {
@@ -84,7 +84,7 @@ const Root: FC = () => {
               <ToastContainer />
               <WithLocalContext
                 defaultValue={window.Cypress ? window.appContext : mockContext}
-                LoadingComponent={<Loader />}
+                LoadingComponent={<Loader>Loading Context</Loader>}
                 useGetLocalContext={hooks.useGetLocalContext}
                 useAutoResize={hooks.useAutoResize}
                 onError={() => {
@@ -94,7 +94,7 @@ const Root: FC = () => {
                 }}
               >
                 <WithTokenContext
-                  LoadingComponent={<Loader />}
+                  LoadingComponent={<Loader>Loading token</Loader>}
                   useAuthToken={hooks.useAuthToken}
                   onError={() => {
                     console.error(
