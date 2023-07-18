@@ -1,4 +1,5 @@
-import type { Database, LocalContext, Member } from '@graasp/apps-query-client';
+import type { Database, LocalContext } from '@graasp/apps-query-client';
+import { Member, PermissionLevel } from '@graasp/sdk';
 
 import { v4 } from 'uuid';
 
@@ -7,7 +8,7 @@ import { API_HOST } from '@/config/env';
 
 export const mockContext: LocalContext = {
   apiHost: API_HOST,
-  permission: 'admin',
+  permission: PermissionLevel.Admin,
   context: 'player',
   itemId: '1234-1234-123456-8123-123456',
   memberId: v4(),
@@ -15,10 +16,22 @@ export const mockContext: LocalContext = {
 
 export const mockMembers: Member[] = [
   {
-    id: mockContext.memberId || v4(),
-    name: 'ID-123',
+    id: mockContext.memberId || '',
+    name: 'current-member',
     email: '',
     extra: {},
+    type: 'individual',
+    createdAt: new Date('1996-09-08T19:00:00'),
+    updatedAt: new Date(),
+  },
+  {
+    id: 'mock-member-id-2',
+    name: 'mock-member-2',
+    email: '',
+    extra: {},
+    type: 'individual',
+    createdAt: new Date('1995-02-02T15:00:00'),
+    updatedAt: new Date(),
   },
 ];
 
@@ -76,24 +89,18 @@ const buildDatabase = (
   ],
   appActions: [],
   members: members ?? mockMembers,
-  appSettings: [
-    // {
-    //   id: 'e09b45ad-4391-48fd-99f1-8f0f300f4b59',
-    //   name: 'CHATBOT_PROMPT_SETTINGS',
-    //   itemId: '81f2dc95-1f15-48f6-92b2-913e38265270',
-    //   data: {
-    //     chatbotPrompt: 'Hello! I am a chatbot. Ask me anything.',
-    //     initialPrompt: [
-    //       {
-    //         role: 'system',
-    //         content: 'You are a chatbot.',
-    //       },
-    //     ],
-    //   },
-    //   creator: 'a25baa07-09e6-4c8c-a53e-9adc94937037',
-    //   createdAt: '2023-04-26T09:34:16.160Z',
-    //   updatedAt: '2023-04-26T09:34:16.160Z',
-    // },
+  appSettings: [],
+  items: [
+    {
+      id: mockContext.itemId,
+      name: 'app-starter-ts-vite',
+      description: null,
+      path: '',
+      settings: {},
+      creator: mockMembers[0],
+      createdAt: new Date(),
+      updatedAt: new Date(),
+    },
   ],
 });
 

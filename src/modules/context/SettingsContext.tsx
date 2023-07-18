@@ -1,6 +1,6 @@
 import { FC, ReactElement, createContext, useContext } from 'react';
 
-import { AppSetting } from '@graasp/apps-query-client';
+import { AppSetting } from '@graasp/sdk';
 
 import {
   APP_MODE_SETTINGS_NAME,
