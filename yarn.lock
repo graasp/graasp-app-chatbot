@@ -4066,6 +4066,26 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@graasp/apps-query-client@npm:2.0.1":
+  version: 2.0.1
+  resolution: "@graasp/apps-query-client@npm:2.0.1"
+  dependencies:
+    "@graasp/sdk": 1.1.2
+    axios: 1.4.0
+    http-status-codes: 2.2.0
+    immutable: 4.3.0
+    miragejs: 0.1.47
+    qs: 6.11.2
+    uuid: 9.0.0
+  peerDependencies:
+    "@tanstack/react-query": ^4.28.0
+    "@tanstack/react-query-devtools": ^4.28.0
+    react: ^18.0.0
+    react-dom: ^18.0.0
+  checksum: 111a378033db78fbcf0ff72456a381f81f2aaa5dcbcdeaf81ce7551a04c18b4cec0cf16628f4e360239546e774cd19464e4de170ef02844a5d54e3b801b92c47
+  languageName: node
+  linkType: hard
+
 "@graasp/apps-query-client@npm:^2.0.1":
   version: 2.0.1
   resolution: "@graasp/apps-query-client@npm:2.0.1"
@@ -9374,7 +9394,7 @@ __metadata:
     "@cypress/code-coverage": 3.11.0
     "@emotion/react": 11.11.1
     "@emotion/styled": 11.11.0
-    "@graasp/apps-query-client": ^2.0.1
+    "@graasp/apps-query-client": 2.0.1
     "@graasp/sdk": 1.1.2
     "@graasp/ui": 3.2.4
     "@mui/icons-material": 5.14.0
