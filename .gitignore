@@ -16,6 +16,7 @@
 .DS_Store
 
 # env files
+.env
 .env.*
 
 npm-debug.log*
