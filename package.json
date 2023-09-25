@@ -51,9 +51,11 @@
   },
   "scripts": {
     "dev": "yarn vite",
+    "start": "yarn dev",
     "start:test": "yarn vite --mode test",
     "build": "yarn vite build",
     "preview": "yarn vite preview",
+    "preview:test": "yarn vite preview --mode test",
     "postinstall": "husky install",
     "lint": "eslint .",
     "prettier:write": "prettier {src,cypress}/**/*.{ts,tsx,js,jsx} --write",
