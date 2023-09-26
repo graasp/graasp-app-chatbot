@@ -29,6 +29,7 @@ jobs:
           VITE_SENTRY_ENV: staging
           VITE_SENTRY_DSN: ${{ secrets.SENTRY_DSN }}
           VITE_VERSION: ${{ github.event.client_payload.tag }}
+          VITE_OPENAI_API_URL: ${{ secrets.VITE_OPENAI_API_URL }}
           # add any env variable needed by your app here
         run: yarn build
         shell: bash
