@@ -1,26 +1,30 @@
-import { AppData, UUID } from '@graasp/apps-query-client';
+import { UUID } from '@graasp/sdk';
+import { ImmutableCast } from '@graasp/sdk/frontend';
 
 import { List } from 'immutable';
 
 import { CommentType } from '@/interfaces/comment';
 
 const findCommentWithId = (
-  comments: List<CommentType>,
+  comments: List<ImmutableCast<CommentType>>,
   commentId: UUID,
-): AppData | undefined => comments.find((c) => c.id === commentId);
+): ImmutableCast<CommentType> | undefined =>
+  comments.find((c) => c.id === commentId);
 
 const findCommentWithParentId = (
-  comments: List<CommentType>,
+  comments: List<ImmutableCast<CommentType>>,
   commentId: UUID,
-): AppData | undefined => comments.find((c) => c.data?.parent === commentId);
+): ImmutableCast<CommentType> | undefined =>
+  comments.find((c) => c.data?.parent === commentId);
 
 const findChild = (
-  comments: List<CommentType>,
+  comments: List<ImmutableCast<CommentType>>,
   parentId: UUID,
-): CommentType | undefined => comments.find((c) => c.data.parent === parentId);
+): ImmutableCast<CommentType> | undefined =>
+  comments.find((c) => c.data.parent === parentId);
 
 const getThreadIdsFromLastCommentId = (
-  allComments: List<CommentType>,
+  allComments: List<ImmutableCast<CommentType>>,
   lastCommentId: UUID,
 ): UUID[] => {
   // this method goes bottom up to find comment ids in the thread
@@ -38,7 +42,7 @@ const getThreadIdsFromLastCommentId = (
 };
 
 const getThreadIdsFromFirstCommentId = (
-  allComments: List<CommentType>,
+  allComments: List<ImmutableCast<CommentType>>,
   firstId: UUID,
 ): UUID[] => {
   // this method goes from top to bottom
@@ -56,9 +60,11 @@ const getThreadIdsFromFirstCommentId = (
   return thread;
 };
 
-const getOrphans = (allComments: List<CommentType>): List<CommentType> => {
+const getOrphans = (
+  allComments: List<ImmutableCast<CommentType>>,
+): List<ImmutableCast<CommentType>> => {
   // orphans are comments which parent does not exist
-  let orphans: List<CommentType> = List();
+  let orphans: List<ImmutableCast<CommentType>> = List();
   allComments.forEach((c) => {
     const parentId = c.data?.parent as UUID;
     const parent = findCommentWithId(allComments, parentId);
@@ -71,9 +77,9 @@ const getOrphans = (allComments: List<CommentType>): List<CommentType> => {
 };
 
 const buildThread = (
-  parentComment: CommentType,
-  comments: List<CommentType>,
-): List<CommentType> => {
+  parentComment: ImmutableCast<CommentType>,
+  comments: List<ImmutableCast<CommentType>>,
+): List<ImmutableCast<CommentType>> => {
   // build thread list
   let thread = List([parentComment]);
   let parentId = parentComment.id;

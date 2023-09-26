@@ -1,4 +1,4 @@
-import { AppSetting } from '@graasp/apps-query-client';
+import { AppSetting } from '@graasp/sdk';
 
 import { AppMode, DataFile } from '@/config/appSettingsTypes';
 

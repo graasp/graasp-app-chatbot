@@ -13,6 +13,8 @@ import {
   TableRow,
 } from '@mui/material';
 
+import { ImmutableCast } from '@graasp/sdk/frontend';
+
 import { List } from 'immutable';
 
 import { COMMENT_APP_DATA_TYPES } from '@/config/appDataTypes';
@@ -57,7 +59,7 @@ const TableView: FC = () => {
 
   const comments = appData?.filter((res) =>
     COMMENT_APP_DATA_TYPES.includes(res.type),
-  ) as List<CommentType>;
+  ) as List<ImmutableCast<CommentType>>;
 
   const renderTableBody = (): ReactElement[] | ReactElement | null => {
     const orphansId = getOrphans(comments).map((c) => c.id);
@@ -79,7 +81,7 @@ const TableView: FC = () => {
       );
     }
     const commentsByUsers = nonOrphanComments
-      .groupBy(({ memberId }) => memberId)
+      .groupBy(({ member }) => member.id)
       .toArray();
     return commentsByUsers.map(([userId, userComments]) => {
       const userName =

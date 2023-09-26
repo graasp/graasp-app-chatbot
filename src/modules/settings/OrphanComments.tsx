@@ -3,7 +3,8 @@ import { useTranslation } from 'react-i18next';
 
 import { FormControlLabel } from '@mui/material';
 
-import { UUID } from '@graasp/apps-query-client';
+import { UUID } from '@graasp/sdk';
+import { ImmutableCast } from '@graasp/sdk/frontend';
 import { Button } from '@graasp/ui';
 
 import { List } from 'immutable';
@@ -14,14 +15,16 @@ import { useAppDataContext } from '@/modules/context/AppDataContext';
 import { getOrphans, getThreadIdsFromFirstCommentId } from '@/utils/comments';
 
 type Prop = {
-  comments: List<CommentType>;
+  comments: List<ImmutableCast<CommentType>>;
 };
 
 const OrphanComments: FC<Prop> = ({ comments }) => {
   const { t } = useTranslation();
   const { deleteAppData } = useAppDataContext();
 
-  const getOrphanComments = (allComments: List<CommentType>): List<UUID[]> => {
+  const getOrphanComments = (
+    allComments: List<ImmutableCast<CommentType>>,
+  ): List<UUID[]> => {
     const orphans = getOrphans(allComments);
     return orphans.map((o) => getThreadIdsFromFirstCommentId(comments, o.id));
   };

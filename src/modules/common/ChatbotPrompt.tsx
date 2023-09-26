@@ -3,7 +3,8 @@ import { useTranslation } from 'react-i18next';
 
 import { CardContent, CardHeader } from '@mui/material';
 
-import { UUID, useLocalContext } from '@graasp/apps-query-client';
+import { useLocalContext } from '@graasp/apps-query-client';
+import { UUID } from '@graasp/sdk';
 
 import { APP_ACTIONS_TYPES } from '@/config/appActionsTypes';
 import { APP_DATA_TYPES, COMMENT_APP_DATA_TYPES } from '@/config/appDataTypes';
@@ -69,7 +70,8 @@ const ChatbotPrompt: FC<Props> = ({ id }) => {
   );
 
   const comments = appData.filter(
-    (c) => COMMENT_APP_DATA_TYPES.includes(c.type) && c.creator === memberId,
+    (c) =>
+      COMMENT_APP_DATA_TYPES.includes(c.type) && c.creator?.id === memberId,
   );
 
   const realChatbotPromptExists = comments.find(

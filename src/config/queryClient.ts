@@ -1,4 +1,5 @@
 import {
+  Notifier,
   buildMockLocalContext,
   buildMockParentWindow,
   configureQueryClient,
@@ -17,7 +18,7 @@ const {
   API_ROUTES,
   MUTATION_KEYS,
 } = configureQueryClient({
-  notifier: (data) => {
+  notifier: (data: Parameters<Notifier>[0]) => {
     // eslint-disable-next-line no-console
     console.log('notifier: ', data);
   },

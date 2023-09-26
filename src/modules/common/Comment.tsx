@@ -13,6 +13,7 @@ import {
 } from '@mui/material';
 
 import { useLocalContext } from '@graasp/apps-query-client';
+import { ImmutableCast } from '@graasp/sdk/frontend';
 
 import { APP_DATA_TYPES } from '@/config/appDataTypes';
 import { GENERAL_SETTINGS_NAME } from '@/config/appSettingsTypes';
@@ -39,7 +40,7 @@ const CustomCard = styled(Card)<CardProps>({
 });
 
 type Props = {
-  comment: CommentType;
+  comment: ImmutableCast<CommentType>;
 };
 
 const Comment: FC<Props> = ({ comment }) => {
@@ -68,7 +69,7 @@ const Comment: FC<Props> = ({ comment }) => {
 
   const isBot = comment.type === APP_DATA_TYPES.BOT_COMMENT;
 
-  const isEditable = (): boolean => currentMember === comment.creator;
+  const isEditable = (): boolean => currentMember === comment.creator?.id;
   const isDeletable = (): boolean => isEditable();
 
   const sendCommentReport = (reason: string): void => {

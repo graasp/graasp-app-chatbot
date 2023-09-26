@@ -13,8 +13,8 @@ const locales: { [key: string]: Locale } = {
 
 export const NO_DATE_PLACEHOLDER = 'N.D.';
 
-const getFormattedTime = (time: string, lang: string): string => {
-  const parsedInputDate = Date.parse(time);
+const getFormattedTime = (time: Date, lang: string): string => {
+  const parsedInputDate = time;
 
   return Number.isNaN(parsedInputDate)
     ? NO_DATE_PLACEHOLDER

@@ -2,7 +2,7 @@ import React, { FC } from 'react';
 
 import { Avatar } from '@mui/material';
 
-import { Member } from '@graasp/apps-query-client';
+import { Member } from '@graasp/sdk';
 
 import { ANONYMOUS_USER } from '@/config/constants';
 

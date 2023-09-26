@@ -1,6 +1,7 @@
 import { FC, ReactElement, createContext, useContext } from 'react';
 
-import { AppSetting } from '@graasp/apps-query-client';
+import { AppSetting, convertJs } from '@graasp/sdk';
+import { ImmutableCast } from '@graasp/sdk/frontend';
 
 import {
   APP_MODE_SETTINGS_NAME,
@@ -49,7 +50,7 @@ type AllSettingsNameType = (typeof ALL_SETTING_NAMES)[number];
 type AllSettingsDataType = AllSettingsType[keyof AllSettingsType];
 
 export type SettingsContextType = AllSettingsType & {
-  chatbotPrompt: ChatbotPromptAppSettings;
+  chatbotPrompt: ImmutableCast<ChatbotPromptAppSettings>;
   saveSettings: (
     name: AllSettingsNameType,
     newValue: AllSettingsDataType,
@@ -58,12 +59,12 @@ export type SettingsContextType = AllSettingsType & {
 
 const defaultContextValue = {
   ...defaultSettingsValues,
-  chatbotPrompt: {
+  chatbotPrompt: convertJs({
     data: {
       [ChatbotPromptSettingsKeys.InitialPrompt]: [{}],
       [ChatbotPromptSettingsKeys.ChatbotPrompt]: '',
     },
-  } as ChatbotPromptAppSettings,
+  }) as ImmutableCast<ChatbotPromptAppSettings>,
   saveSettings: () => null,
 };
 
@@ -129,7 +130,7 @@ export const SettingsProvider: FC<Prop> = ({ children }) => {
 
       const chatbotPrompt = (appSettingsList.find(
         (s) => s.name === CHATBOT_PROMPT_SETTINGS_NAME,
-      ) as ChatbotPromptAppSettings) || {
+      ) as ImmutableCast<ChatbotPromptAppSettings>) || {
         data: DEFAULT_CHATBOT_PROMPT_SETTINGS,
       };
 

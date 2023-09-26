@@ -3,6 +3,8 @@ import { useTranslation } from 'react-i18next';
 
 import { CircularProgress, Stack, Typography } from '@mui/material';
 
+import { ImmutableCast } from '@graasp/sdk/frontend';
+
 import { List } from 'immutable';
 
 import { APP_ACTIONS_TYPES } from '@/config/appActionsTypes';
@@ -33,7 +35,7 @@ import CommentEditor from './CommentEditor';
 import ResponseBox from './ResponseBox';
 
 type Props = {
-  children?: List<CommentType>;
+  children?: List<ImmutableCast<CommentType>>;
 };
 
 const CommentThread: FC<Props> = ({ children }) => {
@@ -72,7 +74,7 @@ const CommentThread: FC<Props> = ({ children }) => {
   const isEdited = (id: string): boolean => id === currentEditedCommentId;
   const isReplied = (id: string): boolean => id === currentRepliedCommentId;
   const allowedChatbotResponse = (
-    arr: List<CommentType>,
+    arr: List<ImmutableCast<CommentType>>,
     idx: number,
     commentType: string,
   ): boolean =>

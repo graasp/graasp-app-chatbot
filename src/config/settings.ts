@@ -19,7 +19,7 @@ import { AppView } from './layout';
 export const DEFAULT_APP_MODE = AppMode.Execute;
 export const DEFAULT_APP_VIEW = AppView.CodeReview;
 
-export const DEFAULT_CONTEXT = Context.BUILDER;
+export const DEFAULT_CONTEXT = Context.Builder;
 export const DEFAULT_PERMISSION = PermissionLevel.Read;
 export const DEFAULT_LINE_HIDDEN_STATE = false;
 

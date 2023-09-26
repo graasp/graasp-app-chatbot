@@ -2,7 +2,9 @@ import { FC } from 'react';
 
 import { Box } from '@mui/material';
 
-import { UUID, useLocalContext } from '@graasp/apps-query-client';
+import { useLocalContext } from '@graasp/apps-query-client';
+import { UUID } from '@graasp/sdk';
+import { ImmutableCast } from '@graasp/sdk/frontend';
 
 import { List } from 'immutable';
 
@@ -28,10 +30,10 @@ const PlayerView: FC<Props> = ({ id }): JSX.Element => {
     memberId = id;
   }
 
-  const comments = appData?.filter(
+  const comments = appData.filter(
     (res) =>
-      COMMENT_APP_DATA_TYPES.includes(res.type) && res.creator === memberId,
-  ) as List<CommentType>;
+      COMMENT_APP_DATA_TYPES.includes(res.type) && res.creator?.id === memberId,
+  ) as List<ImmutableCast<CommentType>>;
 
   return (
     <div data-cy={PLAYER_VIEW_CY}>

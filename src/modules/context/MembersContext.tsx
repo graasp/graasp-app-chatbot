@@ -1,15 +1,13 @@
 import React, { FC, ReactElement, createContext, useMemo } from 'react';
 
-import { Member } from '@graasp/apps-query-client';
-
-import { List } from 'immutable';
+import { Member } from '@graasp/sdk';
 
 import { hooks } from '../../config/queryClient';
 import Loader from '../common/Loader';
 
-export type MembersContextType = List<Member>;
+export type MembersContextType = Member[];
 
-const defaultContextValue = List<Member>();
+const defaultContextValue = [] as Member[];
 const MembersContext = createContext<MembersContextType>(defaultContextValue);
 
 type Prop = {
@@ -20,7 +18,9 @@ export const MembersProvider: FC<Prop> = ({ children }) => {
   const appContext = hooks.useAppContext();
 
   const members = useMemo(() => {
-    const updatedMembers = appContext.data?.members;
+    const updatedMembers = appContext.data?.members.toJS() as
+      | Member[]
+      | undefined;
 
     return updatedMembers ?? defaultContextValue;
   }, [appContext.data]);

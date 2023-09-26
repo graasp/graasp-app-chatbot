@@ -1,4 +1,4 @@
-import { AppData } from '@graasp/apps-query-client';
+import { AppData } from '@graasp/sdk';
 
 import { List } from 'immutable';
 
@@ -9,7 +9,4 @@ export const buildCodeRowKey = (
 
 export const sortAppDataFromNewest = <T extends AppData>(
   appData: List<T>,
-): List<T> =>
-  appData.sort((a, b) =>
-    Date.parse(a.updatedAt) < Date.parse(b.updatedAt) ? 1 : -1,
-  );
+): List<T> => appData.sort((a, b) => (a.updatedAt < b.updatedAt ? 1 : -1));

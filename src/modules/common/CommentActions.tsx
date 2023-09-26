@@ -61,7 +61,7 @@ const CommentActions: FC<Props> = ({
           onClick={() => {
             editComment(comment.id);
             postAction({
-              data: { comment },
+              data: { comment: comment.toJS() },
               type: APP_ACTIONS_TYPES.EDIT_COMMENT,
             });
             onClose();
@@ -78,7 +78,7 @@ const CommentActions: FC<Props> = ({
           onClick={() => {
             deleteAppData({ id: comment.id });
             postAction({
-              data: { comment },
+              data: { comment: comment.toJS() },
               type: APP_ACTIONS_TYPES.DELETE_COMMENT,
             });
             onClose();
@@ -95,7 +95,7 @@ const CommentActions: FC<Props> = ({
           onClick={() => {
             onClickFlag?.();
             postAction({
-              data: { comment },
+              data: { comment: comment.toJS() },
               type: APP_ACTIONS_TYPES.REPORT_COMMENT,
             });
             onClose();

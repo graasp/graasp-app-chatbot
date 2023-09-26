@@ -24,6 +24,7 @@ import {
   styled,
 } from '@mui/material';
 
+import { ImmutableCast } from '@graasp/sdk/frontend';
 import { Button } from '@graasp/ui';
 
 import { SMALL_BORDER_RADIUS } from '@/config/layout';
@@ -68,7 +69,7 @@ const TextArea = styled(TextareaAutosize)(({ theme }) => ({
 type Props = {
   onCancel: () => void;
   onSend: (comment: string) => void;
-  comment?: CommentType;
+  comment?: ImmutableCast<CommentType>;
   maxTextLength?: number;
 };
 

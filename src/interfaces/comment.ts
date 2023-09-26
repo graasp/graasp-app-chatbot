@@ -1,4 +1,4 @@
-import { AppData } from '@graasp/apps-query-client';
+import { AppData } from '@graasp/sdk';
 
 import { APP_DATA_TYPES } from '../config/appDataTypes';
 
