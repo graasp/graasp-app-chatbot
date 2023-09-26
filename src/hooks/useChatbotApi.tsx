@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 
-import { OPEN_AI_API_URL } from '@/config/env';
+import { OPENAI_API_URL } from '@/config/env';
 import { ChatCompletionMessage } from '@/interfaces/settings';
 
 export type UserDataType = { [key: string]: unknown };
@@ -22,7 +22,7 @@ export const useChatbotApi = (callback: CallbackType): ReturnType => {
     () => {
       async function fetchApi(): Promise<void> {
         setIsLoading(true);
-        fetch(OPEN_AI_API_URL, {
+        fetch(OPENAI_API_URL, {
           method: 'POST',
           body: JSON.stringify({ prompt }),
           headers: {

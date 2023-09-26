@@ -1,6 +1,8 @@
+import { FC } from 'react';
+
 import { Box } from '@mui/material';
 
-import { useLocalContext } from '@graasp/apps-query-client';
+import { UUID, useLocalContext } from '@graasp/apps-query-client';
 
 import { List } from 'immutable';
 
@@ -14,9 +16,17 @@ import { ReviewProvider } from '@/modules/context/ReviewContext';
 
 import LoadingIndicatorProvider from '../context/LoadingIndicatorContext';
 
-const PlayerView = (): JSX.Element => {
+type Props = {
+  id?: UUID;
+};
+
+const PlayerView: FC<Props> = ({ id }): JSX.Element => {
   const { appData } = useAppDataContext();
-  const { memberId } = useLocalContext();
+
+  let { memberId } = useLocalContext();
+  if (id) {
+    memberId = id;
+  }
 
   const comments = appData?.filter(
     (res) =>
@@ -28,7 +38,7 @@ const PlayerView = (): JSX.Element => {
       <ReviewProvider>
         <LoadingIndicatorProvider>
           <Box sx={{ p: 10 }}>
-            <ChatbotPrompt />
+            <ChatbotPrompt id={memberId} />
             <CommentThread>{comments}</CommentThread>
           </Box>
         </LoadingIndicatorProvider>

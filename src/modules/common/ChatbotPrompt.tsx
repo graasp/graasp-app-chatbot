@@ -3,6 +3,8 @@ import { useTranslation } from 'react-i18next';
 
 import { CardContent, CardHeader } from '@mui/material';
 
+import { UUID, useLocalContext } from '@graasp/apps-query-client';
+
 import { APP_ACTIONS_TYPES } from '@/config/appActionsTypes';
 import { APP_DATA_TYPES, COMMENT_APP_DATA_TYPES } from '@/config/appDataTypes';
 import { GENERAL_SETTINGS_NAME } from '@/config/appSettingsTypes';
@@ -30,9 +32,17 @@ import CommentBody from './CommentBody';
 import CommentEditor from './CommentEditor';
 import ResponseBox from './ResponseBox';
 
-const ChatbotPrompt: FC = () => {
+type Props = {
+  id?: UUID;
+};
+
+const ChatbotPrompt: FC<Props> = ({ id }) => {
   const { t } = useTranslation();
   const { postAppDataAsync, appData } = useAppDataContext();
+  let { memberId } = useLocalContext();
+  if (id) {
+    memberId = id;
+  }
   const [openEditor, setOpenEditor] = useState(false);
   const { mutate: postAction } = useMutation<
     unknown,
@@ -58,8 +68,8 @@ const ChatbotPrompt: FC = () => {
     },
   );
 
-  const comments = appData.filter((c) =>
-    COMMENT_APP_DATA_TYPES.includes(c.type),
+  const comments = appData.filter(
+    (c) => COMMENT_APP_DATA_TYPES.includes(c.type) && c.creator === memberId,
   );
 
   const realChatbotPromptExists = comments.find(
@@ -120,9 +130,9 @@ const ChatbotPrompt: FC = () => {
   // display only if real chatbot prompt does not exist yet
   if (!realChatbotPromptExists) {
     // console.log(chatbotPrompt);
-    // if (chatbotPrompt?.data?.chatbotPrompt === '') {
-    //   return <>Please configure the chatbot prompt.</>;
-    // }
+    if (chatbotPrompt?.data?.chatbotPrompt === '') {
+      return <>Please configure the chatbot prompt.</>;
+    }
     return (
       <CommentContainer>
         <CustomCommentCard

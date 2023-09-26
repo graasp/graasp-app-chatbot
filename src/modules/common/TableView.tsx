@@ -120,7 +120,7 @@ const TableView: FC = () => {
   const renderDialogContent = (): ReactElement => (
     <>
       <AppDataProvider>
-        <PlayerView />
+        <PlayerView id={currentUser.id} />
       </AppDataProvider>
       <IconButton
         data-cy={TABLE_VIEW_REVIEW_DIALOG_CLOSE_BUTTON_CYPRESS}

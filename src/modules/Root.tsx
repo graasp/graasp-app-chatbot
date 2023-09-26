@@ -7,15 +7,10 @@ import { StyledEngineProvider } from '@mui/material/styles';
 
 import { withContext, withToken } from '@graasp/apps-query-client';
 
+import { QueryClientProvider, hooks, queryClient } from '@/config/queryClient';
 import Loader from '@/modules/common/Loader';
 
 import i18nConfig from '../config/i18n';
-import {
-  QueryClientProvider,
-  ReactQueryDevtools,
-  hooks,
-  queryClient,
-} from '../config/queryClient';
 import App from './main/App';
 
 // declare the module to enable theme modification
@@ -93,9 +88,6 @@ const Root: FC = () => {
           <I18nextProvider i18n={i18nConfig}>
             <QueryClientProvider client={queryClient}>
               <AppWithContextAndToken />
-              {import.meta.env.MODE === 'development' && (
-                <ReactQueryDevtools position="bottom-left" />
-              )}
             </QueryClientProvider>
           </I18nextProvider>
         </ThemeProvider>

@@ -42,7 +42,7 @@ export const REVIEW_MODES = [
   },
 ] as const;
 
-export const DEFAULT_BOT_USERNAME = 'Graasp Bot';
+export const DEFAULT_BOT_USERNAME = 'NeuroBot';
 
 // maximum number of messages allowed in a chatbot thread
 export const MAX_CHATBOT_THREAD_LENGTH = 50;

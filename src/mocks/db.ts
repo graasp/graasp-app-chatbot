@@ -2,13 +2,13 @@ import type { Database, LocalContext, Member } from '@graasp/apps-query-client';
 
 import { v4 } from 'uuid';
 
-// import { APP_DATA_TYPES } from '@/config/appDataTypes';
+import { DEFAULT_LOCAL_CONTEXT } from '@/config/context';
 import { API_HOST } from '@/config/env';
 
 export const mockContext: LocalContext = {
   apiHost: API_HOST,
   permission: 'admin',
-  context: 'player',
+  context: DEFAULT_LOCAL_CONTEXT,
   itemId: '1234-1234-123456-8123-123456',
   memberId: v4(),
 };
@@ -22,79 +22,35 @@ export const mockMembers: Member[] = [
   },
 ];
 
-// const commentBot = v4();
-// const commentParent = v4();
-
 const buildDatabase = (
   appContext: Partial<LocalContext>,
   members?: Member[],
 ): Database => ({
-  appData: [
-    // {
-    //   id: commentBot,
-    //   data: {
-    //     content: 'This would be thee bot comment',
-    //     parent: null,
-    //     chatbotPromptSettingId: 'rubbish',
-    //   },
-    //   memberId: 'mock-member-id',
-    //   type: APP_DATA_TYPES.BOT_COMMENT,
-    //   itemId: appContext.itemId || '',
-    //   visibility: 'member',
-    //   creator: 'mock-member-id',
-    //   createdAt: new Date().toISOString(),
-    //   updatedAt: new Date().toISOString(),
-    // },
-    // {
-    //   id: commentParent,
-    //   data: {
-    //     content: '*Hello* this is a _comment_ on line 3',
-    //     parent: commentBot,
-    //   },
-    //   memberId: 'mock-member-id',
-    //   type: APP_DATA_TYPES.COMMENT,
-    //   itemId: appContext.itemId || '',
-    //   visibility: 'member',
-    //   creator: 'mock-member-id',
-    //   createdAt: new Date().toISOString(),
-    //   updatedAt: new Date().toISOString(),
-    // },
-    // {
-    //   id: v4(),
-    //   data: {
-    //     content: '*Hello* this is a _response_ on line 3',
-    //     parent: commentParent,
-    //   },
-    //   memberId: 'mock-member-id',
-    //   type: APP_DATA_TYPES.COMMENT,
-    //   itemId: appContext.itemId || '',
-    //   creator: 'mock-member-id',
-    //   visibility: 'member',
-    //   createdAt: new Date().toISOString(),
-    //   updatedAt: new Date().toISOString(),
-    // },
+  appSettings: [
+    {
+      createdAt: '2023-09-25T14:11:15.440Z',
+      updatedAt: '2023-09-25T14:11:19.737Z',
+      itemId: '1234-1234-123456-8123-123456',
+      creator: '3b2c3ade-d2c6-4497-8e89-f443d144d3e4',
+      data: {
+        initialPrompt: [
+          { role: 'system', content: 'You are a helpful assistant.' },
+          { role: 'user', content: 'Who won the world series in 2020?' },
+          {
+            role: 'assistant',
+            content: 'The Los Angeles Dodgers won the World Series in 2020.',
+          },
+          { role: 'user', content: 'Where was it played?' },
+        ],
+        chatbotPrompt: 'hello',
+      },
+      name: 'CHATBOT_PROMPT_SETTINGS',
+      id: '1',
+    },
   ],
+  appData: [],
   appActions: [],
   members: members ?? mockMembers,
-  appSettings: [
-    // {
-    //   id: 'e09b45ad-4391-48fd-99f1-8f0f300f4b59',
-    //   name: 'CHATBOT_PROMPT_SETTINGS',
-    //   itemId: '81f2dc95-1f15-48f6-92b2-913e38265270',
-    //   data: {
-    //     chatbotPrompt: 'Hello! I am a chatbot. Ask me anything.',
-    //     initialPrompt: [
-    //       {
-    //         role: 'system',
-    //         content: 'You are a chatbot.',
-    //       },
-    //     ],
-    //   },
-    //   creator: 'a25baa07-09e6-4c8c-a53e-9adc94937037',
-    //   createdAt: '2023-04-26T09:34:16.160Z',
-    //   updatedAt: '2023-04-26T09:34:16.160Z',
-    // },
-  ],
 });
 
 export default buildDatabase;
