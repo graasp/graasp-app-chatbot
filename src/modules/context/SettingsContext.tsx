@@ -1,26 +1,6 @@
 import { FC, ReactElement, createContext, useContext } from 'react';
 
-import { AppSetting } from '@graasp/sdk';
-
-import {
-  APP_MODE_SETTINGS_NAME,
-  CHATBOT_PROMPT_SETTINGS_NAME,
-  GENERAL_SETTINGS_NAME,
-} from '@/config/appSettingsTypes';
-import { MUTATION_KEYS, hooks, useMutation } from '@/config/queryClient';
-import {
-  DEFAULT_APP_MODE_SETTINGS,
-  DEFAULT_CHATBOT_PROMPT_SETTINGS,
-  DEFAULT_GENERAL_SETTINGS,
-} from '@/config/settings';
-import {
-  AppModeSettings,
-  ChatbotPromptAppSettings,
-  ChatbotPromptSettings,
-  ChatbotPromptSettingsKeys,
-  GeneralSettings,
-} from '@/interfaces/settings';
-
+import { hooks, mutations } from '../../config/queryClient';
 import Loader from '../common/Loader';
 
 // mapping between Setting names and their data type
@@ -74,16 +54,8 @@ type Prop = {
 };
 
 export const SettingsProvider: FC<Prop> = ({ children }) => {
-  const { mutate: postAppSetting } = useMutation<
-    unknown,
-    unknown,
-    Partial<AppSetting>
-  >(MUTATION_KEYS.POST_APP_SETTING);
-  const { mutate: patchAppSetting } = useMutation<
-    unknown,
-    unknown,
-    Partial<AppSetting>
-  >(MUTATION_KEYS.PATCH_APP_SETTING);
+  const { mutate: postAppSetting } = mutations.usePostAppSetting();
+  const { mutate: patchAppSetting } = mutations.usePatchAppSetting();
   const {
     data: appSettingsList,
     isLoading,
@@ -119,6 +91,8 @@ export const SettingsProvider: FC<Prop> = ({ children }) => {
     if (isSuccess) {
       const allSettings: AllSettingsType = ALL_SETTING_NAMES.reduce(
         <T extends AllSettingsNameType>(acc: AllSettingsType, key: T) => {
+          // todo: types are not inferred correctly here
+          // @ts-ignore
           const setting = appSettingsList.find((s) => s.name === key);
           const settingData = setting?.data;
           acc[key] = settingData as AllSettingsType[T];
