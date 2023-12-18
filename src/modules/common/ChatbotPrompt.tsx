@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
-import { CardContent, CardHeader } from '@mui/material';
+import { Alert, CardContent, CardHeader } from '@mui/material';
 
 import {
   ChatbotThreadMessage,
@@ -12,7 +12,13 @@ import { UUID } from '@graasp/sdk';
 
 import { AppActionsType } from '@/config/appActions';
 import { AppDataTypes, CommentData } from '@/config/appData';
-import { ChatbotPromptSettings, SettingsKeys } from '@/config/appSetting';
+import {
+  ChatbotPromptSettings,
+  DEFAULT_GENERAL_SETTINGS,
+  GeneralSettings,
+  GeneralSettingsKeys,
+  SettingsKeys,
+} from '@/config/appSetting';
 import { hooks, mutations } from '@/config/queryClient';
 import {
   buildChatbotPromptContainerDataCy,
@@ -39,7 +45,11 @@ const ChatbotPrompt = ({ id }: Props): JSX.Element | null => {
   const { data: chatbotPrompts } = hooks.useAppSettings<ChatbotPromptSettings>({
     name: SettingsKeys.ChatbotPrompt,
   });
+  const { data: generalSettings } = hooks.useAppSettings<GeneralSettings>({
+    name: SettingsKeys.General,
+  });
   const chatbotPrompt = chatbotPrompts?.[0];
+  const generalSetting = generalSettings?.[0]?.data ?? DEFAULT_GENERAL_SETTINGS;
   let { memberId } = useLocalContext();
   if (id) {
     memberId = id;
@@ -126,8 +136,14 @@ const ChatbotPrompt = ({ id }: Props): JSX.Element | null => {
     setOpenEditor(false);
   };
 
+  if (!chatbotPrompt) {
+    return (
+      <Alert severity="warning">{t('CHATBOT_CONFIGURATION_MISSING')}</Alert>
+    );
+  }
+
   // display only if real chatbot prompt does not exist yet
-  if (!realChatbotPromptExists && chatbotPrompt) {
+  if (!realChatbotPromptExists) {
     if (chatbotPrompt?.data?.chatbotCue === '') {
       return <>Please configure the chatbot prompt.</>;
     }
@@ -149,11 +165,7 @@ const ChatbotPrompt = ({ id }: Props): JSX.Element | null => {
 
         {openEditor ? (
           <CommentEditor
-            maxTextLength={
-              300
-              // todo: enable general settings
-              // generalSettings[GeneralSettingsKeys.MaxCommentLength]
-            }
+            maxTextLength={generalSetting[GeneralSettingsKeys.MaxCommentLength]}
             onCancel={() => setOpenEditor(false)}
             onSend={handleNewDiscussion}
           />

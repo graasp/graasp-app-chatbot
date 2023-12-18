@@ -29,8 +29,14 @@ export type ChatbotPromptSettings = {
 // Chatbot Prompt Setting keys
 export enum GeneralSettingsKeys {
   MaxCommentLength = 'maxCommentLength',
+  MaxThreadLength = 'maxThreadLength',
 }
 
 export type GeneralSettings = {
   [GeneralSettingsKeys.MaxCommentLength]: number;
+  [GeneralSettingsKeys.MaxThreadLength]: number;
+};
+export const DEFAULT_GENERAL_SETTINGS: GeneralSettings = {
+  [GeneralSettingsKeys.MaxCommentLength]: 300,
+  [GeneralSettingsKeys.MaxThreadLength]: 50,
 };

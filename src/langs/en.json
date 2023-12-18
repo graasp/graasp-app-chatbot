@@ -153,6 +153,7 @@
         "Download Data": "Download Data",
         "Cue": "Cue",
         "Chatbot Name": "Chatbot Name",
-        "Prompt": "Prompt"
+        "Prompt": "Prompt",
+        "CHATBOT_CONFIGURATION_MISSING": "This chatbot has not been configured yet."
     }
 }

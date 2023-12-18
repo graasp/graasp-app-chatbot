@@ -7,7 +7,12 @@ import { ChatbotThreadMessage, buildPrompt } from '@graasp/apps-query-client';
 
 import { AppActionsType } from '@/config/appActions';
 import { AppDataTypes, CommentAppData } from '@/config/appData';
-import { ChatbotPromptSettings, SettingsKeys } from '@/config/appSetting';
+import {
+  ChatbotPromptSettings,
+  DEFAULT_GENERAL_SETTINGS,
+  GeneralSettings,
+  SettingsKeys,
+} from '@/config/appSetting';
 // import { DEFAULT_GENERAL_SETTINGS } from '@/config/settings';
 // import { GENERAL_SETTINGS_NAME } from '@/config/appSettings';
 import { hooks, mutations } from '@/config/queryClient';
@@ -32,15 +37,17 @@ const CommentThread: FC<Props> = ({ children }) => {
   const { mutateAsync: postAppDataAsync } = mutations.usePostAppData();
   const { mutate: postAction } = mutations.usePostAppAction();
   const { mutateAsync: postChatbot, isLoading } = mutations.usePostChatBot();
-  const {
-    data: chatbotPrompts,
-    // [GENERAL_SETTINGS_NAME]: generalSettings = DEFAULT_GENERAL_SETTINGS,
-  } = hooks.useAppSettings<ChatbotPromptSettings>({
+  const { data: chatbotPrompts } = hooks.useAppSettings<ChatbotPromptSettings>({
     name: SettingsKeys.ChatbotPrompt,
   });
-  // todo: add general settings
+  const { data: generalSettings } = hooks.useAppSettings<GeneralSettings>({
+    name: SettingsKeys.General,
+  });
   const chatbotPrompt = chatbotPrompts?.[0];
-  const maxThreadLength = 50; // generalSettings[GeneralSettingsKeys.MaxThreadLength];
+  const { maxThreadLength, maxCommentLength } = {
+    ...DEFAULT_GENERAL_SETTINGS,
+    ...generalSettings?.[0].data,
+  };
 
   const allowedChatbotResponse = (
     arr: CommentAppData[],
@@ -76,11 +83,7 @@ const CommentThread: FC<Props> = ({ children }) => {
           <Fragment key={c.id}>
             {isEdited(c.id) ? (
               <CommentEditor
-                maxTextLength={
-                  300
-                  // todo: add general settings
-                  // generalSettings[GeneralSettingsKeys.MaxCommentLength]
-                }
+                maxTextLength={maxCommentLength}
                 onCancel={() => {
                   setEditingId(null);
                 }}

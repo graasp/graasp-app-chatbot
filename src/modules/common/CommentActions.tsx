@@ -53,7 +53,6 @@ const CommentActions = ({
       {showEdit && (
         <MenuItem
           onClick={() => {
-            // todo: add editing signal
             onEdit(comment.id);
             postAction({
               data: { comment },
@@ -85,23 +84,6 @@ const CommentActions = ({
           <ListItemText>{t('Delete')}</ListItemText>
         </MenuItem>
       )}
-      {/* {showFlag && (
-        <MenuItem
-          onClick={() => {
-            onClickFlag?.();
-            postAction({
-              data: { comment: comment.toJS() },
-              type: AppActionsType.re,
-            });
-            onClose();
-          }}
-        >
-          <ListItemIcon>
-            <Flag color="warning" />
-          </ListItemIcon>
-          <ListItemText>{t('Report')}</ListItemText>
-        </MenuItem>
-      )} */}
     </Menu>
   );
 };

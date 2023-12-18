@@ -2,10 +2,12 @@ import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { TabContext, TabList, TabPanel } from '@mui/lab';
-import { Tab } from '@mui/material';
+import { Badge, Tab } from '@mui/material';
 
-import { MessageSquareText, Settings } from 'lucide-react';
+import { AlertTriangle, MessageSquareText, Settings } from 'lucide-react';
 
+import { GeneralSettings, SettingsKeys } from '@/config/appSetting';
+import { hooks } from '@/config/queryClient';
 import {
   SETTINGS_VIEW_PANE_CYPRESS,
   TABLE_VIEW_PANE_CYPRESS,
@@ -25,6 +27,10 @@ const AdminView = (): JSX.Element => {
   const { t } = useTranslation();
   const [activeTab, setActiveTab] = useState(Tabs.TABLE_VIEW);
 
+  const { data: generalSettings } = hooks.useAppSettings<GeneralSettings>({
+    name: SettingsKeys.ChatbotPrompt,
+  });
+
   return (
     <TabContext value={activeTab}>
       <TabList
@@ -37,9 +43,22 @@ const AdminView = (): JSX.Element => {
           data-cy={TAB_SETTINGS_VIEW_CYPRESS}
           value={Tabs.SETTINGS_VIEW}
           label={t('Settings View')}
-          icon={<Settings />}
+          icon={
+            <Badge
+              anchorOrigin={{
+                vertical: 'top',
+                horizontal: 'left',
+              }}
+              invisible={generalSettings && generalSettings?.length > 0}
+              badgeContent={<AlertTriangle size={14} />}
+              color="warning"
+            >
+              <Settings />
+            </Badge>
+          }
           iconPosition="start"
         />
+
         <Tab
           data-cy={TAB_TABLE_VIEW_CYPRESS}
           value={Tabs.TABLE_VIEW}

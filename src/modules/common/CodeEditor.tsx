@@ -36,10 +36,9 @@ const CodeEditor: FC<Props> = ({ value, readOnly, onChange }) => {
           }}
           value={value}
           theme={theme.palette.mode}
-          basicSetup
+          basicSetup={{ drawSelection: false }}
           extensions={[javascript()]}
           readOnly={readOnly}
-          unselectable={readOnly ? 'on' : 'off'}
         />
       </StyledEditorContainer>
     </Stack>
