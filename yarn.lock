@@ -2575,7 +2575,7 @@ __metadata:
 
 "@graasp/apps-query-client@github:graasp/graasp-apps-query-client#222-query-setting-by-name":
   version: 3.3.0
-  resolution: "@graasp/apps-query-client@https://github.com/graasp/graasp-apps-query-client.git#commit=f0bd4f9e041cd575196457640ad2b27296ad7059"
+  resolution: "@graasp/apps-query-client@https://github.com/graasp/graasp-apps-query-client.git#commit=7db50113ae86fcadd173ffb84cbad3cdb89b4b2c"
   dependencies:
     "@emotion/react": "npm:11.11.1"
     "@emotion/styled": "npm:11.11.0"
@@ -2593,7 +2593,7 @@ __metadata:
     "@tanstack/react-query-devtools": ^4.28.0
     react: ^18.0.0
     react-dom: ^18.0.0
-  checksum: 6990f50c0b64bd79ccfdb4a72641fab6a5ed61986e35dd09608d6c01fd3d29d90722d0c776ce9244ada3673ecd57cc58e77c62645b499b3be2a76a2b5d810cf0
+  checksum: 018dc132d25f14d21ae22fc8d7cf0ae07cc325c7d1533c28c7427714e9cd8272551981081f700ba062ac13f36218ea593113af2f8f2ea7999c5366fb6dec5a19
   languageName: node
   linkType: hard
 

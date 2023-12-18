@@ -43,7 +43,7 @@ import {
 } from '@/config/selectors';
 import { SMALL_BORDER_RADIUS } from '@/constants';
 
-import ToolbarButton from './utils/ToolbarButton';
+import ToolbarButton from '../comment/ToolbarButton';
 
 const TextArea = styled(TextareaAutosize)(({ theme }) => ({
   borderRadius: SMALL_BORDER_RADIUS,

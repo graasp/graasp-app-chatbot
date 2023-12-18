@@ -4,7 +4,7 @@ import { TextField, styled } from '@mui/material';
 
 import { COMMENT_RESPONSE_BOX_CY } from '@/config/selectors';
 
-import ResponseContainer from './utils/ResponseContainer';
+import ResponseContainer from '../comment/ResponseContainer';
 
 const StyledTextField = styled(TextField)(({ theme }) => ({
   '& input': {

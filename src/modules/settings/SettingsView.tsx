@@ -198,6 +198,7 @@ const SettingsView = (): JSX.Element => {
                 <Typography>{chatbotName}</Typography>
               </Stack>
               <Stack direction="column">
+                {/* todo: add explanations on how to use this */}
                 <FormLabel>{t('Prompt')}:</FormLabel>
                 <Box width="100%">
                   <CodeEditor value={stringifiedJsonPrompt} readOnly />

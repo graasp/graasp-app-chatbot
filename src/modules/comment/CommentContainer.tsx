@@ -1,6 +1,6 @@
 import { styled } from '@mui/material';
 
-import { BIG_BORDER_RADIUS } from '../../../constants';
+import { BIG_BORDER_RADIUS } from '../../constants';
 
 const CommentContainer = styled('div')(({ theme }) => ({
   backgroundColor: 'white',

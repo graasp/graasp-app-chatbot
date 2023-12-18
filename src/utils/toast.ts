@@ -1,21 +1,13 @@
 import { toast } from 'react-toastify';
 
-import isObject from 'lodash.isobject';
-import isString from 'lodash.isstring';
-
-import {
-  SUCCESS_MESSAGE,
-  UNEXPECTED_ERROR_MESSAGE,
-} from '@/constants/messages';
+import { SUCCESS_MESSAGE, UNEXPECTED_ERROR_MESSAGE } from '@/constants';
 
 const showErrorToast = (payload: string | { message: string }): void => {
   let message = UNEXPECTED_ERROR_MESSAGE;
-  if (isString(payload)) {
+  if (typeof payload === 'string') {
     message = payload;
-  } else if (isObject(payload)) {
-    if (payload.message) {
-      ({ message } = payload);
-    }
+  } else {
+    ({ message } = payload);
   }
 
   toast.error(message, {
@@ -26,12 +18,10 @@ const showErrorToast = (payload: string | { message: string }): void => {
 
 const showSuccessToast = (payload: string | { message: string }): void => {
   let message = SUCCESS_MESSAGE;
-  if (isString(payload)) {
+  if (typeof payload === 'string') {
     message = payload;
-  } else if (isObject(payload)) {
-    if (payload.message) {
-      ({ message } = payload);
-    }
+  } else {
+    ({ message } = payload);
   }
 
   toast.success(message, {

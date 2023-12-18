@@ -14,11 +14,11 @@ import { hooks, mutations } from '@/config/queryClient';
 import { COMMENT_THREAD_CONTAINER_CYPRESS } from '@/config/selectors';
 import { buildThread } from '@/utils/comments';
 
+import CommentContainer from '../comment/CommentContainer';
+import ResponseContainer from '../comment/ResponseContainer';
 import Comment from './Comment';
 import CommentEditor from './CommentEditor';
 import ResponseBox from './ResponseBox';
-import CommentContainer from './utils/CommentContainer';
-import ResponseContainer from './utils/ResponseContainer';
 
 type Props = {
   children?: CommentAppData[];

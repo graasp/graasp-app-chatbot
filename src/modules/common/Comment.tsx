@@ -21,7 +21,7 @@ import {
   ChatbotPromptSettingsKeys,
   SettingsKeys,
 } from '@/config/appSetting';
-import { hooks, mutations } from '@/config/queryClient';
+import { hooks } from '@/config/queryClient';
 import { buildCommentContainerDataCy } from '@/config/selectors';
 import { BIG_BORDER_RADIUS, DEFAULT_BOT_USERNAME } from '@/constants';
 
@@ -55,7 +55,7 @@ const Comment = ({ comment, onEdit }: Props): JSX.Element => {
     name: SettingsKeys.ChatbotPrompt,
   });
   const chatbotPrompt = chatbotPrompts?.[0];
-  const { mutate: postAppData } = mutations.usePostAppData();
+  // const { mutate: postAppData } = mutations.usePostAppData();
 
   // const allowCommentReporting = true; // settings[GeneralSettingsKeys.AllowCommentsReporting];
   const [menuAnchorEl, setMenuAnchorEl] = useState<null | HTMLElement>(null);

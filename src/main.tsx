@@ -5,7 +5,7 @@ import { MockSolution, mockApi } from '@graasp/apps-query-client';
 
 import * as Sentry from '@sentry/react';
 
-import { MOCK_API, OPEN_AI_API_URL } from './config/env';
+import { MOCK_API } from './config/env';
 import { generateSentryConfig } from './config/sentry';
 import './index.css';
 import buildDatabase, { defaultMockContext, mockMembers } from './mocks/db';
@@ -25,7 +25,6 @@ Sentry.init({
 if (MOCK_API) {
   mockApi(
     {
-      externalUrls: [],
       dbName: window.Cypress ? 'graasp-app-cypress' : undefined,
       appContext: window.Cypress ? window.appContext : defaultMockContext,
       database: window.Cypress ? window.database : buildDatabase(mockMembers),

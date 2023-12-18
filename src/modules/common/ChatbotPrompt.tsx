@@ -20,12 +20,12 @@ import {
 } from '@/config/selectors';
 import { DEFAULT_BOT_USERNAME } from '@/constants';
 
+import CommentContainer from '../comment/CommentContainer';
+import CustomCommentCard from '../comment/CustomCommentCard';
 import ChatbotAvatar from './ChatbotAvatar';
 import CommentBody from './CommentBody';
 import CommentEditor from './CommentEditor';
 import ResponseBox from './ResponseBox';
-import CommentContainer from './utils/CommentContainer';
-import CustomCommentCard from './utils/CustomCommentCard';
 
 type Props = {
   id?: UUID;

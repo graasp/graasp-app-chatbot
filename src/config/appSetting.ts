@@ -1,5 +1,6 @@
 export const SettingsKeys = {
   ChatbotPrompt: 'chatbot-prompt',
+  General: 'general',
 } as const;
 
 export type ChatCompletionMessageRoles = 'system' | 'user' | 'assistant';
@@ -23,4 +24,13 @@ export type ChatbotPromptSettings = {
 
   // used to allow access using settings[settingKey] syntax
   // [key: string]: unknown;
+};
+
+// Chatbot Prompt Setting keys
+export enum GeneralSettingsKeys {
+  MaxCommentLength = 'maxCommentLength',
+}
+
+export type GeneralSettings = {
+  [GeneralSettingsKeys.MaxCommentLength]: number;
 };
