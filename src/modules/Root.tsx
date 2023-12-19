@@ -84,7 +84,7 @@ const Root: FC = () => {
               <ToastContainer />
               <WithLocalContext
                 defaultValue={window.Cypress ? window.appContext : mockContext}
-                LoadingComponent={<Loader>Loading Context</Loader>}
+                LoadingComponent={<Loader>Context</Loader>}
                 useGetLocalContext={hooks.useGetLocalContext}
                 useAutoResize={hooks.useAutoResize}
                 onError={() => {
@@ -94,7 +94,7 @@ const Root: FC = () => {
                 }}
               >
                 <WithTokenContext
-                  LoadingComponent={<Loader>Loading token</Loader>}
+                  LoadingComponent={<Loader>Token</Loader>}
                   useAuthToken={hooks.useAuthToken}
                   onError={() => {
                     console.error(
