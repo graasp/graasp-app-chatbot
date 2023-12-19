@@ -2573,9 +2573,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@graasp/apps-query-client@github:graasp/graasp-apps-query-client#222-query-setting-by-name":
-  version: 3.3.0
-  resolution: "@graasp/apps-query-client@https://github.com/graasp/graasp-apps-query-client.git#commit=fa6b1e3942f40d6628a1c8de1bdb31233ab9fa3c"
+"@graasp/apps-query-client@npm:3.4.0":
+  version: 3.4.0
+  resolution: "@graasp/apps-query-client@npm:3.4.0"
   dependencies:
     "@emotion/react": "npm:11.11.1"
     "@emotion/styled": "npm:11.11.0"
@@ -2593,7 +2593,7 @@ __metadata:
     "@tanstack/react-query-devtools": ^4.28.0
     react: ^18.0.0
     react-dom: ^18.0.0
-  checksum: 49ca109494f112c106bd48a34f76d878087905cf06c63b180fac2996d2b8b870c6d0f9de926fd553b92b9347037de0bb67b62e62b3668424c6741d7b5e1abdf4
+  checksum: 1cb956714bb04f13b2b488b25a03acab46ed3fbd12c2e493f3a467c577a2d3da96be990894c51fe8d49708e601b32d1144c7b2ea9d3b245e5d35831a3b5cf2ff
   languageName: node
   linkType: hard
 
@@ -7858,7 +7858,7 @@ __metadata:
     "@cypress/code-coverage": "npm:3.12.13"
     "@emotion/react": "npm:11.11.1"
     "@emotion/styled": "npm:11.11.0"
-    "@graasp/apps-query-client": "github:graasp/graasp-apps-query-client#222-query-setting-by-name"
+    "@graasp/apps-query-client": "npm:3.4.0"
     "@graasp/sdk": "npm:3.3.0"
     "@graasp/ui": "npm:4.1.1"
     "@mui/icons-material": "npm:5.14.19"
