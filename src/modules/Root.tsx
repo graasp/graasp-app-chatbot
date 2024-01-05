@@ -74,7 +74,7 @@ const Root: FC = () => {
   const [mockContext, setMockContext] = useObjectState(defaultMockContext);
 
   return (
-    <RootDiv>
+    <RootDiv id="root-div">
       {/* Used to define the order of injected properties between JSS and emotion */}
       <StyledEngineProvider injectFirst>
         <ThemeProvider theme={theme}>
@@ -103,7 +103,7 @@ const Root: FC = () => {
                   }}
                 >
                   <App />
-                  {import.meta.env.DEV && (
+                  {import.meta.env.DEV && !window.Cypress && (
                     <GraaspContextDevTool
                       members={mockMembers}
                       context={mockContext}
