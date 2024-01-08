@@ -1,15 +1,5 @@
-import { AppData } from '@graasp/apps-query-client';
-
-import { List } from 'immutable';
-
-export const buildCodeRowKey = (
-  line: { content: string }[],
-  index: number,
-): string => `row #${index} ${line.map((l) => l.content).join(' ')}`;
-
-export const sortAppDataFromNewest = <T extends AppData>(
-  appData: List<T>,
-): List<T> =>
-  appData.sort((a, b) =>
-    Date.parse(a.updatedAt) < Date.parse(b.updatedAt) ? 1 : -1,
-  );
+export const getInitials = (name: string): string =>
+  name
+    .split(/[^a-z]/i)
+    .map((c) => Array.from(c).filter((l) => l.match(/[a-z]/i))[0])
+    .join('');

@@ -34,6 +34,7 @@ export default ({ mode }: { mode: string }): UserConfigExport => {
       mode === 'test'
         ? undefined
         : checker({
+            overlay: { position: 'br', initialIsOpen: false },
             typescript: true,
             eslint: {
               lintCommand: 'eslint "src/**/*.{ts,tsx}"',

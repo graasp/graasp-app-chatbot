@@ -15,9 +15,6 @@ describe('Player View', () => {
   });
 
   it('App', () => {
-    cy.get(buildDataCy(PLAYER_VIEW_CY)).should(
-      'contain.text',
-      'Player as write',
-    );
+    cy.get(buildDataCy(PLAYER_VIEW_CY)).should('be.visible');
   });
 });

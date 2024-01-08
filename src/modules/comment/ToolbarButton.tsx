@@ -1,8 +1,4 @@
-import React, {
-  ForwardRefRenderFunction,
-  PropsWithChildren,
-  forwardRef,
-} from 'react';
+import { ForwardRefRenderFunction, PropsWithChildren, forwardRef } from 'react';
 
 import { Button } from '@mui/material';
 

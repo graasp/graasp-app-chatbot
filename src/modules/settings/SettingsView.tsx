@@ -1,7 +1,12 @@
-import { FC } from 'react';
+import { Stack } from '@mui/material';
 
-import CodeReviewSettings from './CodeReviewSettings';
+import ChatbotSettings from './ChatbotSettings';
+import GeneralSettingsView from './GeneralSettingsView';
 
-const SettingsView: FC = () => <CodeReviewSettings />;
-
+const SettingsView = (): JSX.Element => (
+  <Stack spacing={1}>
+    <GeneralSettingsView />
+    <ChatbotSettings />
+  </Stack>
+);
 export default SettingsView;

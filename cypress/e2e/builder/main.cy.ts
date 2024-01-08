@@ -8,16 +8,16 @@ describe('Builder View', () => {
       {},
       {
         context: Context.Builder,
-        permission: PermissionLevel.Read,
+        permission: PermissionLevel.Admin,
       },
     );
     cy.visit('/');
   });
 
-  it('App', () => {
+  it('Results table', () => {
     cy.get(buildDataCy(BUILDER_VIEW_CY)).should(
       'contain.text',
-      'Builder as read',
+      'Conversations',
     );
   });
 });

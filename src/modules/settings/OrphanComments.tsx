@@ -1,32 +1,29 @@
-import React, { FC } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { FormControlLabel } from '@mui/material';
 
-import { UUID } from '@graasp/apps-query-client';
+import { UUID } from '@graasp/sdk';
 import { Button } from '@graasp/ui';
 
-import { List } from 'immutable';
-
+import { CommentAppData } from '@/config/appData';
+import { mutations } from '@/config/queryClient';
 import { ORPHAN_BUTTON_CYPRESS } from '@/config/selectors';
-import { CommentType } from '@/interfaces/comment';
-import { useAppDataContext } from '@/modules/context/AppDataContext';
 import { getOrphans, getThreadIdsFromFirstCommentId } from '@/utils/comments';
 
-type Prop = {
-  comments: List<CommentType>;
+type Props = {
+  comments: CommentAppData[];
 };
 
-const OrphanComments: FC<Prop> = ({ comments }) => {
+const OrphanComments = ({ comments }: Props): JSX.Element | null => {
   const { t } = useTranslation();
-  const { deleteAppData } = useAppDataContext();
+  const { mutate: deleteAppData } = mutations.useDeleteAppData();
 
-  const getOrphanComments = (allComments: List<CommentType>): List<UUID[]> => {
+  const getOrphanComments = (allComments: CommentAppData[]): UUID[][] => {
     const orphans = getOrphans(allComments);
     return orphans.map((o) => getThreadIdsFromFirstCommentId(comments, o.id));
   };
 
-  const handleOnClickRemoveOrphans = (orphanThreads: List<UUID[]>): void => {
+  const handleOnClickRemoveOrphans = (orphanThreads: UUID[][]): void => {
     orphanThreads.forEach((thread) => {
       thread.forEach((id) => {
         deleteAppData({ id });
@@ -36,7 +33,7 @@ const OrphanComments: FC<Prop> = ({ comments }) => {
 
   const orphanThreads = getOrphanComments(comments);
 
-  if (!orphanThreads.size) {
+  if (!orphanThreads.length) {
     return null;
   }
 
@@ -47,7 +44,7 @@ const OrphanComments: FC<Prop> = ({ comments }) => {
       color="primary"
       sx={{ mr: 1 }}
       onClick={() => handleOnClickRemoveOrphans(orphanThreads)}
-      disabled={orphanThreads.size === 0}
+      disabled={orphanThreads.length === 0}
     >
       {t('Remove orphans')}
     </Button>
@@ -57,7 +54,7 @@ const OrphanComments: FC<Prop> = ({ comments }) => {
     0,
   );
   const buttonLabel = t('Number of orphan threads', {
-    threads: orphanThreads.size,
+    threads: orphanThreads.length,
     totalComments: totalNumberOfOrphanComments,
   });
 

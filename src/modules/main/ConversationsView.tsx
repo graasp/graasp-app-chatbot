@@ -13,10 +13,10 @@ import {
   TableRow,
 } from '@mui/material';
 
-import { List } from 'immutable';
+import groupBy from 'lodash.groupby';
 
-import { COMMENT_APP_DATA_TYPES } from '@/config/appDataTypes';
-import { ANONYMOUS_USER, NB_COL_TABLE_VIEW_TABLE } from '@/config/constants';
+import { CommentData } from '@/config/appData';
+import { hooks } from '@/config/queryClient';
 import {
   TABLE_NO_COMMENTS_CYPRESS,
   TABLE_VIEW_BODY_USERS_CYPRESS,
@@ -29,18 +29,12 @@ import {
   TABLE_VIEW_VIEW_COMMENTS_CELL_CYPRESS,
   tableRowUserCypress,
 } from '@/config/selectors';
-import { CommentType } from '@/interfaces/comment';
-import {
-  AppDataProvider,
-  useAppDataContext,
-} from '@/modules/context/AppDataContext';
-import { useMembersContext } from '@/modules/context/MembersContext';
-import CustomDialog from '@/modules/layout/CustomDialog';
+import { ANONYMOUS_USER } from '@/constants';
+import CustomDialog from '@/modules/common/CustomDialog';
 import PlayerView from '@/modules/main/PlayerView';
 import { getOrphans } from '@/utils/comments';
 
-import DownloadActions from '../settings/DownloadActions';
-import DownloadData from '../settings/DownloadData';
+import DownloadButtons from '../settings/DownloadButtons';
 import OrphanComments from '../settings/OrphanComments';
 
 const DEFAULT_CURRENT_USER = {
@@ -48,16 +42,12 @@ const DEFAULT_CURRENT_USER = {
   id: '',
 };
 
-const TableView: FC = () => {
+const ConversationsView: FC = () => {
   const { t } = useTranslation();
   const [openCommentView, setOpenCommentView] = useState(false);
   const [currentUser, setCurrentUser] = useState(DEFAULT_CURRENT_USER);
-  const members = useMembersContext();
-  const { appData } = useAppDataContext();
-
-  const comments = appData?.filter((res) =>
-    COMMENT_APP_DATA_TYPES.includes(res.type),
-  ) as List<CommentType>;
+  const { data: { members } = { members: [] } } = hooks.useAppContext();
+  const { data: comments = [] } = hooks.useAppData<CommentData>();
 
   const renderTableBody = (): ReactElement[] | ReactElement | null => {
     const orphansId = getOrphans(comments).map((c) => c.id);
@@ -65,22 +55,19 @@ const TableView: FC = () => {
       (c) => !orphansId.includes(c.id),
     );
     // nonOrphanComments is undefined or, is an empty list -> there are not resources to display
-    if (!nonOrphanComments || nonOrphanComments.isEmpty()) {
+    if (!nonOrphanComments || nonOrphanComments.length === 0) {
       // show that there are no comments available
       return (
         <TableRow>
-          <TableCell
-            colSpan={NB_COL_TABLE_VIEW_TABLE}
-            data-cy={TABLE_NO_COMMENTS_CYPRESS}
-          >
+          <TableCell data-cy={TABLE_NO_COMMENTS_CYPRESS}>
             {t('No Comments')}
           </TableCell>
         </TableRow>
       );
     }
-    const commentsByUsers = nonOrphanComments
-      .groupBy(({ memberId }) => memberId)
-      .toArray();
+    const commentsByUsers = Object.entries(
+      groupBy(nonOrphanComments, ({ member }) => member.id),
+    );
     return commentsByUsers.map(([userId, userComments]) => {
       const userName =
         members.find(({ id }) => id === userId)?.name || ANONYMOUS_USER;
@@ -90,7 +77,7 @@ const TableView: FC = () => {
             {userName}
           </TableCell>
           <TableCell data-cy={TABLE_VIEW_NB_COMMENTS_CELL_CYPRESS}>
-            <div>{userComments.count()}</div>
+            <div>{userComments.length}</div>
           </TableCell>
           <TableCell data-cy={TABLE_VIEW_VIEW_COMMENTS_CELL_CYPRESS}>
             <IconButton
@@ -119,9 +106,7 @@ const TableView: FC = () => {
   // todo: filter app data
   const renderDialogContent = (): ReactElement => (
     <>
-      <AppDataProvider>
-        <PlayerView />
-      </AppDataProvider>
+      <PlayerView id={currentUser.id} />
       <IconButton
         data-cy={TABLE_VIEW_REVIEW_DIALOG_CLOSE_BUTTON_CYPRESS}
         onClick={onCloseDialog}
@@ -134,8 +119,7 @@ const TableView: FC = () => {
 
   return (
     <>
-      <DownloadActions />
-      <DownloadData />
+      <DownloadButtons />
       <OrphanComments comments={comments} />
       <TableContainer data-cy={TABLE_VIEW_TABLE_CYPRESS}>
         <Table aria-label="student table">
@@ -155,7 +139,7 @@ const TableView: FC = () => {
         dataCy={TABLE_VIEW_USER_REVIEW_DIALOG_CYPRESS}
         open={openCommentView}
         maxWidth="lg"
-        title={t('Viewing comments from', { user: currentUser.name })}
+        title={t('Viewing discussion from', { user: currentUser.name })}
         content={renderDialogContent()}
         onClose={onCloseDialog}
       />
@@ -163,4 +147,4 @@ const TableView: FC = () => {
   );
 };
 
-export default TableView;
+export default ConversationsView;

@@ -19,3 +19,6 @@ jobs:
 
       - name: Build
         run: yarn build
+
+      - name: Unit Tests
+        run: yarn vitest

@@ -24,7 +24,7 @@ import { defaultMockContext, mockMembers } from '@/mocks/db';
 import Loader from '@/modules/common/Loader';
 import { useObjectState } from '@/utils/hooks';
 
-import App from './main/App';
+import App from './App';
 
 // declare the module to enable theme modification
 declare module '@mui/material/styles' {
@@ -74,7 +74,7 @@ const Root: FC = () => {
   const [mockContext, setMockContext] = useObjectState(defaultMockContext);
 
   return (
-    <RootDiv>
+    <RootDiv id="root-div">
       {/* Used to define the order of injected properties between JSS and emotion */}
       <StyledEngineProvider injectFirst>
         <ThemeProvider theme={theme}>
@@ -84,7 +84,7 @@ const Root: FC = () => {
               <ToastContainer />
               <WithLocalContext
                 defaultValue={window.Cypress ? window.appContext : mockContext}
-                LoadingComponent={<Loader />}
+                LoadingComponent={<Loader>Context</Loader>}
                 useGetLocalContext={hooks.useGetLocalContext}
                 useAutoResize={hooks.useAutoResize}
                 onError={() => {
@@ -94,7 +94,7 @@ const Root: FC = () => {
                 }}
               >
                 <WithTokenContext
-                  LoadingComponent={<Loader />}
+                  LoadingComponent={<Loader>Token</Loader>}
                   useAuthToken={hooks.useAuthToken}
                   onError={() => {
                     console.error(
@@ -103,7 +103,7 @@ const Root: FC = () => {
                   }}
                 >
                   <App />
-                  {import.meta.env.DEV && (
+                  {import.meta.env.DEV && !window.Cypress && (
                     <GraaspContextDevTool
                       members={mockMembers}
                       context={mockContext}

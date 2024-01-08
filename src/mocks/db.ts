@@ -6,22 +6,11 @@ import {
   PermissionLevel,
 } from '@graasp/sdk';
 
-import { v4 } from 'uuid';
-
-// import { APP_DATA_TYPES } from '@/config/appDataTypes';
 import { API_HOST } from '@/config/env';
-
-export const defaultMockContext: LocalContext = {
-  apiHost: API_HOST,
-  permission: PermissionLevel.Admin,
-  context: 'builder',
-  itemId: '1234-1234-123456-8123-123456',
-  memberId: v4(),
-};
 
 export const mockMembers: CompleteMember[] = [
   {
-    id: defaultMockContext.memberId || '',
+    id: 'current-member',
     name: 'current-member',
     email: '',
     extra: {},
@@ -39,6 +28,14 @@ export const mockMembers: CompleteMember[] = [
     updatedAt: new Date().toISOString(),
   },
 ];
+
+export const defaultMockContext: LocalContext = {
+  apiHost: API_HOST,
+  permission: PermissionLevel.Admin,
+  context: 'builder',
+  itemId: '1234-1234-123456-8123-123456',
+  memberId: mockMembers[0].id,
+};
 
 export const mockItem: DiscriminatedItem = {
   id: defaultMockContext.itemId,

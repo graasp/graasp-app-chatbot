@@ -1,11 +1,10 @@
-import { FC } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { TextField, styled } from '@mui/material';
 
 import { COMMENT_RESPONSE_BOX_CY } from '@/config/selectors';
 
-import ResponseContainer from '../layout/ResponseContainer';
+import ResponseContainer from '../comment/ResponseContainer';
 
 const StyledTextField = styled(TextField)(({ theme }) => ({
   '& input': {
@@ -19,7 +18,7 @@ type Props = {
   onClick: (id: string) => void;
 };
 
-const ResponseBox: FC<Props> = ({ onClick, commentId, dataCy }) => {
+const ResponseBox = ({ onClick, commentId, dataCy }: Props): JSX.Element => {
   const { t } = useTranslation();
   return (
     <ResponseContainer>

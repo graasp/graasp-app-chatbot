@@ -1,12 +1,12 @@
-import React, { FC } from 'react';
+import { FC } from 'react';
 
 import { Box, Stack, styled, useTheme } from '@mui/material';
 
 import { javascript } from '@codemirror/lang-javascript';
 import CodeMirror from '@uiw/react-codemirror';
 
-import { SMALL_BORDER_RADIUS } from '@/config/layout';
 import { CODE_EDITOR_ID_CY } from '@/config/selectors';
+import { SMALL_BORDER_RADIUS } from '@/constants';
 
 const StyledEditorContainer = styled(Box)({
   border: 'solid silver 1px',
@@ -36,7 +36,7 @@ const CodeEditor: FC<Props> = ({ value, readOnly, onChange }) => {
           }}
           value={value}
           theme={theme.palette.mode}
-          basicSetup
+          basicSetup={{ drawSelection: false }}
           extensions={[javascript()]}
           readOnly={readOnly}
         />

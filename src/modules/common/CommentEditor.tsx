@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import {
   boldCommand,
@@ -26,7 +26,8 @@ import {
 
 import { Button } from '@graasp/ui';
 
-import { SMALL_BORDER_RADIUS } from '@/config/layout';
+import { CommentAppData } from '@/config/appData';
+// import { DEFAULT_MAX_COMMENT_LENGTH_SETTING } from '@/config/appSetting';
 import {
   COMMENT_EDITOR_BOLD_BUTTON_CYPRESS,
   COMMENT_EDITOR_CANCEL_BUTTON_CYPRESS,
@@ -40,10 +41,9 @@ import {
   COMMENT_EDITOR_TEXTAREA_CYPRESS,
   COMMENT_EDITOR_TEXTAREA_HELPER_TEXT_CY,
 } from '@/config/selectors';
-import { DEFAULT_MAX_COMMENT_LENGTH_SETTING } from '@/config/settings';
-import { CommentType } from '@/interfaces/comment';
+import { SMALL_BORDER_RADIUS } from '@/constants';
 
-import ToolbarButton from '../layout/ToolbarButton';
+import ToolbarButton from '../comment/ToolbarButton';
 
 const TextArea = styled(TextareaAutosize)(({ theme }) => ({
   borderRadius: SMALL_BORDER_RADIUS,
@@ -68,16 +68,16 @@ const TextArea = styled(TextareaAutosize)(({ theme }) => ({
 type Props = {
   onCancel: () => void;
   onSend: (comment: string) => void;
-  comment?: CommentType;
+  comment?: CommentAppData;
   maxTextLength?: number;
 };
 
-const CommentEditor: FC<Props> = ({
+const CommentEditor = ({
   onCancel,
   onSend,
   comment,
-  maxTextLength = DEFAULT_MAX_COMMENT_LENGTH_SETTING,
-}) => {
+  maxTextLength = 300, // DEFAULT_MAX_COMMENT_LENGTH_SETTING,
+}: Props): JSX.Element => {
   const { t } = useTranslation();
   const [text, setText] = useState(comment?.data.content ?? '');
   const [textTooLong, setTextTooLong] = useState('');

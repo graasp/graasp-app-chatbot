@@ -1,10 +1,8 @@
-import React, { FC } from 'react';
-
 import { Avatar } from '@mui/material';
 
-import { Member } from '@graasp/apps-query-client';
+import { Member } from '@graasp/sdk';
 
-import { ANONYMOUS_USER } from '@/config/constants';
+import { ANONYMOUS_USER } from '@/constants';
 
 // generate a background color for avatars from userName
 const stringToColor = (name: string): string => {
@@ -27,21 +25,26 @@ const stringToColor = (name: string): string => {
   return color;
 };
 
+const getInitials = (name: string): string =>
+  name
+    .split(/[^a-z]/i)
+    .map((c) => Array.from(c).filter((l) => l.match(/[a-z]/i))[0])
+    .join('');
+
 type Props = {
   member?: Member;
   imgSrc?: string;
 };
 
-const CustomAvatar: FC<Props> = ({ member, imgSrc }) => {
+const CustomAvatar = ({ member, imgSrc }: Props): JSX.Element => {
   const userName = member?.name || ANONYMOUS_USER;
-  const initials = 'Y';
   return (
     <Avatar
-      alt={initials}
+      alt={userName}
       src={imgSrc}
       sx={{ bgcolor: stringToColor(userName) }}
     >
-      {initials}
+      {getInitials(userName)}
     </Avatar>
   );
 };
