@@ -113,7 +113,9 @@ const CommentThread = ({ children }: Props): JSX.Element | null => {
           {i + 1 === arr.length && isLoading && (
             <ResponseContainer>
               <Stack spacing={2} direction="row" justifyContent="center">
-                <Typography color="#666">{t('Loading')}</Typography>
+                <Typography color="#666">
+                  {t('LOADING_RESPONSE_PLACEHOLDER')}
+                </Typography>
                 <CircularProgress sx={{ color: '#666' }} size="20px" />
               </Stack>
             </ResponseContainer>

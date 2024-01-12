@@ -51,10 +51,10 @@ const GeneralSettingsView = (): JSX.Element => {
         alignItems="flex-end"
       >
         <Typography variant="h2" fontWeight="bold" fontSize="1.5rem">
-          {t('General')}
+          {t('GENERAL_SETTING_TITLE')}
         </Typography>
       </Stack>
-      <FormLabel>{t('Maximum comment length')}</FormLabel>
+      <FormLabel>{t('MAXIMUM_COMMENT_LENGTH_LABEL')}</FormLabel>
       <TextField
         id={SETTING_MAX_COMMENT_LENGTH}
         type="number"
@@ -66,7 +66,7 @@ const GeneralSettingsView = (): JSX.Element => {
           )
         }
       />
-      <FormLabel>{t('Maximum conversation length')}</FormLabel>
+      <FormLabel>{t('MAXIMUM_THREAD_LENGTH_LABEL')}</FormLabel>
       <TextField
         id={SETTING_MAX_THREAD_LENGTH}
         type="number"

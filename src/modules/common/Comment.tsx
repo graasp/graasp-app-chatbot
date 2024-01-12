@@ -101,7 +101,7 @@ const Comment = ({ comment, onEdit }: Props): JSX.Element => {
         }
         action={
           <>
-            <Tooltip title={t('Actions')}>
+            <Tooltip title={t('COMMENT_ACTIONS_TOOLTIP')}>
               <IconButton
                 onClick={(e) => {
                   setMenuAnchorEl(e.currentTarget);

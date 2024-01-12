@@ -25,7 +25,7 @@ const ResponseBox = ({ onClick, commentId, dataCy }: Props): JSX.Element => {
       <StyledTextField
         data-cy={dataCy || COMMENT_RESPONSE_BOX_CY}
         fullWidth
-        placeholder={t('Respond to this comment')}
+        placeholder={t('RESPONSE_BOX_PLACEHOLDER')}
         onClick={() => onClick(commentId)}
       />
     </ResponseContainer>

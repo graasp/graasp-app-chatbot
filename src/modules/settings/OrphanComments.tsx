@@ -46,16 +46,16 @@ const OrphanComments = ({ comments }: Props): JSX.Element | null => {
       onClick={() => handleOnClickRemoveOrphans(orphanThreads)}
       disabled={orphanThreads.length === 0}
     >
-      {t('Remove orphans')}
+      {t('REMOVE_ORPHANS_LABEL')}
     </Button>
   );
   const totalNumberOfOrphanComments = orphanThreads.reduce(
     (tot, thread) => tot + thread.length,
     0,
   );
-  const buttonLabel = t('Number of orphan threads', {
+  const buttonLabel = t('NUMBER_OF_ORPHAN_THREADS', {
     threads: orphanThreads.length,
-    totalComments: totalNumberOfOrphanComments,
+    count: totalNumberOfOrphanComments,
   });
 
   return <FormControlLabel control={buttonControl} label={buttonLabel} />;

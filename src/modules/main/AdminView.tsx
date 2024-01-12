@@ -44,7 +44,7 @@ const AdminView = (): JSX.Element => {
           <Tab
             data-cy={TAB_SETTINGS_VIEW_CYPRESS}
             value={Tabs.SETTINGS_VIEW}
-            label={t('Settings View')}
+            label={t('SETTINGS_VIEW_TITLE')}
             icon={
               <Badge
                 anchorOrigin={{
@@ -64,7 +64,7 @@ const AdminView = (): JSX.Element => {
           <Tab
             data-cy={TAB_TABLE_VIEW_CYPRESS}
             value={Tabs.TABLE_VIEW}
-            label={t('Conversations')}
+            label={t('CONVERSATIONS_VIEW_TITLE')}
             icon={<MessageSquareText />}
             iconPosition="start"
           />

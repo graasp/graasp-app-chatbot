@@ -45,7 +45,9 @@ const DownloadButtons = (): JSX.Element => {
         startIcon={<DownloadCloud />}
         variant="outlined"
       >
-        {isFetchingAppActions ? t('Downloading') : t('Download Actions')}
+        {isFetchingAppActions
+          ? t('DOWNLOADING_LABEL')
+          : t('DOWNLOAD_ACTIONS_LABEL')}
       </LoadingButton>
       <LoadingButton
         data-cy={DOWNLOAD_DATA_BUTTON_CY}
@@ -54,7 +56,7 @@ const DownloadButtons = (): JSX.Element => {
         startIcon={<DownloadCloud />}
         variant="outlined"
       >
-        {isFetchingAppData ? t('Downloading') : t('Download Data')}
+        {isFetchingAppData ? t('DOWNLOADING_LABEL') : t('DOWNLOAD_DATA_LABEL')}
       </LoadingButton>
     </Stack>
   );

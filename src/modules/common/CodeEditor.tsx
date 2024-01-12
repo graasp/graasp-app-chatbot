@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { CSSProperties, FC } from 'react';
 
 import { Box, Stack, styled, useTheme } from '@mui/material';
 
@@ -18,10 +18,11 @@ const StyledEditorContainer = styled(Box)({
 type Props = {
   value: string;
   readOnly?: boolean;
+  fontSize?: CSSProperties['fontSize'];
   onChange?: (newValue: string) => void;
 };
 
-const CodeEditor: FC<Props> = ({ value, readOnly, onChange }) => {
+const CodeEditor: FC<Props> = ({ value, readOnly, fontSize, onChange }) => {
   const theme = useTheme();
 
   return (
@@ -32,6 +33,7 @@ const CodeEditor: FC<Props> = ({ value, readOnly, onChange }) => {
           onChange={onChange}
           height="100%"
           style={{
+            fontSize,
             height: '100%',
           }}
           value={value}

@@ -32,7 +32,7 @@ const SubmitButtons: FC<Props> = ({
         color="error"
         variant="outlined"
       >
-        {t('Cancel')}
+        {t('CANCEL_LABEL')}
       </Button>
       <Button
         sx={{ m: 1 }}
@@ -41,7 +41,7 @@ const SubmitButtons: FC<Props> = ({
         disabled={!unsavedChanges}
         variant="outlined"
       >
-        {unsavedChanges ? t('Save') : t('Saved')}
+        {unsavedChanges ? t('SAVE_LABEL') : t('SAVED_LABEL')}
       </Button>
     </Box>
   );

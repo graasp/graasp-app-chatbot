@@ -33,7 +33,7 @@ const CommentActions = ({
   const { t } = useTranslation();
   const { mutate: deleteAppData } = mutations.useDeleteAppData();
   const { mutate: postAction } = mutations.usePostAppAction();
-  console.debug(open, showEdit, showDelete);
+
   return (
     <Menu
       MenuListProps={{ dense: true }}
@@ -64,7 +64,7 @@ const CommentActions = ({
           <ListItemIcon>
             <Edit color="primary" />
           </ListItemIcon>
-          <ListItemText>{t('Edit')}</ListItemText>
+          <ListItemText>{t('EDIT_LABEL')}</ListItemText>
         </MenuItem>
       )}
       {showDelete && (
@@ -81,7 +81,7 @@ const CommentActions = ({
           <ListItemIcon>
             <Delete color="error" />
           </ListItemIcon>
-          <ListItemText>{t('Delete')}</ListItemText>
+          <ListItemText>{t('DELETE_LABEL')}</ListItemText>
         </MenuItem>
       )}
     </Menu>

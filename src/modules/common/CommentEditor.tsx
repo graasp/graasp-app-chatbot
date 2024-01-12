@@ -158,7 +158,7 @@ const CommentEditor = ({
         </Stack>
         <TextArea
           data-cy={COMMENT_EDITOR_TEXTAREA_CYPRESS}
-          placeholder={t('Type your comment')}
+          placeholder={t('COMMENT_PLACEHOLDER')}
           minRows={1}
           maxRows={10}
           ref={ref}
@@ -181,7 +181,7 @@ const CommentEditor = ({
               variant="outlined"
               onClick={() => onCancel()}
             >
-              {t('Cancel')}
+              {t('CANCEL_LABEL')}
             </Button>
             <Button
               dataCy={COMMENT_EDITOR_SAVE_BUTTON_CYPRESS}
@@ -189,7 +189,7 @@ const CommentEditor = ({
               variant="outlined"
               onClick={() => onSend(text)}
             >
-              {t('Send')}
+              {t('SEND_LABEL')}
             </Button>
           </Stack>
         </Stack>

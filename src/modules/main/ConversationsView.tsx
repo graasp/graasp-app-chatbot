@@ -5,6 +5,7 @@ import { Close } from '@mui/icons-material';
 import InputIcon from '@mui/icons-material/Input';
 import {
   IconButton,
+  Stack,
   Table,
   TableBody,
   TableCell,
@@ -60,7 +61,7 @@ const ConversationsView: FC = () => {
       return (
         <TableRow>
           <TableCell data-cy={TABLE_NO_COMMENTS_CYPRESS}>
-            {t('No Comments')}
+            {t('NO_COMMENTS_PLACEHOLDER')}
           </TableCell>
         </TableRow>
       );
@@ -118,16 +119,16 @@ const ConversationsView: FC = () => {
   );
 
   return (
-    <>
+    <Stack spacing={2}>
       <DownloadButtons />
       <OrphanComments comments={comments} />
       <TableContainer data-cy={TABLE_VIEW_TABLE_CYPRESS}>
         <Table aria-label="student table">
           <TableHead>
             <TableRow>
-              <TableCell>{t('Name')}</TableCell>
-              <TableCell>{t('Total Number of Messages')}</TableCell>
-              <TableCell>{t('View Chat')}</TableCell>
+              <TableCell>{t('NAME_COLUMN_HEADER')}</TableCell>
+              <TableCell>{t('MESSAGE_NUMBER_COLUMN_HEADER')}</TableCell>
+              <TableCell>{t('VIEW_CHAT_COLUMN_HEADER')}</TableCell>
             </TableRow>
           </TableHead>
           <TableBody data-cy={TABLE_VIEW_BODY_USERS_CYPRESS}>
@@ -139,11 +140,11 @@ const ConversationsView: FC = () => {
         dataCy={TABLE_VIEW_USER_REVIEW_DIALOG_CYPRESS}
         open={openCommentView}
         maxWidth="lg"
-        title={t('Viewing discussion from', { user: currentUser.name })}
+        title={t('DISCUSSION_DIALOG_TITLE', { user: currentUser.name })}
         content={renderDialogContent()}
         onClose={onCloseDialog}
       />
-    </>
+    </Stack>
   );
 };
 

@@ -1,14 +1,18 @@
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
-import { Edit } from '@mui/icons-material';
+import { Edit, ExpandMore } from '@mui/icons-material';
 import {
+  Accordion,
+  AccordionDetails,
+  AccordionSummary,
   Alert,
   Box,
   Button,
   Card,
   CardContent,
   FormLabel,
+  Link,
   Stack,
   TextField,
   TextareaAutosize,
@@ -18,7 +22,11 @@ import {
 
 import { Undo2 } from 'lucide-react';
 
-import { ChatbotPromptSettings, SettingsKeys } from '@/config/appSetting';
+import {
+  ChatCompletionMessage,
+  ChatbotPromptSettings,
+  SettingsKeys,
+} from '@/config/appSetting';
 import { hooks, mutations } from '@/config/queryClient';
 import { SETTING_CHATBOT_PROMPT_CODE_EDITOR_CY } from '@/config/selectors';
 import { DEFAULT_BOT_USERNAME, SMALL_BORDER_RADIUS } from '@/constants';
@@ -53,6 +61,7 @@ const ChatbotSettings = (): JSX.Element => {
   const { mutate: postSetting } = mutations.usePostAppSetting();
   const { mutate: patchSetting } = mutations.usePatchAppSetting();
   const [unsavedChanges, setUnsavedChanges] = useState(false);
+  const [formattingError, setFormattingError] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
   const { data: chatbotPromptSettings } =
     hooks.useAppSettings<ChatbotPromptSettings>({
@@ -73,7 +82,31 @@ const ChatbotSettings = (): JSX.Element => {
     setIsEditing(false);
   };
 
+  const validatePrompt = <T,>(
+    prompt: string,
+    callbacks: {
+      onSuccess?: () => void;
+      onError?: () => void;
+    },
+  ): T | undefined => {
+    try {
+      const jsonNewChatbotPrompt = JSON.parse(prompt);
+      callbacks.onSuccess?.();
+      return jsonNewChatbotPrompt;
+    } catch {
+      callbacks.onError?.();
+    }
+    return undefined;
+  };
+
+  const hasNoFormattingErrors = (): void => setFormattingError(false);
+  const hasFormattingErrors = (): void => setFormattingError(true);
+
   const handleChangeChatbotPrompt = (value: string): void => {
+    validatePrompt(value, {
+      onSuccess: hasNoFormattingErrors,
+      onError: hasFormattingErrors,
+    });
     setNewChatbotPrompt(value);
     setUnsavedChanges(true);
   };
@@ -98,8 +131,16 @@ const ChatbotSettings = (): JSX.Element => {
   };
 
   const handleSave = (): void => {
-    try {
-      const jsonNewChatbotPrompt = JSON.parse(newChatbotPrompt);
+    const jsonNewChatbotPrompt = validatePrompt<ChatCompletionMessage[]>(
+      newChatbotPrompt,
+      {
+        onError: () => {
+          hasFormattingErrors();
+          showErrorToast(t('ERROR_PROMPT_NOT_IN_JSON_FORMAT'));
+        },
+      },
+    );
+    if (jsonNewChatbotPrompt) {
       const data: ChatbotPromptSettings = {
         initialPrompt: jsonNewChatbotPrompt,
         chatbotCue: newChatbotCue,
@@ -117,10 +158,7 @@ const ChatbotSettings = (): JSX.Element => {
           data,
         });
       }
-
       doneEditing();
-    } catch (e) {
-      showErrorToast('Prompt has to be in JSON format.');
     }
   };
 
@@ -132,7 +170,7 @@ const ChatbotSettings = (): JSX.Element => {
         alignItems="flex-end"
       >
         <Typography variant="h2" fontWeight="bold" fontSize="1.5rem">
-          {t('Chatbot')}
+          {t('CHATBOT_SETTING_TITLE')}
         </Typography>
         <Button
           endIcon={isEditing ? <Undo2 /> : <Edit />}
@@ -145,7 +183,7 @@ const ChatbotSettings = (): JSX.Element => {
             }
           }}
         >
-          {isEditing ? t('Cancel') : t('Edit')}
+          {isEditing ? t('CANCEL_LABEL') : t('EDIT_LABEL')}
         </Button>
       </Stack>
       {!chatbotPrompt && (
@@ -153,9 +191,14 @@ const ChatbotSettings = (): JSX.Element => {
       )}
 
       {isEditing ? (
-        <Stack>
+        <Stack spacing={2}>
           <Box>
-            <FormLabel>{t('Chatbot Name')}</FormLabel>
+            <Stack>
+              <FormLabel>{t('CHATBOT_NAME_LABEL')}</FormLabel>
+              <Typography variant="caption" color="text.secondary">
+                {t('CHATBOT_NAME_HELPER')}
+              </Typography>
+            </Stack>
             <TextField
               fullWidth
               id={SETTING_CHATBOT_PROMPT_CODE_EDITOR_CY}
@@ -166,14 +209,82 @@ const ChatbotSettings = (): JSX.Element => {
             />
           </Box>
           <Box>
-            <FormLabel>{t('Prompt')}</FormLabel>
-            <CodeEditor
-              value={newChatbotPrompt}
-              onChange={(value: string) => handleChangeChatbotPrompt(value)}
-            />
+            <Stack spacing={2}>
+              <Stack>
+                <FormLabel>{t('CHATBOT_PROMPT_LABEL')}</FormLabel>
+                <Typography variant="caption" color="text.secondary">
+                  {t('CHATBOT_PROMPT_HELPER')}
+                </Typography>
+                <CodeEditor
+                  value={newChatbotPrompt}
+                  onChange={(value: string) => handleChangeChatbotPrompt(value)}
+                />
+                {formattingError ? (
+                  <Typography color="error">
+                    {t('ERROR_PROMPT_NOT_IN_JSON_FORMAT')}
+                  </Typography>
+                ) : null}
+              </Stack>
+              <Accordion disableGutters>
+                <AccordionSummary
+                  expandIcon={<ExpandMore />}
+                  aria-controls="panel1-content"
+                  id="help-me"
+                >
+                  {t('CHATBOT_PROMPT_HELPER_LABEL')}
+                </AccordionSummary>
+                <AccordionDetails>
+                  <Stack spacing={1}>
+                    <Typography variant="caption" color="text.secondary">
+                      {t('CHATBOT_PROMPT_FORMAT_HELPER')}
+                    </Typography>
+                    <Typography variant="caption" color="text.secondary">
+                      {t('CHATBOT_PROMPT_FORMAT_EXAMPLE')}
+                    </Typography>
+                    <CodeEditor
+                      value={JSON.stringify(
+                        [
+                          {
+                            role: 'system',
+                            content: 'You are a helpful assistant.',
+                          },
+                          {
+                            role: 'user',
+                            content: 'Who won the world series in 2020?',
+                          },
+                          {
+                            role: 'assistant',
+                            content:
+                              'The Los Angeles Dodgers won the World Series in 2020.',
+                          },
+                          { role: 'user', content: 'Where was it played?' },
+                        ],
+                        null,
+                        2,
+                      )}
+                      readOnly
+                      fontSize="10px"
+                    />
+
+                    <Link
+                      variant="caption"
+                      target="_blank"
+                      href="https://platform.openai.com/docs/api-reference/chat/create#chat-create-messages"
+                    >
+                      {t('CHATBOT_PROMPT_API_REFERENCE')}
+                    </Link>
+                  </Stack>
+                </AccordionDetails>
+              </Accordion>
+            </Stack>
           </Box>
           <Box>
-            <FormLabel>{t('Cue')}</FormLabel>
+            <Stack>
+              <FormLabel>{t('CHATBOT_CUE_LABEL')}</FormLabel>
+              <Typography variant="caption" color="text.secondary">
+                {t('CHATBOT_CUE_HELPER')}
+              </Typography>
+            </Stack>
             <TextArea
               id={SETTING_CHATBOT_PROMPT_CODE_EDITOR_CY}
               value={newChatbotCue}
@@ -188,7 +299,7 @@ const ChatbotSettings = (): JSX.Element => {
               disabled={!unsavedChanges}
               variant="outlined"
             >
-              {unsavedChanges ? t('Save') : t('Saved')}
+              {unsavedChanges ? t('SAVE_LABEL') : t('SAVED_LABEL')}
             </Button>
           </Box>
         </Stack>
@@ -196,20 +307,45 @@ const ChatbotSettings = (): JSX.Element => {
         <Card elevation={0} variant="outlined">
           <CardContent sx={{ pb: 0 }}>
             <Stack direction="column" spacing={1}>
-              <Stack direction="row" spacing={1}>
-                <FormLabel>{t('Name')}:</FormLabel>
-                <Typography>{chatbotName}</Typography>
+              <Stack direction="column">
+                <Stack direction="row" spacing={1}>
+                  <FormLabel>
+                    <Typography>{t('CHATBOT_NAME_LABEL')}:</Typography>
+                  </FormLabel>
+                  <Typography>{chatbotName}</Typography>
+                  {chatbotName === DEFAULT_BOT_USERNAME ? (
+                    <Typography color="text.disabled">
+                      ({t('CHATBOT_NAME_DEFAULT_MESSAGE')})
+                    </Typography>
+                  ) : null}
+                </Stack>
+                <Typography variant="caption" color="text.secondary">
+                  {t('CHATBOT_NAME_HELPER')}
+                </Typography>
               </Stack>
               <Stack direction="column">
-                {/* todo: add explanations on how to use this */}
-                <FormLabel>{t('Prompt')}:</FormLabel>
+                <FormLabel>{t('CHATBOT_PROMPT_LABEL')}:</FormLabel>
+                <Typography variant="caption" color="text.secondary">
+                  {t('CHATBOT_PROMPT_HELPER')}
+                </Typography>
                 <Box width="100%">
                   <CodeEditor value={stringifiedJsonPrompt} readOnly />
                 </Box>
               </Stack>
-              <Stack direction="row" spacing={1}>
-                <FormLabel>{t('Cue')}:</FormLabel>
-                <Typography>{chatbotCue}</Typography>
+              <Stack direction="column">
+                <Stack>
+                  <FormLabel>{t('CHATBOT_CUE_LABEL')}:</FormLabel>
+                  <Typography variant="caption" color="text.secondary">
+                    {t('CHATBOT_CUE_HELPER')}
+                  </Typography>
+                </Stack>
+                {chatbotCue ? (
+                  <Typography>{chatbotCue}</Typography>
+                ) : (
+                  <Typography color="text.disabled" fontStyle="italic">
+                    {t('CHATBOT_CUE_EMPTY_MESSAGE')}
+                  </Typography>
+                )}
               </Stack>
             </Stack>
           </CardContent>

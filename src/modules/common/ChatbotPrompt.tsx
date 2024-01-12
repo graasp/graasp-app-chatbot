@@ -155,7 +155,7 @@ const ChatbotPrompt = ({ id }: Props): JSX.Element | null => {
         >
           <CardHeader
             title={DEFAULT_BOT_USERNAME}
-            subheader={t('just now')}
+            subheader={t('JUST_NOW_COMMENT_HEADER')}
             avatar={<ChatbotAvatar />}
           />
           <CardContent sx={{ p: 2, py: 0, '&:last-child': { pb: 0 } }}>
