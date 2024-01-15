@@ -10,13 +10,6 @@ import {
 } from 'react-mde';
 
 import {
-  Code,
-  FormatBold,
-  FormatItalic,
-  FormatQuote,
-  InsertLink,
-} from '@mui/icons-material';
-import {
   Box,
   FormHelperText,
   Stack,
@@ -25,6 +18,15 @@ import {
 } from '@mui/material';
 
 import { Button } from '@graasp/ui';
+
+import {
+  Bold,
+  Code2,
+  Italic,
+  Link as LinkIcon,
+  Quote,
+  SendHorizonal,
+} from 'lucide-react';
 
 import { CommentAppData } from '@/config/appData';
 // import { DEFAULT_MAX_COMMENT_LENGTH_SETTING } from '@/config/appSetting';
@@ -121,7 +123,7 @@ const CommentEditor = ({
               await commandController.executeCommand('bold');
             }}
           >
-            <FormatBold fontSize="inherit" />
+            <Bold size={16} />
           </ToolbarButton>
           <ToolbarButton
             dataCy={COMMENT_EDITOR_ITALIC_BUTTON_CYPRESS}
@@ -129,7 +131,7 @@ const CommentEditor = ({
               await commandController.executeCommand('italic');
             }}
           >
-            <FormatItalic fontSize="inherit" />
+            <Italic size={16} />
           </ToolbarButton>
           <ToolbarButton
             dataCy={COMMENT_EDITOR_CODE_BUTTON_CYPRESS}
@@ -137,7 +139,7 @@ const CommentEditor = ({
               await commandController.executeCommand('code');
             }}
           >
-            <Code fontSize="inherit" />
+            <Code2 size={16} />
           </ToolbarButton>
           <ToolbarButton
             dataCy={COMMENT_EDITOR_LINK_BUTTON_CYPRESS}
@@ -145,7 +147,7 @@ const CommentEditor = ({
               await commandController.executeCommand('link');
             }}
           >
-            <InsertLink fontSize="inherit" />
+            <LinkIcon size={16} />
           </ToolbarButton>
           <ToolbarButton
             dataCy={COMMENT_EDITOR_QUOTE_BUTTON_CYPRESS}
@@ -153,7 +155,7 @@ const CommentEditor = ({
               await commandController.executeCommand('quote');
             }}
           >
-            <FormatQuote fontSize="inherit" />
+            <Quote size={16} />
           </ToolbarButton>
         </Stack>
         <TextArea
@@ -174,24 +176,23 @@ const CommentEditor = ({
           alignItems="center"
           justifyContent="space-between"
         >
-          <Stack direction="row" spacing={1} justifyContent="end">
-            <Button
-              dataCy={COMMENT_EDITOR_CANCEL_BUTTON_CYPRESS}
-              color="secondary"
-              variant="outlined"
-              onClick={() => onCancel()}
-            >
-              {t('CANCEL_LABEL')}
-            </Button>
-            <Button
-              dataCy={COMMENT_EDITOR_SAVE_BUTTON_CYPRESS}
-              color="primary"
-              variant="outlined"
-              onClick={() => onSend(text)}
-            >
-              {t('SEND_LABEL')}
-            </Button>
-          </Stack>
+          <Button
+            dataCy={COMMENT_EDITOR_CANCEL_BUTTON_CYPRESS}
+            color="secondary"
+            variant="outlined"
+            onClick={() => onCancel()}
+          >
+            {t('CANCEL_LABEL')}
+          </Button>
+          <Button
+            endIcon={<SendHorizonal />}
+            dataCy={COMMENT_EDITOR_SAVE_BUTTON_CYPRESS}
+            color="primary"
+            variant="outlined"
+            onClick={() => onSend(text)}
+          >
+            {t('SEND_LABEL')}
+          </Button>
         </Stack>
       </Stack>
     </Box>
