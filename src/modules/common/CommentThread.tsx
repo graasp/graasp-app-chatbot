@@ -25,12 +25,31 @@ import Comment from './Comment';
 import CommentEditor from './CommentEditor';
 import ResponseBox from './ResponseBox';
 
+const LoadingIndicator = ({
+  isChatbotLoading,
+}: {
+  isChatbotLoading: boolean;
+}): JSX.Element | null => {
+  const { t } = useTranslation();
+  return (
+    <ResponseContainer>
+      <Stack spacing={2} direction="row" justifyContent="center">
+        <Typography color="#666">
+          {isChatbotLoading
+            ? t('LOADING_RESPONSE_PLACEHOLDER')
+            : t('PROCESSING_RESPONSE_PLACEHOLDER')}
+        </Typography>
+        <CircularProgress sx={{ color: '#666' }} size="20px" />
+      </Stack>
+    </ResponseContainer>
+  );
+};
+
 type Props = {
   children?: CommentAppData[];
 };
 
 const CommentThread = ({ children }: Props): JSX.Element | null => {
-  const { t } = useTranslation();
   const [replyingId, setReplyingId] = useState<string | null>(null);
   const [editingId, setEditingId] = useState<string | null>(null);
   const { mutate: patchData } = mutations.usePatchAppData();
@@ -110,16 +129,9 @@ const CommentThread = ({ children }: Props): JSX.Element | null => {
                 <ResponseBox commentId={c.id} onClick={addResponse} />
               )
           }
-          {i + 1 === arr.length && isLoading && (
-            <ResponseContainer>
-              <Stack spacing={2} direction="row" justifyContent="center">
-                <Typography color="#666">
-                  {t('LOADING_RESPONSE_PLACEHOLDER')}
-                </Typography>
-                <CircularProgress sx={{ color: '#666' }} size="20px" />
-              </Stack>
-            </ResponseContainer>
-          )}
+          {i + 1 === arr.length && c.type === AppDataTypes.UserComment ? (
+            <LoadingIndicator isChatbotLoading={isLoading} />
+          ) : null}
           {
             // if input bar was clicked, a comment editor opens to compose a response
             isReplied(c.id) && (

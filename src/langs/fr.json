@@ -41,6 +41,7 @@
     "COMMENT_TEXT_TOO_LONG": "Le text du commentaire ne peut pas dépasser {{max_length}} caractères",
     "COMMENT_PLACEHOLDER": "Type your comment here",
     "LOADING_RESPONSE_PLACEHOLDER": "Chargement de la réponse",
+    "PROCESSING_RESPONSE_PLACEHOLDER": "Traitement de la réponse",
     "RESPONSE_BOX_PLACEHOLDER": "Répondre à ce message",
     "NO_COMMENTS_PLACEHOLDER": "Pas de commentaires"
   }
