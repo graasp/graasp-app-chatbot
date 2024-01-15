@@ -141,6 +141,7 @@ const ChatbotPrompt = ({ id }: Props): JSX.Element | null => {
       <Alert severity="warning">{t('CHATBOT_CONFIGURATION_MISSING')}</Alert>
     );
   }
+  const chatbotName = chatbotPrompt?.data?.chatbotName || DEFAULT_BOT_USERNAME;
 
   // display only if real chatbot prompt does not exist yet
   if (!realChatbotPromptExists) {
@@ -154,7 +155,7 @@ const ChatbotPrompt = ({ id }: Props): JSX.Element | null => {
           data-cy={buildChatbotPromptContainerDataCy(chatbotPrompt.id)}
         >
           <CardHeader
-            title={DEFAULT_BOT_USERNAME}
+            title={chatbotName}
             subheader={t('JUST_NOW_COMMENT_HEADER')}
             avatar={<ChatbotAvatar />}
           />

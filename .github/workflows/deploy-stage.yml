@@ -36,7 +36,7 @@ jobs:
           VITE_GRAASP_APP_KEY: ${{ secrets.APP_KEY }}
           VITE_SENTRY_ENV: staging
           VITE_SENTRY_DSN: ${{ secrets.SENTRY_DSN }}
-          VITE_VERSION: ${{ github.event.client_payload.tag }}
+          VITE_VERSION: ${{ github.event.client_payload.tag || inputs.tag }}
           # add any env variable needed by your app here
         run: yarn build
         shell: bash
