@@ -27,6 +27,7 @@ const ResponseBox = ({ onClick, commentId, dataCy }: Props): JSX.Element => {
         fullWidth
         placeholder={t('RESPONSE_BOX_PLACEHOLDER')}
         onClick={() => onClick(commentId)}
+        onFocus={() => onClick(commentId)}
       />
     </ResponseContainer>
   );
