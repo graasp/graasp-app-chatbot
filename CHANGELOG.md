@@ -1,5 +1,15 @@
 # Changelog
 
+## [1.0.1](https://github.com/graasp/graasp-app-chatbot/compare/v1.0.0...v1.0.1) (2024-01-16)
+
+
+### Bug Fixes
+
+* add gpt notice message ([#40](https://github.com/graasp/graasp-app-chatbot/issues/40)) ([6a0aae3](https://github.com/graasp/graasp-app-chatbot/commit/6a0aae35dbd93fb1589ca58603304df902f8c115)), closes [#25](https://github.com/graasp/graasp-app-chatbot/issues/25)
+* **deps:** update dependency @types/node to v20.11.3 ([32e2b4e](https://github.com/graasp/graasp-app-chatbot/commit/32e2b4e302b639d90b2ed1957b6b8f9cf6e3d3a0))
+* **deps:** update dependency @types/node to v20.11.4 ([#48](https://github.com/graasp/graasp-app-chatbot/issues/48)) ([a44e756](https://github.com/graasp/graasp-app-chatbot/commit/a44e75645afbfeda49891e2217713589955725de))
+* **deps:** update dependency @types/react to v18.2.48 ([fd37f14](https://github.com/graasp/graasp-app-chatbot/commit/fd37f14eda6b91c9c5676ea9f6c7d9406971d417))
+
 ## 1.0.0 (2024-01-15)
 
 
