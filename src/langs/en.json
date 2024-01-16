@@ -2,6 +2,7 @@
     "translations": {
         "SETTINGS_VIEW_TITLE": "Configuration",
         "CONVERSATIONS_VIEW_TITLE": "Conversations",
+        "ABOUT_VIEW_TITLE": "About",
         "DOWNLOADING_LABEL": "Downloading",
         "DOWNLOAD_ACTIONS_LABEL": "Download Actions",
         "DOWNLOAD_DATA_LABEL": "Download Data",
@@ -43,6 +44,9 @@
         "LOADING_RESPONSE_PLACEHOLDER": "Loading response",
         "PROCESSING_RESPONSE_PLACEHOLDER": "Processing response",
         "RESPONSE_BOX_PLACEHOLDER": "Respond to this comment",
-        "NO_COMMENTS_PLACEHOLDER": "No comments"
+        "NO_COMMENTS_PLACEHOLDER": "No comments",
+        "ABOUT_TITLE": "About the Chatbot App",
+        "ABOUT_DESCRIPTION": "The chatbot app uses OpenAI's ChatGPT model as a base to provide the chatbot integration. Users responses are transmitted to OpenAI trough their API to be processed and for responses to be generated. No other user data is transmitted. If users provide personal data in their messages there is nothing we can do to protect that data.",
+        "ABOUT_PRIVACY_POLICY_OPENAI": "See the <1>OpenAI Privacy Policy for EU users</1>."
     }
 }

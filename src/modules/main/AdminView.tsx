@@ -1,10 +1,10 @@
 import { useState } from 'react';
-import { useTranslation } from 'react-i18next';
+import { Trans, useTranslation } from 'react-i18next';
 
 import { TabContext, TabList, TabPanel } from '@mui/lab';
-import { Badge, Box, Tab } from '@mui/material';
+import { Badge, Box, Link, Tab, Typography } from '@mui/material';
 
-import { AlertTriangle, MessageSquareText, Settings } from 'lucide-react';
+import { AlertTriangle, Info, MessageSquareText, Settings } from 'lucide-react';
 
 import { GeneralSettings, SettingsKeys } from '@/config/appSetting';
 import { hooks } from '@/config/queryClient';
@@ -12,6 +12,7 @@ import {
   BUILDER_VIEW_CY,
   SETTINGS_VIEW_PANE_CYPRESS,
   TABLE_VIEW_PANE_CYPRESS,
+  TAB_ABOUT_VIEW_CYPRESS,
   TAB_SETTINGS_VIEW_CYPRESS,
   TAB_TABLE_VIEW_CYPRESS,
 } from '@/config/selectors';
@@ -22,6 +23,7 @@ import ConversationsView from './ConversationsView';
 enum Tabs {
   TABLE_VIEW = 'TABLE_VIEW',
   SETTINGS_VIEW = 'SETTINGS_VIEW',
+  ABOUT_VIEW = 'ABOUT_VIEW',
 }
 
 const AdminView = (): JSX.Element => {
@@ -68,6 +70,13 @@ const AdminView = (): JSX.Element => {
             icon={<MessageSquareText />}
             iconPosition="start"
           />
+          <Tab
+            data-cy={TAB_ABOUT_VIEW_CYPRESS}
+            value={Tabs.ABOUT_VIEW}
+            label={t('ABOUT_VIEW_TITLE')}
+            icon={<Info />}
+            iconPosition="start"
+          />
         </TabList>
         <TabPanel value={Tabs.TABLE_VIEW} data-cy={TABLE_VIEW_PANE_CYPRESS}>
           <ConversationsView />
@@ -77,6 +86,20 @@ const AdminView = (): JSX.Element => {
           data-cy={SETTINGS_VIEW_PANE_CYPRESS}
         >
           <SettingsView />
+        </TabPanel>
+        <TabPanel value={Tabs.ABOUT_VIEW} data-cy={SETTINGS_VIEW_PANE_CYPRESS}>
+          <Typography variant="h6" component="h3">
+            {t('ABOUT_TITLE')}
+          </Typography>
+          <Typography>{t('ABOUT_DESCRIPTION')}</Typography>
+          <Typography>
+            <Trans i18nKey="ABOUT_PRIVACY_POLICY_OPENAI">
+              The
+              <Link href="https://openai.com/policies/eu-privacy-policy">
+                Privacy policy
+              </Link>
+            </Trans>
+          </Typography>
         </TabPanel>
       </TabContext>
     </Box>
