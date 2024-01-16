@@ -1,6 +1,6 @@
 {
   "name": "graasp-app-chatbot",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "license": "AGPL-3.0-only",
   "author": "Graasp",
   "contributors": [
@@ -22,7 +22,7 @@
     "@sentry/react": "7.93.0",
     "@tanstack/react-query": "^4.36.1",
     "@tanstack/react-query-devtools": "^4.36.1",
-    "@types/node": "20.11.4",
+    "@types/node": "20.11.3",
     "@types/react": "18.2.48",
     "@types/react-dom": "18.2.18",
     "@uiw/react-codemirror": "^4.21.21",
