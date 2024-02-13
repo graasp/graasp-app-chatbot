@@ -42,7 +42,11 @@ const ChatbotPrompt = ({ id }: Props): JSX.Element | null => {
   const { mutateAsync: postAppDataAsync } = mutations.usePostAppData();
   const { mutateAsync: postChatBot } = mutations.usePostChatBot();
   const { data: appData } = hooks.useAppData<CommentData>();
-  const { data: chatbotPrompts } = hooks.useAppSettings<ChatbotPromptSettings>({
+  const {
+    data: chatbotPrompts,
+    isSuccess,
+    isError,
+  } = hooks.useAppSettings<ChatbotPromptSettings>({
     name: SettingsKeys.ChatbotPrompt,
   });
   const { data: generalSettings } = hooks.useAppSettings<GeneralSettings>({
@@ -137,9 +141,18 @@ const ChatbotPrompt = ({ id }: Props): JSX.Element | null => {
   };
 
   if (!chatbotPrompt) {
-    return (
-      <Alert severity="warning">{t('CHATBOT_CONFIGURATION_MISSING')}</Alert>
-    );
+    if (isSuccess) {
+      return (
+        <Alert severity="warning">{t('CHATBOT_CONFIGURATION_MISSING')}</Alert>
+      );
+    }
+    if (isError) {
+      return (
+        <Alert severity="error">{t('CHATBOT_CONFIGURATION_FETCH_ERROR')}</Alert>
+      );
+    }
+    // do not show anything if it has not finished fetching
+    return null;
   }
   const chatbotName = chatbotPrompt?.data?.chatbotName || DEFAULT_BOT_USERNAME;
 
