@@ -24,7 +24,10 @@ const PlayerView = ({ id }: Props): JSX.Element => {
   const comments = appData?.filter((res) => res.creator?.id === memberId);
 
   return (
-    <Box sx={{ px: 10 }} data-cy={PLAYER_VIEW_CY}>
+    <Box
+      sx={{ px: { xs: 2, sm: 10 }, maxWidth: '100ch', m: 'auto' }}
+      data-cy={PLAYER_VIEW_CY}
+    >
       <ChatbotPrompt id={memberId} />
       <CommentThread>{comments}</CommentThread>
     </Box>
