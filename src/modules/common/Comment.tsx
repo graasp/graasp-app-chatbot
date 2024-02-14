@@ -1,7 +1,6 @@
 import { useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
-import { MoreVert } from '@mui/icons-material';
 import {
   Card,
   CardContent,
@@ -14,6 +13,8 @@ import {
 
 import { useLocalContext } from '@graasp/apps-query-client';
 import { formatDate } from '@graasp/sdk';
+
+import { MoreVertical } from 'lucide-react';
 
 import { AppDataTypes, CommentAppData } from '@/config/appData';
 import {
@@ -108,7 +109,7 @@ const Comment = ({ comment, onEdit }: Props): JSX.Element => {
                   setOpenActionsMenu(true);
                 }}
               >
-                <MoreVert />
+                <MoreVertical />
               </IconButton>
             </Tooltip>
             <CommentActions

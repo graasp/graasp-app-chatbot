@@ -1,8 +1,6 @@
 import { FC, ReactElement, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
-import { Close } from '@mui/icons-material';
-import InputIcon from '@mui/icons-material/Input';
 import {
   IconButton,
   Stack,
@@ -12,9 +10,11 @@ import {
   TableContainer,
   TableHead,
   TableRow,
+  useTheme,
 } from '@mui/material';
 
 import groupBy from 'lodash.groupby';
+import { MessagesSquare, XIcon } from 'lucide-react';
 
 import { CommentData } from '@/config/appData';
 import { hooks } from '@/config/queryClient';
@@ -45,6 +45,7 @@ const DEFAULT_CURRENT_USER = {
 
 const ConversationsView: FC = () => {
   const { t } = useTranslation();
+  const theme = useTheme();
   const [openCommentView, setOpenCommentView] = useState(false);
   const [currentUser, setCurrentUser] = useState(DEFAULT_CURRENT_USER);
   const { data: { members } = { members: [] } } = hooks.useAppContext();
@@ -91,7 +92,7 @@ const ConversationsView: FC = () => {
                 setOpenCommentView(true);
               }}
             >
-              <InputIcon color="primary" />
+              <MessagesSquare color={theme.palette.primary.main} />
             </IconButton>
           </TableCell>
         </TableRow>
@@ -113,7 +114,7 @@ const ConversationsView: FC = () => {
         onClick={onCloseDialog}
         sx={{ position: 'absolute', top: 0, right: 0, m: 1 }}
       >
-        <Close />
+        <XIcon />
       </IconButton>
     </>
   );

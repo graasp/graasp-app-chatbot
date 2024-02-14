@@ -157,11 +157,15 @@ const CommentThread = ({ children }: Props): JSX.Element | null => {
                           data: botThread.data.content,
                         }));
 
-                      const prompt = buildPrompt(
-                        chatbotPrompt?.data.chatbotCue,
-                        chatbotThread,
-                        content,
-                      );
+                      const prompt = [
+                        // this is to spread the JSON setting before the messages
+                        ...(chatbotPrompt?.data?.initialPrompt ?? []),
+                        // this function requests the prompt as the first argument in string format
+                        // we can not use it in this context as we are using a JSON prompt.
+                        // if we simplify the prompt in the future we will be able to remove the line above
+                        // and this function solely
+                        ...buildPrompt(undefined, chatbotThread, content),
+                      ];
 
                       const newData = {
                         ...data,
