@@ -1,7 +1,8 @@
 import { FC } from 'react';
 
-import { SmartToy as BotIcon } from '@mui/icons-material';
 import { Avatar } from '@mui/material';
+
+import { BotIcon } from 'lucide-react';
 
 const ChatbotAvatar: FC = () => (
   <Avatar
@@ -9,7 +10,7 @@ const ChatbotAvatar: FC = () => (
       backgroundColor: 'var(--graasp-primary)',
     }}
   >
-    <BotIcon htmlColor="#fff" />
+    <BotIcon color="#fff" />
   </Avatar>
 );
 

@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
-import { Edit, ExpandMore } from '@mui/icons-material';
 import {
   Accordion,
   AccordionDetails,
@@ -20,13 +19,11 @@ import {
   styled,
 } from '@mui/material';
 
-import { Undo2 } from 'lucide-react';
+import { ChatBotMessage } from '@graasp/sdk';
 
-import {
-  ChatCompletionMessage,
-  ChatbotPromptSettings,
-  SettingsKeys,
-} from '@/config/appSetting';
+import { ChevronDown, Edit, Undo2 } from 'lucide-react';
+
+import { ChatbotPromptSettings, SettingsKeys } from '@/config/appSetting';
 import { hooks, mutations } from '@/config/queryClient';
 import { SETTING_CHATBOT_PROMPT_CODE_EDITOR_CY } from '@/config/selectors';
 import { DEFAULT_BOT_USERNAME, SMALL_BORDER_RADIUS } from '@/constants';
@@ -131,7 +128,7 @@ const ChatbotSettings = (): JSX.Element => {
   };
 
   const handleSave = (): void => {
-    const jsonNewChatbotPrompt = validatePrompt<ChatCompletionMessage[]>(
+    const jsonNewChatbotPrompt = validatePrompt<ChatBotMessage[]>(
       newChatbotPrompt,
       {
         onError: () => {
@@ -227,7 +224,7 @@ const ChatbotSettings = (): JSX.Element => {
               </Stack>
               <Accordion disableGutters>
                 <AccordionSummary
-                  expandIcon={<ExpandMore />}
+                  expandIcon={<ChevronDown />}
                   aria-controls="panel1-content"
                   id="help-me"
                 >

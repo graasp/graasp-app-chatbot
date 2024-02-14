@@ -1,14 +1,11 @@
+import { ChatBotMessage } from '@graasp/sdk';
+
 export const SettingsKeys = {
   ChatbotPrompt: 'chatbot-prompt',
   General: 'general',
 } as const;
 
 export type ChatCompletionMessageRoles = 'system' | 'user' | 'assistant';
-
-export type ChatCompletionMessage = {
-  role: ChatCompletionMessageRoles;
-  content: string;
-};
 
 // Chatbot Prompt Setting keys
 export enum ChatbotPromptSettingsKeys {
@@ -18,7 +15,7 @@ export enum ChatbotPromptSettingsKeys {
 }
 
 export type ChatbotPromptSettings = {
-  [ChatbotPromptSettingsKeys.InitialPrompt]: ChatCompletionMessage[];
+  [ChatbotPromptSettingsKeys.InitialPrompt]: ChatBotMessage[];
   [ChatbotPromptSettingsKeys.ChatbotCue]: string;
   [ChatbotPromptSettingsKeys.ChatbotName]: string;
 
