@@ -68,7 +68,7 @@
   "devDependencies": {
     "@commitlint/cli": "18.6.1",
     "@commitlint/config-conventional": "18.6.2",
-    "@cypress/code-coverage": "3.12.23",
+    "@cypress/code-coverage": "3.12.24",
     "@trivago/prettier-plugin-sort-imports": "^4.3.0",
     "@types/file-saver": "^2",
     "@types/i18n": "0.13.10",
