@@ -5367,9 +5367,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"cypress@npm:13.6.5":
-  version: 13.6.5
-  resolution: "cypress@npm:13.6.5"
+"cypress@npm:13.6.6":
+  version: 13.6.6
+  resolution: "cypress@npm:13.6.6"
   dependencies:
     "@cypress/request": "npm:^3.0.0"
     "@cypress/xvfb": "npm:^1.2.4"
@@ -5415,7 +5415,7 @@ __metadata:
     yauzl: "npm:^2.10.0"
   bin:
     cypress: bin/cypress
-  checksum: 10/df11ec229eaab173dd513b7ee59202407450aaf2900798fe09e076636ffae6a86fea8265c608756f1c44f1b0db6096115e2d7007a48bf196c192462c13e9f339
+  checksum: 10/c86cc38fa25f04575d496fbf26edf8c738f2c98b0faeced9788ec691293424336f6be180f597256d38124df9ce75daddd42a015127af76d8f8df9eb071e3d90e
   languageName: node
   linkType: hard
 
@@ -7220,7 +7220,7 @@ __metadata:
     "@vitejs/plugin-react": "npm:^4.2.1"
     axios: "npm:1.6.7"
     concurrently: "npm:8.2.2"
-    cypress: "npm:13.6.5"
+    cypress: "npm:13.6.6"
     env-cmd: "npm:10.1.0"
     eslint: "npm:8.56.0"
     eslint-config-airbnb: "npm:19.0.4"
