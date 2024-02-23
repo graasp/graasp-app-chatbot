@@ -7,6 +7,7 @@ import {
 } from '@graasp/sdk';
 
 import { API_HOST } from '@/config/env';
+import { DEFAULT_LANGUAGE } from '@/config/i18n';
 
 export const mockMembers: CompleteMember[] = [
   {
@@ -45,6 +46,7 @@ export const mockItem: DiscriminatedItem = {
   settings: {},
   type: ItemType.APP,
   extra: { [ItemType.APP]: { url: 'http://localhost:3002' } },
+  lang: DEFAULT_LANGUAGE,
   creator: mockMembers[0],
   createdAt: new Date().toISOString(),
   updatedAt: new Date().toISOString(),

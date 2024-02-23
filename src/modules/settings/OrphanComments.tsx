@@ -42,7 +42,6 @@ const OrphanComments = ({ comments }: Props): JSX.Element | null => {
       dataCy={ORPHAN_BUTTON_CYPRESS}
       variant="outlined"
       color="primary"
-      sx={{ mr: 1 }}
       onClick={() => handleOnClickRemoveOrphans(orphanThreads)}
       disabled={orphanThreads.length === 0}
     >
