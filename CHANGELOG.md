@@ -1,5 +1,25 @@
 # Changelog
 
+## [1.0.3](https://github.com/graasp/graasp-app-chatbot/compare/v1.0.2...v1.0.3) (2024-02-29)
+
+
+### Bug Fixes
+
+* **deps:** update dependency @codemirror/lang-javascript to v6.2.2 ([fcb4bf3](https://github.com/graasp/graasp-app-chatbot/commit/fcb4bf3a9cae9f70c6cce346525bc570ef66b6b5))
+* **deps:** update dependency @emotion/react to v11.11.4 ([33aeb22](https://github.com/graasp/graasp-app-chatbot/commit/33aeb22af47b7b3eed692f05264c516572fdd78a))
+* **deps:** update dependency @graasp/apps-query-client to v3.4.6 ([a96c06f](https://github.com/graasp/graasp-app-chatbot/commit/a96c06f52a9d619641f3fc1259af217ea6f126ab))
+* **deps:** update dependency @types/node to v20.11.20 ([044b478](https://github.com/graasp/graasp-app-chatbot/commit/044b47812df49c5aeab5960c5d4fdecb48d4d95c))
+* **deps:** update dependency @types/node to v20.11.21 ([3f6d3e0](https://github.com/graasp/graasp-app-chatbot/commit/3f6d3e05616c16c325199c2ccd4067668e0387af))
+* **deps:** update dependency @types/node to v20.11.22 ([78b087c](https://github.com/graasp/graasp-app-chatbot/commit/78b087ced2b3e27cd449024371b577d3b2ea3be2))
+* **deps:** update dependency @types/react to v18.2.58 ([e413209](https://github.com/graasp/graasp-app-chatbot/commit/e4132097b91e0d7ee879ee5ea8af2d25c85ad9ba))
+* **deps:** update dependency @types/react to v18.2.59 ([fa05bad](https://github.com/graasp/graasp-app-chatbot/commit/fa05bad2ee5134f4f3cdc0aa5dac6a29fdd9fb46))
+* **deps:** update dependency @types/react to v18.2.60 ([c31ec04](https://github.com/graasp/graasp-app-chatbot/commit/c31ec049c7ee3a18ed095c7c9260a402c3e93ced))
+* **deps:** update dependency @uiw/react-codemirror to v4.21.23 ([#112](https://github.com/graasp/graasp-app-chatbot/issues/112)) ([faea8ec](https://github.com/graasp/graasp-app-chatbot/commit/faea8eceed96743e0dc77c524636f9bca6a7e6cd))
+* **deps:** update dependency @uiw/react-codemirror to v4.21.24 ([9904782](https://github.com/graasp/graasp-app-chatbot/commit/990478244b8aa3d21a05de1608175d3c3d983ff2))
+* **deps:** update dependency react-router-dom to v6.22.2 ([5e8f3aa](https://github.com/graasp/graasp-app-chatbot/commit/5e8f3aabf806aba351dd5d9cab2a57a6aeced5e6))
+* **deps:** update mui (non-major) ([398d9d9](https://github.com/graasp/graasp-app-chatbot/commit/398d9d9ed043eae117e31a91bd5ef80883e52860))
+* update deps ([#115](https://github.com/graasp/graasp-app-chatbot/issues/115)) ([56b496e](https://github.com/graasp/graasp-app-chatbot/commit/56b496ee388f2faa10d0ef4c9f0a2bc4a2b47db3))
+
 ## [1.0.2](https://github.com/graasp/graasp-app-chatbot/compare/v1.0.1...v1.0.2) (2024-02-20)
 
 
