@@ -8339,7 +8339,7 @@ __metadata:
     husky: "npm:9.0.11"
     i18next: "npm:^23.9.0"
     lodash.groupby: "npm:^4.6.0"
-    lucide-react: "npm:^0.343.0"
+    lucide-react: "npm:^0.363.0"
     miragejs: "npm:^0.1.48"
     nock: "npm:^13.5.3"
     nyc: "npm:15.1.0"
@@ -9907,12 +9907,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"lucide-react@npm:^0.343.0":
-  version: 0.343.0
-  resolution: "lucide-react@npm:0.343.0"
+"lucide-react@npm:^0.363.0":
+  version: 0.363.0
+  resolution: "lucide-react@npm:0.363.0"
   peerDependencies:
     react: ^16.5.1 || ^17.0.0 || ^18.0.0
-  checksum: 10/326933472ba804d9b4b8d15170919386d211128090d6e633378b638e01bb40f556aafba5b64dac305e409224bf3b7af0ec67f834dcdf5bb52aad9abd6de4e4b8
+  checksum: 10/a007e37428c7f99d5c7431703bd6970ce50c62c4592b0a91badd746bdab8ac578f87a67b9d6193d0d36bf1451c432de91795cbdc535dbcb4943510a1752d1cba
   languageName: node
   linkType: hard
 
