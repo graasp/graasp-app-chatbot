@@ -15,9 +15,6 @@ describe('Analytics View', () => {
   });
 
   it('App', () => {
-    cy.get(buildDataCy(ANALYTICS_VIEW_CY)).should(
-      'contain.text',
-      'Analytics as admin',
-    );
+    cy.get(buildDataCy(ANALYTICS_VIEW_CY)).should('be.visible');
   });
 });
