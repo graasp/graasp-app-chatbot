@@ -13,7 +13,7 @@
         "MESSAGE_NUMBER_COLUMN_HEADER": "Total number of messages",
         "VIEW_CHAT_COLUMN_HEADER": "View Chat",
         "DISCUSSION_DIALOG_TITLE": "Discussion from {{user}}",
-        "CHATBOT_CONFIGURATION_MISSING": "This chatbot has not been configured yet.",
+        "CHATBOT_CONFIGURATION_MISSING": "This prompt will guide the interaction with the chatbot.",
         "CHATBOT_CONFIGURATION_FETCH_ERROR": "There was an error fetching the chatbot configuration.",
         "ERROR_PROMPT_NOT_IN_JSON_FORMAT": "Prompt has to be in JSON format.",
         "CHATBOT_SETTING_TITLE": "Chatbot",
