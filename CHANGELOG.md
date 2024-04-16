@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.5](https://github.com/graasp/graasp-app-chatbot/compare/v1.0.4...v1.0.5) (2024-04-16)
+
+
+### Bug Fixes
+
+* change helper text for prompt in chatbot configuration ([#211](https://github.com/graasp/graasp-app-chatbot/issues/211)) ([7552dd1](https://github.com/graasp/graasp-app-chatbot/commit/7552dd15672b574b06de405f2e62d3ee05b3b94d))
+
 ## [1.0.4](https://github.com/graasp/graasp-app-chatbot/compare/v1.0.3...v1.0.4) (2024-04-04)
 
 
