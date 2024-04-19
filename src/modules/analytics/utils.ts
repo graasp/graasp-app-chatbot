@@ -47,7 +47,7 @@ export const getAllWords = (
 
 export const createRegexFromString = (regexString: string): RegExp | string => {
   // Extract between the slashes and the flags
-  const matches = regexString.match(/\/(.+)\/([a-z]*)?/);
+  const matches = regexString.match(/\/(.+)\/([a-z]+)?/);
   if (!matches) {
     return regexString.replace(/[.*+?^${}()|[\]\\]/g, '\\$&').trim();
   }
