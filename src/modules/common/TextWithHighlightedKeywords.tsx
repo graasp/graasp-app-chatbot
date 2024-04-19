@@ -31,15 +31,15 @@ const TextWithHighlightedKeywords = ({
   onClick,
   memberName,
 }: Props): JSX.Element => {
-  const parts = sentence.split(/[\s\n]+|\b/);
-  const content = parts.map((part, index) => {
+  const parts = sentence.split(/\s+/);
+  const content = parts.map((part) => {
     const isMatch = words.some((word) =>
       new RegExp(createRegexFromString(word)).test(part.trim()),
     );
 
     return isMatch ? (
       <span
-        key={index}
+        key={part + memberName}
         style={{
           color: stc(part),
           backgroundColor: `${stc(part)}20`,

@@ -1,51 +1,41 @@
 import React, { useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
-import TaskAltIcon from '@mui/icons-material/TaskAlt';
 import {
-  Autocomplete,
-  Box,
   Button,
   Chip,
-  Dialog,
-  DialogContent,
-  IconButton,
+  Grid,
   Stack,
   TextField,
-  Tooltip,
   Typography,
 } from '@mui/material';
 
 import { AppAction } from '@graasp/sdk';
 
 import { CommentData } from '@/config/appData';
-import { hooks } from '@/config/queryClient';
 
 import KeywordChip from '../common/KeywordChip';
 import TextWithHighlightedKeywords from '../common/TextWithHighlightedKeywords';
 import PlayerView from '../main/PlayerView';
-import WordCloud from './WordCloud';
-import { getAllWords, getTopRepetitiveWords } from './utils';
+import { createRegexFromString, getTopRepetitiveWords } from './utils';
 
 type Props = {
   commentsByUserSide: AppAction<CommentData>[];
+  allWords: { [key: string]: number };
 };
 
-const CommonWords = ({ commentsByUserSide }: Props): JSX.Element => {
+const CommonWords = ({ commentsByUserSide, allWords }: Props): JSX.Element => {
   const { t } = useTranslation();
-  const { data: appContext } = hooks.useAppContext();
-
-  const allWords = getAllWords(commentsByUserSide, appContext?.item?.lang);
 
   const mostFrequentWords = getTopRepetitiveWords(allWords, 5);
-  const options = Object.keys(allWords);
   const topRepetitiveWords = Object.keys(mostFrequentWords);
 
   const [selectedCommonWords, setSelectedCommonWords] =
     useState<string[]>(topRepetitiveWords);
 
+  const [selectedOtherWords, setSelectedOtherWords] = useState<string[]>([]);
+  const [otherWord, setOtherWord] = useState('');
   const [chatMemberID, setChatMemberID] = useState('');
-  const [open, setOpen] = useState(false);
 
   const isAllSelected = topRepetitiveWords.every(
     (ele) => selectedCommonWords.indexOf(ele) > -1,
@@ -55,119 +45,97 @@ const CommonWords = ({ commentsByUserSide }: Props): JSX.Element => {
     () =>
       commentsByUserSide.length
         ? commentsByUserSide.filter(({ data: { content } }) =>
-            selectedCommonWords.some((ele) => {
-              const regex = new RegExp(
-                ele.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'),
-                'i',
-              );
-              return regex.test(content);
-            }),
+            [...selectedCommonWords, ...selectedOtherWords].some((ele) =>
+              new RegExp(createRegexFromString(ele)).test(content),
+            ),
           )
         : [],
-    [selectedCommonWords, commentsByUserSide],
+    [selectedCommonWords, commentsByUserSide, selectedOtherWords],
   );
 
+  const deleteCustomWord = (word: string): void => {
+    setSelectedOtherWords(selectedOtherWords.filter((w) => w !== word));
+  };
+  const selectCommonChip = (text: string): void => {
+    setSelectedCommonWords([...new Set([...selectedCommonWords, text])]);
+  };
+
   return (
-    <>
-      <Stack alignItems="center" spacing={2} mt={2}>
-        <Box width="100%" display="flex" alignItems="center">
-          <Box sx={{ width: { xs: 0, md: 300 } }} />
-          <Typography textAlign="center" variant="h6" flexGrow={1}>
-            {t('MOST_FREQUENT_WORDS_TITLE')}
-            <Tooltip title={t('CHECK_WORDS_CLOUD')}>
-              <IconButton onClick={() => setOpen(true)}>
-                <TaskAltIcon color="primary" />
-              </IconButton>
-            </Tooltip>
-          </Typography>
-
-          <Box sx={{ width: 300, marginLeft: 'auto' }}>
-            <Autocomplete
-              multiple
-              options={options}
-              size="small"
-              limitTags={2}
-              value={selectedCommonWords}
-              onChange={(event, newValue: string[]) => {
-                setSelectedCommonWords(newValue);
-              }}
-              defaultValue={selectedCommonWords}
-              freeSolo
-              renderTags={(value: readonly string[], getTagProps) =>
-                value.map((option: string, index) => (
-                  <Chip
-                    variant="outlined"
-                    label={option}
-                    {...getTagProps({ index })}
-                    key={option}
-                  />
-                ))
-              }
-              renderInput={(params) => (
-                <TextField
-                  {...params}
-                  placeholder={t('SEARCH_COMMON_WORDS_PLACEHOLDER')}
-                />
-              )}
-            />
-          </Box>
-        </Box>
-        <Stack spacing={1} direction="row">
-          {Object.entries(mostFrequentWords).map(([text, count]) => (
-            <KeywordChip
-              key={text}
-              text={text}
-              count={count}
-              isSelected={selectedCommonWords.indexOf(text) > -1}
-              onClick={() =>
-                setSelectedCommonWords((prev) => {
-                  if (prev.indexOf(text) > -1) {
-                    return prev.filter((ele) => ele !== text);
-                  }
-                  return [...prev, text];
-                })
-              }
-            />
-          ))}
-          <Button
-            onClick={() => setSelectedCommonWords(topRepetitiveWords)}
-            variant={isAllSelected ? 'contained' : 'outlined'}
-          >
-            {t('ALL')}
-          </Button>
-        </Stack>
-        <Stack
-          spacing={2}
-          sx={{ maxHeight: '500px', overflow: 'auto', padding: '4px 8px' }}
+    <Stack spacing={2} mt={2}>
+      <Typography variant="h6">{t('MOST_FREQUENT_WORDS_TITLE')}</Typography>
+      <Typography variant="body1">{t('FILTER_BY_COMMON_KEYWORDS')}</Typography>
+      <Stack spacing={1} direction="row">
+        {Object.entries(mostFrequentWords).map(([text, count]) => (
+          <KeywordChip
+            key={text}
+            text={text}
+            count={count}
+            isSelected={selectedCommonWords.indexOf(text) > -1}
+            onClick={() => selectCommonChip(text)}
+          />
+        ))}
+        <Button
+          onClick={() => setSelectedCommonWords(topRepetitiveWords)}
+          variant={isAllSelected ? 'contained' : 'outlined'}
         >
-          {commentsMatchSelectedWords.map((ele) => (
-            <TextWithHighlightedKeywords
-              key={ele.id}
-              sentence={ele.data.content}
-              memberName={ele.member.name}
-              words={selectedCommonWords}
-              onClick={() => setChatMemberID(ele.member.id)}
+          {t('ALL')}
+        </Button>
+      </Stack>
+      <Stack spacing={1} sx={{ maxWidth: 300 }}>
+        <Typography variant="body1">{t('SEARCH_BY_OTHER_KEYWORDS')}</Typography>
+
+        <TextField
+          size="small"
+          onKeyDown={(event) => {
+            if (event.key === 'Enter') {
+              setSelectedOtherWords([
+                ...new Set([...selectedOtherWords, otherWord]),
+              ]);
+              setOtherWord('');
+            }
+          }}
+          value={otherWord}
+          onChange={(e) => {
+            setOtherWord(e.target.value);
+          }}
+          placeholder={t('SEARCH_COMMON_WORDS_PLACEHOLDER')}
+        />
+        <Stack spacing={1} direction="row">
+          {selectedOtherWords.map((text) => (
+            <Chip
+              key={text}
+              label={text}
+              variant="outlined"
+              onDelete={() => deleteCustomWord(text)}
             />
           ))}
-
-          {commentsMatchSelectedWords.length === 0 && (
-            <Typography mt={2}>{t('NO_RESULTS_MATCH_WORDS')}</Typography>
-          )}
         </Stack>
       </Stack>
+      <Grid container sx={{ height: '500px' }}>
+        <Grid item xs={12} md={6} sx={{ height: '100%', overflowY: 'auto' }}>
+          <Stack spacing={2} p={1}>
+            {commentsMatchSelectedWords.map((ele) => (
+              <TextWithHighlightedKeywords
+                key={ele.id}
+                sentence={ele.data.content}
+                memberName={ele.member.name}
+                words={[...selectedCommonWords, ...selectedOtherWords]}
+                onClick={() => setChatMemberID(ele.member.id)}
+              />
+            ))}
 
-      <Dialog onClose={() => setChatMemberID('')} open={Boolean(chatMemberID)}>
-        <DialogContent sx={{ px: 0 }}>
-          <PlayerView id={chatMemberID} />
-        </DialogContent>
-      </Dialog>
-
-      <WordCloud
-        wordCounts={allWords}
-        open={open}
-        onClose={() => setOpen(false)}
-      />
-    </>
+            {commentsMatchSelectedWords.length === 0 && (
+              <Typography mt={2}>{t('NO_RESULTS_MATCH_WORDS')}</Typography>
+            )}
+          </Stack>
+        </Grid>
+        {chatMemberID && (
+          <Grid item xs={12} md={6} sx={{ height: '100%', overflowY: 'auto' }}>
+            <PlayerView id={chatMemberID} />
+          </Grid>
+        )}
+      </Grid>
+    </Stack>
   );
 };
 

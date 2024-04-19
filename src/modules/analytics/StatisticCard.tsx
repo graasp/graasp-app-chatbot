@@ -3,11 +3,11 @@ import { Grid, Paper, Stack, Typography } from '@mui/material';
 type Props = {
   icon: JSX.Element;
   title: string;
-  stat: number | string;
+  children: JSX.Element;
 };
 
-const StatisticCard = ({ icon, title, stat }: Props): JSX.Element => (
-  <Grid xs={12} md={6} lg={3} item>
+const StatisticCard = ({ icon, title, children }: Props): JSX.Element => (
+  <Grid xs={12} md={4} item>
     <Stack
       height="100%"
       component={Paper}
@@ -19,9 +19,7 @@ const StatisticCard = ({ icon, title, stat }: Props): JSX.Element => (
       {icon}
       <Stack flexGrow={1} direction="column" alignItems="center">
         <Typography align="center">{title}</Typography>
-        <Typography variant="h5" component="div">
-          {stat}
-        </Typography>
+        {children}
       </Stack>
     </Stack>
   </Grid>

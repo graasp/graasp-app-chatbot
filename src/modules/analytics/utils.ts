@@ -37,7 +37,7 @@ export const getAllWords = (
   const text = texts
     .reduce((curr: string, acc) => `${curr} ${acc.data.content}`, '')
     .replace(/[.,/#!$%^&*;:{}=\-_`~()]/g, '')
-    ?.split(/[\s\n]+|\b/);
+    ?.split(/\s+/);
 
   const words = removeStopwords(text, [...languages[lang], '', '?', "'", '"']);
   const b = flatten(words);
@@ -47,12 +47,13 @@ export const getAllWords = (
 
 export const createRegexFromString = (regexString: string): RegExp | string => {
   // Extract between the slashes and the flags
-  const matches = regexString.match(/\/(.*)\/([a-z]*)?/);
+  const matches = regexString.match(/\/(.+)\/([a-z]*)?/);
   if (!matches) {
-    return regexString.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    return regexString.replace(/[.*+?^${}()|[\]\\]/g, '\\$&').trim();
   }
 
   const pattern = matches[1];
   const flags = matches[2];
+
   return new RegExp(pattern.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), flags);
 };
