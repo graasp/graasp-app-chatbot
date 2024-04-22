@@ -31,7 +31,7 @@ const languages: { [key: string]: string[] } = {
 };
 
 export const getAllWords = (
-  texts: AppAction<CommentData>[],
+  texts: AppAction<CommentData>[] = [],
   lang = DEFAULT_LANGUAGE,
 ): WordCount => {
   const text = texts

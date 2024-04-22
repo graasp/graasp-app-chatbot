@@ -77,6 +77,11 @@ const AnalyticsView = (): JSX.Element => {
                 commentsByUserSide={commentsByUserSide}
                 allWords={allWords}
               />
+              <WordCloud
+                wordCounts={allWords}
+                open={openWordCloud}
+                onClose={() => setOpenWordCloud(false)}
+              />
             </>
           ) : (
             <Alert severity="warning">
@@ -84,11 +89,6 @@ const AnalyticsView = (): JSX.Element => {
             </Alert>
           )}
         </Box>
-        <WordCloud
-          wordCounts={allWords}
-          open={openWordCloud}
-          onClose={() => setOpenWordCloud(false)}
-        />
       </Box>
     );
   }
