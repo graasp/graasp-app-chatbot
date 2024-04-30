@@ -50,8 +50,9 @@
         "ABOUT_DESCRIPTION": "The chatbot app uses OpenAI's ChatGPT model as a base to provide the chatbot integration. Users responses are transmitted to OpenAI trough their API to be processed and for responses to be generated. No other user data is transmitted. If users provide personal data in their messages there is nothing we can do to protect that data.",
         "ABOUT_PRIVACY_POLICY_OPENAI": "See the <1>OpenAI Privacy Policy for EU users</1>.",
         "MODEL_VERSION": "Model version",
-        "GPT_3_5_TURBO_DESCRIPTION" : "gpt-3.5-turbo-0125",
-        "GPT_4_DESCRIPTION" : "gpt-4",
-        "GPT_4_TURBO_DESCRIPTION" : "gpt-4-turbo"
+        "GPT_3_5_TURBO_DESCRIPTION" : "ptimized for speed and efficiency, suitable for applications where quick interactions are needed.",
+        "GPT_4_DESCRIPTION" : "Features deeper learning and more comprehensive knowledge, ideal for content creation and technical support.",
+        "GPT_4_TURBO_DESCRIPTION" : "Combines the depth of GPT-4 with enhanced speed, perfect for high-demand scenarios.",
+        "CHATBOT_MODEL_VERSION_HELPER": "This defines gpt version used within the model, default version is gpt-3.5-turbo-0125."
     }
 }

@@ -286,7 +286,7 @@ const ChatbotSettings = (): JSX.Element => {
             <Stack>
               <FormLabel>{t('MODEL_VERSION')}</FormLabel>
               <Typography variant="caption" color="text.secondary">
-                {t('CHATBOT_CUE_HELPER')}
+                {t('CHATBOT_MODEL_VERSION_HELPER')}
               </Typography>
             </Stack>
             <Select
@@ -381,7 +381,7 @@ const ChatbotSettings = (): JSX.Element => {
               <Stack direction="column">
                 <FormLabel> {t('MODEL_VERSION')}</FormLabel>
                 <Typography variant="caption" color="text.secondary">
-                  {t('CHATBOT_CUE_HELPER')}
+                  {t('CHATBOT_MODEL_VERSION_HELPER')}
                 </Typography>
                 <Typography>{newChatbotVersion}</Typography>
               </Stack>
