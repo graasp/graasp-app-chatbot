@@ -18,6 +18,7 @@ export const mockMembers: CompleteMember[] = [
     type: 'individual',
     createdAt: new Date('1996-09-08T19:00:00').toISOString(),
     updatedAt: new Date().toISOString(),
+    enableSaveActions: true,
   },
   {
     id: 'mock-member-id-2',
@@ -27,6 +28,7 @@ export const mockMembers: CompleteMember[] = [
     type: 'individual',
     createdAt: new Date('1995-02-02T15:00:00').toISOString(),
     updatedAt: new Date().toISOString(),
+    enableSaveActions: true,
   },
 ];
 
@@ -40,6 +42,7 @@ export const defaultMockContext: LocalContext = {
 
 export const mockItem: DiscriminatedItem = {
   id: defaultMockContext.itemId,
+  displayName: 'app-starter-ts-vite',
   name: 'app-starter-ts-vite',
   description: null,
   path: '',

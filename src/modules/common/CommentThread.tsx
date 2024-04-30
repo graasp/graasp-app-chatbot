@@ -55,14 +55,18 @@ const CommentThread = ({ children }: Props): JSX.Element | null => {
   const { mutate: patchData } = mutations.usePatchAppData();
   const { mutateAsync: postAppDataAsync } = mutations.usePostAppData();
   const { mutate: postAction } = mutations.usePostAppAction();
-  const { mutateAsync: postChatbot, isLoading } = mutations.usePostChatBot();
   const { data: chatbotPrompts } = hooks.useAppSettings<ChatbotPromptSettings>({
     name: SettingsKeys.ChatbotPrompt,
   });
+  const chatbotPrompt = chatbotPrompts?.[0];
+
+  const { mutateAsync: postChatbot, isLoading } = mutations.usePostChatBot(
+    chatbotPrompt?.data?.gptVersion,
+  );
+
   const { data: generalSettings } = hooks.useAppSettings<GeneralSettings>({
     name: SettingsKeys.General,
   });
-  const chatbotPrompt = chatbotPrompts?.[0];
   const { maxThreadLength, maxCommentLength } = {
     ...DEFAULT_GENERAL_SETTINGS,
     ...generalSettings?.[0]?.data,

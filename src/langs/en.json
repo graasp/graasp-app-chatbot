@@ -48,6 +48,10 @@
         "NO_COMMENTS_PLACEHOLDER": "No comments",
         "ABOUT_TITLE": "About the Chatbot App",
         "ABOUT_DESCRIPTION": "The chatbot app uses OpenAI's ChatGPT model as a base to provide the chatbot integration. Users responses are transmitted to OpenAI trough their API to be processed and for responses to be generated. No other user data is transmitted. If users provide personal data in their messages there is nothing we can do to protect that data.",
-        "ABOUT_PRIVACY_POLICY_OPENAI": "See the <1>OpenAI Privacy Policy for EU users</1>."
+        "ABOUT_PRIVACY_POLICY_OPENAI": "See the <1>OpenAI Privacy Policy for EU users</1>.",
+        "MODEL_VERSION": "Model version",
+        "GPT_3_5_TURBO_DESCRIPTION" : "gpt-3.5-turbo-0125",
+        "GPT_4_DESCRIPTION" : "gpt-4",
+        "GPT_4_TURBO_DESCRIPTION" : "gpt-4-turbo"
     }
 }
