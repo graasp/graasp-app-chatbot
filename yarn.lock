@@ -2630,13 +2630,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@graasp/apps-query-client@https://github.com/graasp/graasp-apps-query-client.git#renovate/graasp-sdk-4.x":
-  version: 3.4.12
-  resolution: "@graasp/apps-query-client@https://github.com/graasp/graasp-apps-query-client.git#commit=ab1efe0a3001fbeb20a2c293da9df6055b69e5de"
+"@graasp/apps-query-client@npm:3.4.13":
+  version: 3.4.13
+  resolution: "@graasp/apps-query-client@npm:3.4.13"
   dependencies:
     "@emotion/react": "npm:11.11.4"
     "@emotion/styled": "npm:11.11.5"
-    "@graasp/sdk": "npm:4.8.1"
+    "@graasp/sdk": "npm:4.7.6"
     "@mui/icons-material": "npm:5.15.15"
     "@mui/material": "npm:5.15.15"
     axios: "npm:0.28.1"
@@ -2653,7 +2653,22 @@ __metadata:
     date-fns: ^3.3.0
     react: ^18.0.0
     react-dom: ^18.0.0
-  checksum: 10/b8a75a59ae5f8112c10db833dde54fe930cc65664b8527d30279fc6d4b83c6e00da85a3429e799b6f2152545d1d2015e4ea4d055be53db28ba9f561a30942995
+  checksum: 10/181808446a2861608ee199bfc8a02b08c5bc72330d072700e4ae8d6ae873e71186def65db3819bb7646857b9ac9fff062444842ddc3aa1fe0ccd6095da3cc4fe
+  languageName: node
+  linkType: hard
+
+"@graasp/sdk@npm:4.7.6":
+  version: 4.7.6
+  resolution: "@graasp/sdk@npm:4.7.6"
+  dependencies:
+    "@faker-js/faker": "npm:8.4.1"
+    filesize: "npm:10.1.1"
+    js-cookie: "npm:3.0.5"
+    validator: "npm:13.11.0"
+  peerDependencies:
+    date-fns: ^3
+    uuid: ^9
+  checksum: 10/ac12c6438b0c71502b4b837f98b0dbc164c604a98c23064a5bc0ef233486be8012176fd4cbee3879db2cd468cefd5489678703709ae1b4e766f431ef3ac9f7b2
   languageName: node
   linkType: hard
 
@@ -8354,7 +8369,7 @@ __metadata:
     "@cypress/code-coverage": "npm:3.12.38"
     "@emotion/react": "npm:11.11.4"
     "@emotion/styled": "npm:11.11.5"
-    "@graasp/apps-query-client": "https://github.com/graasp/graasp-apps-query-client.git#renovate/graasp-sdk-4.x"
+    "@graasp/apps-query-client": "npm:3.4.13"
     "@graasp/sdk": "npm:4.8.1"
     "@graasp/ui": "npm:4.8.5"
     "@mui/icons-material": "npm:5.15.16"

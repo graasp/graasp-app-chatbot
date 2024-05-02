@@ -10,6 +10,7 @@ import {
   Button,
   Card,
   CardContent,
+  Chip,
   FormLabel,
   Link,
   MenuItem,
@@ -301,7 +302,16 @@ const ChatbotSettings = (): JSX.Element => {
             >
               {Object.entries(GPTVersion).map(([key, v]) => (
                 <MenuItem key={v} value={v} sx={{ display: 'block' }}>
-                  <Typography>{v}</Typography>
+                  <Stack direction="row" spacing={1}>
+                    <Typography>{v}</Typography>
+                    {v === GPTVersion.GPT_3_5_TURBO && (
+                      <Chip
+                        label={t('RECOMMENDED')}
+                        size="small"
+                        color="primary"
+                      />
+                    )}
+                  </Stack>
                   <Typography variant="caption" color="text.secondary">
                     {t(`${key}_DESCRIPTION`)}
                   </Typography>
