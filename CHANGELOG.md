@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.6](https://github.com/graasp/graasp-app-chatbot/compare/v1.0.5...v1.0.6) (2024-05-01)
+
+
+### Bug Fixes
+
+* use transparent background ([857dc88](https://github.com/graasp/graasp-app-chatbot/commit/857dc8847ae7d2e15cc8c2a0c413927d70abb9a8))
+
 ## [1.0.5](https://github.com/graasp/graasp-app-chatbot/compare/v1.0.4...v1.0.5) (2024-04-16)
 
 
