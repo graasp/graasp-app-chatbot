@@ -1,5 +1,14 @@
 {
   "translations": {
-    "CHATBOT_CONFIGURATION_MISSING": "Dieser chatbot wurde nicht  not been configured yet."
+    "SETTINGS_VIEW_TITLE": "Configuration",
+    "ABOUT_VIEW_TITLE": "Über die Anwendung",
+    "DOWNLOADING_LABEL": "Wird Heruntergeladen",
+    "DOWNLOAD_ACTIONS_LABEL": "Aktionen herunterladen",
+    "REMOVE_ORPHANS_LABEL": "Comentare ohne Urhebern entfernen",
+    "DISCUSSION_DIALOG_TITLE": "Diskussion mit {{user}}",
+    "CHATBOT_CONFIGURATION_MISSING": "Dieser chatbot wurde nicht  not been configured yet.",
+    "CHATBOT_NAME_LABEL": "Chatbot Name",
+    "SAVED_LABEL": "Speichert",
+    "JUST_NOW_COMMENT_HEADER": "Jetzt"
   }
 }
