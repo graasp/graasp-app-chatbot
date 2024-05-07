@@ -1,4 +1,4 @@
-import { ChatBotMessage } from '@graasp/sdk';
+import { ChatBotMessage, GPTVersion } from '@graasp/sdk';
 
 export const SettingsKeys = {
   ChatbotPrompt: 'chatbot-prompt',
@@ -12,13 +12,14 @@ export enum ChatbotPromptSettingsKeys {
   InitialPrompt = 'initialPrompt',
   ChatbotCue = 'chatbotCue',
   ChatbotName = 'chatbotName',
+  GptVersion = 'gptVersion',
 }
 
 export type ChatbotPromptSettings = {
   [ChatbotPromptSettingsKeys.InitialPrompt]: ChatBotMessage[];
   [ChatbotPromptSettingsKeys.ChatbotCue]: string;
   [ChatbotPromptSettingsKeys.ChatbotName]: string;
-
+  [ChatbotPromptSettingsKeys.GptVersion]?: GPTVersion;
   // used to allow access using settings[settingKey] syntax
   // [key: string]: unknown;
 };
