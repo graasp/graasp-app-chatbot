@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.1](https://github.com/graasp/graasp-app-chatbot/compare/v1.1.0...v1.1.1) (2024-05-08)
+
+
+### Bug Fixes
+
+* **deps:** update dependency @graasp/ui to v4.17.1 ([#144](https://github.com/graasp/graasp-app-chatbot/issues/144)) ([a0b909d](https://github.com/graasp/graasp-app-chatbot/commit/a0b909d6ebeb329c45bd13b557f8e9610a2fd93b))
+
 ## [1.1.0](https://github.com/graasp/graasp-app-chatbot/compare/v1.0.6...v1.1.0) (2024-05-08)
 
 
