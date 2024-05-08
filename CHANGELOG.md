@@ -1,5 +1,22 @@
 # Changelog
 
+## [1.1.0](https://github.com/graasp/graasp-app-chatbot/compare/v1.0.6...v1.1.0) (2024-05-08)
+
+
+### Features
+
+* set gpt model version ([#214](https://github.com/graasp/graasp-app-chatbot/issues/214)) ([0869cb8](https://github.com/graasp/graasp-app-chatbot/commit/0869cb821874f377b92c3ed14e80c3ea57048911))
+
+
+### Bug Fixes
+
+* **deps:** update dependency @sentry/react to v7.112.2 ([#136](https://github.com/graasp/graasp-app-chatbot/issues/136)) ([bd5973b](https://github.com/graasp/graasp-app-chatbot/commit/bd5973b7b660d5f3cc9ec62969b2f4fd0b151537))
+* **deps:** update dependency react-i18next to v14.1.1 ([0fad9e7](https://github.com/graasp/graasp-app-chatbot/commit/0fad9e7e6a9360c8700764c6f597bcc1e9eb7204))
+* **deps:** update dependency typescript to v5.4.5 ([#153](https://github.com/graasp/graasp-app-chatbot/issues/153)) ([8470ab6](https://github.com/graasp/graasp-app-chatbot/commit/8470ab6655fcdb88e8983836e57f09092cd3059b))
+* **deps:** update mui (non-major) to v5.15.16 ([1be4a69](https://github.com/graasp/graasp-app-chatbot/commit/1be4a690623e1c5b5989bce464b97ea36770b3b3))
+* **deps:** update react monorepo ([7002db0](https://github.com/graasp/graasp-app-chatbot/commit/7002db04b554fc0aeabf7fd3d2c559d4115c17d6))
+* **german:** update translations ([#227](https://github.com/graasp/graasp-app-chatbot/issues/227)) ([d570e9a](https://github.com/graasp/graasp-app-chatbot/commit/d570e9a8d7356abc28933df1597d8d491e08103d))
+
 ## [1.0.6](https://github.com/graasp/graasp-app-chatbot/compare/v1.0.5...v1.0.6) (2024-05-01)
 
 
