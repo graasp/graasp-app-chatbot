@@ -1,4 +1,5 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import { Box, IconButton, Tooltip, Typography, styled } from '@mui/material';
@@ -31,6 +32,7 @@ const TextWithHighlightedKeywords = ({
   onClick,
   memberName,
 }: Props): JSX.Element => {
+  const { t } = useTranslation();
   const parts = sentence.split(/\s+/);
   const content = parts.map((part) => {
     const isMatch = words.some((word) =>
@@ -61,7 +63,7 @@ const TextWithHighlightedKeywords = ({
         </Typography>
         {content}
       </Box>
-      <Tooltip title="Check the whole chat">
+      <Tooltip title={t('CHECK_WHOLE_CHAT')}>
         <IconButton onClick={onClick}>
           <ArrowForwardIcon fontSize="small" />
         </IconButton>

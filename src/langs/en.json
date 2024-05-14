@@ -57,9 +57,10 @@
     "SEARCH_COMMON_WORDS_PLACEHOLDER": "Search about words or regex",
     "NO_REPLIES_FOR_THIS_ITEM_YET": "No user replies for this item yet!",
     "SEE_WORDS_CLOUD": "See words cloud",
-    "NO_RESULTS_MATCH_WORDS": "Unfortunately, No results match the selected words!",
+    "NO_RESULTS_MATCH_WORDS": "Unfortunately, no results match the selected words!",
     "WORDS_FREQUENCY": "Words frequency",
-    "FILTER_BY_COMMON_KEYWORDS": "Filter by most common keywords",
-    "SEARCH_BY_OTHER_KEYWORDS": "Search by other keywords or regex"
+    "FILTER_BY_COMMON_KEYWORDS": "Filter by most frequent keywords",
+    "SEARCH_BY_OTHER_KEYWORDS": "Search by other keywords or regex",
+    "CHECK_WHOLE_CHAT": "Check the whole chat"
   }
 }

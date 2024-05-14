@@ -9,7 +9,7 @@ import { DEFAULT_LANGUAGE } from '@/config/i18n';
 
 type WordCount = { [key: string]: number };
 
-export const getTopRepetitiveWords = (obj: WordCount, n: number): WordCount => {
+export const getTopFrequentWords = (obj: WordCount, n: number): WordCount => {
   // Convert the object into an array of [key, value] pairs
   const entries = Object.entries(obj);
 
@@ -34,12 +34,13 @@ export const getAllWords = (
   texts: AppAction<CommentData>[] = [],
   lang = DEFAULT_LANGUAGE,
 ): WordCount => {
-  const text = texts
-    .reduce((curr: string, acc) => `${curr} ${acc.data.content}`, '')
-    .replace(/[.,/#!$%^&*;:{}=\-_`~()]/g, '')
-    ?.split(/\s+/);
-
-  const words = removeStopwords(text, [...languages[lang], '', '?', "'", '"']);
+  const text = texts.reduce((curr: string[], acc) => {
+    const splitted = acc.data.content
+      .replace(/[.,/#!$%^&*;:{}=\-_`~()?"']+/g, '')
+      .split(/\s+/);
+    return [...curr, ...splitted];
+  }, []);
+  const words = removeStopwords(text, languages[lang]);
   const b = flatten(words);
   const c = countBy(b);
   return c;

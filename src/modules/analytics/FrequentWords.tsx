@@ -17,65 +17,73 @@ import { CommentData } from '@/config/appData';
 import KeywordChip from '../common/KeywordChip';
 import TextWithHighlightedKeywords from '../common/TextWithHighlightedKeywords';
 import PlayerView from '../main/PlayerView';
-import { createRegexFromString, getTopRepetitiveWords } from './utils';
+import { createRegexFromString, getTopFrequentWords } from './utils';
 
 type Props = {
   commentsByUserSide: AppAction<CommentData>[];
   allWords: { [key: string]: number };
 };
 
-const CommonWords = ({ commentsByUserSide, allWords }: Props): JSX.Element => {
+const FrequentWords = ({
+  commentsByUserSide,
+  allWords,
+}: Props): JSX.Element => {
   const { t } = useTranslation();
 
-  const mostFrequentWords = getTopRepetitiveWords(allWords, 5);
-  const topRepetitiveWords = Object.keys(mostFrequentWords);
+  const mostFrequentWordsWithCount = getTopFrequentWords(allWords, 5);
+  const mostFrequentWords = Object.keys(mostFrequentWordsWithCount);
 
-  const [selectedCommonWords, setSelectedCommonWords] =
-    useState<string[]>(topRepetitiveWords);
+  const [selectedFrequentWords, setSelectedFrequentWords] =
+    useState<string[]>(mostFrequentWords);
 
-  const [selectedOtherWords, setSelectedOtherWords] = useState<string[]>([]);
-  const [otherWord, setOtherWord] = useState('');
+  const [selectedCustomWords, setSelectedCustomWords] = useState<string[]>([]);
+  const [customWord, setCustomWord] = useState('');
   const [chatMemberID, setChatMemberID] = useState('');
 
-  const isAllSelected = topRepetitiveWords.every(
-    (ele) => selectedCommonWords.indexOf(ele) > -1,
+  const isAllSelected = mostFrequentWords.every(
+    (ele) => selectedFrequentWords.indexOf(ele) > -1,
   );
 
   const commentsMatchSelectedWords = useMemo(
     () =>
       commentsByUserSide.length
         ? commentsByUserSide.filter(({ data: { content } }) =>
-            [...selectedCommonWords, ...selectedOtherWords].some((ele) =>
+            [...selectedFrequentWords, ...selectedCustomWords].some((ele) =>
               new RegExp(createRegexFromString(ele)).test(content),
             ),
           )
         : [],
-    [selectedCommonWords, commentsByUserSide, selectedOtherWords],
+    [selectedFrequentWords, commentsByUserSide, selectedCustomWords],
   );
 
   const deleteCustomWord = (word: string): void => {
-    setSelectedOtherWords(selectedOtherWords.filter((w) => w !== word));
+    setSelectedCustomWords(selectedCustomWords.filter((w) => w !== word));
   };
-  const selectCommonChip = (text: string): void => {
-    setSelectedCommonWords([...new Set([...selectedCommonWords, text])]);
+  const selectFrequentChip = (text: string): void => {
+    if (selectedFrequentWords.indexOf(text) > -1) {
+      setSelectedFrequentWords(
+        selectedFrequentWords.filter((ele) => ele !== text),
+      );
+    } else {
+      setSelectedFrequentWords([...new Set([...selectedFrequentWords, text])]);
+    }
   };
-
   return (
     <Stack spacing={2} mt={2}>
       <Typography variant="h6">{t('MOST_FREQUENT_WORDS_TITLE')}</Typography>
       <Typography variant="body1">{t('FILTER_BY_COMMON_KEYWORDS')}</Typography>
       <Stack spacing={1} direction="row">
-        {Object.entries(mostFrequentWords).map(([text, count]) => (
+        {Object.entries(mostFrequentWordsWithCount).map(([text, count]) => (
           <KeywordChip
             key={text}
             text={text}
             count={count}
-            isSelected={selectedCommonWords.indexOf(text) > -1}
-            onClick={() => selectCommonChip(text)}
+            isSelected={selectedFrequentWords.indexOf(text) > -1}
+            onClick={() => selectFrequentChip(text)}
           />
         ))}
         <Button
-          onClick={() => setSelectedCommonWords(topRepetitiveWords)}
+          onClick={() => setSelectedFrequentWords(mostFrequentWords)}
           variant={isAllSelected ? 'contained' : 'outlined'}
         >
           {t('ALL')}
@@ -88,20 +96,20 @@ const CommonWords = ({ commentsByUserSide, allWords }: Props): JSX.Element => {
           size="small"
           onKeyDown={(event) => {
             if (event.key === 'Enter') {
-              setSelectedOtherWords([
-                ...new Set([...selectedOtherWords, otherWord]),
+              setSelectedCustomWords([
+                ...new Set([...selectedCustomWords, customWord]),
               ]);
-              setOtherWord('');
+              setCustomWord('');
             }
           }}
-          value={otherWord}
+          value={customWord}
           onChange={(e) => {
-            setOtherWord(e.target.value);
+            setCustomWord(e.target.value);
           }}
           placeholder={t('SEARCH_COMMON_WORDS_PLACEHOLDER')}
         />
         <Stack spacing={1} direction="row">
-          {selectedOtherWords.map((text) => (
+          {selectedCustomWords.map((text) => (
             <Chip
               key={text}
               label={text}
@@ -119,7 +127,7 @@ const CommonWords = ({ commentsByUserSide, allWords }: Props): JSX.Element => {
                 key={ele.id}
                 sentence={ele.data.content}
                 memberName={ele.member.name}
-                words={[...selectedCommonWords, ...selectedOtherWords]}
+                words={[...selectedFrequentWords, ...selectedCustomWords]}
                 onClick={() => setChatMemberID(ele.member.id)}
               />
             ))}
@@ -139,4 +147,4 @@ const CommonWords = ({ commentsByUserSide, allWords }: Props): JSX.Element => {
   );
 };
 
-export default CommonWords;
+export default FrequentWords;

@@ -16,7 +16,7 @@ import { CommentData } from '@/config/appData';
 import { hooks } from '@/config/queryClient';
 import { ANALYTICS_VIEW_CY } from '@/config/selectors';
 
-import CommonWords from '../analytics/CommonWords';
+import FrequentWords from '../analytics/FrequentWords';
 import StatisticCard from '../analytics/StatisticCard';
 import WordCloud from '../analytics/WordCloud';
 import { getAllWords } from '../analytics/utils';
@@ -42,38 +42,44 @@ const AnalyticsView = (): JSX.Element => {
           {commentsByUserSide ? (
             <>
               <Grid container spacing={2} marginTop={1} justifyContent="center">
-                <StatisticCard
-                  icon={<CommentIcon fontSize="large" color="primary" />}
-                  title={t('STATISTIC_TOTAL_USER_COMMENTS_TITLE')}
-                >
-                  <Typography variant="h5" component="div">
-                    {commentsByUserSide.length}
-                  </Typography>
-                </StatisticCard>
-                <StatisticCard
-                  icon={<PeopleIcon fontSize="large" color="primary" />}
-                  title={t('STATISTIC_AVERAGE_USER_COMMENTS_TITLE')}
-                >
-                  <Typography variant="h5" component="div">
-                    {commentsByUserSide.length /
-                      Object.keys(commentsByMembers).length}
-                  </Typography>
-                </StatisticCard>
-                <StatisticCard
-                  icon={<CloudIcon fontSize="large" color="primary" />}
-                  title={t('WORDS_FREQUENCY')}
-                >
-                  <Button
-                    variant="text"
-                    onClick={() => setOpenWordCloud(true)}
-                    sx={{ textDecoration: 'underline' }}
+                <Grid xs={12} md={4} item>
+                  <StatisticCard
+                    icon={<CommentIcon fontSize="large" color="primary" />}
+                    title={t('STATISTIC_TOTAL_USER_COMMENTS_TITLE')}
                   >
-                    {t('SEE_WORDS_CLOUD')}
-                  </Button>
-                </StatisticCard>
+                    <Typography variant="h5" component="div">
+                      {commentsByUserSide.length}
+                    </Typography>
+                  </StatisticCard>
+                </Grid>
+                <Grid xs={12} md={4} item>
+                  <StatisticCard
+                    icon={<PeopleIcon fontSize="large" color="primary" />}
+                    title={t('STATISTIC_AVERAGE_USER_COMMENTS_TITLE')}
+                  >
+                    <Typography variant="h5" component="div">
+                      {commentsByUserSide.length /
+                        Object.keys(commentsByMembers).length}
+                    </Typography>
+                  </StatisticCard>
+                </Grid>
+                <Grid xs={12} md={4} item>
+                  <StatisticCard
+                    icon={<CloudIcon fontSize="large" color="primary" />}
+                    title={t('WORDS_FREQUENCY')}
+                  >
+                    <Button
+                      variant="text"
+                      onClick={() => setOpenWordCloud(true)}
+                      sx={{ textDecoration: 'underline' }}
+                    >
+                      {t('SEE_WORDS_CLOUD')}
+                    </Button>
+                  </StatisticCard>
+                </Grid>
               </Grid>
 
-              <CommonWords
+              <FrequentWords
                 commentsByUserSide={commentsByUserSide}
                 allWords={allWords}
               />
