@@ -61,6 +61,12 @@
     "WORDS_FREQUENCY": "Words frequency",
     "FILTER_BY_COMMON_KEYWORDS": "Filter by most frequent keywords",
     "SEARCH_BY_OTHER_KEYWORDS": "Search by other keywords or regex",
-    "CHECK_WHOLE_CHAT": "Check the whole chat"
+    "CHECK_WHOLE_CHAT": "Check the whole chat",
+    "MODEL_VERSION": "Model version",
+    "GPT_3_5_TURBO_DESCRIPTION": "Optimized for speed and efficiency, suitable for applications where quick interactions are needed.",
+    "GPT_4_DESCRIPTION": "Features deeper learning and more comprehensive knowledge, ideal for content creation and technical support.",
+    "GPT_4_TURBO_DESCRIPTION": "Combines the depth of GPT-4 with enhanced speed, perfect for high-demand scenarios.",
+    "CHATBOT_MODEL_VERSION_HELPER": "This defines gpt version used within the model, default version is gpt-3.5-turbo-0125.",
+    "RECOMMENDED": "Recommended"
   }
 }

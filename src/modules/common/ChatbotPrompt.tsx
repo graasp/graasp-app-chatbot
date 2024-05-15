@@ -40,7 +40,6 @@ type Props = {
 const ChatbotPrompt = ({ id }: Props): JSX.Element | null => {
   const { t } = useTranslation();
   const { mutateAsync: postAppDataAsync } = mutations.usePostAppData();
-  const { mutateAsync: postChatBot } = mutations.usePostChatBot();
   const { data: appData } = hooks.useAppData<CommentData>();
   const {
     data: chatbotPrompts,
@@ -49,10 +48,15 @@ const ChatbotPrompt = ({ id }: Props): JSX.Element | null => {
   } = hooks.useAppSettings<ChatbotPromptSettings>({
     name: SettingsKeys.ChatbotPrompt,
   });
+  const chatbotPrompt = chatbotPrompts?.[0];
+
+  const { mutateAsync: postChatBot } = mutations.usePostChatBot(
+    chatbotPrompt?.data?.gptVersion,
+  );
+
   const { data: generalSettings } = hooks.useAppSettings<GeneralSettings>({
     name: SettingsKeys.General,
   });
-  const chatbotPrompt = chatbotPrompts?.[0];
   const generalSetting = generalSettings?.[0]?.data ?? DEFAULT_GENERAL_SETTINGS;
   let { memberId } = useLocalContext();
   if (id) {

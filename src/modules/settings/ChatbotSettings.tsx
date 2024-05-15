@@ -10,8 +10,11 @@ import {
   Button,
   Card,
   CardContent,
+  Chip,
   FormLabel,
   Link,
+  MenuItem,
+  Select,
   Stack,
   TextField,
   TextareaAutosize,
@@ -19,7 +22,7 @@ import {
   styled,
 } from '@mui/material';
 
-import { ChatBotMessage } from '@graasp/sdk';
+import { ChatBotMessage, GPTVersion } from '@graasp/sdk';
 
 import { ChevronDown, Edit, Undo2 } from 'lucide-react';
 
@@ -69,11 +72,15 @@ const ChatbotSettings = (): JSX.Element => {
   const stringifiedJsonPrompt = JSON.stringify(initialPrompt, null, 2);
   const chatbotCue = chatbotPrompt?.data?.chatbotCue || '';
   const chatbotName = chatbotPrompt?.data?.chatbotName || DEFAULT_BOT_USERNAME;
+  const chatbotVersion =
+    chatbotPrompt?.data?.gptVersion || GPTVersion.GPT_3_5_TURBO;
+
   const [newChatbotPrompt, setNewChatbotPrompt] = useState(
     stringifiedJsonPrompt,
   );
   const [newChatbotCue, setNewChatbotCue] = useState(chatbotCue);
   const [newChatbotName, setNewChatbotName] = useState(chatbotName);
+  const [newChatbotVersion, setNewChatbotVersion] = useState(chatbotVersion);
 
   const doneEditing = (): void => {
     setIsEditing(false);
@@ -142,6 +149,7 @@ const ChatbotSettings = (): JSX.Element => {
         initialPrompt: jsonNewChatbotPrompt,
         chatbotCue: newChatbotCue,
         chatbotName: newChatbotName,
+        gptVersion: newChatbotVersion,
       };
       // setting does not exist
       if (!chatbotPrompt) {
@@ -277,6 +285,42 @@ const ChatbotSettings = (): JSX.Element => {
           </Box>
           <Box>
             <Stack>
+              <FormLabel>{t('MODEL_VERSION')}</FormLabel>
+              <Typography variant="caption" color="text.secondary">
+                {t('CHATBOT_MODEL_VERSION_HELPER')}
+              </Typography>
+            </Stack>
+            <Select
+              value={newChatbotVersion}
+              label={t('MODEL_VERSION')}
+              onChange={(event) => {
+                setNewChatbotVersion(event.target.value as GPTVersion);
+                setUnsavedChanges(true);
+              }}
+              fullWidth
+              renderValue={(selected) => <Typography>{selected}</Typography>}
+            >
+              {Object.entries(GPTVersion).map(([key, v]) => (
+                <MenuItem key={v} value={v} sx={{ display: 'block' }}>
+                  <Stack direction="row" spacing={1}>
+                    <Typography>{v}</Typography>
+                    {v === GPTVersion.GPT_3_5_TURBO && (
+                      <Chip
+                        label={t('RECOMMENDED')}
+                        size="small"
+                        color="primary"
+                      />
+                    )}
+                  </Stack>
+                  <Typography variant="caption" color="text.secondary">
+                    {t(`${key}_DESCRIPTION`)}
+                  </Typography>
+                </MenuItem>
+              ))}
+            </Select>
+          </Box>
+          <Box>
+            <Stack>
               <FormLabel>{t('CHATBOT_CUE_LABEL')}</FormLabel>
               <Typography variant="caption" color="text.secondary">
                 {t('CHATBOT_CUE_HELPER')}
@@ -328,6 +372,28 @@ const ChatbotSettings = (): JSX.Element => {
                 <Box width="100%">
                   <CodeEditor value={stringifiedJsonPrompt} readOnly />
                 </Box>
+              </Stack>
+              <Stack direction="column">
+                <Stack>
+                  <FormLabel>{t('CHATBOT_CUE_LABEL')}:</FormLabel>
+                  <Typography variant="caption" color="text.secondary">
+                    {t('CHATBOT_CUE_HELPER')}
+                  </Typography>
+                </Stack>
+                {chatbotCue ? (
+                  <Typography>{chatbotCue}</Typography>
+                ) : (
+                  <Typography color="text.disabled" fontStyle="italic">
+                    {t('CHATBOT_CUE_EMPTY_MESSAGE')}
+                  </Typography>
+                )}
+              </Stack>
+              <Stack direction="column">
+                <FormLabel> {t('MODEL_VERSION')}</FormLabel>
+                <Typography variant="caption" color="text.secondary">
+                  {t('CHATBOT_MODEL_VERSION_HELPER')}
+                </Typography>
+                <Typography>{newChatbotVersion}</Typography>
               </Stack>
               <Stack direction="column">
                 <Stack>
