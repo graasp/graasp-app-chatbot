@@ -14,7 +14,11 @@ import groupBy from 'lodash.groupby';
 import { AppActionsType } from '@/config/appActions';
 import { CommentData } from '@/config/appData';
 import { hooks } from '@/config/queryClient';
-import { ANALYTICS_VIEW_CY } from '@/config/selectors';
+import {
+  ANALYTICS_GENERAL_TOTAL_COMMENTS_ID,
+  ANALYTICS_GENERAL_WORDS_FREQUENCY_COMMENTS_ID,
+  ANALYTICS_VIEW_CY,
+} from '@/config/selectors';
 
 import FrequentWords from '../analytics/FrequentWords';
 import StatisticCard from '../analytics/StatisticCard';
@@ -47,7 +51,11 @@ const AnalyticsView = (): JSX.Element => {
                     icon={<CommentIcon fontSize="large" color="primary" />}
                     title={t('STATISTIC_TOTAL_USER_COMMENTS_TITLE')}
                   >
-                    <Typography variant="h5" component="div">
+                    <Typography
+                      variant="h5"
+                      component="div"
+                      id={ANALYTICS_GENERAL_TOTAL_COMMENTS_ID}
+                    >
                       {commentsByUserSide.length}
                     </Typography>
                   </StatisticCard>
@@ -69,6 +77,7 @@ const AnalyticsView = (): JSX.Element => {
                     title={t('WORDS_FREQUENCY')}
                   >
                     <Button
+                      id={ANALYTICS_GENERAL_WORDS_FREQUENCY_COMMENTS_ID}
                       variant="text"
                       onClick={() => setOpenWordCloud(true)}
                       sx={{ textDecoration: 'underline' }}

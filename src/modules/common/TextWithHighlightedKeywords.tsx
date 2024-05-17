@@ -15,6 +15,8 @@ const StyledBox = styled(Box)(({ theme }) => ({
   display: 'flex',
   justifyContent: 'space-between',
   alignItems: 'center',
+  wordWrap: 'break-word',
+  overflow: 'hidden',
   '&:hover': {
     outline: 'solid var(--graasp-primary) 1px ',
   },
@@ -25,19 +27,25 @@ interface Props {
   words: string[];
   onClick: () => void;
   memberName: string;
+  buttonId: string;
 }
 const TextWithHighlightedKeywords = ({
   sentence,
   words,
   onClick,
   memberName,
+  buttonId,
 }: Props): JSX.Element => {
   const { t } = useTranslation();
   const parts = sentence.split(/\s+/);
   const content = parts.map((part) => {
-    const isMatch = words.some((word) =>
-      new RegExp(createRegexFromString(word)).test(part.trim()),
-    );
+    const isMatch =
+      part.trim() &&
+      words.some(
+        (word) =>
+          word.trim() &&
+          new RegExp(createRegexFromString(word)).test(part.trim()),
+      );
 
     return isMatch ? (
       <span
@@ -57,14 +65,14 @@ const TextWithHighlightedKeywords = ({
 
   return (
     <StyledBox>
-      <Box>
+      <Box sx={{ wordWrap: 'break-word', overflow: 'hidden' }}>
         <Typography variant="caption" display="block">
           {memberName}
         </Typography>
         {content}
       </Box>
       <Tooltip title={t('CHECK_WHOLE_CHAT')}>
-        <IconButton onClick={onClick}>
+        <IconButton onClick={onClick} id={buttonId}>
           <ArrowForwardIcon fontSize="small" />
         </IconButton>
       </Tooltip>

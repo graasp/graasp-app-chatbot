@@ -35,7 +35,8 @@ export const getAllWords = (
   lang = DEFAULT_LANGUAGE,
 ): WordCount => {
   const text = texts.reduce((curr: string[], acc) => {
-    const splitted = acc.data.content
+    const splitted = acc.data?.content
+      ?.trim()
       .replace(/[.,/#!$%^&*;:{}=\-_`~()?"']+/g, '')
       .split(/\s+/);
     return [...curr, ...splitted];

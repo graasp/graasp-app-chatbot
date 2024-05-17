@@ -1,3 +1,5 @@
+import { AppItemFactory } from '@graasp/sdk';
+
 import { MEMBERS } from './members';
 
 export const MOCK_SERVER_ITEM = {
@@ -10,3 +12,5 @@ export const MOCK_SERVER_ITEM = {
   createdAt: new Date(),
   updatedAt: new Date(),
 };
+
+export const APP_ITEM = AppItemFactory({ creator: MEMBERS.ANNA });

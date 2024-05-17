@@ -4,9 +4,10 @@ type Props = {
   icon: JSX.Element;
   title: string;
   children: JSX.Element;
+  id?: string;
 };
 
-const StatisticCard = ({ icon, title, children }: Props): JSX.Element => (
+const StatisticCard = ({ icon, title, children, id }: Props): JSX.Element => (
   <Stack
     height="100%"
     component={Paper}
@@ -14,6 +15,7 @@ const StatisticCard = ({ icon, title, children }: Props): JSX.Element => (
     variant="outlined"
     direction="row"
     alignItems="center"
+    id={id}
   >
     {icon}
     <Stack flexGrow={1} direction="column" alignItems="center">

@@ -13,6 +13,11 @@ import {
 import { AppAction } from '@graasp/sdk';
 
 import { CommentData } from '@/config/appData';
+import {
+  ADD_CUSTOM_WORD_INPUT_ID,
+  buildCheckWholeMemberChatButtonId,
+  buildKeywordChipId,
+} from '@/config/selectors';
 
 import KeywordChip from '../common/KeywordChip';
 import TextWithHighlightedKeywords from '../common/TextWithHighlightedKeywords';
@@ -106,6 +111,7 @@ const FrequentWords = ({
           onChange={(e) => {
             setCustomWord(e.target.value);
           }}
+          id={ADD_CUSTOM_WORD_INPUT_ID}
           placeholder={t('SEARCH_COMMON_WORDS_PLACEHOLDER')}
         />
         <Stack spacing={1} direction="row">
@@ -115,6 +121,7 @@ const FrequentWords = ({
               label={text}
               variant="outlined"
               onDelete={() => deleteCustomWord(text)}
+              id={buildKeywordChipId(text)}
             />
           ))}
         </Stack>
@@ -129,6 +136,7 @@ const FrequentWords = ({
                 memberName={ele.member.name}
                 words={[...selectedFrequentWords, ...selectedCustomWords]}
                 onClick={() => setChatMemberID(ele.member.id)}
+                buttonId={buildCheckWholeMemberChatButtonId(ele.member.id)}
               />
             ))}
 

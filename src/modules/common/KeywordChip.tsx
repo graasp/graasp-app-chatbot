@@ -4,6 +4,8 @@ import { Avatar, Chip } from '@mui/material';
 
 import stc from 'string-to-color';
 
+import { KEYWORD_CHIP_COUNT_ID, buildKeywordChipId } from '@/config/selectors';
+
 const KeywordChip = ({
   text,
   count,
@@ -19,12 +21,16 @@ const KeywordChip = ({
   return (
     <Chip
       avatar={
-        <Avatar sx={{ bgcolor: color, color: 'white !important' }}>
+        <Avatar
+          id={KEYWORD_CHIP_COUNT_ID}
+          sx={{ bgcolor: color, color: 'white !important' }}
+        >
           {count}
         </Avatar>
       }
       onClick={onClick}
       label={text}
+      id={buildKeywordChipId(text)}
       sx={{
         color,
         borderColor: color,

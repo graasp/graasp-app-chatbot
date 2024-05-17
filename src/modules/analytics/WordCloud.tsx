@@ -3,6 +3,8 @@ import ReactWordcloud, { MinMaxPair } from 'react-wordcloud';
 
 import { Dialog } from '@mui/material';
 
+import { ANALYTICS_WORDS_CLOUD_MODAL_ID } from '@/config/selectors';
+
 type Props = {
   wordCounts: { [key: string]: number };
   open: boolean;
@@ -21,7 +23,7 @@ const WordCloud = ({ wordCounts, open, onClose }: Props): JSX.Element => {
   };
 
   return (
-    <Dialog open={open} onClose={onClose}>
+    <Dialog open={open} onClose={onClose} id={ANALYTICS_WORDS_CLOUD_MODAL_ID}>
       <ReactWordcloud words={words} options={options} size={[600, 400]} />
     </Dialog>
   );
