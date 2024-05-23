@@ -146,8 +146,11 @@ const FrequentWords = ({
           </Stack>
         </Grid>
         {chatMemberID && (
-          <Grid item xs={12} md={6} sx={{ height: '100%', overflowY: 'auto' }}>
-            <PlayerView id={chatMemberID} />
+          <Grid item xs={12} md={6} sx={{ height: '100%', overflow: 'hidden' }}>
+            <PlayerView
+              id={chatMemberID}
+              threadSx={{ overflow: 'auto', height: '100%' }}
+            />
           </Grid>
         )}
       </Grid>

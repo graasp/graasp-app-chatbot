@@ -1,4 +1,4 @@
-import { Box } from '@mui/material';
+import { Box, SxProps, Theme } from '@mui/material';
 
 import { useLocalContext } from '@graasp/apps-query-client';
 import { UUID } from '@graasp/sdk';
@@ -11,9 +11,10 @@ import CommentThread from '@/modules/common/CommentThread';
 
 type Props = {
   id?: UUID;
+  threadSx?: SxProps<Theme>;
 };
 
-const PlayerView = ({ id }: Props): JSX.Element => {
+const PlayerView = ({ id, threadSx = {} }: Props): JSX.Element => {
   const { data: appData } = hooks.useAppData<CommentData>();
 
   let { memberId } = useLocalContext();
@@ -25,11 +26,16 @@ const PlayerView = ({ id }: Props): JSX.Element => {
 
   return (
     <Box
-      sx={{ px: { xs: 2, sm: 10 }, maxWidth: '100ch', m: 'auto' }}
+      sx={{
+        px: { xs: 2, sm: 10 },
+        maxWidth: '100ch',
+        m: 'auto',
+        height: '100%',
+      }}
       data-cy={PLAYER_VIEW_CY}
     >
       <ChatbotPrompt id={memberId} />
-      <CommentThread>{comments}</CommentThread>
+      <CommentThread threadSx={threadSx}>{comments}</CommentThread>
     </Box>
   );
 };

@@ -1,7 +1,13 @@
 import { Fragment, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
-import { CircularProgress, Stack, Typography } from '@mui/material';
+import {
+  CircularProgress,
+  Stack,
+  SxProps,
+  Theme,
+  Typography,
+} from '@mui/material';
 
 import { ChatbotThreadMessage, buildPrompt } from '@graasp/apps-query-client';
 
@@ -47,9 +53,10 @@ const LoadingIndicator = ({
 
 type Props = {
   children?: CommentAppData[];
+  threadSx: SxProps<Theme>;
 };
 
-const CommentThread = ({ children }: Props): JSX.Element | null => {
+const CommentThread = ({ children, threadSx }: Props): JSX.Element | null => {
   const [replyingId, setReplyingId] = useState<string | null>(null);
   const [editingId, setEditingId] = useState<string | null>(null);
   const { mutate: patchData } = mutations.usePatchAppData();
@@ -99,7 +106,7 @@ const CommentThread = ({ children }: Props): JSX.Element | null => {
   const isEdited = (id: string): boolean => editingId === id;
 
   return (
-    <CommentContainer data-cy={COMMENT_THREAD_CONTAINER_CYPRESS}>
+    <CommentContainer data-cy={COMMENT_THREAD_CONTAINER_CYPRESS} sx={threadSx}>
       {commentThread.map((c, i, arr) => (
         <Fragment key={c.id}>
           {isEdited(c.id) ? (
