@@ -180,3 +180,17 @@ export const EXECUTION_MODE_SETTINGS_KEY = 'EXECUTION_MODE_SETTINGS_KEY';
 export const REVIEW_MODE_SETTINGS_KEY = 'REVIEW_MODE_SETTINGS_KEY';
 export const EXPLAIN_MODE_SETTINGS_KEY = 'EXPLAIN_MODE_SETTINGS_KEY';
 export const SETTING_NEW_CHATBOT_PROMPT_KEY = 'NEW_CHATBOT_PROMPT_KEY';
+
+export const ANALYTICS_GENERAL_TOTAL_COMMENTS_ID =
+  'general_statistic_total_comments';
+export const ANALYTICS_GENERAL_WORDS_FREQUENCY_COMMENTS_ID =
+  'general_statistic_words_frequency';
+export const ANALYTICS_WORDS_CLOUD_MODAL_ID = 'analytics_words_cloud_modal';
+export const KEYWORD_CHIP_COUNT_ID = 'keyword_count_id';
+export const ADD_CUSTOM_WORD_INPUT_ID = 'custom_word_input_id';
+
+export const buildKeywordChipId = (keyword: string): string =>
+  `${keyword}_keyword_chip`;
+
+export const buildCheckWholeMemberChatButtonId = (memberId: string): string =>
+  `check_member_chat_button_id_${memberId}`;
