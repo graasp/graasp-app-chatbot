@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.2.0](https://github.com/graasp/graasp-app-chatbot/compare/v1.1.1...v1.2.0) (2024-05-24)
+
+
+### Features
+
+* create analytic view ([#210](https://github.com/graasp/graasp-app-chatbot/issues/210)) ([1570f0c](https://github.com/graasp/graasp-app-chatbot/commit/1570f0cf12bedf274b212ab8d0027b98258e2e63))
+
 ## [1.1.1](https://github.com/graasp/graasp-app-chatbot/compare/v1.1.0...v1.1.1) (2024-05-08)
 
 
