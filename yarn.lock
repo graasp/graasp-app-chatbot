@@ -4646,9 +4646,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@uiw/codemirror-extensions-basic-setup@npm:4.21.25":
-  version: 4.21.25
-  resolution: "@uiw/codemirror-extensions-basic-setup@npm:4.21.25"
+"@uiw/codemirror-extensions-basic-setup@npm:4.22.2":
+  version: 4.22.2
+  resolution: "@uiw/codemirror-extensions-basic-setup@npm:4.22.2"
   dependencies:
     "@codemirror/autocomplete": "npm:^6.0.0"
     "@codemirror/commands": "npm:^6.0.0"
@@ -4665,19 +4665,19 @@ __metadata:
     "@codemirror/search": ">=6.0.0"
     "@codemirror/state": ">=6.0.0"
     "@codemirror/view": ">=6.0.0"
-  checksum: 10/56b15f0e602d39b29787a601dad189e37a60a544a587e0b06ea5a817d4fcc30a4a80e1e1c4b4d51eb6ea508595cedf4787acaecf939b712fa957fd612b300fcb
+  checksum: 10/6476019c294b36f459c3ea5beac95420d2bed2c939ca61f2a65d71237b385a32d776f63375f720595a82e9384beab822e52527658a7017b26883b9f24b42f8f8
   languageName: node
   linkType: hard
 
 "@uiw/react-codemirror@npm:^4.21.22":
-  version: 4.21.25
-  resolution: "@uiw/react-codemirror@npm:4.21.25"
+  version: 4.22.2
+  resolution: "@uiw/react-codemirror@npm:4.22.2"
   dependencies:
     "@babel/runtime": "npm:^7.18.6"
     "@codemirror/commands": "npm:^6.1.0"
     "@codemirror/state": "npm:^6.1.1"
     "@codemirror/theme-one-dark": "npm:^6.0.0"
-    "@uiw/codemirror-extensions-basic-setup": "npm:4.21.25"
+    "@uiw/codemirror-extensions-basic-setup": "npm:4.22.2"
     codemirror: "npm:^6.0.0"
   peerDependencies:
     "@babel/runtime": ">=7.11.0"
@@ -4687,7 +4687,7 @@ __metadata:
     codemirror: ">=6.0.0"
     react: ">=16.8.0"
     react-dom: ">=16.8.0"
-  checksum: 10/53847803dc73832d29ca7345ebff8714d57a5c66c13f0c3e1de0a0dd41190a0c85cd2e8583a0baa709e56032422a099d2431649018b7a3d78612256fb4878c25
+  checksum: 10/59b5ad5d1ec908f927142bba2eeced7a24053c45da638fdc3414ae78cd40774b41082287691bb9c8a6dc20f3b2f5cdca4b8e26ecc1bc50c6d3c40ab7a118c2ca
   languageName: node
   linkType: hard
 
