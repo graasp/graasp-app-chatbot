@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.2.1](https://github.com/graasp/graasp-app-chatbot/compare/v1.2.0...v1.2.1) (2024-09-18)
+
+
+### Bug Fixes
+
+* **deps:** update dependency react-i18next to v14.1.3 ([f36a8a5](https://github.com/graasp/graasp-app-chatbot/commit/f36a8a50b03de81b454b777a36d3e0efc7aa291b))
+
 ## [1.2.0](https://github.com/graasp/graasp-app-chatbot/compare/v1.1.1...v1.2.0) (2024-05-24)
 
 
