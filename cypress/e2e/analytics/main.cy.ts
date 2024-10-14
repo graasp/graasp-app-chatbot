@@ -66,7 +66,7 @@ describe('Analytics View', () => {
 
     it('display the whole chat', () => {
       cy.get(
-        `#${buildCheckWholeMemberChatButtonId(actions[0]?.member?.id)}`,
+        `#${buildCheckWholeMemberChatButtonId(actions[0]?.account?.id)}`,
       ).click();
       cy.get(buildDataCy(PLAYER_VIEW_CY)).should('be.visible');
     });

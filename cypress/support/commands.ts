@@ -1,6 +1,6 @@
 /// <reference types="../../src/window" />
-import { Database, LocalContext } from '@graasp/apps-query-client';
-import { Context } from '@graasp/sdk';
+import { Database } from '@graasp/apps-query-client';
+import { Context, LocalContext } from '@graasp/sdk';
 
 import { CURRENT_MEMBER, MEMBERS } from '../fixtures/members';
 import { MOCK_SERVER_ITEM } from '../fixtures/mockItem';
