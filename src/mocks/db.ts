@@ -17,7 +17,7 @@ export const mockMembers: CompleteMember[] = [
     name: 'current-member',
     email: '',
     extra: {},
-    type: 'individual',
+    type: AccountType.Individual,
     createdAt: new Date('1996-09-08T19:00:00').toISOString(),
     updatedAt: new Date().toISOString(),
     enableSaveActions: true,
