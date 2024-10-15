@@ -46,7 +46,7 @@
     "RESPONSE_BOX_PLACEHOLDER": "Répondre à ce message",
     "NO_COMMENTS_PLACEHOLDER": "Pas de commentaires",
     "ABOUT_TITLE": "À propos de l'application d'assistant",
-    "ABOUT_DESCRIPTION": "L'application d'assistant (chatbot) utilise les modèles ChatGPT d'OpenAI comme base pour fournir le service d'assistant. Les réponses des utilisateurs sont transmises à OpenAI par leur interface API afin de générer des réponses. Aucune autre donnée utilisateur n'est envoyée. Si les utilisateurs fournissent des données personnelles dans leur messages non ne pouvons rien faire pour les protéger.",
+    "ABOUT_DESCRIPTION": "L'application d'assistant (chatbot) utilise les modèles ChatGPT d'OpenAI comme base pour fournir le service d'assistant. Les réponses des utilisateurs sont transmises à OpenAI par leur interface API afin de générer des réponses. Aucune autre donnée utilisateur n'est envoyée. Si les utilisateurs fournissent des données personnelles dans leur messages nous ne pouvons rien faire pour les protéger.",
     "ABOUT_PRIVACY_POLICY_OPENAI": "Veuillez voir la <1>Politique de confidentialité des données d'OpenAI pour les utilisateurs européens (en anglais)</1>."
   }
 }
