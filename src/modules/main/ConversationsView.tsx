@@ -68,7 +68,7 @@ const ConversationsView: FC = () => {
       );
     }
     const commentsByUsers = Object.entries(
-      groupBy(nonOrphanComments, ({ member }) => member.id),
+      groupBy(nonOrphanComments, ({ account }) => account.id),
     );
     return commentsByUsers.map(([userId, userComments]) => {
       const userName =

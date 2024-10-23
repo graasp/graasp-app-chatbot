@@ -133,10 +133,10 @@ const FrequentWords = ({
               <TextWithHighlightedKeywords
                 key={ele.id}
                 sentence={ele.data.content}
-                memberName={ele.member.name}
+                memberName={ele.account.name}
                 words={[...selectedFrequentWords, ...selectedCustomWords]}
-                onClick={() => setChatMemberID(ele.member.id)}
-                buttonId={buildCheckWholeMemberChatButtonId(ele.member.id)}
+                onClick={() => setChatMemberID(ele.account.id)}
+                buttonId={buildCheckWholeMemberChatButtonId(ele.account.id)}
               />
             ))}
 
