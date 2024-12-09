@@ -8676,7 +8676,7 @@ __metadata:
     react-markdown: "npm:^9.0.1"
     react-mde: "npm:12.0.8"
     react-router-dom: "npm:^6.22.1"
-    react-toastify: "npm:10.0.5"
+    react-toastify: "npm:10.0.6"
     react-wordcloud: "npm:^1.2.7"
     remark-breaks: "npm:^4.0.0"
     remark-gfm: "npm:^4.0.0"
@@ -12433,15 +12433,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-toastify@npm:10.0.5":
-  version: 10.0.5
-  resolution: "react-toastify@npm:10.0.5"
+"react-toastify@npm:10.0.6":
+  version: 10.0.6
+  resolution: "react-toastify@npm:10.0.6"
   dependencies:
     clsx: "npm:^2.1.0"
   peerDependencies:
     react: ">=18"
     react-dom: ">=18"
-  checksum: 10/6630f4b6d6902d827efd5e66c09df693c7ab8abeeb6ef24d880080f47b636614ef9cc251dd5e6564d49fe2f6f25f720ce0f7ef72cd4b0cd58a65b7c4b8052fac
+  checksum: 10/60ec092f6b6ab4c6dd0a42e6207ce0d72af1f41a010ae8aa1b3de080697a3cdaa4d2249eb9092f9331bc17f155b1b45c681bd4a29dc698e20a6ac6fe79f967e6
   languageName: node
   linkType: hard
 
