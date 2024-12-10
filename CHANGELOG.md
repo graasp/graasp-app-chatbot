@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.2.2](https://github.com/graasp/graasp-app-chatbot/compare/v1.2.1...v1.2.2) (2024-12-10)
+
+
+### Bug Fixes
+
+* **deps:** update dependency react-toastify to v10.0.6 ([#252](https://github.com/graasp/graasp-app-chatbot/issues/252)) ([9c23226](https://github.com/graasp/graasp-app-chatbot/commit/9c23226e64d69737705b76ad6b892873c2015caf))
+
 ## [1.2.1](https://github.com/graasp/graasp-app-chatbot/compare/v1.2.0...v1.2.1) (2024-10-15)
 
 
