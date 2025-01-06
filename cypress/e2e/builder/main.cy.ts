@@ -5,7 +5,7 @@ import { BUILDER_VIEW_CY, buildDataCy } from '../../../src/config/selectors';
 describe('Builder View', () => {
   beforeEach(() => {
     cy.setUpApi(
-      {},
+      { appActions: [] },
       {
         context: Context.Builder,
         permission: PermissionLevel.Admin,

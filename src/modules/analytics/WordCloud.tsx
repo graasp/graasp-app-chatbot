@@ -1,4 +1,3 @@
-import React from 'react';
 import ReactWordcloud, { MinMaxPair } from 'react-wordcloud';
 
 import { Dialog } from '@mui/material';

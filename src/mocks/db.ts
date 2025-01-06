@@ -41,12 +41,11 @@ export const defaultMockContext: LocalContext = {
   permission: PermissionLevel.Admin,
   context: 'builder',
   itemId: '1234-1234-123456-8123-123456',
-  memberId: mockMembers[0].id,
+  accountId: mockMembers[0].id,
 };
 
 export const mockItem: DiscriminatedItem = {
   id: defaultMockContext.itemId,
-  displayName: 'app-starter-ts-vite',
   name: 'app-starter-ts-vite',
   description: null,
   path: '',

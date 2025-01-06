@@ -1,10 +1,10 @@
-import React, { useMemo, useState } from 'react';
+import { useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import {
   Button,
   Chip,
-  Grid,
+  Grid2,
   Stack,
   TextField,
   Typography,
@@ -126,8 +126,11 @@ const FrequentWords = ({
           ))}
         </Stack>
       </Stack>
-      <Grid container sx={{ height: '500px' }}>
-        <Grid item xs={12} md={6} sx={{ height: '100%', overflowY: 'auto' }}>
+      <Grid2 container sx={{ height: '500px' }}>
+        <Grid2
+          size={{ xs: 12, md: 6 }}
+          sx={{ height: '100%', overflowY: 'auto' }}
+        >
           <Stack spacing={2} p={1}>
             {commentsMatchSelectedWords.map((ele) => (
               <TextWithHighlightedKeywords
@@ -144,16 +147,19 @@ const FrequentWords = ({
               <Typography mt={2}>{t('NO_RESULTS_MATCH_WORDS')}</Typography>
             )}
           </Stack>
-        </Grid>
+        </Grid2>
         {chatMemberID && (
-          <Grid item xs={12} md={6} sx={{ height: '100%', overflow: 'hidden' }}>
+          <Grid2
+            size={{ xs: 12, md: 6 }}
+            sx={{ height: '100%', overflow: 'hidden' }}
+          >
             <PlayerView
               id={chatMemberID}
               threadSx={{ overflow: 'auto', height: '100%' }}
             />
-          </Grid>
+          </Grid2>
         )}
-      </Grid>
+      </Grid2>
     </Stack>
   );
 };

@@ -68,12 +68,12 @@ const ChatbotSettings = (): JSX.Element => {
       name: SettingsKeys.ChatbotPrompt,
     });
   const chatbotPrompt = chatbotPromptSettings?.[0];
-  const initialPrompt = chatbotPrompt?.data?.initialPrompt || [];
+  const initialPrompt = chatbotPrompt?.data?.initialPrompt ?? [];
   const stringifiedJsonPrompt = JSON.stringify(initialPrompt, null, 2);
-  const chatbotCue = chatbotPrompt?.data?.chatbotCue || '';
-  const chatbotName = chatbotPrompt?.data?.chatbotName || DEFAULT_BOT_USERNAME;
+  const chatbotCue = chatbotPrompt?.data?.chatbotCue ?? '';
+  const chatbotName = chatbotPrompt?.data?.chatbotName ?? DEFAULT_BOT_USERNAME;
   const chatbotVersion =
-    chatbotPrompt?.data?.gptVersion || GPTVersion.GPT_3_5_TURBO;
+    chatbotPrompt?.data?.gptVersion ?? GPTVersion.GPT_3_5_TURBO;
 
   const [newChatbotPrompt, setNewChatbotPrompt] = useState(
     stringifiedJsonPrompt,
