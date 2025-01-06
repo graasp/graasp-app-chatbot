@@ -21,25 +21,28 @@ declare global {
   }
 }
 
-Cypress.Commands.add('setUpApi', (database, appContext) => {
-  Cypress.on('window:before:load', (win: Window) => {
-    // win.indexedDB.deleteDatabase('graasp-app-cypress');
-    // eslint-disable-next-line no-param-reassign
-    win.appContext = {
-      memberId: CURRENT_MEMBER.id,
-      itemId: MOCK_SERVER_ITEM.id,
-      apiHost: Cypress.env('VITE_API_HOST'),
-      context: Context.Player,
-      ...appContext,
-    };
-    // eslint-disable-next-line no-param-reassign
-    win.database = {
-      appData: [],
-      appActions: [],
-      appSettings: [],
-      members: Object.values(MEMBERS),
-      items: [MOCK_SERVER_ITEM],
-      ...database,
-    };
-  });
-});
+Cypress.Commands.add(
+  'setUpApi',
+  (database: Partial<Database>, appContext: Partial<LocalContext>) => {
+    Cypress.on('window:before:load', (win: Window) => {
+      // win.indexedDB.deleteDatabase('graasp-app-cypress');
+      // eslint-disable-next-line no-param-reassign
+      win.appContext = {
+        accountId: CURRENT_MEMBER.id,
+        itemId: MOCK_SERVER_ITEM.id,
+        apiHost: Cypress.env('VITE_API_HOST'),
+        context: Context.Player,
+        ...appContext,
+      };
+      // eslint-disable-next-line no-param-reassign
+      win.database = {
+        appData: [],
+        appActions: [],
+        appSettings: [],
+        members: Object.values(MEMBERS),
+        items: [MOCK_SERVER_ITEM],
+        ...database,
+      };
+    });
+  },
+);
