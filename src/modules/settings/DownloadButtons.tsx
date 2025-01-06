@@ -28,7 +28,7 @@ const DownloadButtons = (): JSX.Element => {
     (): void => {
       // fetch actions
       refetchFunction().then(({ data }) => {
-        const dataBlob = new Blob([JSON.stringify(data)] || [], {
+        const dataBlob = new Blob([JSON.stringify(data)], {
           type: 'text/plain;charset=utf-8',
         });
         const fileName = `${new Date().toISOString()}_${suffix}.json`;

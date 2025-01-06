@@ -2,7 +2,12 @@
   "compilerOptions": {
     "target": "ESNext",
     "useDefineForClassFields": true,
-    "lib": ["DOM", "DOM.Iterable", "ESNext", "ES2021.String"],
+    "lib": [
+      "DOM",
+      "DOM.Iterable",
+      "ESNext",
+      "ES2021.String"
+    ],
     "allowJs": false,
     "skipLibCheck": true,
     "esModuleInterop": true,
@@ -10,19 +15,31 @@
     "strict": true,
     "forceConsistentCasingInFileNames": true,
     "module": "ESNext",
-    "moduleResolution": "Node",
+    "moduleResolution": "bundler",
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
     "jsx": "react-jsx",
-    "typeRoots": ["node_modules", "node_modules/@types", "./src/@types"],
-    "types": ["vite/client", "cypress"],
+    "typeRoots": [
+      "node_modules",
+      "node_modules/@types",
+      "./src/@types"
+    ],
+    "types": [
+      "vite/client",
+      "cypress"
+    ],
     "baseUrl": "./src",
     "paths": {
-      "@/*": ["./*"]
+      "@/*": [
+        "./*"
+      ]
     }
   },
-  "include": ["src"],
+  "include": [
+    "src",
+    "cypress"
+  ],
   "references": [
     {
       "path": "./tsconfig.node.json"
