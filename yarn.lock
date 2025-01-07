@@ -2946,9 +2946,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@graasp/apps-query-client@github:graasp/graasp-apps-query-client#update-with-account":
+"@graasp/apps-query-client@npm:^3.7.3":
   version: 3.7.3
-  resolution: "@graasp/apps-query-client@https://github.com/graasp/graasp-apps-query-client.git#commit=fbfd31bb24256b255bfaa1afa86f004238502e32"
+  resolution: "@graasp/apps-query-client@npm:3.7.3"
   dependencies:
     "@emotion/react": "npm:11.13.3"
     "@emotion/styled": "npm:11.13.0"
@@ -2970,7 +2970,7 @@ __metadata:
     date-fns: ^3.3.0 || ^4.0.0
     react: ^18.0.0
     react-dom: ^18.0.0
-  checksum: 10/3fb59af6221a5efe427a02118da70474fb2c5d2916669c36a36792c3e42062c608cab65d1437b8a8968ff80b8ccbdea0822bd7944c43df65d531a6488bd26b4f
+  checksum: 10/a6ff4f2fa8635df76e1524d45dc749c8ce628867acaa0fba357851afba0d51296cb795ed5452761ce8a3a9116e6ccee6d579a252ec8abff6123fa8bf36a750a7
   languageName: node
   linkType: hard
 
@@ -8558,7 +8558,7 @@ __metadata:
     "@eslint/compat": "npm:^1.2.4"
     "@eslint/eslintrc": "npm:^3.2.0"
     "@eslint/js": "npm:^9.17.0"
-    "@graasp/apps-query-client": "github:graasp/graasp-apps-query-client#update-with-account"
+    "@graasp/apps-query-client": "npm:^3.7.3"
     "@graasp/sdk": "npm:^5.5.0"
     "@graasp/stylis-plugin-rtl": "npm:^2.2.0"
     "@graasp/ui": "npm:5.4.7"
