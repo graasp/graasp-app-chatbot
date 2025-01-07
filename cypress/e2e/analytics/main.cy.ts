@@ -28,7 +28,7 @@ describe('Analytics View', () => {
         itemId: APP_ITEM.id,
       },
     );
-    cy.visit(`/`);
+    cy.visit('/');
   });
 
   it('App', () => {
@@ -37,6 +37,7 @@ describe('Analytics View', () => {
 
   describe('getting general statistics cards', () => {
     it('check total user comments statistic card display the right value', () => {
+      cy.get(`#${ANALYTICS_GENERAL_TOTAL_COMMENTS_ID}`).scrollIntoView();
       cy.get(`#${ANALYTICS_GENERAL_TOTAL_COMMENTS_ID}`).should(
         'have.text',
         actions.length,

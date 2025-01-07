@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 import CloudIcon from '@mui/icons-material/Cloud';
 import CommentIcon from '@mui/icons-material/Comment';
 import PeopleIcon from '@mui/icons-material/People';
-import { Alert, Box, Button, Grid, Typography } from '@mui/material';
+import { Alert, Box, Button, Grid2, Typography } from '@mui/material';
 
 import { AppAction } from '@graasp/sdk';
 import { Loader } from '@graasp/ui';
@@ -45,8 +45,13 @@ const AnalyticsView = (): JSX.Element => {
         <Box>
           {commentsByUserSide ? (
             <>
-              <Grid container spacing={2} marginTop={1} justifyContent="center">
-                <Grid xs={12} md={4} item>
+              <Grid2
+                container
+                spacing={2}
+                marginTop={1}
+                justifyContent="center"
+              >
+                <Grid2 size={{ xs: 12, md: 4 }}>
                   <StatisticCard
                     icon={<CommentIcon fontSize="large" color="primary" />}
                     title={t('STATISTIC_TOTAL_USER_COMMENTS_TITLE')}
@@ -59,8 +64,8 @@ const AnalyticsView = (): JSX.Element => {
                       {commentsByUserSide.length}
                     </Typography>
                   </StatisticCard>
-                </Grid>
-                <Grid xs={12} md={4} item>
+                </Grid2>
+                <Grid2 size={{ xs: 12, md: 4 }}>
                   <StatisticCard
                     icon={<PeopleIcon fontSize="large" color="primary" />}
                     title={t('STATISTIC_AVERAGE_USER_COMMENTS_TITLE')}
@@ -70,8 +75,8 @@ const AnalyticsView = (): JSX.Element => {
                         Object.keys(commentsByMembers).length}
                     </Typography>
                   </StatisticCard>
-                </Grid>
-                <Grid xs={12} md={4} item>
+                </Grid2>
+                <Grid2 size={{ xs: 12, md: 4 }}>
                   <StatisticCard
                     icon={<CloudIcon fontSize="large" color="primary" />}
                     title={t('WORDS_FREQUENCY')}
@@ -85,8 +90,8 @@ const AnalyticsView = (): JSX.Element => {
                       {t('SEE_WORDS_CLOUD')}
                     </Button>
                   </StatisticCard>
-                </Grid>
-              </Grid>
+                </Grid2>
+              </Grid2>
 
               <FrequentWords
                 commentsByUserSide={commentsByUserSide}

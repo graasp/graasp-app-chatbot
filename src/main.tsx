@@ -32,7 +32,7 @@ if (MOCK_API) {
       appContext: window.Cypress ? window.appContext : defaultMockContext,
       database: window.Cypress ? window.database : buildDatabase(mockMembers),
     },
-    MockSolution.ServiceWorker,
+    window.Cypress ? MockSolution.MirageJS : MockSolution.ServiceWorker,
   );
 }
 
