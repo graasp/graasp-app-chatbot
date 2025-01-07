@@ -54,6 +54,7 @@ describe('Analytics View', () => {
 
   describe('frequent words section', () => {
     it('check count of frequent word', () => {
+      cy.get(`#${ADD_CUSTOM_WORD_INPUT_ID}`).type('complex{enter}');
       cy.get(
         `#${buildKeywordChipId('complex')} #${KEYWORD_CHIP_COUNT_ID}`,
       ).should('have.text', 2);
