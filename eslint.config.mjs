@@ -29,6 +29,7 @@ export default [
       '**/.nyc_output',
       '**/.yarn',
       '**/commitlint.config.cjs',
+      'cypress.config.ts',
       'eslint.config.mjs',
     ],
   },

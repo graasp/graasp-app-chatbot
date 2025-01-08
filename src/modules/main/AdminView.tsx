@@ -4,6 +4,8 @@ import { Trans, useTranslation } from 'react-i18next';
 import { TabContext, TabList, TabPanel } from '@mui/lab';
 import { Badge, Box, Link, Tab, Typography } from '@mui/material';
 
+import { UnionOfConst } from '@graasp/sdk';
+
 import { AlertTriangle, Info, MessageSquareText, Settings } from 'lucide-react';
 
 import { GeneralSettings, SettingsKeys } from '@/config/appSetting';
@@ -20,15 +22,16 @@ import {
 import SettingsView from '../settings/SettingsView';
 import ConversationsView from './ConversationsView';
 
-enum Tabs {
-  TABLE_VIEW = 'TABLE_VIEW',
-  SETTINGS_VIEW = 'SETTINGS_VIEW',
-  ABOUT_VIEW = 'ABOUT_VIEW',
-}
+const Tabs = {
+  TABLE_VIEW: 'TABLE_VIEW',
+  SETTINGS_VIEW: 'SETTINGS_VIEW',
+  ABOUT_VIEW: 'ABOUT_VIEW',
+} as const;
+type TabsType = UnionOfConst<typeof Tabs>;
 
 const AdminView = (): JSX.Element => {
   const { t } = useTranslation();
-  const [activeTab, setActiveTab] = useState(Tabs.TABLE_VIEW);
+  const [activeTab, setActiveTab] = useState<TabsType>(Tabs.TABLE_VIEW);
 
   const { data: generalSettings } = hooks.useAppSettings<GeneralSettings>({
     name: SettingsKeys.ChatbotPrompt,
@@ -40,7 +43,7 @@ const AdminView = (): JSX.Element => {
         <TabList
           textColor="secondary"
           indicatorColor="secondary"
-          onChange={(_, newTab: Tabs) => setActiveTab(newTab)}
+          onChange={(_, newTab: TabsType) => setActiveTab(newTab)}
           centered
         >
           <Tab

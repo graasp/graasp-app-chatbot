@@ -58,14 +58,12 @@ const ChatbotPrompt = ({ id }: Props): JSX.Element | null => {
     name: SettingsKeys.General,
   });
   const generalSetting = generalSettings?.[0]?.data ?? DEFAULT_GENERAL_SETTINGS;
-  let { memberId } = useLocalContext();
-  if (id) {
-    memberId = id;
-  }
+  const { accountId } = useLocalContext();
+
   const [openEditor, setOpenEditor] = useState(false);
   const { mutate: postAction } = mutations.usePostAppAction();
 
-  const comments = appData?.filter((c) => c.creator?.id === memberId);
+  const comments = appData?.filter((c) => c.creator?.id === (id ?? accountId));
 
   const realChatbotPromptExists = comments?.find(
     (c) => c.data.chatbotPromptSettingId !== undefined,

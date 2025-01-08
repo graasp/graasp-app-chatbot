@@ -8,12 +8,12 @@ export const SettingsKeys = {
 export type ChatCompletionMessageRoles = 'system' | 'user' | 'assistant';
 
 // Chatbot Prompt Setting keys
-export enum ChatbotPromptSettingsKeys {
-  InitialPrompt = 'initialPrompt',
-  ChatbotCue = 'chatbotCue',
-  ChatbotName = 'chatbotName',
-  GptVersion = 'gptVersion',
-}
+export const ChatbotPromptSettingsKeys = {
+  InitialPrompt: 'initialPrompt',
+  ChatbotCue: 'chatbotCue',
+  ChatbotName: 'chatbotName',
+  GptVersion: 'gptVersion',
+} as const;
 
 export type ChatbotPromptSettings = {
   [ChatbotPromptSettingsKeys.InitialPrompt]: ChatBotMessage[];
@@ -25,10 +25,10 @@ export type ChatbotPromptSettings = {
 };
 
 // Chatbot Prompt Setting keys
-export enum GeneralSettingsKeys {
-  MaxCommentLength = 'maxCommentLength',
-  MaxThreadLength = 'maxThreadLength',
-}
+export const GeneralSettingsKeys = {
+  MaxCommentLength: 'maxCommentLength',
+  MaxThreadLength: 'maxThreadLength',
+} as const;
 
 export type GeneralSettings = {
   [GeneralSettingsKeys.MaxCommentLength]: number;

@@ -1,7 +1,6 @@
 import { FC } from 'react';
 import { I18nextProvider } from 'react-i18next';
 import { ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.min.css';
 
 import { CssBaseline, ThemeProvider, createTheme, styled } from '@mui/material';
 import { grey, orange, pink } from '@mui/material/colors';

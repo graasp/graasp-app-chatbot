@@ -29,7 +29,6 @@ import { BIG_BORDER_RADIUS, DEFAULT_BOT_USERNAME } from '@/constants';
 import ChatbotAvatar from './ChatbotAvatar';
 import CommentActions from './CommentActions';
 import CommentBody from './CommentBody';
-// import { useMembersContext } from '../context/MembersContext';
 import CustomAvatar from './CustomAvatar';
 
 const CustomCard = styled(Card)<CardProps>({
@@ -43,45 +42,23 @@ type Props = {
 
 const Comment = ({ comment, onEdit }: Props): JSX.Element => {
   const { t, i18n } = useTranslation();
-  // const members = useMembersContext();
-  // const {
-  //   // [GENERAL_SETTINGS_NAME]: settings = DEFAULT_GENERAL_SETTINGS,
-  // } = useSettings();
-  const currentMemberId = useLocalContext().memberId;
+
+  const { accountId } = useLocalContext();
   const { data: appContext } = hooks.useAppContext();
-  const currentMember = appContext?.members.find(
-    (m) => m.id === currentMemberId,
-  );
+  const currentMember = appContext?.members.find((m) => m.id === accountId);
   const { data: chatbotPrompts } = hooks.useAppSettings<ChatbotPromptSettings>({
     name: SettingsKeys.ChatbotPrompt,
   });
   const chatbotPrompt = chatbotPrompts?.[0];
-  // const { mutate: postAppData } = mutations.usePostAppData();
-
-  // const allowCommentReporting = true; // settings[GeneralSettingsKeys.AllowCommentsReporting];
   const [menuAnchorEl, setMenuAnchorEl] = useState<null | HTMLElement>(null);
   const [openActionsMenu, setOpenActionsMenu] = useState(false);
-  // const [openFlagDialog, setOpenFlagDialog] = useState(false);
   const commentRef = useRef<HTMLDivElement>(null);
-
-  // currently not using members
-  // const member = members.find((u) => u.id === comment.memberId);
-  // const userName = member?.name || ANONYMOUS_USER;
 
   const isBot = comment.type === AppDataTypes.BotComment;
 
   const isEditable = (): boolean =>
-    !!comment.creator &&
-    !!currentMemberId &&
-    comment.creator.id === currentMemberId;
+    !!comment.creator && !!accountId && comment.creator.id === accountId;
   const isDeletable = (): boolean => isEditable();
-
-  // const sendCommentReport = (reason: string): void => {
-  //   postAppData({
-  //     data: { reason, commentId: comment.id },
-  //     type: AppDataTypes.FLAG,
-  //   });
-  // };
 
   return (
     <CustomCard
@@ -92,8 +69,8 @@ const Comment = ({ comment, onEdit }: Props): JSX.Element => {
       <CardHeader
         title={
           isBot
-            ? chatbotPrompt?.data[ChatbotPromptSettingsKeys.ChatbotName] ||
-              DEFAULT_BOT_USERNAME
+            ? (chatbotPrompt?.data[ChatbotPromptSettingsKeys.ChatbotName] ??
+              DEFAULT_BOT_USERNAME)
             : currentMember?.name
         }
         subheader={formatDate(comment.updatedAt, { locale: i18n.language })}
@@ -126,12 +103,6 @@ const Comment = ({ comment, onEdit }: Props): JSX.Element => {
               }}
               onEdit={onEdit}
             />
-            {/* <ReportCommentDialog
-            open={openFlagDialog}
-            setOpen={setOpenFlagDialog}
-            // onSendReport={sendCommentReport}
-            commentRef={commentRef}
-          /> */}
           </>
         }
       />
