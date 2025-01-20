@@ -6575,9 +6575,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eslint-plugin-prettier@npm:5.2.2":
-  version: 5.2.2
-  resolution: "eslint-plugin-prettier@npm:5.2.2"
+"eslint-plugin-prettier@npm:5.2.3":
+  version: 5.2.3
+  resolution: "eslint-plugin-prettier@npm:5.2.3"
   dependencies:
     prettier-linter-helpers: "npm:^1.0.0"
     synckit: "npm:^0.9.1"
@@ -6591,7 +6591,7 @@ __metadata:
       optional: true
     eslint-config-prettier:
       optional: true
-  checksum: 10/292569865fde6a91646037f58105c18225f5cd57e255966f8388b13c196ce023f84e22100408dcd30472c02d0846a897b8afe460ece57dfc23e80e6cac70a644
+  checksum: 10/6444a0b89f3e2a6b38adce69761133f8539487d797f1655b3fa24f93a398be132c4f68f87041a14740b79202368d5782aa1dffd2bd7a3ea659f263d6796acf15
   languageName: node
   linkType: hard
 
@@ -7526,7 +7526,7 @@ __metadata:
     eslint-plugin-cypress: "npm:4.1.0"
     eslint-plugin-import: "npm:2.31.0"
     eslint-plugin-jsx-a11y: "npm:6.10.2"
-    eslint-plugin-prettier: "npm:5.2.2"
+    eslint-plugin-prettier: "npm:5.2.3"
     eslint-plugin-react: "npm:^7.37.3"
     eslint-plugin-react-hooks: "npm:5.1.0"
     file-saver: "npm:^2.0.5"
@@ -12721,8 +12721,8 @@ __metadata:
   linkType: hard
 
 "vite@npm:^5.0.0":
-  version: 5.4.11
-  resolution: "vite@npm:5.4.11"
+  version: 5.4.13
+  resolution: "vite@npm:5.4.13"
   dependencies:
     esbuild: "npm:^0.21.3"
     fsevents: "npm:~2.3.3"
@@ -12759,13 +12759,13 @@ __metadata:
       optional: true
   bin:
     vite: bin/vite.js
-  checksum: 10/719c4dea896e9547958643354003c8c9ea98e5367196d98f5f46cffb3ec963fead3ea5853f5af941c79bbfb73583dec19bbb0d28d2f644b95d7f59c55e22919d
+  checksum: 10/39769e2fdd8823500292bf33c58f442ffcf620aa60b52c04f72c0f35bc55d67674374810ed0faac2ab314e7f9031264244605185e45d78e3abf54b9a5a970f07
   languageName: node
   linkType: hard
 
 "vite@npm:^6.0.7":
-  version: 6.0.7
-  resolution: "vite@npm:6.0.7"
+  version: 6.0.10
+  resolution: "vite@npm:6.0.10"
   dependencies:
     esbuild: "npm:^0.24.2"
     fsevents: "npm:~2.3.3"
@@ -12811,7 +12811,7 @@ __metadata:
       optional: true
   bin:
     vite: bin/vite.js
-  checksum: 10/bf76b3647983cb3d76c0db90d1f72cd4f6e80864a112145405ac0046cedfb14814cc4d9c1acbd9c53da8749c3a2fa80570971f7c44c0524b71974981065e9388
+  checksum: 10/dbe6fc180115fdac0013cd6245b41d2f83f67644ebddb99bd0eb6ec7c64c651ed6df168467a287272545fe2e7f803ba417ab5ddf39d87c77a2a23823dcd66cfb
   languageName: node
   linkType: hard
 
