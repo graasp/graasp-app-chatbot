@@ -1791,7 +1791,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@cypress/request@npm:^3.0.6":
+"@cypress/request@npm:^3.0.7":
   version: 3.0.7
   resolution: "@cypress/request@npm:3.0.7"
   dependencies:
@@ -5040,7 +5040,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"ci-info@npm:^4.0.0":
+"ci-info@npm:^4.1.0":
   version: 4.1.0
   resolution: "ci-info@npm:4.1.0"
   checksum: 10/546628efd04e37da3182a58b6995a3313deb86ec7c8112e22ffb644317a61296b89bbfa128219e5bfcce43d9613a434ed89907ed8e752db947f7291e0405125f
@@ -5427,11 +5427,11 @@ __metadata:
   languageName: node
   linkType: hard
 
-"cypress@npm:13.17.0":
-  version: 13.17.0
-  resolution: "cypress@npm:13.17.0"
+"cypress@npm:14.1.0":
+  version: 14.1.0
+  resolution: "cypress@npm:14.1.0"
   dependencies:
-    "@cypress/request": "npm:^3.0.6"
+    "@cypress/request": "npm:^3.0.7"
     "@cypress/xvfb": "npm:^1.2.4"
     "@types/sinonjs__fake-timers": "npm:8.1.1"
     "@types/sizzle": "npm:^2.3.2"
@@ -5442,7 +5442,7 @@ __metadata:
     cachedir: "npm:^2.3.0"
     chalk: "npm:^4.1.0"
     check-more-types: "npm:^2.24.0"
-    ci-info: "npm:^4.0.0"
+    ci-info: "npm:^4.1.0"
     cli-cursor: "npm:^3.1.0"
     cli-table3: "npm:~0.6.1"
     commander: "npm:^6.2.1"
@@ -5476,7 +5476,7 @@ __metadata:
     yauzl: "npm:^2.10.0"
   bin:
     cypress: bin/cypress
-  checksum: 10/6c548e2adf7ae127365570680aa32015dbeb94cad30ce4f8a92e2e58d8ef7033b7f0ece50579a0a13eb07061feede0c813ff8d1e50e0feb87520dece5be4ba95
+  checksum: 10/35b7081f00c2e3ba8c757c571d9cb7650e7e64a9294717c4ba8ad35af337be855584946cc517b6a91fa2cd3b8d947bb4e883f7c0fe393727513ea3ec9c99d170
   languageName: node
   linkType: hard
 
@@ -7514,7 +7514,7 @@ __metadata:
     "@vitejs/plugin-react": "npm:^4.3.4"
     axios: "npm:1.7.9"
     concurrently: "npm:9.1.2"
-    cypress: "npm:13.17.0"
+    cypress: "npm:14.1.0"
     date-fns: "npm:^4.1.0"
     env-cmd: "npm:10.1.0"
     eslint: "npm:^9.17.0"
