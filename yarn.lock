@@ -7536,7 +7536,7 @@ __metadata:
     lodash.countby: "npm:^4.6.0"
     lodash.flatten: "npm:^4.4.0"
     lodash.groupby: "npm:^4.6.0"
-    lucide-react: "npm:^0.469.0"
+    lucide-react: "npm:^0.477.0"
     nock: "npm:^13.5.6"
     nyc: "npm:17.1.0"
     prettier: "npm:3.4.2"
@@ -8974,12 +8974,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"lucide-react@npm:^0.469.0":
-  version: 0.469.0
-  resolution: "lucide-react@npm:0.469.0"
+"lucide-react@npm:^0.477.0":
+  version: 0.477.0
+  resolution: "lucide-react@npm:0.477.0"
   peerDependencies:
     react: ^16.5.1 || ^17.0.0 || ^18.0.0 || ^19.0.0
-  checksum: 10/8cf1f5b125354f1ac4304bb0eead52f369fd67866199bc37a63c856369c97003702b90522e257971670e75acaaf1e55c05c8e4960aaa7ba96dc084d3f0505102
+  checksum: 10/41c1c655a3f10dcdf95a7542c7c3a65c89d29f604063b0200b56dc7aaa9409e0c9f8fd860e09655bcee0d44e74960d472bd4f8aa658e687ff872659a129bafd1
   languageName: node
   linkType: hard
 
