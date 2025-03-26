@@ -19,7 +19,7 @@
     "@graasp/stylis-plugin-rtl": "^2.2.0",
     "@graasp/ui": "5.4.7",
     "@mui/icons-material": "6.3.1",
-    "@mui/lab": "6.0.0-beta.22",
+    "@mui/lab": "6.0.0-dev.240424162023-9968b4889d",
     "@mui/material": "6.3.1",
     "@sentry/react": "8.48.0",
     "@tanstack/react-query": "^4.36.1",
