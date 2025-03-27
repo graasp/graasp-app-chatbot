@@ -2853,10 +2853,17 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@mui/core-downloads-tracker@npm:^6.1.7, @mui/core-downloads-tracker@npm:^6.3.1":
+"@mui/core-downloads-tracker@npm:^6.1.7":
   version: 6.4.0
   resolution: "@mui/core-downloads-tracker@npm:6.4.0"
   checksum: 10/3e8f31c3b461f85448152b99e156f487b146725560d2f60f0b60becf2c37f4fc1ab913ca7496dd038514bddb214a51cb6f6147fa66b4f9d0d7d5a1e7ce0cce97
+  languageName: node
+  linkType: hard
+
+"@mui/core-downloads-tracker@npm:^6.4.9":
+  version: 6.4.9
+  resolution: "@mui/core-downloads-tracker@npm:6.4.9"
+  checksum: 10/afd4f5ee57eaa86181464e2f05cf0c8f74a3ada309df5f0c74aacc3de0b48827757ac68dec487c09443f9eb5968a334c543a1986aa1130b2f160e8d70e39b735
   languageName: node
   linkType: hard
 
@@ -2876,19 +2883,19 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@mui/icons-material@npm:6.3.1":
-  version: 6.3.1
-  resolution: "@mui/icons-material@npm:6.3.1"
+"@mui/icons-material@npm:6.4.9":
+  version: 6.4.9
+  resolution: "@mui/icons-material@npm:6.4.9"
   dependencies:
     "@babel/runtime": "npm:^7.26.0"
   peerDependencies:
-    "@mui/material": ^6.3.1
+    "@mui/material": ^6.4.9
     "@types/react": ^17.0.0 || ^18.0.0 || ^19.0.0
     react: ^17.0.0 || ^18.0.0 || ^19.0.0
   peerDependenciesMeta:
     "@types/react":
       optional: true
-  checksum: 10/5800d4a12225688ef8b611f7c7768d87ea1f9940ce44fc92e96610da4bc8145c580fa7dadbdb182458dcf174ebd2e0bbc1582b2564e6ff78a32650ab3b018b06
+  checksum: 10/c41f4546a9817457cd9cf2107bb29e817e164a637fab01b24e6d16f387937c23d41643d39b1ae819bde9ff906bfa4a98f1c7851da5d9074ebbc0e4f4daec27e9
   languageName: node
   linkType: hard
 
@@ -2957,15 +2964,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@mui/material@npm:6.3.1":
-  version: 6.3.1
-  resolution: "@mui/material@npm:6.3.1"
+"@mui/material@npm:6.4.9":
+  version: 6.4.9
+  resolution: "@mui/material@npm:6.4.9"
   dependencies:
     "@babel/runtime": "npm:^7.26.0"
-    "@mui/core-downloads-tracker": "npm:^6.3.1"
-    "@mui/system": "npm:^6.3.1"
-    "@mui/types": "npm:^7.2.21"
-    "@mui/utils": "npm:^6.3.1"
+    "@mui/core-downloads-tracker": "npm:^6.4.9"
+    "@mui/system": "npm:^6.4.9"
+    "@mui/types": "npm:~7.2.24"
+    "@mui/utils": "npm:^6.4.8"
     "@popperjs/core": "npm:^2.11.8"
     "@types/react-transition-group": "npm:^4.4.12"
     clsx: "npm:^2.1.1"
@@ -2976,7 +2983,7 @@ __metadata:
   peerDependencies:
     "@emotion/react": ^11.5.0
     "@emotion/styled": ^11.3.0
-    "@mui/material-pigment-css": ^6.3.1
+    "@mui/material-pigment-css": ^6.4.9
     "@types/react": ^17.0.0 || ^18.0.0 || ^19.0.0
     react: ^17.0.0 || ^18.0.0 || ^19.0.0
     react-dom: ^17.0.0 || ^18.0.0 || ^19.0.0
@@ -2989,7 +2996,7 @@ __metadata:
       optional: true
     "@types/react":
       optional: true
-  checksum: 10/06663f1818406c6cb61e31682ac056b4bbc4470439882a9d485464cc064d94603a590fdf3223f9f68567d321bf88eab7c1d4ed2bd002ccb797a189f758535966
+  checksum: 10/721b9e61f72f755142acb12e7775b62d65f31231b88979dcce9960b08b88359b2b04dc9419bb79376dd40d74674ff452004b90a6ae39ce9319eae23bf2a50357
   languageName: node
   linkType: hard
 
@@ -3073,7 +3080,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@mui/system@npm:^6.0.0-dev.240424162023-9968b4889d":
+"@mui/system@npm:^6.0.0-dev.240424162023-9968b4889d, @mui/system@npm:^6.4.9":
   version: 6.4.9
   resolution: "@mui/system@npm:6.4.9"
   dependencies:
@@ -3101,7 +3108,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@mui/system@npm:^6.1.7, @mui/system@npm:^6.3.1":
+"@mui/system@npm:^6.1.7":
   version: 6.4.0
   resolution: "@mui/system@npm:6.4.0"
   dependencies:
@@ -3187,7 +3194,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@mui/utils@npm:^6.1.7, @mui/utils@npm:^6.3.1, @mui/utils@npm:^6.4.0":
+"@mui/utils@npm:^6.1.7, @mui/utils@npm:^6.4.0":
   version: 6.4.0
   resolution: "@mui/utils@npm:6.4.0"
   dependencies:
@@ -7611,9 +7618,9 @@ __metadata:
     "@graasp/sdk": "npm:^5.5.0"
     "@graasp/stylis-plugin-rtl": "npm:^2.2.0"
     "@graasp/ui": "npm:5.4.7"
-    "@mui/icons-material": "npm:6.3.1"
+    "@mui/icons-material": "npm:6.4.9"
     "@mui/lab": "npm:6.0.0-dev.240424162023-9968b4889d"
-    "@mui/material": "npm:6.3.1"
+    "@mui/material": "npm:6.4.9"
     "@sentry/react": "npm:8.48.0"
     "@tanstack/react-query": "npm:^4.36.1"
     "@tanstack/react-query-devtools": "npm:^4.36.1"
