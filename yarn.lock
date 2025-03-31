@@ -1791,7 +1791,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@cypress/request@npm:^3.0.6":
+"@cypress/request@npm:^3.0.8":
   version: 3.0.8
   resolution: "@cypress/request@npm:3.0.8"
   dependencies:
@@ -5249,7 +5249,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"ci-info@npm:^4.0.0":
+"ci-info@npm:^4.1.0":
   version: 4.2.0
   resolution: "ci-info@npm:4.2.0"
   checksum: 10/928d8457f3476ffc4a66dec93b9cdf1944d5e60dba69fbd6a0fc95b652386f6ef64857f6e32372533210ef6d8954634af2c7693d7c07778ee015f3629a5e0dd9
@@ -5272,7 +5272,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"cli-table3@npm:~0.6.1":
+"cli-table3@npm:~0.6.5":
   version: 0.6.5
   resolution: "cli-table3@npm:0.6.5"
   dependencies:
@@ -5636,11 +5636,11 @@ __metadata:
   languageName: node
   linkType: hard
 
-"cypress@npm:13.17.0":
-  version: 13.17.0
-  resolution: "cypress@npm:13.17.0"
+"cypress@npm:14.2.1":
+  version: 14.2.1
+  resolution: "cypress@npm:14.2.1"
   dependencies:
-    "@cypress/request": "npm:^3.0.6"
+    "@cypress/request": "npm:^3.0.8"
     "@cypress/xvfb": "npm:^1.2.4"
     "@types/sinonjs__fake-timers": "npm:8.1.1"
     "@types/sizzle": "npm:^2.3.2"
@@ -5651,9 +5651,9 @@ __metadata:
     cachedir: "npm:^2.3.0"
     chalk: "npm:^4.1.0"
     check-more-types: "npm:^2.24.0"
-    ci-info: "npm:^4.0.0"
+    ci-info: "npm:^4.1.0"
     cli-cursor: "npm:^3.1.0"
-    cli-table3: "npm:~0.6.1"
+    cli-table3: "npm:~0.6.5"
     commander: "npm:^6.2.1"
     common-tags: "npm:^1.8.0"
     dayjs: "npm:^1.10.4"
@@ -5677,7 +5677,7 @@ __metadata:
     process: "npm:^0.11.10"
     proxy-from-env: "npm:1.0.0"
     request-progress: "npm:^3.0.0"
-    semver: "npm:^7.5.3"
+    semver: "npm:^7.7.1"
     supports-color: "npm:^8.1.1"
     tmp: "npm:~0.2.3"
     tree-kill: "npm:1.2.2"
@@ -5685,7 +5685,7 @@ __metadata:
     yauzl: "npm:^2.10.0"
   bin:
     cypress: bin/cypress
-  checksum: 10/6c548e2adf7ae127365570680aa32015dbeb94cad30ce4f8a92e2e58d8ef7033b7f0ece50579a0a13eb07061feede0c813ff8d1e50e0feb87520dece5be4ba95
+  checksum: 10/0691252e00639d1a133db2429ec9d90274ab3ea60734524da2337f9c0ad878fb3c32cf28309d23f720ae75c04adf2bfce123d99e9e0f1c81364f524d37037a58
   languageName: node
   linkType: hard
 
@@ -7726,7 +7726,7 @@ __metadata:
     "@vitejs/plugin-react": "npm:^4.3.4"
     axios: "npm:1.7.9"
     concurrently: "npm:9.1.2"
-    cypress: "npm:13.17.0"
+    cypress: "npm:14.2.1"
     date-fns: "npm:^4.1.0"
     env-cmd: "npm:10.1.0"
     eslint: "npm:^9.17.0"
