@@ -2490,10 +2490,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@faker-js/faker@npm:9.5.0":
-  version: 9.5.0
-  resolution: "@faker-js/faker@npm:9.5.0"
-  checksum: 10/7dfcdf81a01b41f04e6b3a40b1c164658f1d309af8a8585ce36409758d1ee0de02e875c5e2a7163c88225ef5679386ca9706a64c800b525d8f2747967b2171ed
+"@faker-js/faker@npm:9.7.0":
+  version: 9.7.0
+  resolution: "@faker-js/faker@npm:9.7.0"
+  checksum: 10/5167cc179bbf5f140b957f600af24772ca8c6e7e42405c312c25a6b4278b851b84bd8e3065f80e667dd4c35dd5aeb0ed490b0b1872f908d58ffae1cef9a5ef72
   languageName: node
   linkType: hard
 
@@ -2564,16 +2564,16 @@ __metadata:
   linkType: hard
 
 "@graasp/sdk@npm:^5.5.0":
-  version: 5.12.0
-  resolution: "@graasp/sdk@npm:5.12.0"
+  version: 5.13.1
+  resolution: "@graasp/sdk@npm:5.13.1"
   dependencies:
-    "@faker-js/faker": "npm:9.5.0"
+    "@faker-js/faker": "npm:9.7.0"
     filesize: "npm:10.1.6"
     js-cookie: "npm:3.0.5"
   peerDependencies:
     date-fns: ^3 || ^4.0.0
     uuid: ^9 || ^10 || ^11.0.0
-  checksum: 10/14db99deb7701030b15ab5d93ab09b330f32b00ba79c5dd5688f0db42896a432de59a1d7c95035f9fd81e707d031862164938bfb8450d7c82f649f5daef23598
+  checksum: 10/bbdf813a0cc25cb00fdc14f9958892887e049f45a0815315f846d01d028990ce37d8d7ee5c74ee6c6ae395d04656efeb18f1c82a347413bb6b857f7e19ba7e76
   languageName: node
   linkType: hard
 
@@ -2588,9 +2588,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@graasp/ui@npm:5.4.7":
-  version: 5.4.7
-  resolution: "@graasp/ui@npm:5.4.7"
+"@graasp/ui@npm:5.5.1":
+  version: 5.5.1
+  resolution: "@graasp/ui@npm:5.5.1"
   dependencies:
     http-status-codes: "npm:2.3.0"
     interweave: "npm:13.1.0"
@@ -2619,7 +2619,7 @@ __metadata:
     react-i18next: ^15.0.0
     react-router-dom: ^6.11.0
     stylis: ^4.1.3
-  checksum: 10/ca596d426ce6fbb167564ffae4557642ea187dbbe4570523e60047d72fabd349a82390e8138e7c9259a13438533677b48fd5b07b3be6664d0c2e28f0206539e8
+  checksum: 10/b77a42eca157b5157a817b8937112f78e3a598ff1ecf6483eed721459e6bf1e02c8b3ac3bd9918961d700f6aa97428b10fbdb5aa32384ff17083a8a4f9166a28
   languageName: node
   linkType: hard
 
@@ -7905,7 +7905,7 @@ __metadata:
     "@graasp/apps-query-client": "npm:^3.7.3"
     "@graasp/sdk": "npm:^5.5.0"
     "@graasp/stylis-plugin-rtl": "npm:^2.2.0"
-    "@graasp/ui": "npm:5.4.7"
+    "@graasp/ui": "npm:5.5.1"
     "@mui/icons-material": "npm:6.3.1"
     "@mui/lab": "npm:6.0.0-dev.240424162023-9968b4889d"
     "@mui/material": "npm:6.3.1"
