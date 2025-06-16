@@ -1,5 +1,25 @@
 # Changelog
 
+## [1.2.2](https://github.com/graasp/graasp-app-chatbot/compare/v1.2.1...v1.2.2) (2025-06-16)
+
+
+### Bug Fixes
+
+* change enum to const ([852ca4c](https://github.com/graasp/graasp-app-chatbot/commit/852ca4ce78c5356b9e9328ff16c0549941e9895c))
+* **deps:** update dependency @mui/lab to v6.0.0-dev.240424162023-9968b4889d ([#245](https://github.com/graasp/graasp-app-chatbot/issues/245)) ([ded3525](https://github.com/graasp/graasp-app-chatbot/commit/ded35255b2da307158ce235d8ee3bf7b2fcaa90c))
+* **deps:** update dependency @sentry/react to v8.48.0 ([#218](https://github.com/graasp/graasp-app-chatbot/issues/218)) ([31e3e47](https://github.com/graasp/graasp-app-chatbot/commit/31e3e475b2fd392d10f9986bd7c8ac1a9eb7af6e))
+* **deps:** update dependency @types/node to v20.16.15 ([#260](https://github.com/graasp/graasp-app-chatbot/issues/260)) ([95a135b](https://github.com/graasp/graasp-app-chatbot/commit/95a135bc77b2a039760e7bb8de4ae4fe406f0e58))
+* **deps:** update dependency @types/node to v22.10.6 ([#277](https://github.com/graasp/graasp-app-chatbot/issues/277)) ([5605ab0](https://github.com/graasp/graasp-app-chatbot/commit/5605ab0ffd98cdb4cfb54b2248e3067b8c651d2b))
+* **deps:** update dependency @types/node to v22.10.7 ([#283](https://github.com/graasp/graasp-app-chatbot/issues/283)) ([7807716](https://github.com/graasp/graasp-app-chatbot/commit/78077163477f2f35ad29083841738e535b4cfa62))
+* **deps:** update dependency i18next to v24.2.1 ([#265](https://github.com/graasp/graasp-app-chatbot/issues/265)) ([8f3bc00](https://github.com/graasp/graasp-app-chatbot/commit/8f3bc00be760d0a8ad2843febf64476fd88c9461))
+* **deps:** update dependency react-router-dom to v6.28.2 ([#284](https://github.com/graasp/graasp-app-chatbot/issues/284)) ([a722638](https://github.com/graasp/graasp-app-chatbot/commit/a7226384352cb2f54ea4546da69d40c5892ba001))
+* **deps:** update dependency react-toastify to v10.0.6 ([#252](https://github.com/graasp/graasp-app-chatbot/issues/252)) ([9c23226](https://github.com/graasp/graasp-app-chatbot/commit/9c23226e64d69737705b76ad6b892873c2015caf))
+* **deps:** update dependency react-toastify to v11.0.3 ([#282](https://github.com/graasp/graasp-app-chatbot/issues/282)) ([bc12215](https://github.com/graasp/graasp-app-chatbot/commit/bc1221524b3fe060c3408b021fb1dfac1bed24a4))
+* **deps:** update dependency typescript to v5.7.3 ([#269](https://github.com/graasp/graasp-app-chatbot/issues/269)) ([59aa027](https://github.com/graasp/graasp-app-chatbot/commit/59aa027604e2595e3fa321a04381eba024ef74fa))
+* update dependencies ([#259](https://github.com/graasp/graasp-app-chatbot/issues/259)) ([852ca4c](https://github.com/graasp/graasp-app-chatbot/commit/852ca4ce78c5356b9e9328ff16c0549941e9895c))
+* upgrade everything ([#250](https://github.com/graasp/graasp-app-chatbot/issues/250)) ([20bbf89](https://github.com/graasp/graasp-app-chatbot/commit/20bbf89458a35fd753a96539c7e7efa8ed2e459e))
+* use stable version from apps-query-client ([852ca4c](https://github.com/graasp/graasp-app-chatbot/commit/852ca4ce78c5356b9e9328ff16c0549941e9895c))
+
 ## [1.2.1](https://github.com/graasp/graasp-app-chatbot/compare/v1.2.0...v1.2.1) (2024-10-15)
 
 
