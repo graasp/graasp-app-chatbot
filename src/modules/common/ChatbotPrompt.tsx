@@ -8,7 +8,7 @@ import {
   buildPrompt,
   useLocalContext,
 } from '@graasp/apps-query-client';
-import { UUID } from '@graasp/sdk';
+import { GPTVersion, UUID } from '@graasp/sdk';
 
 import { AppActionsType } from '@/config/appActions';
 import { AppDataTypes, CommentData } from '@/config/appData';
@@ -51,7 +51,7 @@ const ChatbotPrompt = ({ id }: Props): JSX.Element | null => {
   const chatbotPrompt = chatbotPrompts?.[0];
 
   const { mutateAsync: postChatBot } = mutations.usePostChatBot(
-    chatbotPrompt?.data?.gptVersion,
+    chatbotPrompt?.data?.gptVersion as GPTVersion,
   );
 
   const { data: generalSettings } = hooks.useAppSettings<GeneralSettings>({

@@ -10,6 +10,7 @@ import {
 } from '@mui/material';
 
 import { ChatbotThreadMessage, buildPrompt } from '@graasp/apps-query-client';
+import { GPTVersion } from '@graasp/sdk';
 
 import { AppActionsType } from '@/config/appActions';
 import { AppDataTypes, CommentAppData } from '@/config/appData';
@@ -19,8 +20,6 @@ import {
   GeneralSettings,
   SettingsKeys,
 } from '@/config/appSetting';
-// import { DEFAULT_GENERAL_SETTINGS } from '@/config/settings';
-// import { GENERAL_SETTINGS_NAME } from '@/config/appSettings';
 import { hooks, mutations } from '@/config/queryClient';
 import { COMMENT_THREAD_CONTAINER_CYPRESS } from '@/config/selectors';
 import { buildThread } from '@/utils/comments';
@@ -68,7 +67,7 @@ const CommentThread = ({ children, threadSx }: Props): JSX.Element | null => {
   const chatbotPrompt = chatbotPrompts?.[0];
 
   const { mutateAsync: postChatbot, isLoading } = mutations.usePostChatBot(
-    chatbotPrompt?.data?.gptVersion,
+    chatbotPrompt?.data?.gptVersion as GPTVersion,
   );
 
   const { data: generalSettings } = hooks.useAppSettings<GeneralSettings>({

@@ -1,9 +1,9 @@
 /// <reference types="./src/env"/>
 import react from '@vitejs/plugin-react';
-import { resolve } from 'path';
 import { UserConfigExport, defineConfig, loadEnv } from 'vite';
 import checker from 'vite-plugin-checker';
 import istanbul from 'vite-plugin-istanbul';
+import tsconfigPaths from 'vite-tsconfig-paths';
 
 // https://vitejs.dev/config/
 export default ({ mode }: { mode: string }): UserConfigExport => {
@@ -18,7 +18,7 @@ export default ({ mode }: { mode: string }): UserConfigExport => {
     base: '',
     server: {
       port: parseInt(process.env.VITE_PORT, 10) || 4001,
-      open: mode !== 'test', // open only when mode is different from test
+      open: false, // open only when mode is different from test
       watch: {
         ignored: ['**/coverage/**', '**/cypress/downloads/**'],
       },
@@ -31,6 +31,7 @@ export default ({ mode }: { mode: string }): UserConfigExport => {
       outDir: 'build',
     },
     plugins: [
+      tsconfigPaths(),
       mode === 'test'
         ? undefined
         : checker({
@@ -51,10 +52,5 @@ export default ({ mode }: { mode: string }): UserConfigExport => {
         checkProd: true,
       }),
     ],
-    resolve: {
-      alias: {
-        '@': resolve(__dirname, 'src'),
-      },
-    },
   });
 };

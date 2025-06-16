@@ -28,7 +28,6 @@ import {
 } from 'lucide-react';
 
 import { CommentAppData } from '@/config/appData';
-// import { DEFAULT_MAX_COMMENT_LENGTH_SETTING } from '@/config/appSetting';
 import {
   COMMENT_EDITOR_BOLD_BUTTON_CYPRESS,
   COMMENT_EDITOR_CANCEL_BUTTON_CYPRESS,

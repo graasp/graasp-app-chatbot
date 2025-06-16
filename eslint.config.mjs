@@ -56,8 +56,6 @@ export default [
       globals: {
         ...globals.browser,
         ...globals.node,
-        ...globals.mocha,
-        ...globals.jest,
         cy: true,
         Cypress: true,
       },
@@ -155,9 +153,9 @@ export default [
       ],
 
       'react/function-component-definition': [
-        2,
+        'error',
         {
-          namedComponents: 'arrow-function',
+          namedComponents: ['function-declaration', 'arrow-function'],
         },
       ],
 
