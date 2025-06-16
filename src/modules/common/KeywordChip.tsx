@@ -1,8 +1,6 @@
-import React from 'react';
-
 import { Avatar, Chip } from '@mui/material';
 
-import stc from 'string-to-color';
+import { stringToColor } from '@graasp/ui/apps';
 
 import { KEYWORD_CHIP_COUNT_ID, buildKeywordChipId } from '@/config/selectors';
 
@@ -17,7 +15,7 @@ const KeywordChip = ({
   isSelected: boolean;
   onClick: () => void;
 }): JSX.Element => {
-  const color = stc(text);
+  const color = stringToColor(text);
   return (
     <Chip
       avatar={

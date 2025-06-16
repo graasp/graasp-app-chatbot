@@ -3,6 +3,7 @@ import { FlatCompat } from '@eslint/eslintrc';
 import js from '@eslint/js';
 import typescriptEslint from '@typescript-eslint/eslint-plugin';
 import tsParser from '@typescript-eslint/parser';
+import cypressEslint from 'eslint-plugin-cypress';
 import prettier from 'eslint-plugin-prettier';
 import reactHooks from 'eslint-plugin-react-hooks';
 import globals from 'globals';
@@ -38,7 +39,6 @@ export default [
       'airbnb',
       'plugin:import/typescript',
       'prettier',
-      'plugin:cypress/recommended',
       'plugin:react/recommended',
       'plugin:react-hooks/recommended',
       'plugin:@typescript-eslint/recommended',
@@ -46,6 +46,7 @@ export default [
   ),
   {
     plugins: {
+      cypress: cypressEslint,
       '@typescript-eslint': fixupPluginRules(typescriptEslint),
       prettier,
       'react-hooks': fixupPluginRules(reactHooks),

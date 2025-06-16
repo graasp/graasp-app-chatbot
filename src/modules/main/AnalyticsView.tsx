@@ -7,7 +7,6 @@ import PeopleIcon from '@mui/icons-material/People';
 import { Alert, Box, Button, Grid2, Typography } from '@mui/material';
 
 import { AppAction } from '@graasp/sdk';
-import { Loader } from '@graasp/ui';
 
 import groupBy from 'lodash.groupby';
 
@@ -24,6 +23,7 @@ import FrequentWords from '../analytics/FrequentWords';
 import StatisticCard from '../analytics/StatisticCard';
 import WordCloud from '../analytics/WordCloud';
 import { getAllWords } from '../analytics/utils';
+import Loader from '../common/Loader';
 
 const AnalyticsView = (): JSX.Element => {
   const { data: actions, isLoading } = hooks.useAppActions();
@@ -114,7 +114,7 @@ const AnalyticsView = (): JSX.Element => {
   }
 
   if (isLoading) {
-    return <Loader />;
+    return <Loader>Analytics</Loader>;
   }
   return <Alert severity="error">{t('UNEXPECTED_ERROR')}</Alert>;
 };
