@@ -1,10 +1,9 @@
-import React from 'react';
 import { useTranslation } from 'react-i18next';
 
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import { Box, IconButton, Tooltip, Typography, styled } from '@mui/material';
 
-import stc from 'string-to-color';
+import { stringToColor } from '@graasp/ui/apps';
 
 import { createRegexFromString } from '../analytics/utils';
 
@@ -51,8 +50,8 @@ const TextWithHighlightedKeywords = ({
       <span
         key={part + memberName}
         style={{
-          color: stc(part),
-          backgroundColor: `${stc(part)}20`,
+          color: stringToColor(part),
+          backgroundColor: `${stringToColor(part)}20`,
           padding: '4px',
         }}
       >

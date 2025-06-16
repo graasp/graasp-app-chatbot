@@ -11,13 +11,12 @@ import {
 
 import {
   Box,
+  Button,
   FormHelperText,
   Stack,
   TextareaAutosize,
   styled,
 } from '@mui/material';
-
-import { Button } from '@graasp/ui';
 
 import {
   Bold,
@@ -177,7 +176,7 @@ const CommentEditor = ({
           justifyContent="space-between"
         >
           <Button
-            dataCy={COMMENT_EDITOR_CANCEL_BUTTON_CYPRESS}
+            data-cy={COMMENT_EDITOR_CANCEL_BUTTON_CYPRESS}
             color="secondary"
             variant="outlined"
             onClick={() => onCancel()}
@@ -186,7 +185,7 @@ const CommentEditor = ({
           </Button>
           <Button
             endIcon={<SendHorizonal />}
-            dataCy={COMMENT_EDITOR_SAVE_BUTTON_CYPRESS}
+            data-cy={COMMENT_EDITOR_SAVE_BUTTON_CYPRESS}
             color="primary"
             variant="outlined"
             onClick={() => onSend(text)}
