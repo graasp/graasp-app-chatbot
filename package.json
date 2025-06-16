@@ -17,7 +17,7 @@
     "@graasp/apps-query-client": "^3.7.3",
     "@graasp/sdk": "^5.5.0",
     "@graasp/stylis-plugin-rtl": "^2.2.0",
-    "@graasp/ui": "5.4.7",
+    "@graasp/ui": "5.5.4",
     "@mui/icons-material": "6.3.1",
     "@mui/lab": "6.0.0-dev.240424162023-9968b4889d",
     "@mui/material": "6.3.1",
