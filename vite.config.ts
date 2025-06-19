@@ -18,7 +18,7 @@ export default ({ mode }: { mode: string }): UserConfigExport => {
     base: '',
     server: {
       port: parseInt(process.env.VITE_PORT, 10) || 4001,
-      open: false, // open only when mode is different from test
+      open: false, // do not open the browser on start
       watch: {
         ignored: ['**/coverage/**', '**/cypress/downloads/**'],
       },

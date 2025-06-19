@@ -27,7 +27,7 @@
     "CHATBOT_VERSION_DEFAULT_MESSAGE": "by default",
     "CHATBOT_PROMPT_LABEL": "Chatbot Prompt",
     "CHATBOT_PROMPT_HELPER_LABEL": "In-depth technical description",
-    "CHATBOT_PROMPT_HELPER": "This is a collection of examples of interactions that help the chatbot use an appropriate voice with users.",
+    "CHATBOT_PROMPT_HELPER": "This is a collection of examples of interactions that define the chatbot's personality.",
     "CHATBOT_PROMPT_FORMAT_HELPER": "To describe the initial situation, create an object at the start of the array with 2 keys: 'role' and 'content'. For the initial description the role must be 'system'. Place your description of the initial situation in the 'content' key. Add interaction examples after that. Add one object per message with the role corresponding to either 'assistant' or 'user'.",
     "CHATBOT_PROMPT_FORMAT_EXAMPLE": "Here is an example",
     "CHATBOT_PROMPT_API_REFERENCE": "See the API reference",

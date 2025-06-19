@@ -23,8 +23,8 @@ import { ChatbotEditionView } from './chatbot/ChatbotEditingView';
 
 const ChatbotSettings = (): JSX.Element => {
   const { t } = useTranslation();
-  const { mutate: postSetting } = mutations.usePostAppSetting();
-  const { mutate: patchSetting } = mutations.usePatchAppSetting();
+  const { mutateAsync: postSetting } = mutations.usePostAppSetting();
+  const { mutateAsync: patchSetting } = mutations.usePatchAppSetting();
   const [isEditing, setIsEditing] = useState(false);
   const { data: chatbotPromptSettings } =
     hooks.useAppSettings<ChatbotPromptSettings>({
@@ -42,15 +42,15 @@ const ChatbotSettings = (): JSX.Element => {
     setIsEditing(false);
   };
 
-  const handleOnSave = (data: ChatbotPromptSettings): void => {
+  const handleOnSave = async (data: ChatbotPromptSettings): Promise<void> => {
     // setting does not exist
     if (!chatbotPrompt) {
-      postSetting({
+      await postSetting({
         data,
         name: SettingsKeys.ChatbotPrompt,
       });
     } else {
-      patchSetting({
+      await patchSetting({
         id: chatbotPrompt.id,
         data,
       });
