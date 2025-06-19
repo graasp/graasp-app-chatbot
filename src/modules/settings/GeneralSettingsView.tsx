@@ -1,3 +1,4 @@
+import type { JSX } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { FormLabel, Stack, TextField, Typography } from '@mui/material';
@@ -14,7 +15,7 @@ import {
   SETTING_MAX_THREAD_LENGTH,
 } from '@/config/selectors';
 
-const GeneralSettingsView = (): JSX.Element => {
+export function GeneralSettingsView(): JSX.Element {
   const { t } = useTranslation();
 
   const { data: generalSettings } = hooks.useAppSettings<GeneralSettings>({
@@ -54,31 +55,36 @@ const GeneralSettingsView = (): JSX.Element => {
           {t('GENERAL_SETTING_TITLE')}
         </Typography>
       </Stack>
-      <FormLabel>{t('MAXIMUM_COMMENT_LENGTH_LABEL')}</FormLabel>
-      <TextField
-        id={SETTING_MAX_COMMENT_LENGTH}
-        type="number"
-        value={generalSetting[GeneralSettingsKeys.MaxCommentLength] ?? 0}
-        onChange={(e) =>
-          handleChange(
-            GeneralSettingsKeys.MaxCommentLength,
-            Math.max(0, window.parseInt(e.target.value)),
-          )
-        }
-      />
-      <FormLabel>{t('MAXIMUM_THREAD_LENGTH_LABEL')}</FormLabel>
-      <TextField
-        id={SETTING_MAX_THREAD_LENGTH}
-        type="number"
-        value={generalSetting[GeneralSettingsKeys.MaxThreadLength] ?? 0}
-        onChange={(e) =>
-          handleChange(
-            GeneralSettingsKeys.MaxThreadLength,
-            Math.max(0, window.parseInt(e.target.value)),
-          )
-        }
-      />
+      <Stack gap={2} direction={{ xs: 'column', md: 'row' }}>
+        <Stack flex={1}>
+          <FormLabel>{t('MAXIMUM_COMMENT_LENGTH_LABEL')}</FormLabel>
+          <TextField
+            id={SETTING_MAX_COMMENT_LENGTH}
+            type="number"
+            value={generalSetting[GeneralSettingsKeys.MaxCommentLength] ?? 0}
+            onChange={(e) =>
+              handleChange(
+                GeneralSettingsKeys.MaxCommentLength,
+                Math.max(0, window.parseInt(e.target.value)),
+              )
+            }
+          />
+        </Stack>
+        <Stack flex={1}>
+          <FormLabel>{t('MAXIMUM_THREAD_LENGTH_LABEL')}</FormLabel>
+          <TextField
+            id={SETTING_MAX_THREAD_LENGTH}
+            type="number"
+            value={generalSetting[GeneralSettingsKeys.MaxThreadLength] ?? 0}
+            onChange={(e) =>
+              handleChange(
+                GeneralSettingsKeys.MaxThreadLength,
+                Math.max(0, window.parseInt(e.target.value)),
+              )
+            }
+          />
+        </Stack>
+      </Stack>
     </Stack>
   );
-};
-export default GeneralSettingsView;
+}
