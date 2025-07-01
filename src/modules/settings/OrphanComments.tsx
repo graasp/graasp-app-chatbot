@@ -13,7 +13,7 @@ type Props = {
   comments: CommentAppData[];
 };
 
-const OrphanComments = ({ comments }: Props): JSX.Element | null => {
+function OrphanComments({ comments }: Readonly<Props>): JSX.Element | null {
   const { t } = useTranslation();
   const { mutate: deleteAppData } = mutations.useDeleteAppData();
 
@@ -57,6 +57,6 @@ const OrphanComments = ({ comments }: Props): JSX.Element | null => {
   });
 
   return <FormControlLabel control={buttonControl} label={buttonLabel} />;
-};
+}
 
 export default OrphanComments;

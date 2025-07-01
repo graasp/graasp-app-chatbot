@@ -18,12 +18,16 @@ type Props = {
   onClick: (id: string) => void;
 };
 
-const ResponseBox = ({ onClick, commentId, dataCy }: Props): JSX.Element => {
+function ResponseBox({
+  onClick,
+  commentId,
+  dataCy,
+}: Readonly<Props>): JSX.Element {
   const { t } = useTranslation();
   return (
     <ResponseContainer>
       <StyledTextField
-        data-cy={dataCy || COMMENT_RESPONSE_BOX_CY}
+        data-cy={dataCy ?? COMMENT_RESPONSE_BOX_CY}
         fullWidth
         placeholder={t('RESPONSE_BOX_PLACEHOLDER')}
         onClick={() => onClick(commentId)}
@@ -31,5 +35,5 @@ const ResponseBox = ({ onClick, commentId, dataCy }: Props): JSX.Element => {
       />
     </ResponseContainer>
   );
-};
+}
 export default ResponseBox;

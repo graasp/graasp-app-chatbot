@@ -14,15 +14,15 @@ type Props = {
   threadSx?: SxProps<Theme>;
 };
 
-const PlayerView = ({ id, threadSx = {} }: Props): JSX.Element => {
+function PlayerView({ id, threadSx = {} }: Readonly<Props>) {
   const { data: appData } = hooks.useAppData<CommentData>();
 
-  let { memberId } = useLocalContext();
+  let { accountId } = useLocalContext();
   if (id) {
-    memberId = id;
+    accountId = id;
   }
 
-  const comments = appData?.filter((res) => res.creator?.id === memberId);
+  const comments = appData?.filter((res) => res.creator?.id === accountId);
 
   return (
     <Box
@@ -34,9 +34,9 @@ const PlayerView = ({ id, threadSx = {} }: Props): JSX.Element => {
       }}
       data-cy={PLAYER_VIEW_CY}
     >
-      <ChatbotPrompt id={memberId} />
+      <ChatbotPrompt id={accountId} />
       <CommentThread threadSx={threadSx}>{comments}</CommentThread>
     </Box>
   );
-};
+}
 export default PlayerView;

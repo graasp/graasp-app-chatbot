@@ -1,4 +1,3 @@
-import { FC } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { Box, Button } from '@mui/material';
@@ -16,12 +15,12 @@ type Props = {
   onCancel: () => void;
 };
 
-const SubmitButtons: FC<Props> = ({
+function SubmitButtons({
   settingKey,
   unsavedChanges,
   onSave,
   onCancel,
-}) => {
+}: Readonly<Props>) {
   const { t } = useTranslation();
   return (
     <Box id={settingKeyDataCy(settingKey)}>
@@ -45,5 +44,5 @@ const SubmitButtons: FC<Props> = ({
       </Button>
     </Box>
   );
-};
+}
 export default SubmitButtons;

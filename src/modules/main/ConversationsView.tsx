@@ -1,4 +1,4 @@
-import { FC, ReactElement, useState } from 'react';
+import { ReactElement, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import {
@@ -43,7 +43,7 @@ const DEFAULT_CURRENT_USER = {
   id: '',
 };
 
-const ConversationsView: FC = () => {
+function ConversationsView() {
   const { t } = useTranslation();
   const theme = useTheme();
   const [openCommentView, setOpenCommentView] = useState(false);
@@ -147,6 +147,6 @@ const ConversationsView: FC = () => {
       />
     </Stack>
   );
-};
+}
 
 export default ConversationsView;

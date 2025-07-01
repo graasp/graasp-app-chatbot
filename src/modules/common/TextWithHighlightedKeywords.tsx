@@ -28,13 +28,13 @@ interface Props {
   memberName: string;
   buttonId: string;
 }
-const TextWithHighlightedKeywords = ({
+function TextWithHighlightedKeywords({
   sentence,
   words,
   onClick,
   memberName,
   buttonId,
-}: Props): JSX.Element => {
+}: Readonly<Props>): JSX.Element {
   const { t } = useTranslation();
   const parts = sentence.split(/\s+/);
   const content = parts.map((part) => {
@@ -77,6 +77,6 @@ const TextWithHighlightedKeywords = ({
       </Tooltip>
     </StyledBox>
   );
-};
+}
 
 export default TextWithHighlightedKeywords;

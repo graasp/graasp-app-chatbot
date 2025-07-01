@@ -132,6 +132,7 @@ export default [
         'error',
         {
           allowExpressions: true,
+          allowFunctionsWithoutTypeParameters: true,
           allowHigherOrderFunctions: true,
           allowTypedFunctionExpressions: true,
         },

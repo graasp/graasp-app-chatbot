@@ -36,8 +36,8 @@ type Props = {
   imgSrc?: string;
 };
 
-const CustomAvatar = ({ member, imgSrc }: Props): JSX.Element => {
-  const userName = member?.name || ANONYMOUS_USER;
+function CustomAvatar({ member, imgSrc }: Readonly<Props>): JSX.Element {
+  const userName = member?.name ?? ANONYMOUS_USER;
   return (
     <Avatar
       alt={userName}
@@ -47,6 +47,6 @@ const CustomAvatar = ({ member, imgSrc }: Props): JSX.Element => {
       {getInitials(userName)}
     </Avatar>
   );
-};
+}
 
 export default CustomAvatar;

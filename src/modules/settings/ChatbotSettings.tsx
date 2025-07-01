@@ -12,6 +12,8 @@ import {
   Typography,
 } from '@mui/material';
 
+import { DEPRECATED_GPT_MODELS } from '@graasp/sdk';
+
 import { Edit, Undo2 } from 'lucide-react';
 
 import { ChatbotPromptSettings, SettingsKeys } from '@/config/appSetting';
@@ -20,12 +22,20 @@ import { DEFAULT_BOT_USERNAME, DEFAULT_MODEL_VERSION } from '@/constants';
 
 import CodeEditor from '../common/CodeEditor';
 import { ChatbotEditionView } from './chatbot/ChatbotEditingView';
+import { ChatbotPromptDisplay } from './chatbot/ChatbotPromptDisplay';
+import {
+  PromptDisplay,
+  PromptDisplayType,
+} from './chatbot/PromptDisplaySwitch';
+import { PromptTitle } from './chatbot/PromptTitle';
 
-const ChatbotSettings = (): JSX.Element => {
+function ChatbotSettings() {
   const { t } = useTranslation();
   const { mutateAsync: postSetting } = mutations.usePostAppSetting();
   const { mutateAsync: patchSetting } = mutations.usePatchAppSetting();
   const [isEditing, setIsEditing] = useState(false);
+  const [viewType, setViewType] = useState<PromptDisplayType>(PromptDisplay.UI);
+
   const { data: chatbotPromptSettings } =
     hooks.useAppSettings<ChatbotPromptSettings>({
       name: SettingsKeys.ChatbotPrompt,
@@ -99,6 +109,8 @@ const ChatbotSettings = (): JSX.Element => {
             version: chatbotVersion,
             prompt: stringifiedJsonPrompt,
           }}
+          viewType={viewType}
+          onViewChange={setViewType}
           onSave={handleOnSave}
         />
       ) : (
@@ -131,6 +143,13 @@ const ChatbotSettings = (): JSX.Element => {
                     </Typography>
                   ) : null}
                 </Stack>
+                {(DEPRECATED_GPT_MODELS as string[]).includes(
+                  chatbotVersion,
+                ) && (
+                  <Alert severity="warning">
+                    {t('CHATBOT_VERSION_DEPRECATED_MESSAGE')}
+                  </Alert>
+                )}
                 <Typography variant="caption" color="text.secondary">
                   {t('CHATBOT_MODEL_VERSION_HELPER', {
                     default: DEFAULT_MODEL_VERSION,
@@ -138,13 +157,14 @@ const ChatbotSettings = (): JSX.Element => {
                 </Typography>
               </Stack>
               <Stack direction="column">
-                <FormLabel>{t('CHATBOT_PROMPT_LABEL')}:</FormLabel>
-                <Typography variant="caption" color="text.secondary">
-                  {t('CHATBOT_PROMPT_HELPER')}
-                </Typography>
-                <Box width="100%">
-                  <CodeEditor value={stringifiedJsonPrompt} readOnly />
-                </Box>
+                <PromptTitle view={viewType} onChange={setViewType} />
+                {viewType === PromptDisplay.UI ? (
+                  <ChatbotPromptDisplay messages={initialPrompt} />
+                ) : (
+                  <Box width="100%">
+                    <CodeEditor value={stringifiedJsonPrompt} readOnly />
+                  </Box>
+                )}
               </Stack>
               <Stack direction="column">
                 <Stack>
@@ -167,5 +187,5 @@ const ChatbotSettings = (): JSX.Element => {
       )}
     </Stack>
   );
-};
+}
 export default ChatbotSettings;

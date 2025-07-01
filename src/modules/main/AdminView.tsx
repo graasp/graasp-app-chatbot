@@ -2,7 +2,15 @@ import { useState } from 'react';
 import { Trans, useTranslation } from 'react-i18next';
 
 import { TabContext, TabList, TabPanel } from '@mui/lab';
-import { Badge, Box, Link, Tab, Typography } from '@mui/material';
+import {
+  Alert,
+  Badge,
+  Box,
+  Button,
+  Link,
+  Tab,
+  Typography,
+} from '@mui/material';
 
 import { UnionOfConst } from '@graasp/sdk';
 
@@ -29,7 +37,7 @@ const Tabs = {
 } as const;
 type TabsType = UnionOfConst<typeof Tabs>;
 
-const AdminView = (): JSX.Element => {
+function AdminView(): JSX.Element {
   const { t } = useTranslation();
   const [activeTab, setActiveTab] = useState<TabsType>(Tabs.TABLE_VIEW);
 
@@ -81,7 +89,16 @@ const AdminView = (): JSX.Element => {
             iconPosition="start"
           />
         </TabList>
+
         <TabPanel value={Tabs.TABLE_VIEW} data-cy={TABLE_VIEW_PANE_CYPRESS}>
+          {generalSettings?.length === 0 && (
+            <Alert severity="warning">
+              No config{' '}
+              <Button onClick={() => setActiveTab(Tabs.SETTINGS_VIEW)}>
+                Configure
+              </Button>
+            </Alert>
+          )}
           <ConversationsView />
         </TabPanel>
         <TabPanel
@@ -107,6 +124,6 @@ const AdminView = (): JSX.Element => {
       </TabContext>
     </Box>
   );
-};
+}
 
 export default AdminView;

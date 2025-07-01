@@ -1,4 +1,5 @@
-import { useState } from 'react';
+import { type JSX, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 
 import {
   Accordion,
@@ -18,16 +19,38 @@ import {
   styled,
 } from '@mui/material';
 
-import { ChatBotMessage, GPTVersion } from '@graasp/sdk';
+import { ChatBotMessage, DEPRECATED_GPT_MODELS, GPTVersion } from '@graasp/sdk';
 
-import { t } from 'i18next';
 import { ChevronDownIcon } from 'lucide-react';
 
 import { ChatbotPromptSettings } from '@/config/appSetting';
 import { SETTING_CHATBOT_PROMPT_CODE_EDITOR_CY } from '@/config/selectors';
-import { SMALL_BORDER_RADIUS } from '@/constants';
+import { DEFAULT_MODEL_VERSION, SMALL_BORDER_RADIUS } from '@/constants';
 import CodeEditor from '@/modules/common/CodeEditor';
-import { showErrorToast } from '@/utils/toast';
+
+import { ChatbotConfigurator } from './ChatbotConfigurator';
+import { PromptDisplay, PromptDisplayType } from './PromptDisplaySwitch';
+import { PromptTitle } from './PromptTitle';
+
+type ModelDef = {
+  key: string;
+  value: string;
+  isRecommended: boolean;
+  isDeprecated: boolean;
+};
+
+function compareModels(a: ModelDef, b: ModelDef): number {
+  // 1. Recommended first
+  if (a.isRecommended && !b.isRecommended) return -1;
+  if (!a.isRecommended && b.isRecommended) return 1;
+
+  // 2. Deprecated last
+  if (a.isDeprecated && !b.isDeprecated) return 1;
+  if (!a.isDeprecated && b.isDeprecated) return -1;
+
+  // 3. Alphabetical by key
+  return a.key.localeCompare(b.key);
+}
 
 const TextArea = styled(TextareaAutosize)(({ theme }) => ({
   borderRadius: SMALL_BORDER_RADIUS,
@@ -58,14 +81,20 @@ type Props = {
     cue: string;
     prompt: string;
   };
+  viewType: PromptDisplayType;
+  onViewChange: (view: PromptDisplayType) => void;
   onSave: (data: ChatbotPromptSettings) => void;
 };
 
 export function ChatbotEditionView({
+  viewType,
+  onViewChange,
   initialValue,
   onSave,
 }: Readonly<Props>): JSX.Element {
-  const [prompt, setPrompt] = useState(initialValue.prompt);
+  const { t } = useTranslation();
+  const parsedPrompt: ChatBotMessage[] = JSON.parse(initialValue.prompt);
+  const [prompt, setPrompt] = useState(parsedPrompt);
   const [cue, setCue] = useState(initialValue.cue);
   const [name, setName] = useState(initialValue.name);
   const [version, setVersion] = useState(initialValue.version);
@@ -92,17 +121,19 @@ export function ChatbotEditionView({
   const hasNoFormattingErrors = (): void => setFormattingError(false);
   const hasFormattingErrors = (): void => setFormattingError(true);
 
-  const handleChangeChatbotPrompt = (value: string): void => {
-    validatePrompt(value, {
+  const handleChangeChatbotPromptString = (value: string): void => {
+    const newValue = validatePrompt<ChatBotMessage[]>(value, {
       onSuccess: hasNoFormattingErrors,
       onError: hasFormattingErrors,
     });
-    setPrompt(value);
-    setUnsavedChanges(true);
+    if (newValue) {
+      setPrompt(newValue);
+      setUnsavedChanges(true);
+    }
   };
 
   const handleChangeChatbotVersion = (value: string): void => {
-    setVersion(value as GPTVersion);
+    setVersion(value);
     setUnsavedChanges(true);
   };
 
@@ -117,15 +148,9 @@ export function ChatbotEditionView({
   };
 
   const handleSave = (): void => {
-    const jsonNewChatbotPrompt = validatePrompt<ChatBotMessage[]>(prompt, {
-      onError: () => {
-        hasFormattingErrors();
-        showErrorToast(t('ERROR_PROMPT_NOT_IN_JSON_FORMAT'));
-      },
-    });
-    if (jsonNewChatbotPrompt) {
+    if (prompt) {
       const data: ChatbotPromptSettings = {
-        initialPrompt: jsonNewChatbotPrompt,
+        initialPrompt: prompt,
         chatbotCue: cue,
         chatbotName: name,
         gptVersion: version,
@@ -133,6 +158,21 @@ export function ChatbotEditionView({
       onSave(data);
     }
   };
+
+  // currently supported models
+  const models = Object.entries(GPTVersion)
+    .reduce<ModelDef[]>((acc, [modelKey, modelName]) => {
+      acc.push({
+        key: modelKey,
+        value: modelName,
+        isDeprecated: (DEPRECATED_GPT_MODELS as string[]).includes(modelName),
+        isRecommended: modelName === DEFAULT_MODEL_VERSION,
+      });
+
+      return acc;
+    }, [])
+    // sort models to put deprecated last in the list
+    .toSorted(compareModels);
 
   return (
     <Stack spacing={2}>
@@ -154,7 +194,9 @@ export function ChatbotEditionView({
         <Stack>
           <FormLabel>{t('MODEL_VERSION')}</FormLabel>
           <Typography variant="caption" color="text.secondary">
-            {t('CHATBOT_MODEL_VERSION_HELPER')}
+            {t('CHATBOT_MODEL_VERSION_HELPER', {
+              default: DEFAULT_MODEL_VERSION,
+            })}
           </Typography>
         </Stack>
         <Select
@@ -166,13 +208,14 @@ export function ChatbotEditionView({
           fullWidth
           renderValue={(selected) => <Typography>{selected}</Typography>}
         >
-          {Object.entries(GPTVersion).map(([key, v]) => (
-            <MenuItem key={v} value={v} sx={{ display: 'block' }}>
+          {models.map(({ key, value, isRecommended, isDeprecated }) => (
+            <MenuItem key={key} value={value} sx={{ display: 'block' }}>
               <Stack direction="row" spacing={1}>
-                <Typography>{v}</Typography>
-                {v === GPTVersion.GPT_3_5_TURBO && (
+                <Typography>{value}</Typography>
+                {isRecommended && (
                   <Chip label={t('RECOMMENDED')} size="small" color="primary" />
                 )}
+                {isDeprecated && <Chip label={t('DEPRECATED')} size="small" />}
               </Stack>
               <Typography variant="caption" color="text.secondary">
                 {t(`${key}_DESCRIPTION`)}
@@ -183,15 +226,24 @@ export function ChatbotEditionView({
       </Box>
       <Box>
         <Stack spacing={2}>
+          <PromptTitle view={viewType} onChange={onViewChange} />
           <Stack>
-            <FormLabel>{t('CHATBOT_PROMPT_LABEL')}</FormLabel>
-            <Typography variant="caption" color="text.secondary">
-              {t('CHATBOT_PROMPT_HELPER')}
-            </Typography>
-            <CodeEditor
-              value={prompt}
-              onChange={(value: string) => handleChangeChatbotPrompt(value)}
-            />
+            {viewType === PromptDisplay.UI ? (
+              <ChatbotConfigurator
+                value={prompt}
+                onChange={(value) => {
+                  setPrompt(value);
+                  setUnsavedChanges(true);
+                }}
+              />
+            ) : (
+              <CodeEditor
+                value={JSON.stringify(prompt, null, 2)}
+                onChange={(value: string) =>
+                  handleChangeChatbotPromptString(value)
+                }
+              />
+            )}
             {formattingError ? (
               <Typography color="error">
                 {t('ERROR_PROMPT_NOT_IN_JSON_FORMAT')}

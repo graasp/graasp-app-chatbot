@@ -1,4 +1,4 @@
-import React, { FC, MutableRefObject, ReactElement, RefObject } from 'react';
+import { MutableRefObject, ReactElement, RefObject } from 'react';
 
 import {
   Breakpoint,
@@ -49,7 +49,7 @@ type Props = {
   anchor?: RefType;
 };
 
-const CustomDialog: FC<Props> = ({
+function CustomDialog({
   open,
   title,
   content,
@@ -61,30 +61,32 @@ const CustomDialog: FC<Props> = ({
   maxWidth = 'sm',
   noPadding = false,
   anchor = null,
-}) => (
-  <Dialog
-    keepMounted={keepMounted}
-    data-cy={dataCy}
-    fullWidth
-    fullScreen={fullScreen}
-    maxWidth={maxWidth}
-    open={open}
-    onClose={onClose}
-    PaperProps={anchor ? { style: getPlacedModalStyle(anchor) } : {}}
-  >
-    <StyledDialogTitle data-cy={CUSTOM_DIALOG_TITLE_CYPRESS}>
-      {title}
-    </StyledDialogTitle>
-    <DialogContent
-      data-cy={CUSTOM_DIALOG_CONTENT_CY}
-      sx={noPadding ? { py: 0 } : {}}
+}: Props) {
+  return (
+    <Dialog
+      keepMounted={keepMounted}
+      data-cy={dataCy}
+      fullWidth
+      fullScreen={fullScreen}
+      maxWidth={maxWidth}
+      open={open}
+      onClose={onClose}
+      PaperProps={anchor ? { style: getPlacedModalStyle(anchor) } : {}}
     >
-      {content}
-    </DialogContent>
-    <DialogActions data-cy={CUSTOM_DIALOG_ACTIONS_CYPRESS}>
-      {actions}
-    </DialogActions>
-  </Dialog>
-);
+      <StyledDialogTitle data-cy={CUSTOM_DIALOG_TITLE_CYPRESS}>
+        {title}
+      </StyledDialogTitle>
+      <DialogContent
+        data-cy={CUSTOM_DIALOG_CONTENT_CY}
+        sx={noPadding ? { py: 0 } : {}}
+      >
+        {content}
+      </DialogContent>
+      <DialogActions data-cy={CUSTOM_DIALOG_ACTIONS_CYPRESS}>
+        {actions}
+      </DialogActions>
+    </Dialog>
+  );
+}
 
 export default CustomDialog;

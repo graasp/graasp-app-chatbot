@@ -13,7 +13,7 @@ import {
   DOWNLOAD_DATA_BUTTON_CY,
 } from '@/config/selectors';
 
-const DownloadButtons = (): JSX.Element => {
+function DownloadButtons() {
   const { t } = useTranslation();
 
   const { refetch: refetchAppActions, isFetching: isFetchingAppActions } =
@@ -60,5 +60,5 @@ const DownloadButtons = (): JSX.Element => {
       </LoadingButton>
     </Stack>
   );
-};
+}
 export default DownloadButtons;
