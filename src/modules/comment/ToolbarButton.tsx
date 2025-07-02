@@ -1,4 +1,4 @@
-import { ForwardRefRenderFunction, PropsWithChildren, forwardRef } from 'react';
+import { ForwardedRef, PropsWithChildren, forwardRef } from 'react';
 
 import { Button } from '@mui/material';
 
@@ -8,10 +8,7 @@ type Props = {
   disabled?: boolean;
 };
 
-const ToolbarButton: ForwardRefRenderFunction<
-  HTMLButtonElement,
-  PropsWithChildren<Props>
-> = (props, ref) => {
+function ToolbarButton(props: Props, ref: ForwardedRef<HTMLButtonElement>) {
   // structure the custom props from the other ones given by the tooltip
   const { dataCy, onClick, disabled, ...otherProps } = props;
   return (
@@ -32,7 +29,7 @@ const ToolbarButton: ForwardRefRenderFunction<
       onClick={onClick}
     />
   );
-};
+}
 
 export default forwardRef<HTMLButtonElement, PropsWithChildren<Props>>(
   ToolbarButton,

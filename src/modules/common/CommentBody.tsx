@@ -1,4 +1,4 @@
-import { FC, PropsWithChildren, ReactNode } from 'react';
+import { ReactNode } from 'react';
 import ReactMarkdown from 'react-markdown';
 
 import { styled } from '@mui/material';
@@ -68,9 +68,6 @@ const StyledReactMarkdown = styled(ReactMarkdown)(({ theme }) => ({
   },
 }));
 
-type Props = {
-  children: string;
-};
 function code(props: {
   className?: string;
   children?: ReactNode;
@@ -114,13 +111,15 @@ function code(props: {
   );
 }
 
-const CommentBody: FC<PropsWithChildren<Props>> = ({ children }) => (
-  <StyledReactMarkdown
-    remarkPlugins={[remarkGfm, remarkBreaks]}
-    components={{ code }}
-  >
-    {children}
-  </StyledReactMarkdown>
-);
+function CommentBody({ children }: Readonly<{ children: string }>) {
+  return (
+    <StyledReactMarkdown
+      remarkPlugins={[remarkGfm, remarkBreaks]}
+      components={{ code }}
+    >
+      {children}
+    </StyledReactMarkdown>
+  );
+}
 
 export default CommentBody;

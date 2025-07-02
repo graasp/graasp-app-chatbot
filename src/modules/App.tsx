@@ -8,7 +8,7 @@ import AnalyticsView from './main/AnalyticsView';
 import BuilderView from './main/BuilderView';
 import PlayerView from './main/PlayerView';
 
-const App = (): JSX.Element => {
+function App(): JSX.Element {
   const context = useLocalContext();
 
   useEffect(() => {
@@ -30,6 +30,6 @@ const App = (): JSX.Element => {
     default:
       return <PlayerView />;
   }
-};
+}
 
 export default App;

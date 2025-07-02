@@ -26,7 +26,7 @@ type Props = {
   comment: CommentAppData;
 };
 
-const CommentActions = ({
+function CommentActions({
   open,
   menuAnchorEl,
   onClose,
@@ -36,7 +36,7 @@ const CommentActions = ({
   showEdit = true,
   // showFlag = true,
   comment,
-}: Props): JSX.Element => {
+}: Readonly<Props>): JSX.Element {
   const theme = useTheme();
   const { t } = useTranslation();
   const { mutate: deleteAppData } = mutations.useDeleteAppData();
@@ -44,7 +44,7 @@ const CommentActions = ({
 
   return (
     <Menu
-      MenuListProps={{ dense: true }}
+      slotProps={{ list: { dense: true } }}
       open={open}
       anchorEl={menuAnchorEl}
       // center the popover
@@ -94,6 +94,6 @@ const CommentActions = ({
       )}
     </Menu>
   );
-};
+}
 
 export default CommentActions;

@@ -29,10 +29,10 @@ type Props = {
   allWords: { [key: string]: number };
 };
 
-const FrequentWords = ({
+function FrequentWords({
   commentsByUserSide,
   allWords,
-}: Props): JSX.Element => {
+}: Readonly<Props>): JSX.Element {
   const { t } = useTranslation();
 
   const mostFrequentWordsWithCount = getTopFrequentWords(allWords, 5);
@@ -162,6 +162,6 @@ const FrequentWords = ({
       </Grid2>
     </Stack>
   );
-};
+}
 
 export default FrequentWords;

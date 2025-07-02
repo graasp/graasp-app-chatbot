@@ -8,7 +8,7 @@ import {
   buildPrompt,
   useLocalContext,
 } from '@graasp/apps-query-client';
-import { GPTVersion, UUID } from '@graasp/sdk';
+import { GPTVersionType, UUID } from '@graasp/sdk';
 
 import { AppActionsType } from '@/config/appActions';
 import { AppDataTypes, CommentData } from '@/config/appData';
@@ -37,7 +37,7 @@ type Props = {
   id?: UUID;
 };
 
-const ChatbotPrompt = ({ id }: Props): JSX.Element | null => {
+function ChatbotPrompt({ id }: Props): JSX.Element | null {
   const { t } = useTranslation();
   const { mutateAsync: postAppDataAsync } = mutations.usePostAppData();
   const { data: appData } = hooks.useAppData<CommentData>();
@@ -51,7 +51,7 @@ const ChatbotPrompt = ({ id }: Props): JSX.Element | null => {
   const chatbotPrompt = chatbotPrompts?.[0];
 
   const { mutateAsync: postChatBot } = mutations.usePostChatBot(
-    chatbotPrompt?.data?.gptVersion as GPTVersion,
+    chatbotPrompt?.data?.gptVersion as GPTVersionType,
   );
 
   const { data: generalSettings } = hooks.useAppSettings<GeneralSettings>({
@@ -200,5 +200,5 @@ const ChatbotPrompt = ({ id }: Props): JSX.Element | null => {
     );
   }
   return null;
-};
+}
 export default ChatbotPrompt;

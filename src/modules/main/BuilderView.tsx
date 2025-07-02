@@ -4,7 +4,7 @@ import { PermissionLevel } from '@graasp/sdk';
 import AdminView from './AdminView';
 import PlayerView from './PlayerView';
 
-const BuilderView = (): JSX.Element => {
+function BuilderView(): JSX.Element {
   const context = useLocalContext();
 
   switch (context.permission) {
@@ -15,6 +15,6 @@ const BuilderView = (): JSX.Element => {
     default:
       return <PlayerView />;
   }
-};
+}
 
 export default BuilderView;

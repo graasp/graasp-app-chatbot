@@ -7,21 +7,28 @@ type Props = {
   id?: string;
 };
 
-const StatisticCard = ({ icon, title, children, id }: Props): JSX.Element => (
-  <Stack
-    height="100%"
-    component={Paper}
-    p={2}
-    variant="outlined"
-    direction="row"
-    alignItems="center"
-    id={id}
-  >
-    {icon}
-    <Stack flexGrow={1} direction="column" alignItems="center">
-      <Typography align="center">{title}</Typography>
-      {children}
+function StatisticCard({
+  icon,
+  title,
+  children,
+  id,
+}: Readonly<Props>): JSX.Element {
+  return (
+    <Stack
+      height="100%"
+      component={Paper}
+      p={2}
+      variant="outlined"
+      direction="row"
+      alignItems="center"
+      id={id}
+    >
+      {icon}
+      <Stack flexGrow={1} direction="column" alignItems="center">
+        <Typography align="center">{title}</Typography>
+        {children}
+      </Stack>
     </Stack>
-  </Stack>
-);
+  );
+}
 export default StatisticCard;

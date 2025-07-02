@@ -64,9 +64,12 @@
     "SEARCH_BY_OTHER_KEYWORDS": "Search by other keywords or regex",
     "CHECK_WHOLE_CHAT": "Check the whole chat",
     "MODEL_VERSION": "Model version",
-    "GPT_3_5_TURBO_DESCRIPTION": "Optimized for speed and efficiency, suitable for applications where quick interactions are needed.",
+    "GPT_3_5_TURBO_DESCRIPTION": "Best for basic chat and non-chat tasks where legacy compatibility is needed",
     "GPT_4_DESCRIPTION": "Features deeper learning and more comprehensive knowledge, ideal for content creation and technical support.",
-    "GPT_4_TURBO_DESCRIPTION": "Combines the depth of GPT-4 with enhanced speed, perfect for high-demand scenarios.",
+    "GPT_4_TURBO_DESCRIPTION": "Best for high-intelligence tasks where you want a proven, older flagship model",
+    "GPT_4_1_NANO_DESCRIPTION": "Best for ultra-fast tasks where average intelligence is sufficient",
+    "GPT_4_O_DESCRIPTION": "Best for high-intelligence, versatile applications requiring top performance and flexibility",
+    "GPT_4_O_MINI_DESCRIPTION": "Best for fast, focused tasks where efficiency matters most",
     "CHATBOT_MODEL_VERSION_HELPER": "This defines the  model that will be used. The default is: {{default}}.",
     "RECOMMENDED": "Recommended"
   }

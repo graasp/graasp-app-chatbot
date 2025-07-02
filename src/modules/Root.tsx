@@ -1,4 +1,3 @@
-import { FC } from 'react';
 import { I18nextProvider } from 'react-i18next';
 import { ToastContainer } from 'react-toastify';
 
@@ -70,7 +69,7 @@ const RootDiv = styled('div')({
   height: '100%',
 });
 
-const Root: FC = () => {
+function Root() {
   const [mockContext, setMockContext] = useObjectState(defaultMockContext);
 
   return (
@@ -121,6 +120,6 @@ const Root: FC = () => {
       </StyledEngineProvider>
     </RootDiv>
   );
-};
+}
 
 export default Root;

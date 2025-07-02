@@ -40,7 +40,7 @@ type Props = {
   onEdit: (id: string) => void;
 };
 
-const Comment = ({ comment, onEdit }: Props): JSX.Element => {
+function Comment({ comment, onEdit }: Props): JSX.Element {
   const { t, i18n } = useTranslation();
 
   const { accountId } = useLocalContext();
@@ -111,6 +111,6 @@ const Comment = ({ comment, onEdit }: Props): JSX.Element => {
       </CardContent>
     </CustomCard>
   );
-};
+}
 
 export default Comment;

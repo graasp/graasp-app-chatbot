@@ -25,7 +25,7 @@ import WordCloud from '../analytics/WordCloud';
 import { getAllWords } from '../analytics/utils';
 import Loader from '../common/Loader';
 
-const AnalyticsView = (): JSX.Element => {
+function AnalyticsView(): JSX.Element {
   const { data: actions, isLoading } = hooks.useAppActions();
   const { t } = useTranslation();
   const { data: appContext } = hooks.useAppContext();
@@ -117,5 +117,5 @@ const AnalyticsView = (): JSX.Element => {
     return <Loader>Analytics</Loader>;
   }
   return <Alert severity="error">{t('UNEXPECTED_ERROR')}</Alert>;
-};
+}
 export default AnalyticsView;

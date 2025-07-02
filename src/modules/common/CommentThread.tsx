@@ -10,7 +10,7 @@ import {
 } from '@mui/material';
 
 import { ChatbotThreadMessage, buildPrompt } from '@graasp/apps-query-client';
-import { GPTVersion } from '@graasp/sdk';
+import { GPTVersionType } from '@graasp/sdk';
 
 import { AppActionsType } from '@/config/appActions';
 import { AppDataTypes, CommentAppData } from '@/config/appData';
@@ -30,11 +30,11 @@ import Comment from './Comment';
 import CommentEditor from './CommentEditor';
 import ResponseBox from './ResponseBox';
 
-const LoadingIndicator = ({
+function LoadingIndicator({
   isChatbotLoading,
-}: {
+}: Readonly<{
   isChatbotLoading: boolean;
-}): JSX.Element | null => {
+}>) {
   const { t } = useTranslation();
   return (
     <ResponseContainer>
@@ -48,14 +48,17 @@ const LoadingIndicator = ({
       </Stack>
     </ResponseContainer>
   );
-};
+}
 
 type Props = {
   children?: CommentAppData[];
   threadSx: SxProps<Theme>;
 };
 
-const CommentThread = ({ children, threadSx }: Props): JSX.Element | null => {
+function CommentThread({
+  children,
+  threadSx,
+}: Readonly<Props>): JSX.Element | null {
   const [replyingId, setReplyingId] = useState<string | null>(null);
   const [editingId, setEditingId] = useState<string | null>(null);
   const { mutate: patchData } = mutations.usePatchAppData();
@@ -67,7 +70,7 @@ const CommentThread = ({ children, threadSx }: Props): JSX.Element | null => {
   const chatbotPrompt = chatbotPrompts?.[0];
 
   const { mutateAsync: postChatbot, isLoading } = mutations.usePostChatBot(
-    chatbotPrompt?.data?.gptVersion as GPTVersion,
+    chatbotPrompt?.data?.gptVersion as GPTVersionType,
   );
 
   const { data: generalSettings } = hooks.useAppSettings<GeneralSettings>({
@@ -218,6 +221,6 @@ const CommentThread = ({ children, threadSx }: Props): JSX.Element | null => {
       ))}
     </CommentContainer>
   );
-};
+}
 
 export default CommentThread;

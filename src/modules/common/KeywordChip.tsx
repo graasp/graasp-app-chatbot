@@ -4,17 +4,17 @@ import { stringToColor } from '@graasp/ui/apps';
 
 import { KEYWORD_CHIP_COUNT_ID, buildKeywordChipId } from '@/config/selectors';
 
-const KeywordChip = ({
+function KeywordChip({
   text,
   count,
   isSelected,
   onClick,
-}: {
+}: Readonly<{
   text: string;
   count: number;
   isSelected: boolean;
   onClick: () => void;
-}): JSX.Element => {
+}>) {
   const color = stringToColor(text);
   return (
     <Chip
@@ -37,6 +37,6 @@ const KeywordChip = ({
       variant={isSelected ? 'outlined' : 'filled'}
     />
   );
-};
+}
 
 export default KeywordChip;

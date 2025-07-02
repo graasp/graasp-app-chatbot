@@ -72,12 +72,12 @@ type Props = {
   maxTextLength?: number;
 };
 
-const CommentEditor = ({
+function CommentEditor({
   onCancel,
   onSend,
   comment,
   maxTextLength = 300, // DEFAULT_MAX_COMMENT_LENGTH_SETTING,
-}: Props): JSX.Element => {
+}: Readonly<Props>): JSX.Element {
   const { t } = useTranslation();
   const [text, setText] = useState(comment?.data.content ?? '');
   const [textTooLong, setTextTooLong] = useState('');
@@ -195,6 +195,6 @@ const CommentEditor = ({
       </Stack>
     </Box>
   );
-};
+}
 
 export default CommentEditor;

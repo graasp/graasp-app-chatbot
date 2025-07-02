@@ -1,5 +1,3 @@
-import { FC } from 'react';
-
 import { FormControlLabel, Switch } from '@mui/material';
 
 type Props = {
@@ -12,7 +10,7 @@ type Props = {
   changeSetting: (settingKey: string, switchState: boolean) => void;
 };
 
-const SettingsSwitch: FC<Props> = ({
+function SettingsSwitch({
   settingKey,
   value,
   label,
@@ -20,7 +18,7 @@ const SettingsSwitch: FC<Props> = ({
   disabled = false,
   dataCy,
   changeSetting,
-}) => {
+}: Readonly<Props>) {
   const switchControl = (
     <Switch
       color="primary"
@@ -37,6 +35,6 @@ const SettingsSwitch: FC<Props> = ({
       labelPlacement={labelPlacement}
     />
   );
-};
+}
 
 export default SettingsSwitch;
