@@ -1,5 +1,15 @@
 # Changelog
 
+## [1.2.3](https://github.com/graasp/graasp-app-chatbot/compare/v1.2.2...v1.2.3) (2025-07-15)
+
+
+### Bug Fixes
+
+* add comment component and upgrade models ([#308](https://github.com/graasp/graasp-app-chatbot/issues/308)) ([18066fd](https://github.com/graasp/graasp-app-chatbot/commit/18066fdc2984b6dc45f49868da1a00c910517b7d))
+* cypress upgrade and import path fix ([#301](https://github.com/graasp/graasp-app-chatbot/issues/301)) ([3048dd1](https://github.com/graasp/graasp-app-chatbot/commit/3048dd14ec4498d2364aa7711532e3d40c9f5289))
+* issues with interface ([#304](https://github.com/graasp/graasp-app-chatbot/issues/304)) ([993b960](https://github.com/graasp/graasp-app-chatbot/commit/993b9604459f3d1c2358c075f746442fa7034d0f))
+* upgrade deps ([#303](https://github.com/graasp/graasp-app-chatbot/issues/303)) ([fb77fc3](https://github.com/graasp/graasp-app-chatbot/commit/fb77fc37a065cf21b303eace20717ccc615be29b))
+
 ## [1.2.2](https://github.com/graasp/graasp-app-chatbot/compare/v1.2.1...v1.2.2) (2025-06-16)
 
 
