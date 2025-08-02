@@ -13,7 +13,7 @@
   "dependencies": {
     "@codemirror/lang-javascript": "6.2.4",
     "@emotion/react": "11.14.0",
-    "@emotion/styled": "11.14.0",
+    "@emotion/styled": "11.14.1",
     "@graasp/apps-query-client": "3.7.5",
     "@graasp/sdk": "github:graasp/graasp-sdk#add-chatbot-export",
     "@graasp/ui": "5.5.4",
