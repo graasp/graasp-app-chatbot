@@ -3711,13 +3711,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/react@npm:18.3.24":
-  version: 18.3.24
-  resolution: "@types/react@npm:18.3.24"
+"@types/react@npm:18.3.25":
+  version: 18.3.25
+  resolution: "@types/react@npm:18.3.25"
   dependencies:
     "@types/prop-types": "npm:*"
     csstype: "npm:^3.0.2"
-  checksum: 10/3f8529961afa40696f4a677e0f4399cb5da1fca9828c00634f884db261fc29a68af0b0397611fff4dd81847ac85036a1b72e987eafd994cdf4ddb1a1bcce7d61
+  checksum: 10/1b806cc90207558bd96384f2a74e8a457c6211bd71b22d74ed7efb745e4e1b4fe7aea59eb906b8cf96571f9e0ab4fdb89e00395a082a361cfd7a8baf50bcb9c1
   languageName: node
   linkType: hard
 
@@ -7604,7 +7604,7 @@ __metadata:
     "@types/lodash.flatten": "npm:4.4.9"
     "@types/lodash.groupby": "npm:4.6.9"
     "@types/node": "npm:22.15.35"
-    "@types/react": "npm:18.3.24"
+    "@types/react": "npm:18.3.25"
     "@types/react-dom": "npm:18.3.7"
     "@types/stopword": "npm:2.0.3"
     "@types/uuid": "npm:10.0.0"
@@ -7653,7 +7653,7 @@ __metadata:
     stopword: "npm:3.1.5"
     typescript: "npm:5.8.3"
     uuid: "npm:11.1.0"
-    vite: "npm:6.3.5"
+    vite: "npm:6.3.6"
     vite-plugin-checker: "npm:0.9.3"
     vite-plugin-istanbul: "npm:7.0.0"
     vite-tsconfig-paths: "npm:5.1.4"
@@ -12896,9 +12896,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"vite@npm:6.3.5":
-  version: 6.3.5
-  resolution: "vite@npm:6.3.5"
+"vite@npm:6.3.6":
+  version: 6.3.6
+  resolution: "vite@npm:6.3.6"
   dependencies:
     esbuild: "npm:^0.25.0"
     fdir: "npm:^6.4.4"
@@ -12947,7 +12947,7 @@ __metadata:
       optional: true
   bin:
     vite: bin/vite.js
-  checksum: 10/7bc3a1c5ef79413ad70daeeaf69b76cd1218d16aa18ed8ee08d74648ef17284f4a17c11f5cf42b573b6dc5e3d5f115110b67b1d23c2c699cfe404757764a634a
+  checksum: 10/8b8b6fe12318ca457396bf2053df7056cf4810f1d4a43b36b6afe59860e32b749c0685a290fe8a973b0d3da179ceec4c30cebbd3c91d0c47fbcf6436b17bdeef
   languageName: node
   linkType: hard
 
