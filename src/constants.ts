@@ -1,7 +1,7 @@
 import { GPTVersion } from '@graasp/sdk';
 
 export const DEFAULT_BOT_USERNAME = 'Graasp Bot';
-export const DEFAULT_MODEL_VERSION = GPTVersion.GPT_4_O_MINI;
+export const DEFAULT_MODEL_VERSION = GPTVersion.GPT_5_NANO;
 export const ANONYMOUS_USER = 'Anonymous';
 
 // UI
