@@ -1,25 +1,21 @@
 import { Fragment, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
-import {
-  CircularProgress,
-  Stack,
-  SxProps,
-  Theme,
-  Typography,
-} from '@mui/material';
+import type { SxProps, Theme } from '@mui/material';
+import { CircularProgress, Stack, Typography } from '@mui/material';
 
-import { ChatbotThreadMessage, buildPrompt } from '@graasp/apps-query-client';
-import { GPTVersionType } from '@graasp/sdk';
+import type { ChatbotThreadMessage } from '@graasp/apps-query-client';
+import { buildPrompt } from '@graasp/apps-query-client';
+import type { GPTVersionType } from '@graasp/sdk';
 
 import { AppActionsType } from '@/config/appActions';
-import { AppDataTypes, CommentAppData } from '@/config/appData';
-import {
+import type { CommentAppData } from '@/config/appData';
+import { AppDataTypes } from '@/config/appData';
+import type {
   ChatbotPromptSettings,
-  DEFAULT_GENERAL_SETTINGS,
   GeneralSettings,
-  SettingsKeys,
 } from '@/config/appSetting';
+import { DEFAULT_GENERAL_SETTINGS, SettingsKeys } from '@/config/appSetting';
 import { hooks, mutations } from '@/config/queryClient';
 import { COMMENT_THREAD_CONTAINER_CYPRESS } from '@/config/selectors';
 import { buildThread } from '@/utils/comments';
@@ -59,8 +55,8 @@ function CommentThread({
   children,
   threadSx,
 }: Readonly<Props>): JSX.Element | null {
-  const [replyingId, setReplyingId] = useState<string | null>(null);
-  const [editingId, setEditingId] = useState<string | null>(null);
+  const [replyingId, setReplyingId] = useState<string | null>();
+  const [editingId, setEditingId] = useState<string | null>();
   const { mutate: patchData } = mutations.usePatchAppData();
   const { mutateAsync: postAppDataAsync } = mutations.usePostAppData();
   const { mutate: postAction } = mutations.usePostAppAction();
@@ -98,6 +94,8 @@ function CommentThread({
   const botComment = children?.find(
     (c) => c.data.chatbotPromptSettingId === chatbotPrompt?.id,
   );
+
+  //oxlint-disable-next-line eslint/yoda
   if (!children || children.length === 0 || !botComment) {
     return null;
   }
@@ -115,7 +113,7 @@ function CommentThread({
             <CommentEditor
               maxTextLength={maxCommentLength}
               onCancel={() => {
-                setEditingId(null);
+                setEditingId(undefined);
               }}
               onSend={(content) => {
                 patchData({
@@ -125,7 +123,7 @@ function CommentThread({
                     content,
                   },
                 });
-                setEditingId(null);
+                setEditingId(undefined);
               }}
               comment={c}
             />
@@ -144,12 +142,12 @@ function CommentThread({
           }
           {i + 1 === arr.length && c.type === AppDataTypes.UserComment ? (
             <LoadingIndicator isChatbotLoading={isLoading} />
-          ) : null}
+          ) : undefined}
           {
             // if input bar was clicked, a comment editor opens to compose a response
             isReplied(c.id) && (
               <CommentEditor
-                onCancel={() => setReplyingId(null)}
+                onCancel={() => setReplyingId(undefined)}
                 onSend={(content) => {
                   const data = {
                     ...c.data,
@@ -211,7 +209,7 @@ function CommentThread({
                     data,
                     type: AppActionsType.Reply,
                   });
-                  setReplyingId(null);
+                  setReplyingId(undefined);
                 }}
                 comment={{ ...c, data: { ...c.data, content: '' } }}
               />

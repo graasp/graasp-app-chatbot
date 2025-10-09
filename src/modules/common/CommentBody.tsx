@@ -1,4 +1,4 @@
-import { ReactNode } from 'react';
+import type { ReactNode } from 'react';
 import ReactMarkdown from 'react-markdown';
 
 import { styled } from '@mui/material';
@@ -9,6 +9,7 @@ import remarkGfm from 'remark-gfm';
 
 import { BIG_BORDER_RADIUS } from '@/constants';
 
+// oxlint-disable no-magic-numbers
 const StyledReactMarkdown = styled(ReactMarkdown)(({ theme }) => ({
   '& .prism-code': {
     fontFamily: 'var(--monospace-fonts)',
@@ -85,6 +86,7 @@ function code(props: {
           {tokens.map((line, i) => (
             // eslint-disable-next-line react/jsx-key
             <div
+              key={i}
               {...getLineProps({
                 line,
                 key: i,
@@ -93,6 +95,7 @@ function code(props: {
               {line.map((token, key) => (
                 // eslint-disable-next-line react/jsx-key
                 <span
+                  key={key}
                   {...getTokenProps({
                     token,
                     key,

@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom/client';
 
 import { MockSolution, mockApi } from '@graasp/apps-query-client';
 
+// oxlint-disable-next-line eslint-plugin-import(no-namespace)
 import * as Sentry from '@sentry/react';
 
 import { MOCK_API } from './config/env';
@@ -36,7 +37,7 @@ if (MOCK_API) {
   );
 }
 
-ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
+ReactDOM.createRoot(document.querySelector('#root') as HTMLElement).render(
   <React.StrictMode>
     <Root />
   </React.StrictMode>,

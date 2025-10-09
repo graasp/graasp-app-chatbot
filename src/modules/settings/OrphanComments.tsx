@@ -2,9 +2,9 @@ import { useTranslation } from 'react-i18next';
 
 import { Button, FormControlLabel } from '@mui/material';
 
-import { UUID } from '@graasp/sdk';
+import type { UUID } from '@graasp/sdk';
 
-import { CommentAppData } from '@/config/appData';
+import type { CommentAppData } from '@/config/appData';
 import { mutations } from '@/config/queryClient';
 import { ORPHAN_BUTTON_CYPRESS } from '@/config/selectors';
 import { getOrphans, getThreadIdsFromFirstCommentId } from '@/utils/comments';
@@ -32,7 +32,10 @@ function OrphanComments({ comments }: Readonly<Props>): JSX.Element | null {
 
   const orphanThreads = getOrphanComments(comments);
 
-  if (!orphanThreads.length) {
+  // oxlint-disable-next-line eslint/yoda
+  const hasNoOrphans = orphanThreads.length === 0;
+
+  if (hasNoOrphans) {
     return null;
   }
 
@@ -42,7 +45,7 @@ function OrphanComments({ comments }: Readonly<Props>): JSX.Element | null {
       variant="outlined"
       color="primary"
       onClick={() => handleOnClickRemoveOrphans(orphanThreads)}
-      disabled={orphanThreads.length === 0}
+      disabled={hasNoOrphans}
     >
       {t('REMOVE_ORPHANS_LABEL')}
     </Button>

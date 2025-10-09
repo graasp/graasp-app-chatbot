@@ -1,9 +1,14 @@
 import { I18nextProvider } from 'react-i18next';
 import { ToastContainer } from 'react-toastify';
 
-import { CssBaseline, ThemeProvider, createTheme, styled } from '@mui/material';
+import {
+  CssBaseline,
+  StyledEngineProvider,
+  ThemeProvider,
+  createTheme,
+  styled,
+} from '@mui/material';
 import { grey, orange, pink } from '@mui/material/colors';
-import { StyledEngineProvider } from '@mui/material/styles';
 
 import {
   GraaspContextDevTool,
@@ -26,6 +31,7 @@ import App from './App';
 
 // declare the module to enable theme modification
 declare module '@mui/material/styles' {
+  // oxlint-disable-next-line consistent-type-definitions
   interface Theme {
     status: {
       danger: { background: string; color: string };
@@ -33,12 +39,14 @@ declare module '@mui/material/styles' {
   }
 
   // allow configuration using `createTheme`
+  // oxlint-disable-next-line consistent-type-definitions
   interface ThemeOptions {
     status?: {
       danger?: { background: string; color: string };
     };
   }
 
+  // oxlint-disable-next-line consistent-type-definitions
   interface PaletteOptions {
     default: string;
   }
@@ -82,7 +90,10 @@ function Root() {
             <QueryClientProvider client={queryClient}>
               <ToastContainer />
               <WithLocalContext
-                defaultValue={window.Cypress ? window.appContext : mockContext}
+                defaultValue={
+                  // oxlint-disable-next-line no-ternary
+                  globalThis.Cypress ? globalThis.appContext : mockContext
+                }
                 LoadingComponent={<Loader>Context</Loader>}
                 useGetLocalContext={hooks.useGetLocalContext}
                 useAutoResize={hooks.useAutoResize}
@@ -102,7 +113,7 @@ function Root() {
                   }}
                 >
                   <App />
-                  {import.meta.env.DEV && !window.Cypress && (
+                  {import.meta.env.DEV && !globalThis.Cypress && (
                     <GraaspContextDevTool
                       members={mockMembers}
                       context={mockContext}

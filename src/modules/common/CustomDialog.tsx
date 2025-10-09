@@ -1,7 +1,7 @@
-import { MutableRefObject, ReactElement, RefObject } from 'react';
+import type { MutableRefObject, ReactElement, RefObject } from 'react';
 
+import type { Breakpoint } from '@mui/material';
 import {
-  Breakpoint,
   Dialog,
   DialogActions,
   DialogContent,

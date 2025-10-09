@@ -4,6 +4,7 @@ import js from '@eslint/js';
 import typescriptEslint from '@typescript-eslint/eslint-plugin';
 import tsParser from '@typescript-eslint/parser';
 import cypressEslint from 'eslint-plugin-cypress';
+import importPlugin from 'eslint-plugin-import';
 import prettier from 'eslint-plugin-prettier';
 import reactHooks from 'eslint-plugin-react-hooks';
 import globals from 'globals';
@@ -18,13 +19,14 @@ const compat = new FlatCompat({
   allConfig: js.configs.all,
 });
 
+// oxlint-disable-next-line no-anonymous-default-export
 export default [
   {
     ignores: [
       '**/build',
       '**/public',
       '**/coverage',
-      '**/node_modules',
+      'node_modules',
       '.yarn/.cache',
       '**/.husky',
       '**/.nyc_output',
@@ -36,7 +38,6 @@ export default [
   },
   ...fixupConfigRules(
     compat.extends(
-      'airbnb',
       'plugin:import/typescript',
       'prettier',
       'plugin:react/recommended',
@@ -72,7 +73,8 @@ export default [
         },
       },
     },
-
+    ...importPlugin.flatConfigs.recommended,
+    ...importPlugin.flatConfigs.typescript,
     settings: {
       'import/extensions': ['.js', '.jsx', '.ts', '.tsx'],
 
@@ -116,7 +118,6 @@ export default [
       ],
 
       'import/prefer-default-export': 'off',
-      'prettier/prettier': 'error',
 
       'import/extensions': [
         'error',

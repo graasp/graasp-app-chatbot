@@ -1,4 +1,4 @@
-import { AppData } from '@graasp/sdk';
+import type { AppData } from '@graasp/sdk';
 
 export const AppDataTypes = {
   UserComment: 'comment',

@@ -1,6 +1,6 @@
-import { UUID } from '@graasp/sdk';
+import type { UUID } from '@graasp/sdk';
 
-import { CommentAppData } from '@/config/appData';
+import type { CommentAppData } from '@/config/appData';
 
 const findCommentWithId = (
   comments: CommentAppData[],
@@ -26,7 +26,7 @@ const getThreadIdsFromLastCommentId = (
   // this method goes bottom up to find comment ids in the thread
   const thread = [];
   let parentId = lastCommentId;
-  let parent = null;
+  let parent = undefined;
   do {
     parent = findCommentWithId(allComments, parentId);
     if (parent) {
@@ -44,7 +44,7 @@ const getThreadIdsFromFirstCommentId = (
   // this method goes from top to bottom
   let parentId = firstId;
   const thread = [firstId];
-  let children = null;
+  let children = undefined;
   // find children to the comment
   do {
     children = findCommentWithParentId(allComments, parentId);
@@ -77,7 +77,7 @@ const buildThread = (
   // build thread list
   const thread = [parentComment];
   let parentId = parentComment.id;
-  let nextChild = null;
+  let nextChild = undefined;
   do {
     nextChild = findChild(comments, parentId);
     if (nextChild) {

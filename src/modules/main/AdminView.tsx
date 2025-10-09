@@ -12,11 +12,12 @@ import {
   Typography,
 } from '@mui/material';
 
-import { UnionOfConst } from '@graasp/sdk';
+import type { UnionOfConst } from '@graasp/sdk';
 
 import { AlertTriangle, Info, MessageSquareText, Settings } from 'lucide-react';
 
-import { GeneralSettings, SettingsKeys } from '@/config/appSetting';
+import type { GeneralSettings } from '@/config/appSetting';
+import { SettingsKeys } from '@/config/appSetting';
 import { hooks } from '@/config/queryClient';
 import {
   BUILDER_VIEW_CY,
@@ -64,7 +65,7 @@ function AdminView(): JSX.Element {
                   vertical: 'top',
                   horizontal: 'left',
                 }}
-                invisible={generalSettings && generalSettings?.length > 0}
+                invisible={generalSettings && 0 < generalSettings?.length}
                 badgeContent={<AlertTriangle size={14} />}
                 color="warning"
               >
@@ -91,14 +92,17 @@ function AdminView(): JSX.Element {
         </TabList>
 
         <TabPanel value={Tabs.TABLE_VIEW} data-cy={TABLE_VIEW_PANE_CYPRESS}>
-          {generalSettings?.length === 0 && (
-            <Alert severity="warning">
-              No config{' '}
-              <Button onClick={() => setActiveTab(Tabs.SETTINGS_VIEW)}>
-                Configure
-              </Button>
-            </Alert>
-          )}
+          {
+            // oxlint-disable-next-line eslint/yoda
+            generalSettings?.length === 0 && (
+              <Alert severity="warning">
+                No config{' '}
+                <Button onClick={() => setActiveTab(Tabs.SETTINGS_VIEW)}>
+                  Configure
+                </Button>
+              </Alert>
+            )
+          }
           <ConversationsView />
         </TabPanel>
         <TabPanel

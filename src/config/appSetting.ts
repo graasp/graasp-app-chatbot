@@ -1,4 +1,4 @@
-import { ChatBotMessage } from '@graasp/sdk';
+import type { ChatBotMessage } from '@graasp/sdk';
 
 export const SettingsKeys = {
   ChatbotPrompt: 'chatbot-prompt',

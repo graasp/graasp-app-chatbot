@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next';
 import { LoadingButton } from '@mui/lab';
 import { Stack } from '@mui/material';
 
-import { UseQueryResult } from '@tanstack/react-query';
+import type { UseQueryResult } from '@tanstack/react-query';
 import { saveAs } from 'file-saver';
 import { DownloadCloud } from 'lucide-react';
 
@@ -36,6 +36,10 @@ function DownloadButtons() {
       });
     };
 
+  const loadingLabel = isFetchingAppActions
+    ? t('DOWNLOADING_LABEL')
+    : t('DOWNLOAD_ACTIONS_LABEL');
+
   return (
     <Stack direction="row" justifyContent="center" spacing={2}>
       <LoadingButton
@@ -45,9 +49,7 @@ function DownloadButtons() {
         startIcon={<DownloadCloud />}
         variant="outlined"
       >
-        {isFetchingAppActions
-          ? t('DOWNLOADING_LABEL')
-          : t('DOWNLOAD_ACTIONS_LABEL')}
+        {loadingLabel}
       </LoadingButton>
       <LoadingButton
         data-cy={DOWNLOAD_DATA_BUTTON_CY}

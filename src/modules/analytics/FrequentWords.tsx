@@ -10,9 +10,9 @@ import {
   Typography,
 } from '@mui/material';
 
-import { AppAction } from '@graasp/sdk';
+import type { AppAction } from '@graasp/sdk';
 
-import { CommentData } from '@/config/appData';
+import type { CommentData } from '@/config/appData';
 import {
   ADD_CUSTOM_WORD_INPUT_ID,
   buildCheckWholeMemberChatButtonId,
@@ -46,12 +46,12 @@ function FrequentWords({
   const [chatMemberID, setChatMemberID] = useState('');
 
   const isAllSelected = mostFrequentWords.every(
-    (ele) => selectedFrequentWords.indexOf(ele) > -1,
+    (ele) => -1 < selectedFrequentWords.indexOf(ele),
   );
 
   const commentsMatchSelectedWords = useMemo(
     () =>
-      commentsByUserSide.length
+      0 < commentsByUserSide.length
         ? commentsByUserSide.filter(({ data: { content } }) =>
             [...selectedFrequentWords, ...selectedCustomWords].some((ele) =>
               new RegExp(createRegexFromString(ele)).test(content),
@@ -65,7 +65,7 @@ function FrequentWords({
     setSelectedCustomWords(selectedCustomWords.filter((w) => w !== word));
   };
   const selectFrequentChip = (text: string): void => {
-    if (selectedFrequentWords.indexOf(text) > -1) {
+    if (-1 < selectedFrequentWords.indexOf(text)) {
       setSelectedFrequentWords(
         selectedFrequentWords.filter((ele) => ele !== text),
       );
@@ -83,7 +83,7 @@ function FrequentWords({
             key={text}
             text={text}
             count={count}
-            isSelected={selectedFrequentWords.indexOf(text) > -1}
+            isSelected={-1 < selectedFrequentWords.indexOf(text)}
             onClick={() => selectFrequentChip(text)}
           />
         ))}
@@ -100,7 +100,7 @@ function FrequentWords({
         <TextField
           size="small"
           onKeyDown={(event) => {
-            if (event.key === 'Enter') {
+            if ('Enter' === event.key) {
               setSelectedCustomWords([
                 ...new Set([...selectedCustomWords, customWord]),
               ]);
@@ -143,9 +143,12 @@ function FrequentWords({
               />
             ))}
 
-            {commentsMatchSelectedWords.length === 0 && (
-              <Typography mt={2}>{t('NO_RESULTS_MATCH_WORDS')}</Typography>
-            )}
+            {
+              // oxlint-disable-next-line eslint/yoda
+              commentsMatchSelectedWords.length === 0 && (
+                <Typography mt={2}>{t('NO_RESULTS_MATCH_WORDS')}</Typography>
+              )
+            }
           </Stack>
         </Grid2>
         {chatMemberID && (

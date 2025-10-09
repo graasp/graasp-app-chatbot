@@ -1,10 +1,7 @@
 import { toast } from 'react-toastify';
 
-import {
-  Notifier,
-  ROUTINES,
-  configureQueryClient,
-} from '@graasp/apps-query-client';
+import type { Notifier } from '@graasp/apps-query-client';
+import { ROUTINES, configureQueryClient } from '@graasp/apps-query-client';
 
 import type { AxiosError } from 'axios';
 
@@ -44,12 +41,16 @@ const notifier: Notifier = (data) => {
     // axios error
     if (
       payload.error &&
-      payload.error.name === 'AxiosError' &&
+      'AxiosError' === payload.error.name &&
       (payload.error as AxiosError).response
     ) {
-      const { message } = (payload.error as AxiosError).response?.data as {
-        message: string;
-      };
+      const message = (
+        (payload.error as AxiosError).response?.data as
+          | {
+              message: string;
+            }
+          | undefined
+      )?.message;
       toast.error(
         <NetworkErrorToast
           title={payload.error.message}
@@ -61,8 +62,9 @@ const notifier: Notifier = (data) => {
     if (
       !EXCLUDED_NOTIFICATION_TYPES.includes(data.type) ||
       import.meta.env.VITE_DEBUG
-    )
+    ) {
       toast.success(<InfoToast type={data.type} payload={payload} />);
+    }
   }
 };
 

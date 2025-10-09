@@ -9,6 +9,13 @@ type Props = {
 };
 
 function ToolbarButton(props: Props, ref: ForwardedRef<HTMLButtonElement>) {
+  const buttonSx = {
+    p: 1,
+    // ensure that buttons stay as small as possible
+    // MuiButton has a min-width of 64px by default
+    minWidth: '0px',
+  };
+
   // structure the custom props from the other ones given by the tooltip
   const { dataCy, onClick, disabled, ...otherProps } = props;
   return (
@@ -17,12 +24,7 @@ function ToolbarButton(props: Props, ref: ForwardedRef<HTMLButtonElement>) {
       {...otherProps}
       data-cy={dataCy}
       disabled={disabled}
-      sx={{
-        p: 1,
-        // ensure that buttons stay as small as possible
-        // MuiButton has a min-width of 64px by default
-        minWidth: '0px',
-      }}
+      sx={buttonSx}
       variant="outlined"
       size="medium"
       color="primary"
@@ -31,6 +33,8 @@ function ToolbarButton(props: Props, ref: ForwardedRef<HTMLButtonElement>) {
   );
 }
 
-export default forwardRef<HTMLButtonElement, PropsWithChildren<Props>>(
-  ToolbarButton,
-);
+const ForwardedRefToolbarButton = forwardRef<
+  HTMLButtonElement,
+  PropsWithChildren<Props>
+>(ToolbarButton);
+export default ForwardedRefToolbarButton;

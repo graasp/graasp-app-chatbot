@@ -1,6 +1,7 @@
 /// <reference types="./src/env"/>
 import react from '@vitejs/plugin-react';
-import { UserConfigExport, defineConfig, loadEnv } from 'vite';
+import type { UserConfigExport} from 'vite';
+import { defineConfig, loadEnv } from 'vite';
 import checker from 'vite-plugin-checker';
 import istanbul from 'vite-plugin-istanbul';
 import tsconfigPaths from 'vite-tsconfig-paths';
@@ -32,7 +33,7 @@ export default ({ mode }: { mode: string }): UserConfigExport => {
     },
     plugins: [
       tsconfigPaths(),
-      mode === 'test'
+      'test' === mode 
         ? undefined
         : checker({
             overlay: { position: 'br', initialIsOpen: false },
@@ -48,7 +49,7 @@ export default ({ mode }: { mode: string }): UserConfigExport => {
         exclude: ['node_modules', 'test/', '.nyc_output', 'coverage'],
         extension: ['.js', '.ts', '.tsx'],
         requireEnv: false,
-        forceBuildInstrument: mode === 'test',
+        forceBuildInstrument: 'test' === mode ,
         checkProd: true,
       }),
     ],

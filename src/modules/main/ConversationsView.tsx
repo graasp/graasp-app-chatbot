@@ -1,4 +1,5 @@
-import { ReactElement, useState } from 'react';
+import type { ReactElement } from 'react';
+import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import {
@@ -16,7 +17,7 @@ import {
 import groupBy from 'lodash.groupby';
 import { MessagesSquare, XIcon } from 'lucide-react';
 
-import { CommentData } from '@/config/appData';
+import type { CommentData } from '@/config/appData';
 import { hooks } from '@/config/queryClient';
 import {
   TABLE_NO_COMMENTS_CYPRESS,
@@ -57,7 +58,10 @@ function ConversationsView() {
       (c) => !orphansId.includes(c.id),
     );
     // nonOrphanComments is undefined or, is an empty list -> there are not resources to display
-    if (!nonOrphanComments || nonOrphanComments.length === 0) {
+    if (
+      !nonOrphanComments ||
+      nonOrphanComments.length === 0 // oxlint-disable-line eslint/yoda
+    ) {
       // show that there are no comments available
       return (
         <TableRow>

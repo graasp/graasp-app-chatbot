@@ -1,10 +1,10 @@
-import { AppAction } from '@graasp/sdk';
+import type { AppAction } from '@graasp/sdk';
 
 import countBy from 'lodash.countby';
 import flatten from 'lodash.flatten';
 import { ara, deu, eng, fra, ita, removeStopwords, spa } from 'stopword';
 
-import { CommentData } from '@/config/appData';
+import type { CommentData } from '@/config/appData';
 import { DEFAULT_LANGUAGE } from '@/config/i18n';
 
 type WordCount = { [key: string]: number };
@@ -37,7 +37,7 @@ export const getAllWords = (
   const text = texts.reduce((curr: string[], acc) => {
     const splitted = acc.data?.content
       ?.trim()
-      .replace(/[.,/#!$%^&*;:{}=\-_`~()?"']+/g, '')
+      .replaceAll(/[.,/#!$%^&*;:{}=\-_`~()?"']+/g, '')
       .split(/\s+/);
     return [...curr, ...splitted];
   }, []);
@@ -51,11 +51,16 @@ export const createRegexFromString = (regexString: string): RegExp | string => {
   // Extract between the slashes and the flags
   const matches = regexString.match(/\/(.+)\/([a-z]+)?/);
   if (!matches) {
-    return regexString.replace(/[.*+?^${}()|[\]\\]/g, '\\$&').trim();
+    return regexString
+      .replaceAll(/[.*+?^${}()|[\]\\]/g, String.raw`\$&`)
+      .trim();
   }
 
   const pattern = matches[1];
   const flags = matches[2];
 
-  return new RegExp(pattern.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), flags);
+  return new RegExp(
+    pattern.replaceAll(/[.*+?^${}()|[\]\\]/g, String.raw`\$&`),
+    flags,
+  );
 };

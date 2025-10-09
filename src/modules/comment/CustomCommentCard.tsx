@@ -1,4 +1,5 @@
-import { Card, CardProps, styled } from '@mui/material';
+import type { CardProps } from '@mui/material';
+import { Card, styled } from '@mui/material';
 
 import { BIG_BORDER_RADIUS } from '../../constants';
 
