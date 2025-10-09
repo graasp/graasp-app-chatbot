@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.2.4](https://github.com/graasp/graasp-app-chatbot/compare/v1.2.3...v1.2.4) (2025-10-09)
+
+
+### Bug Fixes
+
+* add new GPT models ([#324](https://github.com/graasp/graasp-app-chatbot/issues/324)) ([c152c5b](https://github.com/graasp/graasp-app-chatbot/commit/c152c5be7e3f039c0bd89b845412c1874d5a4165))
+* **deps:** update dependency @emotion/styled to v11.14.1 ([#312](https://github.com/graasp/graasp-app-chatbot/issues/312)) ([6d70337](https://github.com/graasp/graasp-app-chatbot/commit/6d703378873039075fdf028dd429f11571697578))
+
 ## [1.2.3](https://github.com/graasp/graasp-app-chatbot/compare/v1.2.2...v1.2.3) (2025-07-15)
 
 
