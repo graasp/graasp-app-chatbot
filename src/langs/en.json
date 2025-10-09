@@ -70,6 +70,7 @@
     "GPT_4_1_NANO_DESCRIPTION": "Best for ultra-fast tasks where average intelligence is sufficient",
     "GPT_4_O_DESCRIPTION": "Best for high-intelligence, versatile applications requiring top performance and flexibility",
     "GPT_4_O_MINI_DESCRIPTION": "Best for fast, focused tasks where efficiency matters most",
+    "GPT_5_NANO_DESCRIPTION": "Fastest, most cost efficient GPT 5 with 400'000 token window. Best for fast, focused tasks where efficiency matters most",
     "CHATBOT_MODEL_VERSION_HELPER": "This defines the  model that will be used. The default is: {{default}}.",
     "RECOMMENDED": "Recommended"
   }

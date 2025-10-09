@@ -2425,9 +2425,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@graasp/sdk@github:graasp/graasp-sdk#add-chatbot-export":
-  version: 5.14.0
-  resolution: "@graasp/sdk@https://github.com/graasp/graasp-sdk.git#commit=1c8d74c94c5927f9bdcc0cddd977ebb17e7df47e"
+"@graasp/sdk@npm:5.16.0":
+  version: 5.16.0
+  resolution: "@graasp/sdk@npm:5.16.0"
   dependencies:
     "@faker-js/faker": "npm:9.7.0"
     filesize: "npm:10.1.6"
@@ -2435,7 +2435,7 @@ __metadata:
   peerDependencies:
     date-fns: ^3 || ^4.0.0
     uuid: ^9 || ^10 || ^11.0.0
-  checksum: 10/209800a1fc2e40a462ec5f36d341a9288fcf81c0df6683de215e66036bc2de37da18a8de8885a4dee265184aaa6c746d4b9d126be2d2733625f4899ddcf56b78
+  checksum: 10/51f9396375d3d7d040212f58512977edd81cce4e865e41fe646f8cb894f861bff849126588163cb4896ec77dcd52fd076297590fa1062a985c7d01ad19bb62c4
   languageName: node
   linkType: hard
 
@@ -7589,7 +7589,7 @@ __metadata:
     "@eslint/eslintrc": "npm:3.3.1"
     "@eslint/js": "npm:9.29.0"
     "@graasp/apps-query-client": "npm:3.7.5"
-    "@graasp/sdk": "github:graasp/graasp-sdk#add-chatbot-export"
+    "@graasp/sdk": "npm:5.16.0"
     "@graasp/ui": "npm:5.5.4"
     "@mui/icons-material": "npm:6.4.12"
     "@mui/lab": "npm:6.0.0-dev.240424162023-9968b4889d"
