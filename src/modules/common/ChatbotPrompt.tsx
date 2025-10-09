@@ -3,19 +3,19 @@ import { useTranslation } from 'react-i18next';
 
 import { Alert, CardContent, CardHeader } from '@mui/material';
 
-import {
-  ChatbotThreadMessage,
-  buildPrompt,
-  useLocalContext,
-} from '@graasp/apps-query-client';
-import { GPTVersionType, UUID } from '@graasp/sdk';
+import type { ChatbotThreadMessage } from '@graasp/apps-query-client';
+import { buildPrompt, useLocalContext } from '@graasp/apps-query-client';
+import type { GPTVersionType, UUID } from '@graasp/sdk';
 
 import { AppActionsType } from '@/config/appActions';
-import { AppDataTypes, CommentData } from '@/config/appData';
-import {
+import type { CommentData } from '@/config/appData';
+import { AppDataTypes } from '@/config/appData';
+import type {
   ChatbotPromptSettings,
-  DEFAULT_GENERAL_SETTINGS,
   GeneralSettings,
+} from '@/config/appSetting';
+import {
+  DEFAULT_GENERAL_SETTINGS,
   GeneralSettingsKeys,
   SettingsKeys,
 } from '@/config/appSetting';
@@ -77,6 +77,7 @@ function ChatbotPrompt({ id }: Props): JSX.Element | null {
     }
     const chatbotMessage = chatbotPrompt.data.chatbotCue;
     const newData: CommentData = {
+      // oxlint-disable-next-line eslint-plugin-unicorn/no-null
       parent: null,
       content: chatbotMessage,
       chatbotPromptSettingId: chatbotPrompt?.id,
@@ -158,13 +159,13 @@ function ChatbotPrompt({ id }: Props): JSX.Element | null {
       );
     }
     // do not show anything if it has not finished fetching
-    return null;
+    return null; // oxlint-disable-line eslint-plugin-unicorn/no-null
   }
   const chatbotName = chatbotPrompt?.data?.chatbotName || DEFAULT_BOT_USERNAME;
 
   // display only if real chatbot prompt does not exist yet
   if (!realChatbotPromptExists) {
-    if (chatbotPrompt?.data?.chatbotCue === '') {
+    if ('' === chatbotPrompt?.data?.chatbotCue) {
       return <>Please configure the chatbot prompt.</>;
     }
     return (
@@ -201,4 +202,5 @@ function ChatbotPrompt({ id }: Props): JSX.Element | null {
   }
   return null;
 }
+
 export default ChatbotPrompt;

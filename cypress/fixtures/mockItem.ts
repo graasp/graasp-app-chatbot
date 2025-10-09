@@ -1,16 +1,23 @@
+import type { DiscriminatedItem } from '@graasp/sdk';
 import { AppItemFactory } from '@graasp/sdk';
 
 import { MEMBERS } from './members';
 
-export const MOCK_SERVER_ITEM = {
+const MOCK_SERVER_ITEM = {
   id: '123456789',
   name: 'app-starter-ts-vite',
-  description: null,
+  description: '',
   path: '',
+  type: 'folder',
+  extra: { folder: {} },
   settings: {},
   creator: MEMBERS[0],
-  createdAt: new Date(),
-  updatedAt: new Date(),
-};
+  createdAt: new Date().toDateString(),
+  updatedAt: new Date().toISOString(),
+  lang: 'en',
+} satisfies DiscriminatedItem;
 
-export const APP_ITEM = AppItemFactory({ creator: MEMBERS.ANNA });
+// oxlint-disable eslint/new-cap
+const APP_ITEM = AppItemFactory({ creator: MEMBERS.ANNA });
+
+export { APP_ITEM, MOCK_SERVER_ITEM };

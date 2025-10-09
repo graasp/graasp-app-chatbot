@@ -11,7 +11,7 @@ export function useObjectState<T extends object>(
   const [state, setState] = React.useState(initialValue);
 
   const handleUpdate = React.useCallback((arg: UpdateArgument<T>) => {
-    if (typeof arg === 'function') {
+    if ('function' === typeof arg) {
       setState((s) => {
         const newState = arg(s);
 
@@ -22,7 +22,7 @@ export function useObjectState<T extends object>(
       });
     }
 
-    if (typeof arg === 'object') {
+    if ('object' === typeof arg) {
       setState((s) => ({
         ...s,
         ...arg,

@@ -1,6 +1,7 @@
-/// <reference types="../../src/window" />
-import { Database } from '@graasp/apps-query-client';
-import { Context, LocalContext } from '@graasp/sdk';
+/// <reference types="../../src/global.d.ts" />
+import type { Database } from '@graasp/apps-query-client';
+import type { LocalContext } from '@graasp/sdk';
+import { Context } from '@graasp/sdk';
 
 import { CURRENT_MEMBER, MEMBERS } from '../fixtures/members';
 import { MOCK_SERVER_ITEM } from '../fixtures/mockItem';
@@ -8,6 +9,7 @@ import { MOCK_SERVER_ITEM } from '../fixtures/mockItem';
 declare global {
   // eslint-disable-next-line @typescript-eslint/no-namespace
   namespace Cypress {
+    // oxlint-disable-next-line typescript-eslint(consistent-type-definitions)
     interface Chainable {
       /**
        * Custom command to select DOM element by data-cy attribute.
@@ -24,9 +26,9 @@ declare global {
 Cypress.Commands.add(
   'setUpApi',
   (database: Partial<Database>, appContext: Partial<LocalContext>) => {
-    Cypress.on('window:before:load', (win: Window) => {
+    Cypress.on('window:before:load', (win) => {
       // win.indexedDB.deleteDatabase('graasp-app-cypress');
-      // eslint-disable-next-line no-param-reassign
+      // @ts-expect-error
       win.appContext = {
         accountId: CURRENT_MEMBER.id,
         itemId: MOCK_SERVER_ITEM.id,
@@ -34,7 +36,7 @@ Cypress.Commands.add(
         context: Context.Player,
         ...appContext,
       };
-      // eslint-disable-next-line no-param-reassign
+      // @ts-expect-error
       win.database = {
         appData: [],
         appActions: [],

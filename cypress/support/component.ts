@@ -26,6 +26,7 @@ import './commands';
 declare global {
   // eslint-disable-next-line @typescript-eslint/no-namespace
   namespace Cypress {
+    // oxlint-disable-next-line consistent-type-definitions
     interface Chainable {
       mount: typeof mount;
     }

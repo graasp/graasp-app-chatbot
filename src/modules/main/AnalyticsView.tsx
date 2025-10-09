@@ -6,12 +6,12 @@ import CommentIcon from '@mui/icons-material/Comment';
 import PeopleIcon from '@mui/icons-material/People';
 import { Alert, Box, Button, Grid2, Typography } from '@mui/material';
 
-import { AppAction } from '@graasp/sdk';
+import type { AppAction } from '@graasp/sdk';
 
 import groupBy from 'lodash.groupby';
 
 import { AppActionsType } from '@/config/appActions';
-import { CommentData } from '@/config/appData';
+import type { CommentData } from '@/config/appData';
 import { hooks } from '@/config/queryClient';
 import {
   ANALYTICS_GENERAL_TOTAL_COMMENTS_ID,

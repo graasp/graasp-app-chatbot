@@ -1,9 +1,10 @@
-import { Box, SxProps, Theme } from '@mui/material';
+import type { SxProps, Theme } from '@mui/material';
+import { Box } from '@mui/material';
 
 import { useLocalContext } from '@graasp/apps-query-client';
-import { UUID } from '@graasp/sdk';
+import type { UUID } from '@graasp/sdk';
 
-import { CommentData } from '@/config/appData';
+import type { CommentData } from '@/config/appData';
 import { hooks } from '@/config/queryClient';
 import { PLAYER_VIEW_CY } from '@/config/selectors';
 import ChatbotPrompt from '@/modules/common/ChatbotPrompt';

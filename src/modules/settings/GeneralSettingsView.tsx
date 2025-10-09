@@ -3,9 +3,9 @@ import { useTranslation } from 'react-i18next';
 
 import { FormLabel, Stack, TextField, Typography } from '@mui/material';
 
+import type { GeneralSettings } from '@/config/appSetting';
 import {
   DEFAULT_GENERAL_SETTINGS,
-  GeneralSettings,
   GeneralSettingsKeys,
   SettingsKeys,
 } from '@/config/appSetting';

@@ -21,13 +21,13 @@ const StyledBox = styled(Box)(({ theme }) => ({
   },
 }));
 
-interface Props {
+type Props = {
   sentence: string;
   words: string[];
   onClick: () => void;
   memberName: string;
   buttonId: string;
-}
+};
 function TextWithHighlightedKeywords({
   sentence,
   words,
@@ -45,8 +45,10 @@ function TextWithHighlightedKeywords({
           word.trim() &&
           new RegExp(createRegexFromString(word)).test(part.trim()),
       );
-
-    return isMatch ? (
+    if (!isMatch) {
+      return `${part} `;
+    }
+    return (
       <span
         key={part + memberName}
         style={{
@@ -57,8 +59,6 @@ function TextWithHighlightedKeywords({
       >
         {part}
       </span>
-    ) : (
-      `${part} `
     );
   });
 

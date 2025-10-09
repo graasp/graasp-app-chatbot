@@ -1,4 +1,4 @@
-import { AppAction, AppItemType, Member } from '@graasp/sdk';
+import type { AppAction, AppItemType, Member } from '@graasp/sdk';
 
 import { AppActionsType } from '@/config/appActions';
 
@@ -16,7 +16,7 @@ const generateAction = (): {
   type: AppActionsType.Reply,
   account: MEMBERS.ANNA,
   createdAt: '2020-02-07',
-  id: (Math.random() + 1).toString(36).substring(2),
+  id: (Math.random() + 1).toString(36).slice(2),
 });
 
 export const actions = [
