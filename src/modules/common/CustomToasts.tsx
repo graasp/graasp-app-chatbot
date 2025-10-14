@@ -1,6 +1,6 @@
 import { Stack, Typography } from '@mui/material';
 
-export function NetworkErrorToast({
+function NetworkErrorToast({
   title,
   description,
 }: Readonly<{
@@ -15,7 +15,7 @@ export function NetworkErrorToast({
   );
 }
 
-export function InfoToast({
+function InfoToast({
   type,
   payload,
 }: {
@@ -26,8 +26,10 @@ export function InfoToast({
     <Stack>
       <Typography fontWeight="bold">{type}</Typography>
       <Typography variant="caption">
-        {JSON.stringify(payload, null, 2)}
+        {JSON.stringify(payload, undefined, 2)}
       </Typography>
     </Stack>
   );
 }
+
+export { NetworkErrorToast, InfoToast };

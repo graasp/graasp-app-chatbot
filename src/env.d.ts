@@ -1,5 +1,7 @@
 import 'vite/client';
 
+// oxlint-disable consistent-type-definitions
+
 interface ImportMetaEnv {
   readonly VITE_PORT?: number;
   readonly VITE_API_HOST: string;

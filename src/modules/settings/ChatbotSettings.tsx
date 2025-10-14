@@ -16,7 +16,8 @@ import { DEPRECATED_GPT_MODELS } from '@graasp/sdk';
 
 import { Edit, Undo2 } from 'lucide-react';
 
-import { ChatbotPromptSettings, SettingsKeys } from '@/config/appSetting';
+import type { ChatbotPromptSettings } from '@/config/appSetting';
+import { SettingsKeys } from '@/config/appSetting';
 import { hooks, mutations } from '@/config/queryClient';
 import { DEFAULT_BOT_USERNAME, DEFAULT_MODEL_VERSION } from '@/constants';
 
@@ -42,7 +43,7 @@ function ChatbotSettings() {
     });
   const chatbotPrompt = chatbotPromptSettings?.[0];
   const initialPrompt = chatbotPrompt?.data?.initialPrompt ?? [];
-  const stringifiedJsonPrompt = JSON.stringify(initialPrompt, null, 2);
+  const stringifiedJsonPrompt = JSON.stringify(initialPrompt, undefined, 2);
   const chatbotCue = chatbotPrompt?.data?.chatbotCue ?? '';
   const chatbotName = chatbotPrompt?.data?.chatbotName ?? DEFAULT_BOT_USERNAME;
   const chatbotVersion =
@@ -127,7 +128,7 @@ function ChatbotSettings() {
                     <Typography color="text.disabled">
                       ({t('CHATBOT_NAME_DEFAULT_MESSAGE')})
                     </Typography>
-                  ) : null}
+                  ) : undefined}
                 </Stack>
                 <Typography variant="caption" color="text.secondary">
                   {t('CHATBOT_NAME_HELPER')}
@@ -141,7 +142,7 @@ function ChatbotSettings() {
                     <Typography color="text.disabled">
                       ({t('CHATBOT_VERSION_DEFAULT_MESSAGE')})
                     </Typography>
-                  ) : null}
+                  ) : undefined}
                 </Stack>
                 {(DEPRECATED_GPT_MODELS as string[]).includes(
                   chatbotVersion,

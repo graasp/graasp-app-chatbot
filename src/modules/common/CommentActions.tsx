@@ -11,7 +11,7 @@ import {
 import { Edit2, Trash2 } from 'lucide-react';
 
 import { AppActionsType } from '@/config/appActions';
-import { CommentAppData } from '@/config/appData';
+import type { CommentAppData } from '@/config/appData';
 import { mutations } from '@/config/queryClient';
 
 type Props = {

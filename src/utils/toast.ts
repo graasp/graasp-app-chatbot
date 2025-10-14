@@ -4,7 +4,7 @@ import { SUCCESS_MESSAGE, UNEXPECTED_ERROR_MESSAGE } from '@/constants';
 
 const showErrorToast = (payload: string | { message: string }): void => {
   let message = UNEXPECTED_ERROR_MESSAGE;
-  if (typeof payload === 'string') {
+  if ('string' === typeof payload) {
     message = payload;
   } else {
     ({ message } = payload);
@@ -18,7 +18,7 @@ const showErrorToast = (payload: string | { message: string }): void => {
 
 const showSuccessToast = (payload: string | { message: string }): void => {
   let message = SUCCESS_MESSAGE;
-  if (typeof payload === 'string') {
+  if ('string' === typeof payload) {
     message = payload;
   } else {
     ({ message } = payload);

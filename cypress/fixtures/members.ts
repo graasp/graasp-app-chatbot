@@ -1,4 +1,5 @@
-import { AccountType, CompleteMember, MemberFactory } from '@graasp/sdk';
+import type { CompleteMember } from '@graasp/sdk';
+import { AccountType, MemberFactory } from '@graasp/sdk';
 
 export const MEMBERS: { [key: string]: CompleteMember } = {
   ANNA: MemberFactory({

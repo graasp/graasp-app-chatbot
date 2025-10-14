@@ -12,7 +12,7 @@ type SentryConfigType = {
 export const generateSentryConfig = (): SentryConfigType => {
   // This sets the sample rate to be 10%. You may want this to be 100% while
   // in development and sample at a lower rate in production
-  const DEV_TRACE_SAMPLE_RATE = 1.0;
+  const DEV_TRACE_SAMPLE_RATE = 1;
   const DEV_REPLAY_SAMPLE_RATE = 0.1;
   const PROD_TRACE_SAMPLE_RATE = 0.1;
   const PROD_REPLAY_SAMPLE_RATE = 0.1;
@@ -32,6 +32,6 @@ export const generateSentryConfig = (): SentryConfigType => {
       : DEV_REPLAY_SAMPLE_RATE,
     // If the entire session is not sampled, use the below sample rate to sample
     // sessions when an error occurs.
-    replaysOnErrorSampleRate: 1.0,
+    replaysOnErrorSampleRate: 1,
   };
 };

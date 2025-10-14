@@ -1,11 +1,11 @@
 import { useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
+import type { CardProps } from '@mui/material';
 import {
   Card,
   CardContent,
   CardHeader,
-  CardProps,
   IconButton,
   Tooltip,
   styled,
@@ -16,12 +16,10 @@ import { formatDate } from '@graasp/sdk';
 
 import { MoreVertical } from 'lucide-react';
 
-import { AppDataTypes, CommentAppData } from '@/config/appData';
-import {
-  ChatbotPromptSettings,
-  ChatbotPromptSettingsKeys,
-  SettingsKeys,
-} from '@/config/appSetting';
+import type { CommentAppData } from '@/config/appData';
+import { AppDataTypes } from '@/config/appData';
+import type { ChatbotPromptSettings } from '@/config/appSetting';
+import { ChatbotPromptSettingsKeys, SettingsKeys } from '@/config/appSetting';
 import { hooks } from '@/config/queryClient';
 import { buildCommentContainerDataCy } from '@/config/selectors';
 import { BIG_BORDER_RADIUS, DEFAULT_BOT_USERNAME } from '@/constants';

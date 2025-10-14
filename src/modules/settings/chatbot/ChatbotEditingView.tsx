@@ -1,4 +1,5 @@
-import { type JSX, useState } from 'react';
+import { useState } from 'react';
+import type { JSX } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import {
@@ -19,17 +20,19 @@ import {
   styled,
 } from '@mui/material';
 
-import { ChatBotMessage, DEPRECATED_GPT_MODELS, GPTVersion } from '@graasp/sdk';
+import type { ChatBotMessage } from '@graasp/sdk';
+import { DEPRECATED_GPT_MODELS, GPTVersion } from '@graasp/sdk';
 
 import { ChevronDownIcon } from 'lucide-react';
 
-import { ChatbotPromptSettings } from '@/config/appSetting';
+import type { ChatbotPromptSettings } from '@/config/appSetting';
 import { SETTING_CHATBOT_PROMPT_CODE_EDITOR_CY } from '@/config/selectors';
 import { DEFAULT_MODEL_VERSION, SMALL_BORDER_RADIUS } from '@/constants';
 import CodeEditor from '@/modules/common/CodeEditor';
 
 import { ChatbotConfigurator } from './ChatbotConfigurator';
-import { PromptDisplay, PromptDisplayType } from './PromptDisplaySwitch';
+import { PromptDisplay } from './PromptDisplaySwitch';
+import type { PromptDisplayType } from './PromptDisplaySwitch';
 import { PromptTitle } from './PromptTitle';
 
 type ModelDef = {
@@ -41,12 +44,20 @@ type ModelDef = {
 
 function compareModels(a: ModelDef, b: ModelDef): number {
   // 1. Recommended first
-  if (a.isRecommended && !b.isRecommended) return -1;
-  if (!a.isRecommended && b.isRecommended) return 1;
+  if (a.isRecommended && !b.isRecommended) {
+    return -1;
+  }
+  if (!a.isRecommended && b.isRecommended) {
+    return 1;
+  }
 
   // 2. Deprecated last
-  if (a.isDeprecated && !b.isDeprecated) return 1;
-  if (!a.isDeprecated && b.isDeprecated) return -1;
+  if (a.isDeprecated && !b.isDeprecated) {
+    return 1;
+  }
+  if (!a.isDeprecated && b.isDeprecated) {
+    return -1;
+  }
 
   // 3. Alphabetical by key
   return a.key.localeCompare(b.key);
@@ -86,7 +97,7 @@ type Props = {
   onSave: (data: ChatbotPromptSettings) => void;
 };
 
-export function ChatbotEditionView({
+function ChatbotEditionView({
   viewType,
   onViewChange,
   initialValue,
@@ -248,7 +259,7 @@ export function ChatbotEditionView({
               <Typography color="error">
                 {t('ERROR_PROMPT_NOT_IN_JSON_FORMAT')}
               </Typography>
-            ) : null}
+            ) : undefined}
           </Stack>
           <Accordion disableGutters>
             <AccordionSummary
@@ -284,7 +295,7 @@ export function ChatbotEditionView({
                       },
                       { role: 'user', content: 'Where was it played?' },
                     ],
-                    null,
+                    undefined,
                     2,
                   )}
                   readOnly
@@ -329,3 +340,4 @@ export function ChatbotEditionView({
     </Stack>
   );
 }
+export { ChatbotEditionView };

@@ -27,7 +27,7 @@ import {
   SendHorizonal,
 } from 'lucide-react';
 
-import { CommentAppData } from '@/config/appData';
+import type { CommentAppData } from '@/config/appData';
 import {
   COMMENT_EDITOR_BOLD_BUTTON_CYPRESS,
   COMMENT_EDITOR_CANCEL_BUTTON_CYPRESS,
