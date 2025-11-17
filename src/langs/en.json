@@ -3,6 +3,7 @@
     "SETTINGS_VIEW_TITLE": "Configuration",
     "CONVERSATIONS_VIEW_TITLE": "Conversations",
     "ABOUT_VIEW_TITLE": "About",
+    "ADVANCED_TITLE": "Advanced",
     "DOWNLOADING_LABEL": "Downloading",
     "DOWNLOAD_ACTIONS_LABEL": "Download Actions",
     "DOWNLOAD_DATA_LABEL": "Download Data",
@@ -71,7 +72,8 @@
     "GPT_4_O_DESCRIPTION": "Best for high-intelligence, versatile applications requiring top performance and flexibility",
     "GPT_4_O_MINI_DESCRIPTION": "Best for fast, focused tasks where efficiency matters most",
     "GPT_5_NANO_DESCRIPTION": "Fastest, most cost efficient GPT 5 with 400'000 token window. Best for fast, focused tasks where efficiency matters most",
-    "CHATBOT_MODEL_VERSION_HELPER": "This defines the  model that will be used. The default is: {{default}}.",
+    "CHATBOT_VERSION_DEPRECATED_MESSAGE": "The chosen chatbot version is deprecated and might not work anymore in the future.",
+    "CHATBOT_MODEL_VERSION_HELPER": "This defines the model that will be used. The default is: {{default}}.",
     "RECOMMENDED": "Recommended"
   }
 }

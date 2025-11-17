@@ -46,15 +46,6 @@ export function GeneralSettingsView(): JSX.Element {
 
   return (
     <Stack spacing={1}>
-      <Stack
-        direction="row"
-        justifyContent="space-between"
-        alignItems="flex-end"
-      >
-        <Typography variant="h2" fontWeight="bold" fontSize="1.5rem">
-          {t('GENERAL_SETTING_TITLE')}
-        </Typography>
-      </Stack>
       <Stack gap={2} direction={{ xs: 'column', md: 'row' }}>
         <Stack flex={1}>
           <FormLabel>{t('MAXIMUM_COMMENT_LENGTH_LABEL')}</FormLabel>

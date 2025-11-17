@@ -14,7 +14,13 @@ import {
 
 import type { UnionOfConst } from '@graasp/sdk';
 
-import { AlertTriangle, Info, MessageSquareText, Settings } from 'lucide-react';
+import {
+  AlertTriangle,
+  Info,
+  MessageSquareText,
+  Settings,
+  SlidersVerticalIcon,
+} from 'lucide-react';
 
 import type { GeneralSettings } from '@/config/appSetting';
 import { SettingsKeys } from '@/config/appSetting';
@@ -29,11 +35,13 @@ import {
 } from '@/config/selectors';
 
 import SettingsView from '../settings/SettingsView';
+import AdvancedView from './AdvancedView';
 import ConversationsView from './ConversationsView';
 
 const Tabs = {
   TABLE_VIEW: 'TABLE_VIEW',
   SETTINGS_VIEW: 'SETTINGS_VIEW',
+  ADVANCED_VIEW: 'ADVANCED_VIEW',
   ABOUT_VIEW: 'ABOUT_VIEW',
 } as const;
 type TabsType = UnionOfConst<typeof Tabs>;
@@ -83,6 +91,12 @@ function AdminView(): JSX.Element {
             iconPosition="start"
           />
           <Tab
+            value={Tabs.ADVANCED_VIEW}
+            label={t('ADVANCED_TITLE')}
+            icon={<SlidersVerticalIcon />}
+            iconPosition="start"
+          />
+          <Tab
             data-cy={TAB_ABOUT_VIEW_CYPRESS}
             value={Tabs.ABOUT_VIEW}
             label={t('ABOUT_VIEW_TITLE')}
@@ -110,6 +124,9 @@ function AdminView(): JSX.Element {
           data-cy={SETTINGS_VIEW_PANE_CYPRESS}
         >
           <SettingsView />
+        </TabPanel>
+        <TabPanel value={Tabs.ADVANCED_VIEW}>
+          <AdvancedView />
         </TabPanel>
         <TabPanel value={Tabs.ABOUT_VIEW} data-cy={SETTINGS_VIEW_PANE_CYPRESS}>
           <Typography variant="h6" component="h3">
