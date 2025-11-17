@@ -1,3 +1,5 @@
+import { useCallback } from 'react';
+
 import {
   Alert,
   Chip,
@@ -59,7 +61,10 @@ const models = Object.entries(GPTVersion)
   // sort models to put deprecated last in the list
   .toSorted(compareModels);
 
-function ChatbotModelSelect() {
+const useGptVersion = () => {
+  const { mutate: postAppSetting } = mutations.usePostAppSetting();
+  const { mutate: patchAppSetting } = mutations.usePatchAppSetting();
+
   const { data: chatbotPromptSettings } =
     hooks.useAppSettings<ChatbotPromptSettings>({
       name: SettingsKeys.ChatbotPrompt,
@@ -68,26 +73,30 @@ function ChatbotModelSelect() {
   const version =
     chatbotPromptSettings?.[0]?.data?.gptVersion ?? DEFAULT_MODEL_VERSION;
 
-  const { mutate: postAppSetting } = mutations.usePostAppSetting();
-  const { mutate: patchAppSetting } = mutations.usePatchAppSetting();
+  const handleChange = useCallback(
+    <T extends ChatbotPromptSettings, K extends keyof T>(value: T[K]): void => {
+      const settingId = chatbotPromptSettings?.[0]?.id;
+      const data = { ...chatbotPromptSettings, gptVersion: value };
+      if (settingId) {
+        patchAppSetting({
+          data,
+          id: settingId,
+        });
+      } else {
+        postAppSetting({
+          data,
+          name: SettingsKeys.ChatbotPrompt,
+        });
+      }
+    },
+    [chatbotPromptSettings, postAppSetting, patchAppSetting],
+  );
 
-  const handleChange = <T extends ChatbotPromptSettings, K extends keyof T>(
-    value: T[K],
-  ): void => {
-    const settingId = chatbotPromptSettings?.[0]?.id;
-    const data = { ...chatbotPromptSettings, gptVersion: value };
-    if (settingId) {
-      patchAppSetting({
-        data,
-        id: settingId,
-      });
-    } else {
-      postAppSetting({
-        data,
-        name: SettingsKeys.ChatbotPrompt,
-      });
-    }
-  };
+  return { version, handleChange };
+};
+
+export function ChatbotModelSelect() {
+  const { version, handleChange } = useGptVersion();
 
   return (
     <Stack gap={1}>
@@ -129,5 +138,3 @@ function ChatbotModelSelect() {
     </Stack>
   );
 }
-
-export default ChatbotModelSelect;

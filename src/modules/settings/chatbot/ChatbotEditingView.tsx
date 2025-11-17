@@ -76,7 +76,6 @@ function ChatbotEditionView({
   const [prompt, setPrompt] = useState(parsedPrompt);
   const [cue, setCue] = useState(initialValue.cue);
   const [name, setName] = useState(initialValue.name);
-  const [version] = useState(initialValue.version);
   const [formattingError, setFormattingError] = useState(false);
   const [unsavedChanges, setUnsavedChanges] = useState(false);
 
@@ -127,7 +126,7 @@ function ChatbotEditionView({
         initialPrompt: prompt,
         chatbotCue: cue,
         chatbotName: name,
-        gptVersion: version,
+        gptVersion: initialValue.version,
       };
       onSave(data);
     }

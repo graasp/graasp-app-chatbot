@@ -2,7 +2,7 @@ import { useTranslation } from 'react-i18next';
 
 import { Stack, Typography } from '@mui/material';
 
-import ChatbotModelSelect from '../settings/ChatbotModelSelect';
+import { ChatbotModelSelect } from '../settings/ChatbotModelSelect';
 import { GeneralSettingsView } from '../settings/GeneralSettingsView';
 
 function AdvancedView() {
