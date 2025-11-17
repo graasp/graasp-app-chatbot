@@ -1,7 +1,7 @@
 import type { JSX } from 'react';
 import { useTranslation } from 'react-i18next';
 
-import { FormLabel, Stack, TextField, Typography } from '@mui/material';
+import { FormLabel, Stack, TextField } from '@mui/material';
 
 import type { GeneralSettings } from '@/config/appSetting';
 import {

@@ -59,7 +59,7 @@ const models = Object.entries(GPTVersion)
   // sort models to put deprecated last in the list
   .toSorted(compareModels);
 
-function ChatbotModelSelect({}) {
+function ChatbotModelSelect() {
   const { data: chatbotPromptSettings } =
     hooks.useAppSettings<ChatbotPromptSettings>({
       name: SettingsKeys.ChatbotPrompt,

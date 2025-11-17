@@ -8,11 +8,8 @@ import {
   AccordionSummary,
   Box,
   Button,
-  Chip,
   FormLabel,
   Link,
-  MenuItem,
-  Select,
   Stack,
   TextField,
   TextareaAutosize,
@@ -21,7 +18,6 @@ import {
 } from '@mui/material';
 
 import type { ChatBotMessage } from '@graasp/sdk';
-import { DEPRECATED_GPT_MODELS, GPTVersion } from '@graasp/sdk';
 
 import { ChevronDownIcon } from 'lucide-react';
 
