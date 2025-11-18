@@ -7,10 +7,16 @@ import { AppDataTypes } from '@/config/appData';
 import { ChatbotPromptSettings } from '@/config/appSetting';
 import { mutations } from '@/config/queryClient';
 
+/**
+ * Returns a function that save a chatbot answer based on the user message
+ * @param chatbotPrompt settings of the chatbot with cue and initial prompt
+ * @returns generateChatbotAnswer function
+ */
 export const useAskChatbot = (chatbotPrompt: ChatbotPromptSettings) => {
-  const { mutateAsync: postAppDataAsync } = mutations.usePostAppData();
+  const { mutateAsync: postAppDataAsync, isLoading: isPostAppDataLoading } =
+    mutations.usePostAppData();
 
-  const { mutateAsync: postChatBotAsync, isLoading } =
+  const { mutateAsync: postChatBotAsync, isLoading: isPostChatbotLoading } =
     mutations.usePostChatBot();
   const { mutate: postAction } = mutations.usePostAppAction();
 
@@ -64,5 +70,8 @@ export const useAskChatbot = (chatbotPrompt: ChatbotPromptSettings) => {
     ],
   );
 
-  return { generateChatbotAnswer, isLoading };
+  return {
+    generateChatbotAnswer,
+    isLoading: isPostChatbotLoading || isPostAppDataLoading,
+  };
 };

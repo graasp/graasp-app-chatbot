@@ -104,6 +104,7 @@ function CommentEditor({
           maxRows={10}
           value={text}
           onChange={handleTextChange}
+          role="textbox"
         />
         <FormHelperText data-cy={COMMENT_EDITOR_TEXTAREA_HELPER_TEXT_CY} error>
           {textTooLong || ' '}
@@ -115,6 +116,7 @@ function CommentEditor({
           variant="contained"
           onClick={() => onSendHandler(text)}
           loading={askChatbotLoading || sendMessageLoading}
+          name="send"
         >
           {t('SEND_LABEL')}
         </Button>
