@@ -3,7 +3,6 @@
     "SETTINGS_VIEW_TITLE": "Configuration",
     "CONVERSATIONS_VIEW_TITLE": "Conversations",
     "ABOUT_VIEW_TITLE": "About",
-    "ADVANCED_TITLE": "Advanced",
     "DOWNLOADING_LABEL": "Downloading",
     "DOWNLOAD_ACTIONS_LABEL": "Download Actions",
     "DOWNLOAD_DATA_LABEL": "Download Data",
@@ -38,8 +37,6 @@
     "SAVE_LABEL": "Save",
     "SAVED_LABEL": "Saved",
     "GENERAL_SETTING_TITLE": "General",
-    "MAXIMUM_COMMENT_LENGTH_LABEL": "Maximum comment length (number of characters)",
-    "MAXIMUM_THREAD_LENGTH_LABEL": "Maximum conversation length (number of messages)",
     "JUST_NOW_COMMENT_HEADER": "Just now",
     "COMMENT_ACTIONS_TOOLTIP": "Actions",
     "COMMENT_TEXT_TOO_LONG": "The comment text can not be longer than {{max_length}} characters",
@@ -47,7 +44,7 @@
     "LOADING_RESPONSE_PLACEHOLDER": "Loading response",
     "PROCESSING_RESPONSE_PLACEHOLDER": "Processing response",
     "RESPONSE_BOX_PLACEHOLDER": "Respond to this comment",
-    "NO_COMMENTS_PLACEHOLDER": "No comments",
+    "NO_COMMENTS_PLACEHOLDER": "No conversations",
     "ABOUT_TITLE": "About the Chatbot App",
     "ABOUT_DESCRIPTION": "The chatbot app uses OpenAI's ChatGPT model as a base to provide the chatbot integration. Users responses are transmitted to OpenAI trough their API to be processed and for responses to be generated. No other user data is transmitted. If users provide personal data in their messages there is nothing we can do to protect that data.",
     "ABOUT_PRIVACY_POLICY_OPENAI": "See the <1>OpenAI Privacy Policy for EU users</1>.",
@@ -64,16 +61,6 @@
     "FILTER_BY_COMMON_KEYWORDS": "Filter by most frequent keywords",
     "SEARCH_BY_OTHER_KEYWORDS": "Search by other keywords or regex",
     "CHECK_WHOLE_CHAT": "Check the whole chat",
-    "MODEL_VERSION": "Model version",
-    "GPT_3_5_TURBO_DESCRIPTION": "Best for basic chat and non-chat tasks where legacy compatibility is needed",
-    "GPT_4_DESCRIPTION": "Features deeper learning and more comprehensive knowledge, ideal for content creation and technical support.",
-    "GPT_4_TURBO_DESCRIPTION": "Best for high-intelligence tasks where you want a proven, older flagship model",
-    "GPT_4_1_NANO_DESCRIPTION": "Best for ultra-fast tasks where average intelligence is sufficient",
-    "GPT_4_O_DESCRIPTION": "Best for high-intelligence, versatile applications requiring top performance and flexibility",
-    "GPT_4_O_MINI_DESCRIPTION": "Best for fast, focused tasks where efficiency matters most",
-    "GPT_5_NANO_DESCRIPTION": "Fastest, most cost efficient GPT 5 with 400'000 token window. Best for fast, focused tasks where efficiency matters most",
-    "CHATBOT_VERSION_DEPRECATED_MESSAGE": "The chosen chatbot version is deprecated and might not work anymore in the future.",
-    "CHATBOT_MODEL_VERSION_HELPER": "This defines the model that will be used. The default is: {{default}}.",
-    "RECOMMENDED": "Recommended"
+    "CONFIGURE_BUTTON": "Configure"
   }
 }

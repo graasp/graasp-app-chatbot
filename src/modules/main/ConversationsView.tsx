@@ -65,7 +65,11 @@ function ConversationsView() {
       // show that there are no comments available
       return (
         <TableRow>
-          <TableCell data-cy={TABLE_NO_COMMENTS_CYPRESS}>
+          <TableCell
+            data-cy={TABLE_NO_COMMENTS_CYPRESS}
+            colSpan={3}
+            align="center"
+          >
             {t('NO_COMMENTS_PLACEHOLDER')}
           </TableCell>
         </TableRow>

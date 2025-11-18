@@ -56,7 +56,6 @@ const TextArea = styled(TextareaAutosize)(({ theme }) => ({
 type Props = {
   initialValue: {
     name: string;
-    version: string;
     cue: string;
     prompt: string;
   };
@@ -126,7 +125,6 @@ function ChatbotEditionView({
         initialPrompt: prompt,
         chatbotCue: cue,
         chatbotName: name,
-        gptVersion: initialValue.version,
       };
       onSave(data);
     }

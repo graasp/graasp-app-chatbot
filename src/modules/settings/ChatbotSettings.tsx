@@ -17,7 +17,7 @@ import { Edit, Undo2 } from 'lucide-react';
 import type { ChatbotPromptSettings } from '@/config/appSetting';
 import { SettingsKeys } from '@/config/appSetting';
 import { hooks, mutations } from '@/config/queryClient';
-import { DEFAULT_BOT_USERNAME, DEFAULT_MODEL_VERSION } from '@/constants';
+import { DEFAULT_BOT_USERNAME } from '@/constants';
 
 import CodeEditor from '../common/CodeEditor';
 import { ChatbotEditionView } from './chatbot/ChatbotEditingView';
@@ -44,8 +44,6 @@ function ChatbotSettings() {
   const stringifiedJsonPrompt = JSON.stringify(initialPrompt, undefined, 2);
   const chatbotCue = chatbotPrompt?.data?.chatbotCue ?? '';
   const chatbotName = chatbotPrompt?.data?.chatbotName ?? DEFAULT_BOT_USERNAME;
-  const chatbotVersion =
-    chatbotPrompt?.data?.gptVersion ?? DEFAULT_MODEL_VERSION;
 
   const doneEditing = (): void => {
     setIsEditing(false);
@@ -105,7 +103,6 @@ function ChatbotSettings() {
           initialValue={{
             name: chatbotName,
             cue: chatbotCue,
-            version: chatbotVersion,
             prompt: stringifiedJsonPrompt,
           }}
           viewType={viewType}
