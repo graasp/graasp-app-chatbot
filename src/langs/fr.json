@@ -38,7 +38,7 @@
     "JUST_NOW_COMMENT_HEADER": "À l'instant",
     "COMMENT_ACTIONS_TOOLTIP": "Actions",
     "COMMENT_TEXT_TOO_LONG": "Le text du commentaire ne peut pas dépasser {{max_length}} caractères",
-    "COMMENT_PLACEHOLDER": "Type your comment here",
+    "COMMENT_PLACEHOLDER": "Ecrire ici...",
     "LOADING_RESPONSE_PLACEHOLDER": "Chargement de la réponse",
     "PROCESSING_RESPONSE_PLACEHOLDER": "Traitement de la réponse",
     "RESPONSE_BOX_PLACEHOLDER": "Répondre à ce message",

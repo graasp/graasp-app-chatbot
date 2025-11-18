@@ -1,13 +1,5 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import {
-  boldCommand,
-  codeCommand,
-  italicCommand,
-  linkCommand,
-  quoteCommand,
-  useTextAreaMarkdownEditor,
-} from 'react-mde';
 
 import {
   Box,
@@ -18,37 +10,26 @@ import {
   styled,
 } from '@mui/material';
 
-import {
-  Bold,
-  Code2,
-  Italic,
-  Link as LinkIcon,
-  Quote,
-  SendHorizonal,
-} from 'lucide-react';
+import { SendHorizonal } from 'lucide-react';
 
-import type { CommentAppData } from '@/config/appData';
-import { DEFAULT_GENERAL_SETTINGS } from '@/config/appSetting';
 import {
-  COMMENT_EDITOR_BOLD_BUTTON_CYPRESS,
-  COMMENT_EDITOR_CANCEL_BUTTON_CYPRESS,
-  COMMENT_EDITOR_CODE_BUTTON_CYPRESS,
+  ChatbotPromptSettings,
+  DEFAULT_GENERAL_SETTINGS,
+} from '@/config/appSetting';
+import {
   COMMENT_EDITOR_CYPRESS,
-  COMMENT_EDITOR_ITALIC_BUTTON_CYPRESS,
-  COMMENT_EDITOR_LINE_INFO_TEXT_CYPRESS,
-  COMMENT_EDITOR_LINK_BUTTON_CYPRESS,
-  COMMENT_EDITOR_QUOTE_BUTTON_CYPRESS,
   COMMENT_EDITOR_SAVE_BUTTON_CYPRESS,
   COMMENT_EDITOR_TEXTAREA_CYPRESS,
   COMMENT_EDITOR_TEXTAREA_HELPER_TEXT_CY,
 } from '@/config/selectors';
 import { SMALL_BORDER_RADIUS } from '@/constants';
 
-import ToolbarButton from '../comment/ToolbarButton';
+import { useAskChatbot } from './useAskChatbot';
+import { useSendMessage } from './useSendMessage';
 
 const TextArea = styled(TextareaAutosize)(({ theme }) => ({
   borderRadius: SMALL_BORDER_RADIUS,
-  padding: theme.spacing(2),
+  padding: theme.spacing(1),
   fontSize: '1rem',
   boxSizing: 'border-box',
   resize: 'vertical',
@@ -56,7 +37,6 @@ const TextArea = styled(TextareaAutosize)(({ theme }) => ({
   outline: 'solid rgba(80, 80, 210, 0.5) 1px',
   width: '100%',
   minWidth: '0',
-  minHeight: `calc(1rem + 2*${theme.spacing(2)})`,
   transition: 'outline 250ms ease-in-out',
   '&:focus': {
     outline: 'solid var(--graasp-primary) 2px !important',
@@ -67,37 +47,39 @@ const TextArea = styled(TextareaAutosize)(({ theme }) => ({
 }));
 
 type Props = {
-  onCancel: () => void;
-  onSend: (comment: string) => void;
-  comment?: CommentAppData;
   maxTextLength?: number;
+  chatbotPrompt: ChatbotPromptSettings;
 };
 
 function CommentEditor({
-  onCancel,
-  onSend,
-  comment,
+  chatbotPrompt,
   maxTextLength = DEFAULT_GENERAL_SETTINGS.MaxCommentLength,
 }: Readonly<Props>): JSX.Element {
   const { t } = useTranslation();
-  const [text, setText] = useState(comment?.data.content ?? '');
+  const [text, setText] = useState('');
   const [textTooLong, setTextTooLong] = useState('');
-  const { ref, commandController } = useTextAreaMarkdownEditor({
-    commandMap: {
-      bold: boldCommand,
-      italic: italicCommand,
-      code: codeCommand,
-      link: linkCommand,
-      quote: quoteCommand,
-    },
-  });
 
-  // focus textarea on mount
-  useEffect(() => {
-    if (ref.current) {
-      ref.current.focus();
+  const { generateChatbotAnswer, isLoading: askChatbotLoading } =
+    useAskChatbot(chatbotPrompt);
+  const { sendMessage, isLoading: sendMessageLoading } = useSendMessage();
+
+  const onSendHandler = async (newUserComment: string) => {
+    if (!chatbotPrompt) {
+      throw new Error(
+        "unexpected error, chatbot setting is not present, can't sent to API without it",
+      );
     }
-  });
+
+    try {
+      const userMessage = await sendMessage(newUserComment);
+
+      await generateChatbotAnswer(userMessage.id, newUserComment);
+
+      setText('');
+    } catch (e) {
+      console.error(e);
+    }
+  };
 
   const handleTextChange = ({
     target: { value },
@@ -114,85 +96,28 @@ function CommentEditor({
 
   return (
     <Box sx={{ p: 1 }} data-cy={COMMENT_EDITOR_CYPRESS}>
-      <Stack direction="column" spacing={1}>
-        <Stack direction="row" spacing={1}>
-          <ToolbarButton
-            dataCy={COMMENT_EDITOR_BOLD_BUTTON_CYPRESS}
-            onClick={async () => {
-              await commandController.executeCommand('bold');
-            }}
-          >
-            <Bold size={16} />
-          </ToolbarButton>
-          <ToolbarButton
-            dataCy={COMMENT_EDITOR_ITALIC_BUTTON_CYPRESS}
-            onClick={async () => {
-              await commandController.executeCommand('italic');
-            }}
-          >
-            <Italic size={16} />
-          </ToolbarButton>
-          <ToolbarButton
-            dataCy={COMMENT_EDITOR_CODE_BUTTON_CYPRESS}
-            onClick={async () => {
-              await commandController.executeCommand('code');
-            }}
-          >
-            <Code2 size={16} />
-          </ToolbarButton>
-          <ToolbarButton
-            dataCy={COMMENT_EDITOR_LINK_BUTTON_CYPRESS}
-            onClick={async () => {
-              await commandController.executeCommand('link');
-            }}
-          >
-            <LinkIcon size={16} />
-          </ToolbarButton>
-          <ToolbarButton
-            dataCy={COMMENT_EDITOR_QUOTE_BUTTON_CYPRESS}
-            onClick={async () => {
-              await commandController.executeCommand('quote');
-            }}
-          >
-            <Quote size={16} />
-          </ToolbarButton>
-        </Stack>
+      <Stack direction="row" spacing={1}>
         <TextArea
           data-cy={COMMENT_EDITOR_TEXTAREA_CYPRESS}
           placeholder={t('COMMENT_PLACEHOLDER')}
           minRows={1}
           maxRows={10}
-          ref={ref}
           value={text}
           onChange={handleTextChange}
         />
         <FormHelperText data-cy={COMMENT_EDITOR_TEXTAREA_HELPER_TEXT_CY} error>
           {textTooLong || ' '}
         </FormHelperText>
-        <Stack
-          data-cy={COMMENT_EDITOR_LINE_INFO_TEXT_CYPRESS}
-          direction="row"
-          alignItems="center"
-          justifyContent="space-between"
+        <Button
+          endIcon={<SendHorizonal />}
+          data-cy={COMMENT_EDITOR_SAVE_BUTTON_CYPRESS}
+          color="primary"
+          variant="contained"
+          onClick={() => onSendHandler(text)}
+          loading={askChatbotLoading || sendMessageLoading}
         >
-          <Button
-            data-cy={COMMENT_EDITOR_CANCEL_BUTTON_CYPRESS}
-            color="secondary"
-            variant="outlined"
-            onClick={() => onCancel()}
-          >
-            {t('CANCEL_LABEL')}
-          </Button>
-          <Button
-            endIcon={<SendHorizonal />}
-            data-cy={COMMENT_EDITOR_SAVE_BUTTON_CYPRESS}
-            color="primary"
-            variant="outlined"
-            onClick={() => onSend(text)}
-          >
-            {t('SEND_LABEL')}
-          </Button>
-        </Stack>
+          {t('SEND_LABEL')}
+        </Button>
       </Stack>
     </Box>
   );
