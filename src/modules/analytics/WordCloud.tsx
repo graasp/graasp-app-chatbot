@@ -11,13 +11,14 @@ type WordData = {
 };
 
 const colors = ['#143059', '#2F6B9A', '#82a6c2'];
-const fixedValueGenerator = () => 2.5;
+const fixedValueGenerator = () => 0.5;
 
 type Props = {
   wordCounts: { [key: string]: number };
   open: boolean;
   onClose: () => void;
 };
+
 function WordCloud({
   wordCounts,
   open,
@@ -39,34 +40,32 @@ function WordCloud({
 
   return (
     <Dialog open={open} onClose={onClose} id={ANALYTICS_WORDS_CLOUD_MODAL_ID}>
-      <div className="wordcloud">
-        <VWordCloud
-          words={words}
-          width={600}
-          height={400}
-          fontSize={fontSizeSetter}
-          font={'Nunito'}
-          padding={2}
-          spiral={'archimedean'}
-          rotate={0}
-          random={fixedValueGenerator}
-        >
-          {(cloudWords) =>
-            cloudWords.map((w, i) => (
-              <text
-                key={w.text}
-                color={colors[i % colors.length]}
-                textAnchor={'middle'}
-                transform={`translate(${w.x}, ${w.y}) rotate(${w.rotate})`}
-                fontSize={w.size}
-                fontFamily={w.font}
-              >
-                {w.text}
-              </text>
-            ))
-          }
-        </VWordCloud>
-      </div>
+      <VWordCloud
+        words={words}
+        width={600}
+        height={400}
+        fontSize={fontSizeSetter}
+        font="Nunito"
+        padding={2}
+        spiral="archimedean"
+        rotate={0}
+        random={fixedValueGenerator}
+      >
+        {(cloudWords) =>
+          cloudWords.map((w, i) => (
+            <text
+              key={w.text}
+              color={colors[i % colors.length]}
+              textAnchor={'middle'}
+              transform={`translate(${w.x}, ${w.y}) rotate(${w.rotate})`}
+              fontSize={w.size}
+              fontFamily={w.font}
+            >
+              {w.text}
+            </text>
+          ))
+        }
+      </VWordCloud>
     </Dialog>
   );
 }
