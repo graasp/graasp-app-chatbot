@@ -34,7 +34,7 @@ function justifyContentByRole(
 
 export function ChatbotPromptDisplay({
   messages,
-}: ChatbotPromptDisplayProps): JSX.Element {
+}: Readonly<ChatbotPromptDisplayProps>): JSX.Element {
   return (
     <Stack spacing={2}>
       {messages.map((msg, idx) => (

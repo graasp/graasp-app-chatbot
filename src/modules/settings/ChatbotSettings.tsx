@@ -1,9 +1,8 @@
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import {
   Alert,
-  Box,
   Button,
   Card,
   CardContent,
@@ -17,51 +16,68 @@ import { Edit, Undo2 } from 'lucide-react';
 import type { ChatbotPromptSettings } from '@/config/appSetting';
 import { SettingsKeys } from '@/config/appSetting';
 import { hooks, mutations } from '@/config/queryClient';
+import { CHATBOT_SETTINGS_SUMMARY_CY } from '@/config/selectors';
 import { DEFAULT_BOT_USERNAME } from '@/constants';
 
-import CodeEditor from '../common/CodeEditor';
 import { ChatbotEditionView } from './chatbot/ChatbotEditingView';
 import { ChatbotPromptDisplay } from './chatbot/ChatbotPromptDisplay';
-import {
-  PromptDisplay,
-  PromptDisplayType,
-} from './chatbot/PromptDisplaySwitch';
-import { PromptTitle } from './chatbot/PromptTitle';
 
-function ChatbotSettings() {
-  const { t } = useTranslation();
+const useChatbotSetting = () => {
   const { mutateAsync: postSetting } = mutations.usePostAppSetting();
   const { mutateAsync: patchSetting } = mutations.usePatchAppSetting();
-  const [isEditing, setIsEditing] = useState(false);
-  const [viewType, setViewType] = useState<PromptDisplayType>(PromptDisplay.UI);
-
   const { data: chatbotPromptSettings } =
     hooks.useAppSettings<ChatbotPromptSettings>({
       name: SettingsKeys.ChatbotPrompt,
     });
-  const chatbotPrompt = chatbotPromptSettings?.[0];
-  const initialPrompt = chatbotPrompt?.data?.initialPrompt ?? [];
-  const stringifiedJsonPrompt = JSON.stringify(initialPrompt, undefined, 2);
-  const chatbotCue = chatbotPrompt?.data?.chatbotCue ?? '';
-  const chatbotName = chatbotPrompt?.data?.chatbotName ?? DEFAULT_BOT_USERNAME;
+  const setting = chatbotPromptSettings?.[0];
+  const chatbotCue = setting?.data?.chatbotCue ?? '';
+  const chatbotName = setting?.data?.chatbotName ?? DEFAULT_BOT_USERNAME;
+
+  const initialPrompt = setting?.data?.initialPrompt ?? [];
+  const chatbotPrompt = initialPrompt[0]?.content ?? '';
+
+  const saveSetting = useCallback(
+    async (data: ChatbotPromptSettings): Promise<void> => {
+      // setting does not exist
+      if (setting) {
+        await patchSetting({
+          id: setting.id,
+          data,
+        });
+      } else {
+        await postSetting({
+          data,
+          name: SettingsKeys.ChatbotPrompt,
+        });
+      }
+    },
+    [patchSetting, postSetting, setting],
+  );
+
+  return {
+    chatbotPrompt,
+    chatbotCue,
+    chatbotName,
+    initialPrompt,
+    saveSetting,
+  };
+};
+
+function ChatbotSettings() {
+  const { t } = useTranslation();
+
+  const { saveSetting, chatbotCue, chatbotName, chatbotPrompt, initialPrompt } =
+    useChatbotSetting();
+
+  const [isEditing, setIsEditing] = useState(false);
 
   const doneEditing = (): void => {
     setIsEditing(false);
   };
 
-  const handleOnSave = async (data: ChatbotPromptSettings): Promise<void> => {
-    // setting does not exist
-    if (!chatbotPrompt) {
-      await postSetting({
-        data,
-        name: SettingsKeys.ChatbotPrompt,
-      });
-    } else {
-      await patchSetting({
-        id: chatbotPrompt.id,
-        data,
-      });
-    }
+  const handleOnSave = async (data: ChatbotPromptSettings) => {
+    await saveSetting(data);
+
     // close the editing view
     doneEditing();
   };
@@ -71,7 +87,7 @@ function ChatbotSettings() {
   };
 
   return (
-    <Stack spacing={1}>
+    <Stack spacing={3}>
       <Stack
         direction="row"
         justifyContent="space-between"
@@ -103,19 +119,21 @@ function ChatbotSettings() {
           initialValue={{
             name: chatbotName,
             cue: chatbotCue,
-            prompt: stringifiedJsonPrompt,
+            prompt: chatbotPrompt,
           }}
-          viewType={viewType}
-          onViewChange={setViewType}
           onSave={handleOnSave}
         />
       ) : (
-        <Card elevation={0} variant="outlined">
+        <Card
+          elevation={0}
+          variant="outlined"
+          data-cy={CHATBOT_SETTINGS_SUMMARY_CY}
+        >
           <CardContent sx={{ pb: 0 }}>
             <Stack direction="column" spacing={1}>
               <Stack direction="column">
                 <Stack direction="row" spacing={1}>
-                  <FormLabel>
+                  <FormLabel htmlFor="chatbotName">
                     <Typography>{t('CHATBOT_NAME_LABEL')}:</Typography>
                   </FormLabel>
                   <Typography>{chatbotName}</Typography>
@@ -131,14 +149,8 @@ function ChatbotSettings() {
               </Stack>
 
               <Stack direction="column">
-                <PromptTitle view={viewType} onChange={setViewType} />
-                {viewType === PromptDisplay.UI ? (
-                  <ChatbotPromptDisplay messages={initialPrompt} />
-                ) : (
-                  <Box width="100%">
-                    <CodeEditor value={stringifiedJsonPrompt} readOnly />
-                  </Box>
-                )}
+                <FormLabel>{t('CHATBOT_PROMPT_LABEL')}</FormLabel>
+                <ChatbotPromptDisplay messages={initialPrompt} />
               </Stack>
               <Stack direction="column">
                 <Stack>
