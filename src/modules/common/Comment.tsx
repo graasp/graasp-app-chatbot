@@ -1,20 +1,11 @@
-import { useRef, useState } from 'react';
+import { useRef } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import type { CardProps } from '@mui/material';
-import {
-  Card,
-  CardContent,
-  CardHeader,
-  IconButton,
-  Tooltip,
-  styled,
-} from '@mui/material';
+import { Card, CardContent, CardHeader, styled } from '@mui/material';
 
 import { useLocalContext } from '@graasp/apps-query-client';
 import { formatDate } from '@graasp/sdk';
-
-import { MoreVertical } from 'lucide-react';
 
 import type { CommentAppData } from '@/config/appData';
 import { AppDataTypes } from '@/config/appData';
@@ -25,7 +16,6 @@ import { buildCommentContainerDataCy } from '@/config/selectors';
 import { BIG_BORDER_RADIUS, DEFAULT_BOT_USERNAME } from '@/constants';
 
 import ChatbotAvatar from './ChatbotAvatar';
-import CommentActions from './CommentActions';
 import CommentBody from './CommentBody';
 import CustomAvatar from './CustomAvatar';
 
@@ -35,11 +25,10 @@ const CustomCard = styled(Card)<CardProps>({
 
 type Props = {
   comment: CommentAppData;
-  onEdit: (id: string) => void;
 };
 
-function Comment({ comment, onEdit }: Props): JSX.Element {
-  const { t, i18n } = useTranslation();
+function Comment({ comment }: Props): JSX.Element {
+  const { i18n } = useTranslation();
 
   const { accountId } = useLocalContext();
   const { data: appContext } = hooks.useAppContext();
@@ -48,15 +37,9 @@ function Comment({ comment, onEdit }: Props): JSX.Element {
     name: SettingsKeys.ChatbotPrompt,
   });
   const chatbotPrompt = chatbotPrompts?.[0];
-  const [menuAnchorEl, setMenuAnchorEl] = useState<null | HTMLElement>(null);
-  const [openActionsMenu, setOpenActionsMenu] = useState(false);
   const commentRef = useRef<HTMLDivElement>(null);
 
   const isBot = comment.type === AppDataTypes.BotComment;
-
-  const isEditable = (): boolean =>
-    !!comment.creator && !!accountId && comment.creator.id === accountId;
-  const isDeletable = (): boolean => isEditable();
 
   return (
     <CustomCard
@@ -74,34 +57,6 @@ function Comment({ comment, onEdit }: Props): JSX.Element {
         subheader={formatDate(comment.updatedAt, { locale: i18n.language })}
         avatar={
           isBot ? <ChatbotAvatar /> : <CustomAvatar member={currentMember} />
-        }
-        action={
-          <>
-            <Tooltip title={t('COMMENT_ACTIONS_TOOLTIP')}>
-              <IconButton
-                onClick={(e) => {
-                  setMenuAnchorEl(e.currentTarget);
-                  setOpenActionsMenu(true);
-                }}
-              >
-                <MoreVertical />
-              </IconButton>
-            </Tooltip>
-            <CommentActions
-              open={openActionsMenu}
-              comment={comment}
-              menuAnchorEl={menuAnchorEl}
-              showEdit={isEditable()}
-              showDelete={isDeletable()}
-              // showFlag={allowCommentReporting}
-              // onClickFlag={() => setOpenFlagDialog(true)}
-              onClose={() => {
-                setMenuAnchorEl(null);
-                setOpenActionsMenu(false);
-              }}
-              onEdit={onEdit}
-            />
-          </>
         }
       />
       <CardContent sx={{ p: 2, py: 0, '&:last-child': { pb: 0 } }}>

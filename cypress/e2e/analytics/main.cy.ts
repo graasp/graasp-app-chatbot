@@ -14,6 +14,7 @@ import {
 } from '../../../src/config/selectors';
 import { actions } from '../../fixtures/mockActions';
 import { APP_ITEM } from '../../fixtures/mockItem';
+import { MOCK_APP_SETTING } from '../../fixtures/mockSettings';
 
 describe('Analytics View', () => {
   beforeEach(() => {
@@ -21,6 +22,7 @@ describe('Analytics View', () => {
       {
         items: [APP_ITEM],
         appActions: actions,
+        appSettings: [MOCK_APP_SETTING],
       },
       {
         context: Context.Analytics,
