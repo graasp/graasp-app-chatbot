@@ -1,7 +1,7 @@
 import { useTranslation } from 'react-i18next';
 
 import type { SxProps, Theme } from '@mui/material';
-import { Alert, Box } from '@mui/material';
+import { Alert, Box, CircularProgress } from '@mui/material';
 
 import { useLocalContext } from '@graasp/apps-query-client';
 import type { UUID } from '@graasp/sdk';
@@ -21,7 +21,7 @@ type Props = {
   threadSx?: SxProps<Theme>;
 };
 
-function PlayerView({ id, threadSx = {} }: Readonly<Props>) {
+function PlayerView({ id, threadSx = {} }: Readonly<Props>): JSX.Element {
   const { t } = useTranslation();
   const { data: appData, isLoading: isAppDataLoading } =
     hooks.useAppData<CommentData>();
@@ -60,13 +60,9 @@ function PlayerView({ id, threadSx = {} }: Readonly<Props>) {
   }
 
   if (isAppDataLoading || isChatbotSettingsLoading) {
-    return 'loading';
+    return <CircularProgress />;
   }
 
-  if (!chatbotPromptSettings || 0 === chatbotPromptSettings.length) {
-    return (
-      <Alert severity="warning">{t('CHATBOT_CONFIGURATION_MISSING')}</Alert>
-    );
-  }
+  return <Alert severity="warning">{t('CHATBOT_CONFIGURATION_MISSING')}</Alert>;
 }
 export default PlayerView;

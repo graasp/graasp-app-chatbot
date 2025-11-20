@@ -11,8 +11,6 @@ import Comment from './Comment';
 type Props = {
   comments?: CommentAppData[];
   threadSx: SxProps<Theme>;
-  maxThreadLength?: number;
-  maxCommentLength?: number;
 };
 
 function CommentThread({
