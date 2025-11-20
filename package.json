@@ -24,6 +24,8 @@
     "@tanstack/react-query": "4.40.1",
     "@tanstack/react-query-devtools": "4.40.1",
     "@uiw/react-codemirror": "4.23.13",
+    "@visx/scale": "3.12.0",
+    "@visx/wordcloud": "3.12.0",
     "date-fns": "4.1.0",
     "file-saver": "2.0.5",
     "i18next": "24.2.3",
@@ -38,7 +40,6 @@
     "react-markdown": "9.1.0",
     "react-mde": "12.0.8",
     "react-toastify": "11.0.5",
-    "react-wordcloud": "1.2.7",
     "remark-breaks": "4.0.0",
     "remark-gfm": "4.0.1",
     "stopword": "3.1.5"
