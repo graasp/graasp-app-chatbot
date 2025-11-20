@@ -12,14 +12,12 @@ import {
   Typography,
 } from '@mui/material';
 
-import { DEPRECATED_GPT_MODELS } from '@graasp/sdk';
-
 import { Edit, Undo2 } from 'lucide-react';
 
 import type { ChatbotPromptSettings } from '@/config/appSetting';
 import { SettingsKeys } from '@/config/appSetting';
 import { hooks, mutations } from '@/config/queryClient';
-import { DEFAULT_BOT_USERNAME, DEFAULT_MODEL_VERSION } from '@/constants';
+import { DEFAULT_BOT_USERNAME } from '@/constants';
 
 import CodeEditor from '../common/CodeEditor';
 import { ChatbotEditionView } from './chatbot/ChatbotEditingView';
@@ -46,8 +44,6 @@ function ChatbotSettings() {
   const stringifiedJsonPrompt = JSON.stringify(initialPrompt, undefined, 2);
   const chatbotCue = chatbotPrompt?.data?.chatbotCue ?? '';
   const chatbotName = chatbotPrompt?.data?.chatbotName ?? DEFAULT_BOT_USERNAME;
-  const chatbotVersion =
-    chatbotPrompt?.data?.gptVersion ?? DEFAULT_MODEL_VERSION;
 
   const doneEditing = (): void => {
     setIsEditing(false);
@@ -107,7 +103,6 @@ function ChatbotSettings() {
           initialValue={{
             name: chatbotName,
             cue: chatbotCue,
-            version: chatbotVersion,
             prompt: stringifiedJsonPrompt,
           }}
           viewType={viewType}
@@ -134,29 +129,7 @@ function ChatbotSettings() {
                   {t('CHATBOT_NAME_HELPER')}
                 </Typography>
               </Stack>
-              <Stack direction="column">
-                <Stack direction="row" spacing={1}>
-                  <FormLabel> {t('MODEL_VERSION')}:</FormLabel>
-                  <Typography>{chatbotVersion}</Typography>
-                  {chatbotVersion === DEFAULT_MODEL_VERSION ? (
-                    <Typography color="text.disabled">
-                      ({t('CHATBOT_VERSION_DEFAULT_MESSAGE')})
-                    </Typography>
-                  ) : undefined}
-                </Stack>
-                {(DEPRECATED_GPT_MODELS as string[]).includes(
-                  chatbotVersion,
-                ) && (
-                  <Alert severity="warning">
-                    {t('CHATBOT_VERSION_DEPRECATED_MESSAGE')}
-                  </Alert>
-                )}
-                <Typography variant="caption" color="text.secondary">
-                  {t('CHATBOT_MODEL_VERSION_HELPER', {
-                    default: DEFAULT_MODEL_VERSION,
-                  })}
-                </Typography>
-              </Stack>
+
               <Stack direction="column">
                 <PromptTitle view={viewType} onChange={setViewType} />
                 {viewType === PromptDisplay.UI ? (

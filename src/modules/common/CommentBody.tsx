@@ -84,7 +84,6 @@ function code(props: {
       {({ className, style, tokens, getLineProps, getTokenProps }) => (
         <div className={className} style={style}>
           {tokens.map((line, i) => (
-            // eslint-disable-next-line react/jsx-key
             <div
               key={i}
               {...getLineProps({
@@ -93,7 +92,6 @@ function code(props: {
               })}
             >
               {line.map((token, key) => (
-                // eslint-disable-next-line react/jsx-key
                 <span
                   key={key}
                   {...getTokenProps({

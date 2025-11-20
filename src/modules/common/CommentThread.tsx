@@ -6,15 +6,11 @@ import { CircularProgress, Stack, Typography } from '@mui/material';
 
 import type { ChatbotThreadMessage } from '@graasp/apps-query-client';
 import { buildPrompt } from '@graasp/apps-query-client';
-import type { GPTVersionType } from '@graasp/sdk';
 
 import { AppActionsType } from '@/config/appActions';
 import type { CommentAppData } from '@/config/appData';
 import { AppDataTypes } from '@/config/appData';
-import type {
-  ChatbotPromptSettings,
-  GeneralSettings,
-} from '@/config/appSetting';
+import type { ChatbotPromptSettings } from '@/config/appSetting';
 import { DEFAULT_GENERAL_SETTINGS, SettingsKeys } from '@/config/appSetting';
 import { hooks, mutations } from '@/config/queryClient';
 import { COMMENT_THREAD_CONTAINER_CYPRESS } from '@/config/selectors';
@@ -49,11 +45,15 @@ function LoadingIndicator({
 type Props = {
   children?: CommentAppData[];
   threadSx: SxProps<Theme>;
+  maxThreadLength?: number;
+  maxCommentLength?: number;
 };
 
 function CommentThread({
   children,
   threadSx,
+  maxThreadLength = DEFAULT_GENERAL_SETTINGS.MaxThreadLength,
+  maxCommentLength = DEFAULT_GENERAL_SETTINGS.MaxCommentLength,
 }: Readonly<Props>): JSX.Element | null {
   const [replyingId, setReplyingId] = useState<string | null>();
   const [editingId, setEditingId] = useState<string | null>();
@@ -65,17 +65,7 @@ function CommentThread({
   });
   const chatbotPrompt = chatbotPrompts?.[0];
 
-  const { mutateAsync: postChatbot, isLoading } = mutations.usePostChatBot(
-    chatbotPrompt?.data?.gptVersion as GPTVersionType,
-  );
-
-  const { data: generalSettings } = hooks.useAppSettings<GeneralSettings>({
-    name: SettingsKeys.General,
-  });
-  const { maxThreadLength, maxCommentLength } = {
-    ...DEFAULT_GENERAL_SETTINGS,
-    ...generalSettings?.[0]?.data,
-  };
+  const { mutateAsync: postChatbot, isLoading } = mutations.usePostChatBot();
 
   const allowedChatbotResponse = (
     arr: CommentAppData[],

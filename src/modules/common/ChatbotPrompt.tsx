@@ -5,20 +5,13 @@ import { Alert, CardContent, CardHeader } from '@mui/material';
 
 import type { ChatbotThreadMessage } from '@graasp/apps-query-client';
 import { buildPrompt, useLocalContext } from '@graasp/apps-query-client';
-import type { GPTVersionType, UUID } from '@graasp/sdk';
+import type { UUID } from '@graasp/sdk';
 
 import { AppActionsType } from '@/config/appActions';
 import type { CommentData } from '@/config/appData';
 import { AppDataTypes } from '@/config/appData';
-import type {
-  ChatbotPromptSettings,
-  GeneralSettings,
-} from '@/config/appSetting';
-import {
-  DEFAULT_GENERAL_SETTINGS,
-  GeneralSettingsKeys,
-  SettingsKeys,
-} from '@/config/appSetting';
+import type { ChatbotPromptSettings } from '@/config/appSetting';
+import { SettingsKeys } from '@/config/appSetting';
 import { hooks, mutations } from '@/config/queryClient';
 import {
   buildChatbotPromptContainerDataCy,
@@ -50,14 +43,8 @@ function ChatbotPrompt({ id }: Props): JSX.Element | null {
   });
   const chatbotPrompt = chatbotPrompts?.[0];
 
-  const { mutateAsync: postChatBot } = mutations.usePostChatBot(
-    chatbotPrompt?.data?.gptVersion as GPTVersionType,
-  );
+  const { mutateAsync: postChatBot } = mutations.usePostChatBot();
 
-  const { data: generalSettings } = hooks.useAppSettings<GeneralSettings>({
-    name: SettingsKeys.General,
-  });
-  const generalSetting = generalSettings?.[0]?.data ?? DEFAULT_GENERAL_SETTINGS;
   const { accountId } = useLocalContext();
 
   const [openEditor, setOpenEditor] = useState(false);
@@ -186,7 +173,6 @@ function ChatbotPrompt({ id }: Props): JSX.Element | null {
 
         {openEditor ? (
           <CommentEditor
-            maxTextLength={generalSetting[GeneralSettingsKeys.MaxCommentLength]}
             onCancel={() => setOpenEditor(false)}
             onSend={handleNewDiscussion}
           />

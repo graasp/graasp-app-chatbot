@@ -16,8 +16,7 @@ import type { UnionOfConst } from '@graasp/sdk';
 
 import { AlertTriangle, Info, MessageSquareText, Settings } from 'lucide-react';
 
-import type { GeneralSettings } from '@/config/appSetting';
-import { SettingsKeys } from '@/config/appSetting';
+import { ChatbotPromptSettings, SettingsKeys } from '@/config/appSetting';
 import { hooks } from '@/config/queryClient';
 import {
   BUILDER_VIEW_CY,
@@ -42,9 +41,10 @@ function AdminView(): JSX.Element {
   const { t } = useTranslation();
   const [activeTab, setActiveTab] = useState<TabsType>(Tabs.TABLE_VIEW);
 
-  const { data: generalSettings } = hooks.useAppSettings<GeneralSettings>({
-    name: SettingsKeys.ChatbotPrompt,
-  });
+  const { data: chatbotPromptSettings } =
+    hooks.useAppSettings<ChatbotPromptSettings>({
+      name: SettingsKeys.ChatbotPrompt,
+    });
 
   return (
     <Box data-cy={BUILDER_VIEW_CY}>
@@ -56,6 +56,13 @@ function AdminView(): JSX.Element {
           centered
         >
           <Tab
+            data-cy={TAB_TABLE_VIEW_CYPRESS}
+            value={Tabs.TABLE_VIEW}
+            label={t('CONVERSATIONS_VIEW_TITLE')}
+            icon={<MessageSquareText />}
+            iconPosition="start"
+          />
+          <Tab
             data-cy={TAB_SETTINGS_VIEW_CYPRESS}
             value={Tabs.SETTINGS_VIEW}
             label={t('SETTINGS_VIEW_TITLE')}
@@ -65,21 +72,15 @@ function AdminView(): JSX.Element {
                   vertical: 'top',
                   horizontal: 'left',
                 }}
-                invisible={generalSettings && 0 < generalSettings?.length}
+                invisible={
+                  chatbotPromptSettings && 0 < chatbotPromptSettings?.length
+                }
                 badgeContent={<AlertTriangle size={14} />}
                 color="warning"
               >
                 <Settings />
               </Badge>
             }
-            iconPosition="start"
-          />
-
-          <Tab
-            data-cy={TAB_TABLE_VIEW_CYPRESS}
-            value={Tabs.TABLE_VIEW}
-            label={t('CONVERSATIONS_VIEW_TITLE')}
-            icon={<MessageSquareText />}
             iconPosition="start"
           />
           <Tab
@@ -94,12 +95,17 @@ function AdminView(): JSX.Element {
         <TabPanel value={Tabs.TABLE_VIEW} data-cy={TABLE_VIEW_PANE_CYPRESS}>
           {
             // oxlint-disable-next-line eslint/yoda
-            generalSettings?.length === 0 && (
-              <Alert severity="warning">
-                No config{' '}
-                <Button onClick={() => setActiveTab(Tabs.SETTINGS_VIEW)}>
-                  Configure
-                </Button>
+            chatbotPromptSettings?.length === 0 && (
+              <Alert
+                severity="warning"
+                sx={{ mb: 2 }}
+                action={
+                  <Button onClick={() => setActiveTab(Tabs.SETTINGS_VIEW)}>
+                    {t('CONFIGURE_BUTTON')}
+                  </Button>
+                }
+              >
+                <Typography>{t('CHATBOT_CONFIGURATION_MISSING')}</Typography>
               </Alert>
             )
           }

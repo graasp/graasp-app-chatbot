@@ -28,6 +28,7 @@ import {
 } from 'lucide-react';
 
 import type { CommentAppData } from '@/config/appData';
+import { DEFAULT_GENERAL_SETTINGS } from '@/config/appSetting';
 import {
   COMMENT_EDITOR_BOLD_BUTTON_CYPRESS,
   COMMENT_EDITOR_CANCEL_BUTTON_CYPRESS,
@@ -76,7 +77,7 @@ function CommentEditor({
   onCancel,
   onSend,
   comment,
-  maxTextLength = 300, // DEFAULT_MAX_COMMENT_LENGTH_SETTING,
+  maxTextLength = DEFAULT_GENERAL_SETTINGS.MaxCommentLength,
 }: Readonly<Props>): JSX.Element {
   const { t } = useTranslation();
   const [text, setText] = useState(comment?.data.content ?? '');

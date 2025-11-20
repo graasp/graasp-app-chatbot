@@ -35,8 +35,6 @@
     "SAVE_LABEL": "Sauvegarder",
     "SAVED_LABEL": "Sauvegardé",
     "GENERAL_SETTING_TITLE": "Généraux",
-    "MAXIMUM_COMMENT_LENGTH_LABEL": "Longueur maximum d'un commentaire (nombre de caractères)",
-    "MAXIMUM_THREAD_LENGTH_LABEL": "Longueur maximum de la discussion (nombre de messages)",
     "JUST_NOW_COMMENT_HEADER": "À l'instant",
     "COMMENT_ACTIONS_TOOLTIP": "Actions",
     "COMMENT_TEXT_TOO_LONG": "Le text du commentaire ne peut pas dépasser {{max_length}} caractères",

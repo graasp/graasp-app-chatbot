@@ -8,11 +8,8 @@ import {
   AccordionSummary,
   Box,
   Button,
-  Chip,
   FormLabel,
   Link,
-  MenuItem,
-  Select,
   Stack,
   TextField,
   TextareaAutosize,
@@ -21,47 +18,18 @@ import {
 } from '@mui/material';
 
 import type { ChatBotMessage } from '@graasp/sdk';
-import { DEPRECATED_GPT_MODELS, GPTVersion } from '@graasp/sdk';
 
 import { ChevronDownIcon } from 'lucide-react';
 
 import type { ChatbotPromptSettings } from '@/config/appSetting';
 import { SETTING_CHATBOT_PROMPT_CODE_EDITOR_CY } from '@/config/selectors';
-import { DEFAULT_MODEL_VERSION, SMALL_BORDER_RADIUS } from '@/constants';
+import { SMALL_BORDER_RADIUS } from '@/constants';
 import CodeEditor from '@/modules/common/CodeEditor';
 
 import { ChatbotConfigurator } from './ChatbotConfigurator';
 import { PromptDisplay } from './PromptDisplaySwitch';
 import type { PromptDisplayType } from './PromptDisplaySwitch';
 import { PromptTitle } from './PromptTitle';
-
-type ModelDef = {
-  key: string;
-  value: string;
-  isRecommended: boolean;
-  isDeprecated: boolean;
-};
-
-function compareModels(a: ModelDef, b: ModelDef): number {
-  // 1. Recommended first
-  if (a.isRecommended && !b.isRecommended) {
-    return -1;
-  }
-  if (!a.isRecommended && b.isRecommended) {
-    return 1;
-  }
-
-  // 2. Deprecated last
-  if (a.isDeprecated && !b.isDeprecated) {
-    return 1;
-  }
-  if (!a.isDeprecated && b.isDeprecated) {
-    return -1;
-  }
-
-  // 3. Alphabetical by key
-  return a.key.localeCompare(b.key);
-}
 
 const TextArea = styled(TextareaAutosize)(({ theme }) => ({
   borderRadius: SMALL_BORDER_RADIUS,
@@ -88,7 +56,6 @@ const TextArea = styled(TextareaAutosize)(({ theme }) => ({
 type Props = {
   initialValue: {
     name: string;
-    version: string;
     cue: string;
     prompt: string;
   };
@@ -108,7 +75,6 @@ function ChatbotEditionView({
   const [prompt, setPrompt] = useState(parsedPrompt);
   const [cue, setCue] = useState(initialValue.cue);
   const [name, setName] = useState(initialValue.name);
-  const [version, setVersion] = useState(initialValue.version);
   const [formattingError, setFormattingError] = useState(false);
   const [unsavedChanges, setUnsavedChanges] = useState(false);
 
@@ -143,11 +109,6 @@ function ChatbotEditionView({
     }
   };
 
-  const handleChangeChatbotVersion = (value: string): void => {
-    setVersion(value);
-    setUnsavedChanges(true);
-  };
-
   const handleChangeChatbotCue = (value: string): void => {
     setCue(value);
     setUnsavedChanges(true);
@@ -164,26 +125,10 @@ function ChatbotEditionView({
         initialPrompt: prompt,
         chatbotCue: cue,
         chatbotName: name,
-        gptVersion: version,
       };
       onSave(data);
     }
   };
-
-  // currently supported models
-  const models = Object.entries(GPTVersion)
-    .reduce<ModelDef[]>((acc, [modelKey, modelName]) => {
-      acc.push({
-        key: modelKey,
-        value: modelName,
-        isDeprecated: (DEPRECATED_GPT_MODELS as string[]).includes(modelName),
-        isRecommended: modelName === DEFAULT_MODEL_VERSION,
-      });
-
-      return acc;
-    }, [])
-    // sort models to put deprecated last in the list
-    .toSorted(compareModels);
 
   return (
     <Stack spacing={2}>
@@ -201,40 +146,7 @@ function ChatbotEditionView({
           onChange={({ target: { value } }) => handleChangeChatbotName(value)}
         />
       </Box>
-      <Box>
-        <Stack>
-          <FormLabel>{t('MODEL_VERSION')}</FormLabel>
-          <Typography variant="caption" color="text.secondary">
-            {t('CHATBOT_MODEL_VERSION_HELPER', {
-              default: DEFAULT_MODEL_VERSION,
-            })}
-          </Typography>
-        </Stack>
-        <Select
-          value={version}
-          label={t('MODEL_VERSION')}
-          onChange={({ target: { value } }) =>
-            handleChangeChatbotVersion(value)
-          }
-          fullWidth
-          renderValue={(selected) => <Typography>{selected}</Typography>}
-        >
-          {models.map(({ key, value, isRecommended, isDeprecated }) => (
-            <MenuItem key={key} value={value} sx={{ display: 'block' }}>
-              <Stack direction="row" spacing={1}>
-                <Typography>{value}</Typography>
-                {isRecommended && (
-                  <Chip label={t('RECOMMENDED')} size="small" color="primary" />
-                )}
-                {isDeprecated && <Chip label={t('DEPRECATED')} size="small" />}
-              </Stack>
-              <Typography variant="caption" color="text.secondary">
-                {t(`${key}_DESCRIPTION`)}
-              </Typography>
-            </MenuItem>
-          ))}
-        </Select>
-      </Box>
+
       <Box>
         <Stack spacing={2}>
           <PromptTitle view={viewType} onChange={onViewChange} />
