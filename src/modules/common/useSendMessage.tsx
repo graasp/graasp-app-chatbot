@@ -1,5 +1,6 @@
 import { useCallback } from 'react';
 
+import { AppActionsType } from '@/config/appActions';
 import { AppDataTypes } from '@/config/appData';
 import { mutations } from '@/config/queryClient';
 
@@ -10,6 +11,7 @@ import { mutations } from '@/config/queryClient';
 export const useSendMessage = () => {
   const { mutateAsync: postAppDataAsync, isLoading } =
     mutations.usePostAppData();
+  const { mutateAsync: postAppActionAsync } = mutations.usePostAppAction();
 
   const sendMessage = useCallback(
     async (newUserComment: string) => {
@@ -21,9 +23,14 @@ export const useSendMessage = () => {
         type: AppDataTypes.UserComment,
       });
 
+      await postAppActionAsync({
+        type: AppActionsType.Reply,
+        data: { content: newUserComment },
+      });
+
       return userMessage;
     },
-    [postAppDataAsync],
+    [postAppDataAsync, postAppActionAsync],
   );
 
   return { sendMessage, isLoading };
