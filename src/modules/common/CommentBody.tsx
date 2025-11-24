@@ -11,6 +11,9 @@ import { BIG_BORDER_RADIUS } from '@/constants';
 
 // oxlint-disable no-magic-numbers
 const StyledReactMarkdown = styled(ReactMarkdown)(({ theme }) => ({
+  background: '#efefef',
+  borderRadius: 8,
+  padding: theme.spacing(1),
   '& .prism-code': {
     fontFamily: 'var(--monospace-fonts)',
     backgroundColor: 'transparent !important',

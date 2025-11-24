@@ -1,25 +1,29 @@
 import { Avatar } from '@mui/material';
 
-import type { Member } from '@graasp/sdk';
 import { stringToColor } from '@graasp/ui/apps';
 
 import { ANONYMOUS_USER } from '@/constants';
-import { getInitials } from '@/utils/utils';
 
 type Props = {
-  member?: Member;
+  username?: string;
   imgSrc?: string;
 };
 
-function CustomAvatar({ member, imgSrc }: Readonly<Props>): JSX.Element {
-  const userName = member?.name ?? ANONYMOUS_USER;
+function CustomAvatar({
+  username = ANONYMOUS_USER,
+  imgSrc,
+}: Readonly<Props>): JSX.Element {
   return (
     <Avatar
-      alt={userName}
+      alt={username}
       src={imgSrc}
-      sx={{ bgcolor: stringToColor(userName) }}
+      sx={{
+        bgcolor: stringToColor(username),
+        color: 'white',
+        textTransform: 'uppercase',
+      }}
     >
-      {getInitials(userName)}
+      {username[0]}
     </Avatar>
   );
 }

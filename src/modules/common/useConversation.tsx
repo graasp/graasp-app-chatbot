@@ -1,0 +1,46 @@
+import { AppDataTypes, CommentData } from '@/config/appData';
+import { ChatbotPromptSettings, SettingsKeys } from '@/config/appSetting';
+import { hooks } from '@/config/queryClient';
+import { ANONYMOUS_USER, DEFAULT_BOT_USERNAME } from '@/constants';
+
+export type Comment = {
+  id: string;
+  body: string;
+  createdAt: string;
+  isBot: boolean;
+  username: string;
+};
+
+export const useConversation = (accountId?: string) => {
+  const { data: appData, isLoading: isAppDataLoading } =
+    hooks.useAppData<CommentData>();
+  const { data: chatbotPromptSettings, isLoading: isChatbotSettingsLoading } =
+    hooks.useAppSettings<ChatbotPromptSettings>({
+      name: SettingsKeys.ChatbotPrompt,
+    });
+
+  // get comments for given user only
+  const comments = appData
+    ?.filter((res) => res.creator?.id === accountId)
+    ?.toSorted((c1, c2) => (c1.createdAt > c2.createdAt ? 1 : -1))
+    ?.map((c) => {
+      const isBot = c.type === AppDataTypes.BotComment;
+      return {
+        id: c.id,
+        createdAt: c.createdAt,
+        isBot,
+        body: c.data.content,
+        username: isBot
+          ? DEFAULT_BOT_USERNAME
+          : (c.account.name ?? ANONYMOUS_USER),
+      };
+    });
+
+  const chatbotPrompt = chatbotPromptSettings?.[0]?.data;
+
+  return {
+    comments: comments ?? [],
+    chatbotPrompt,
+    isLoading: isAppDataLoading || isChatbotSettingsLoading,
+  };
+};

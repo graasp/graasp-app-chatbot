@@ -51,7 +51,7 @@ function AnalyticsView(): JSX.Element {
                 marginTop={1}
                 justifyContent="center"
               >
-                <Grid2 size={{ xs: 12, md: 4 }}>
+                <Grid2 size={{ xs: 12, sm: 4 }}>
                   <StatisticCard
                     icon={<CommentIcon fontSize="large" color="primary" />}
                     title={t('STATISTIC_TOTAL_USER_COMMENTS_TITLE')}
@@ -65,7 +65,7 @@ function AnalyticsView(): JSX.Element {
                     </Typography>
                   </StatisticCard>
                 </Grid2>
-                <Grid2 size={{ xs: 12, md: 4 }}>
+                <Grid2 size={{ xs: 12, sm: 4 }}>
                   <StatisticCard
                     icon={<PeopleIcon fontSize="large" color="primary" />}
                     title={t('STATISTIC_AVERAGE_USER_COMMENTS_TITLE')}
@@ -76,7 +76,7 @@ function AnalyticsView(): JSX.Element {
                     </Typography>
                   </StatisticCard>
                 </Grid2>
-                <Grid2 size={{ xs: 12, md: 4 }}>
+                <Grid2 size={{ xs: 12, sm: 4 }}>
                   <StatisticCard
                     icon={<CloudIcon fontSize="large" color="primary" />}
                     title={t('WORDS_FREQUENCY')}
@@ -92,7 +92,6 @@ function AnalyticsView(): JSX.Element {
                   </StatisticCard>
                 </Grid2>
               </Grid2>
-
               <FrequentWords
                 commentsByUserSide={commentsByUserSide}
                 allWords={allWords}

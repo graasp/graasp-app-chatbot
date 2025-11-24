@@ -102,7 +102,6 @@ export const buildChatbotPromptContainerDataCy = (id: string): string =>
 export const buildCommentResponseBoxDataCy = (id: string): string =>
   `${COMMENT_RESPONSE_BOX_CY}-${id}`;
 
-export const COMMENT_THREAD_CONTAINER_CYPRESS = 'comment_thread_container';
 export const ORPHAN_BUTTON_CYPRESS = 'orphan_button';
 export const CODE_EXECUTION_CONTAINER_CYPRESS = 'code_execution_container';
 export const CODE_EDITOR_ID_CY = 'code_editor';

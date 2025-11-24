@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next';
 import {
   Button,
   Chip,
+  Dialog,
   Grid2,
   Stack,
   TextField,
@@ -19,9 +20,9 @@ import {
   buildKeywordChipId,
 } from '@/config/selectors';
 
+import { ConversationForUser } from '../comment/ConversationForUser';
 import KeywordChip from '../common/KeywordChip';
 import TextWithHighlightedKeywords from '../common/TextWithHighlightedKeywords';
-import PlayerView from '../main/PlayerView';
 import { createRegexFromString, getTopFrequentWords } from './utils';
 
 type Props = {
@@ -152,15 +153,15 @@ function FrequentWords({
           </Stack>
         </Grid2>
         {chatMemberID && (
-          <Grid2
-            size={{ xs: 12, md: 6 }}
-            sx={{ height: '100%', overflow: 'hidden' }}
+          <Dialog
+            open
+            onClose={() => {
+              setChatMemberID('');
+            }}
           >
-            <PlayerView
-              id={chatMemberID}
-              threadSx={{ overflow: 'auto', height: '100%' }}
-            />
-          </Grid2>
+            <ConversationForUser userId={chatMemberID} />
+            <Button>{t('CLOSE')}</Button>
+          </Dialog>
         )}
       </Grid2>
     </Stack>
