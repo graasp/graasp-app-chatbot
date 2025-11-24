@@ -20,26 +20,41 @@ export const useConversation = (accountId?: string) => {
     });
 
   // get comments for given user only
-  const comments = appData
-    ?.filter((res) => res.creator?.id === accountId)
-    ?.toSorted((c1, c2) => (c1.createdAt > c2.createdAt ? 1 : -1))
-    ?.map((c) => {
-      const isBot = c.type === AppDataTypes.BotComment;
-      return {
-        id: c.id,
-        createdAt: c.createdAt,
-        isBot,
-        body: c.data.content,
-        username: isBot
-          ? DEFAULT_BOT_USERNAME
-          : (c.account.name ?? ANONYMOUS_USER),
-      };
-    });
+  const comments =
+    appData
+      ?.filter((res) => res.creator?.id === accountId)
+      ?.toSorted((c1, c2) => (c1.createdAt > c2.createdAt ? 1 : -1))
+      ?.map((c) => {
+        const isBot = c.type === AppDataTypes.BotComment;
+        return {
+          id: c.id,
+          createdAt: c.createdAt,
+          isBot,
+          body: c.data.content,
+          username: isBot
+            ? DEFAULT_BOT_USERNAME
+            : (c.account.name ?? ANONYMOUS_USER),
+        };
+      }) ?? [];
 
   const chatbotPrompt = chatbotPromptSettings?.[0]?.data;
 
+  // include cue as comment if there is no comments
+  const chatbotCueComment =
+    chatbotPrompt?.chatbotCue && 0 === comments.length
+      ? [
+          {
+            id: 'cue',
+            isBot: true,
+            createdAt: new Date().toISOString(),
+            body: chatbotPrompt.chatbotCue,
+            username: DEFAULT_BOT_USERNAME,
+          },
+        ]
+      : [];
+
   return {
-    comments: comments ?? [],
+    comments: [...chatbotCueComment, ...comments],
     chatbotPrompt,
     isLoading: isAppDataLoading || isChatbotSettingsLoading,
   };

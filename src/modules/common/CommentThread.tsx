@@ -7,7 +7,7 @@ import { Stack, Typography } from '@mui/material';
 import { intlFormat } from 'date-fns';
 import groupby from 'lodash.groupby';
 
-import Comment from './Comment';
+import { Comment } from './Comment';
 import { type Comment as CommentType } from './useConversation';
 
 type Props = {
@@ -56,9 +56,9 @@ function CommentThread({
                 return (
                   <Comment
                     key={c.id}
+                    id={c.id}
                     isBot={c.isBot}
                     username={c.username}
-                    id="hello"
                     body={c.body}
                   />
                 );

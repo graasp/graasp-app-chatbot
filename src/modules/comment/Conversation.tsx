@@ -11,7 +11,6 @@ import {
 } from '@mui/material';
 
 import { ChatbotPromptSettings } from '@/config/appSetting';
-import { DEFAULT_BOT_USERNAME } from '@/constants';
 
 import CommentEditor from '../common/CommentEditor';
 import CommentThread from '../common/CommentThread';
@@ -33,21 +32,7 @@ function Conversation({
   const { t } = useTranslation();
 
   if (chatbotPrompt) {
-    const { chatbotCue, chatbotName } = chatbotPrompt;
-
-    // construct cue message if there is no messages yet
-    let commentsToShow = comments;
-    if (0 === comments.length) {
-      commentsToShow = [
-        {
-          id: 'cue',
-          isBot: true,
-          createdAt: new Date().toISOString(),
-          body: chatbotCue,
-          username: DEFAULT_BOT_USERNAME,
-        },
-      ];
-    }
+    const { chatbotName } = chatbotPrompt;
 
     return (
       <Box
@@ -62,7 +47,7 @@ function Conversation({
           <Stack gap={3} px={2}>
             <ChatbotHeader name={chatbotName} />
             <Divider />
-            <CommentThread threadSx={threadSx} comments={commentsToShow} />
+            <CommentThread threadSx={threadSx} comments={comments} />
             <CommentEditor chatbotPrompt={chatbotPrompt} />
           </Stack>
         </CommentContainer>

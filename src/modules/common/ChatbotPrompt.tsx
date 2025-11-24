@@ -1,6 +1,6 @@
 import { DEFAULT_BOT_USERNAME } from '@/constants';
 
-import Comment from './Comment';
+import { Comment } from './Comment';
 
 type Props = {
   chatbotCue?: string;
@@ -12,9 +12,7 @@ function ChatbotPrompt({
   chatbotName = DEFAULT_BOT_USERNAME,
 }: Readonly<Props>): JSX.Element | null {
   if (chatbotCue) {
-    return (
-      <Comment id={'cue'} isBot body={chatbotCue} username={chatbotName} />
-    );
+    return <Comment id="cue" isBot body={chatbotCue} username={chatbotName} />;
   }
   return null;
 }

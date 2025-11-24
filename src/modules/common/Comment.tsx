@@ -9,13 +9,18 @@ import CommentBody from './CommentBody';
 import CustomAvatar from './CustomAvatar';
 
 type Props = {
+  id: string;
   body: string;
   isBot: boolean;
-  id: string;
   username: string;
 };
 
-function Comment({ id, isBot, body, username }: Readonly<Props>): JSX.Element {
+export function Comment({
+  id,
+  isBot,
+  body,
+  username,
+}: Readonly<Props>): JSX.Element {
   const commentRef = useRef<HTMLDivElement>(null);
 
   const avatar = isBot ? (
@@ -30,19 +35,18 @@ function Comment({ id, isBot, body, username }: Readonly<Props>): JSX.Element {
         direction={isBot ? 'row' : 'row-reverse'}
         alignItems="end"
         justifyContent={isBot ? 'start' : 'end'}
+        gap={1}
+        pl={isBot ? 0 : 10}
+        pr={isBot ? 10 : 0}
       >
         <Stack>{avatar}</Stack>
-        <Stack
-          sx={{ p: 2, py: 0, '&:last-child': { pb: 0 } }}
-          alignItems={isBot ? 'start' : 'end'}
-          gap={1}
-        >
+        <Stack sx={{ py: 0 }} alignItems={isBot ? 'start' : 'end'} gap={1}>
           <Typography variant="subtitle2">{username}</Typography>
-          <CommentBody>{body}</CommentBody>
+          <CommentBody background={isBot ? undefined : '#ddd'}>
+            {body}
+          </CommentBody>
         </Stack>
       </Stack>
     </Stack>
   );
 }
-
-export default Comment;

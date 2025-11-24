@@ -61,7 +61,8 @@ function CommentEditor({
 
   const { generateChatbotAnswer, isLoading: askChatbotLoading } =
     useAskChatbot(chatbotPrompt);
-  const { sendMessage, isLoading: sendMessageLoading } = useSendMessage();
+  const { sendMessage, isLoading: sendMessageLoading } =
+    useSendMessage(chatbotPrompt);
 
   const onSendHandler = async (newUserComment: string) => {
     if (!chatbotPrompt) {

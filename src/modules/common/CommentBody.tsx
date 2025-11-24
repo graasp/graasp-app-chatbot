@@ -11,7 +11,6 @@ import { BIG_BORDER_RADIUS } from '@/constants';
 
 // oxlint-disable no-magic-numbers
 const StyledReactMarkdown = styled(ReactMarkdown)(({ theme }) => ({
-  background: '#efefef',
   borderRadius: 8,
   padding: theme.spacing(1),
   '& .prism-code': {
@@ -115,11 +114,17 @@ function code(props: {
   );
 }
 
-function CommentBody({ children }: Readonly<{ children: string }>) {
+function CommentBody({
+  children,
+  background = '#efefef',
+}: Readonly<{ children: string; background?: string }>) {
   return (
     <StyledReactMarkdown
       remarkPlugins={[remarkGfm, remarkBreaks]}
       components={{ code }}
+      sx={{
+        background,
+      }}
     >
       {children}
     </StyledReactMarkdown>
