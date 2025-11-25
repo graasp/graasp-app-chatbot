@@ -23,3 +23,5 @@ export const DEFAULT_GENERAL_SETTINGS = {
   MaxCommentLength: 300,
   MaxThreadLength: 50,
 };
+
+export const CHATBOT_THUMBNAIL_APP_SETTING_NAME = 'chatbot-thumbnail';

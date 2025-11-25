@@ -5,9 +5,9 @@ import { useTranslation } from 'react-i18next';
 import { Box, Button, Stack, TextField } from '@mui/material';
 
 import type { ChatbotPromptSettings } from '@/config/appSetting';
-import ChatbotAvatar from '@/modules/common/ChatbotAvatar';
 import { TextArea } from '@/modules/common/TextArea';
 
+import { ChatbotAvatarEditor } from './ChatbotAvatarEditor';
 import { ChatbotSetting } from './ChatbotSetting';
 
 type Props = {
@@ -64,7 +64,7 @@ function ChatbotEditionView({
         alignItems="center"
         gap={2}
       >
-        <ChatbotAvatar />
+        <ChatbotAvatarEditor />
         <TextField
           name={t('CHATBOT_NAME_LABEL')}
           label={t('CHATBOT_NAME_LABEL')}
