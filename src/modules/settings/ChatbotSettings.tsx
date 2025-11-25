@@ -38,7 +38,6 @@ const useChatbotSetting = () => {
 
   const saveSetting = useCallback(
     async (data: ChatbotPromptSettings): Promise<void> => {
-      // setting does not exist
       if (setting) {
         await patchSetting({
           id: setting.id,
@@ -133,7 +132,7 @@ function ChatbotSettings() {
             <Stack direction="column" spacing={1}>
               <Stack direction="column">
                 <Stack direction="row" spacing={1}>
-                  <FormLabel htmlFor="chatbotName">
+                  <FormLabel>
                     <Typography>{t('CHATBOT_NAME_LABEL')}:</Typography>
                   </FormLabel>
                   <Typography>{chatbotName}</Typography>
