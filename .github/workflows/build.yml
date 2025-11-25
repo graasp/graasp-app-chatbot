@@ -20,5 +20,6 @@ jobs:
       - name: Build
         run: yarn build
 
-      - name: Unit Tests
-        run: yarn vitest
+      # enable again when we have unit tests
+      # - name: Unit Tests
+      #   run: yarn vitest

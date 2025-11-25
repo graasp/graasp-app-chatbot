@@ -5,7 +5,9 @@ import {
   Button,
   Chip,
   Dialog,
-  Grid2,
+  DialogActions,
+  DialogContent,
+  DialogTitle,
   Stack,
   TextField,
   Typography,
@@ -127,43 +129,41 @@ function FrequentWords({
           ))}
         </Stack>
       </Stack>
-      <Grid2 container sx={{ height: '500px' }}>
-        <Grid2
-          size={{ xs: 12, md: 6 }}
-          sx={{ height: '100%', overflowY: 'auto' }}
-        >
-          <Stack spacing={2} p={1}>
-            {commentsMatchSelectedWords.map((ele) => (
-              <TextWithHighlightedKeywords
-                key={ele.id}
-                sentence={ele.data.content}
-                memberName={ele.account.name}
-                words={[...selectedFrequentWords, ...selectedCustomWords]}
-                onClick={() => setChatMemberID(ele.account.id)}
-                buttonId={buildCheckWholeMemberChatButtonId(ele.account.id)}
-              />
-            ))}
+      <Stack spacing={2} p={1}>
+        {commentsMatchSelectedWords.map((ele) => (
+          <TextWithHighlightedKeywords
+            key={ele.id}
+            sentence={ele.data.content}
+            memberName={ele.account.name}
+            words={[...selectedFrequentWords, ...selectedCustomWords]}
+            onClick={() => setChatMemberID(ele.account.id)}
+            buttonId={buildCheckWholeMemberChatButtonId(ele.account.id)}
+          />
+        ))}
 
-            {
-              // oxlint-disable-next-line eslint/yoda
-              commentsMatchSelectedWords.length === 0 && (
-                <Typography mt={2}>{t('NO_RESULTS_MATCH_WORDS')}</Typography>
-              )
-            }
-          </Stack>
-        </Grid2>
-        {chatMemberID && (
-          <Dialog
-            open
-            onClose={() => {
-              setChatMemberID('');
-            }}
-          >
+        {
+          // oxlint-disable-next-line eslint/yoda
+          commentsMatchSelectedWords.length === 0 && (
+            <Typography mt={2}>{t('NO_RESULTS_MATCH_WORDS')}</Typography>
+          )
+        }
+      </Stack>
+      {chatMemberID && (
+        <Dialog
+          open
+          onClose={() => {
+            setChatMemberID('');
+          }}
+        >
+          <DialogTitle>{t('ANALYTICS_CONVERSATION_MEMBER')}</DialogTitle>
+          <DialogContent>
             <ConversationForUser userId={chatMemberID} />
+          </DialogContent>
+          <DialogActions>
             <Button>{t('CLOSE')}</Button>
-          </Dialog>
-        )}
-      </Grid2>
+          </DialogActions>
+        </Dialog>
+      )}
     </Stack>
   );
 }

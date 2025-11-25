@@ -138,7 +138,6 @@ function ConversationsView() {
         title={t('DISCUSSION_DIALOG_TITLE', { user: currentUser.name })}
         onClose={onCloseDialog}
       >
-        {/* // todo: filter app data  */}
         <ConversationForUser userId={currentUser.id} />
         <IconButton
           data-cy={TABLE_VIEW_REVIEW_DIALOG_CLOSE_BUTTON_CYPRESS}

@@ -18,6 +18,7 @@ function PlayerView(): JSX.Element {
 
   return (
     <Conversation
+      mode="write"
       isLoading={isLoading}
       comments={comments}
       chatbotPrompt={chatbotPrompt}

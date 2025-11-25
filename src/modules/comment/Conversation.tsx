@@ -23,11 +23,13 @@ function Conversation({
   comments,
   chatbotPrompt,
   isLoading,
+  mode = 'read',
 }: Readonly<{
   chatbotPrompt?: ChatbotPromptSettings;
   threadSx?: SxProps<Theme>;
   isLoading?: boolean;
   comments: Comment[];
+  mode?: 'read' | 'write';
 }>) {
   const { t } = useTranslation();
 
@@ -48,7 +50,9 @@ function Conversation({
             <ChatbotHeader name={chatbotName} />
             <Divider />
             <CommentThread threadSx={threadSx} comments={comments} />
-            <CommentEditor chatbotPrompt={chatbotPrompt} />
+            {'write' === mode && (
+              <CommentEditor chatbotPrompt={chatbotPrompt} />
+            )}
           </Stack>
         </CommentContainer>
       </Box>

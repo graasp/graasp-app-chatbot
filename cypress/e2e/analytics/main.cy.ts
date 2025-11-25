@@ -7,7 +7,6 @@ import {
   ANALYTICS_VIEW_CY,
   ANALYTICS_WORDS_CLOUD_MODAL_ID,
   KEYWORD_CHIP_COUNT_ID,
-  PLAYER_VIEW_CY,
   buildCheckWholeMemberChatButtonId,
   buildDataCy,
   buildKeywordChipId,
@@ -72,7 +71,14 @@ describe('Analytics View', () => {
       cy.get(
         `#${buildCheckWholeMemberChatButtonId(actions[0]?.account?.id)}`,
       ).click();
-      cy.get(buildDataCy(PLAYER_VIEW_CY)).should('be.visible');
+
+      // show conversation
+      cy.get('[role="dialog"]')
+        .should('contain', MOCK_APP_SETTING.data.chatbotCue)
+        .should('contain', MOCK_APP_SETTING.data.chatbotName);
+
+      // do not show textbox
+      cy.get('[role="textbox"]').should('not.exist');
     });
   });
 });

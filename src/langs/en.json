@@ -63,6 +63,7 @@
     "CHECK_WHOLE_CHAT": "Check the whole chat",
     "CONFIGURE_BUTTON": "Configure",
     "CLOSE": "Close",
-    "SIGN_OUT_ALERT": "You should be signed in to interact with the chatbot"
+    "SIGN_OUT_ALERT": "You should be signed in to interact with the chatbot",
+    "ANALYTICS_CONVERSATION_MEMBER": "Conversation"
   }
 }
