@@ -1,13 +1,20 @@
 import { ChangeEventHandler, useRef } from 'react';
 
-import { Avatar, Badge, IconButton, styled } from '@mui/material';
+import {
+  Avatar,
+  Badge,
+  CircularProgress,
+  IconButton,
+  styled,
+} from '@mui/material';
+
+import { useLocalContext } from '@graasp/apps-query-client';
 
 import { useMutation } from '@tanstack/react-query';
 import axios from 'axios';
 import { PenIcon } from 'lucide-react';
 
 import { CHATBOT_THUMBNAIL_APP_SETTING_NAME } from '@/config/appSetting';
-import { API_HOST } from '@/config/env';
 import { API_ROUTES, hooks } from '@/config/queryClient';
 
 const { buildUploadAppSettingFilesRoute } = API_ROUTES;
@@ -33,13 +40,8 @@ const EditButton = styled(IconButton)(() => ({
   },
 }));
 
-const getItemId = () => {
-  const sp = new URL(location.href).searchParams;
-  return sp.get('itemId') ?? 'invalid';
-};
-
 export const useUploadThumbnail = () => {
-  const itemId = getItemId();
+  const { itemId, apiHost } = useLocalContext();
   const { data: token } = hooks.useAuthToken(itemId);
   return useMutation({
     mutationFn: async (args: { file: Blob }) => {
@@ -53,7 +55,7 @@ export const useUploadThumbnail = () => {
       payload.append('files', args.file);
 
       await axios.post(
-        `${API_HOST}/${buildUploadAppSettingFilesRoute(itemId)}`,
+        `${apiHost}/${buildUploadAppSettingFilesRoute(itemId)}`,
         payload,
         {
           //   formData: true,
@@ -76,7 +78,7 @@ export const useUploadThumbnail = () => {
 
 export function ChatbotAvatarEditor() {
   const fileInput = useRef<HTMLInputElement>(null);
-  const { mutate: uploadThumbnail } = useUploadThumbnail();
+  const { mutate: uploadThumbnail, isPending } = useUploadThumbnail();
   const { data: appSettings } = hooks.useAppSettings({
     name: CHATBOT_THUMBNAIL_APP_SETTING_NAME,
   });
@@ -101,20 +103,24 @@ export function ChatbotAvatarEditor() {
     <Badge
       anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
       badgeContent={
-        <EditButton
-          color="info"
-          onClick={() => {
-            fileInput?.current?.click();
-          }}
-        >
-          <PenIcon />
-          <VisuallyHiddenInput
-            ref={fileInput}
-            onChange={onChange}
-            type="file"
-            accept="image/png, image/jpeg, image/jpg"
-          />
-        </EditButton>
+        isPending ? (
+          <CircularProgress />
+        ) : (
+          <EditButton
+            color="info"
+            onClick={() => {
+              fileInput?.current?.click();
+            }}
+          >
+            <PenIcon />
+            <VisuallyHiddenInput
+              ref={fileInput}
+              onChange={onChange}
+              type="file"
+              accept="image/png, image/jpeg, image/jpg"
+            />
+          </EditButton>
+        )
       }
       overlap="circular"
     >
