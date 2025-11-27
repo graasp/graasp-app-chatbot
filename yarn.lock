@@ -2351,9 +2351,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@graasp/apps-query-client@github:graasp/graasp-apps-query-client#upload-app-setting":
-  version: 3.8.0
-  resolution: "@graasp/apps-query-client@https://github.com/graasp/graasp-apps-query-client.git#commit=eb2e6ca2b6b615c06560dfc8a1560347c78cd8f7"
+"@graasp/apps-query-client@npm:4.0.0":
+  version: 4.0.0
+  resolution: "@graasp/apps-query-client@npm:4.0.0"
   dependencies:
     "@emotion/react": "npm:11.14.0"
     "@emotion/styled": "npm:11.14.1"
@@ -2375,7 +2375,7 @@ __metadata:
     date-fns: ^3.3.0 || ^4.0.0
     react: ^18.0.0 || ^19.0.0
     react-dom: ^18.0.0 || ^19.0.0
-  checksum: 10/fc2f6658f6f5d53872adb6aac2747a98f4de0b81afeb6b9c7f5c6a06132438f5ba857e8ac785b7fd3017f5d2610cee8673f29140c6555f48e31620a456f8593d
+  checksum: 10/8851af4ef7dc3038a99051831cd6c09bf8f153206c489c6328040d4dfcb291fccae0e63f8d269877bb765445de6e25631853ac5b8ebed6d765b012ab777deba5
   languageName: node
   linkType: hard
 
@@ -7753,7 +7753,7 @@ __metadata:
     "@eslint/compat": "npm:1.4.1"
     "@eslint/eslintrc": "npm:3.3.1"
     "@eslint/js": "npm:9.39.1"
-    "@graasp/apps-query-client": "github:graasp/graasp-apps-query-client#upload-app-setting"
+    "@graasp/apps-query-client": "npm:4.0.0"
     "@graasp/sdk": "npm:5.16.5"
     "@graasp/ui": "npm:5.5.4"
     "@mui/icons-material": "npm:6.5.0"
