@@ -83,7 +83,7 @@ describe('Builder View', () => {
     // show default values
     cy.get(buildDataCy(CHATBOT_SETTINGS_SUMMARY_CY))
       .should('contain', MOCK_APP_SETTING.data.chatbotName)
-      .should('contain', MOCK_APP_SETTING.data.initialPrompt[0].content)
+      .should('contain', MOCK_APP_SETTING.data.initialPrompt)
       .should('contain', MOCK_APP_SETTING.data.chatbotCue);
 
     cy.get(EDIT_SETTINGS_BUTTON).click();
