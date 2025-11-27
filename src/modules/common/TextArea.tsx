@@ -24,4 +24,5 @@ export const TextArea = styled(TextareaAutosize)(({ theme }) => ({
     outline: 'solid var(--graasp-primary) 1px ',
   },
   fontFamily: 'unset',
+  lineHeight: 'unset',
 }));
