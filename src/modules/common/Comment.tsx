@@ -13,6 +13,7 @@ type Props = {
   body: string;
   isBot: boolean;
   username: string;
+  chatbotAvatar?: Blob;
 };
 
 export function Comment({
@@ -20,11 +21,12 @@ export function Comment({
   isBot,
   body,
   username,
+  chatbotAvatar,
 }: Readonly<Props>): JSX.Element {
   const commentRef = useRef<HTMLDivElement>(null);
 
-  const avatar = isBot ? (
-    <ChatbotAvatar />
+  const userAvatar = isBot ? (
+    <ChatbotAvatar avatar={chatbotAvatar} />
   ) : (
     <CustomAvatar username={username} />
   );
@@ -39,7 +41,7 @@ export function Comment({
         pl={isBot ? 0 : 10}
         pr={isBot ? 10 : 0}
       >
-        <Stack>{avatar}</Stack>
+        <Stack>{userAvatar}</Stack>
         <Stack sx={{ py: 0 }} alignItems={isBot ? 'start' : 'end'} gap={1}>
           <Typography variant="subtitle2">{username}</Typography>
           <CommentBody background={isBot ? undefined : '#ddd'}>
