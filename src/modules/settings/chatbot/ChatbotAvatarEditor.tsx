@@ -32,10 +32,13 @@ const EditButton = styled(IconButton)(() => ({
 
 export function ChatbotAvatarEditor() {
   const fileInput = useRef<HTMLInputElement>(null);
-  const { mutateAsync: uploadThumbnail, isPending } =
-    mutations.useUploadAppSettingFile();
+  const { mutateAsync: uploadThumbnail } = mutations.useUploadAppSettingFile();
   const { mutateAsync: deleteAvatar } = mutations.useDeleteAppSetting();
-  const { avatar, avatarSetting, isLoading } = useChatbotAvatar();
+  const {
+    avatar,
+    avatarSetting,
+    isLoading: isAvatarLoading,
+  } = useChatbotAvatar();
   const [isUploading, setIsUploading] = useState(false);
 
   const onChange: ChangeEventHandler<HTMLInputElement> = async (e) => {
@@ -62,7 +65,7 @@ export function ChatbotAvatarEditor() {
       anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
       badgeContent={
         <EditButton
-          disabled={isPending}
+          disabled={isUploading}
           type="button"
           color="info"
           onClick={() => {
@@ -83,7 +86,7 @@ export function ChatbotAvatarEditor() {
       <ChatbotAvatar
         size="medium"
         avatar={avatar}
-        isLoading={isPending || isLoading || isUploading}
+        isLoading={isAvatarLoading || isUploading}
       />
     </Badge>
   );
