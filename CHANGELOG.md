@@ -1,5 +1,26 @@
 # Changelog
 
+## [1.3.0](https://github.com/graasp/graasp-app-chatbot/compare/v1.2.3...v1.3.0) (2025-11-27)
+
+
+### Features
+
+* remove chatbot models selection and maximum inputs ([#342](https://github.com/graasp/graasp-app-chatbot/issues/342)) ([d0e650a](https://github.com/graasp/graasp-app-chatbot/commit/d0e650ad5806d38b328bae505bc1f93a1031a79b))
+* remove thread system, message edition ([#344](https://github.com/graasp/graasp-app-chatbot/issues/344)) ([12b927d](https://github.com/graasp/graasp-app-chatbot/commit/12b927d8d8c592fe22c49eaa4f2f83232103eaf6))
+* simplify settings view ([#347](https://github.com/graasp/graasp-app-chatbot/issues/347)) ([4b7309d](https://github.com/graasp/graasp-app-chatbot/commit/4b7309df309563745daf28fff3b33468f688a506))
+* update player view ([#350](https://github.com/graasp/graasp-app-chatbot/issues/350)) ([2b7d7a5](https://github.com/graasp/graasp-app-chatbot/commit/2b7d7a5310edbb8a97329772063f972c63934a54))
+* upgrade yarn, apps query client and graaspsdk ([#345](https://github.com/graasp/graasp-app-chatbot/issues/345)) ([b41524e](https://github.com/graasp/graasp-app-chatbot/commit/b41524e7939aeb7229f77b0f44cdc8e80fdce650))
+
+
+### Bug Fixes
+
+* add new GPT models ([#324](https://github.com/graasp/graasp-app-chatbot/issues/324)) ([c152c5b](https://github.com/graasp/graasp-app-chatbot/commit/c152c5be7e3f039c0bd89b845412c1874d5a4165))
+* **deps:** update dependency @emotion/styled to v11.14.1 ([#312](https://github.com/graasp/graasp-app-chatbot/issues/312)) ([6d70337](https://github.com/graasp/graasp-app-chatbot/commit/6d703378873039075fdf028dd429f11571697578))
+* **deps:** update dependency @sentry/react to v10 ([#309](https://github.com/graasp/graasp-app-chatbot/issues/309)) ([ce95acf](https://github.com/graasp/graasp-app-chatbot/commit/ce95acfa976850ae19c1e2ade8012889a251e300))
+* **deps:** update mui (non-major) to v6.5.0 ([#313](https://github.com/graasp/graasp-app-chatbot/issues/313)) ([3decdbd](https://github.com/graasp/graasp-app-chatbot/commit/3decdbdbad21e11514e5879ee0f7b4d116eb079a))
+* update react packages ([#346](https://github.com/graasp/graasp-app-chatbot/issues/346)) ([ea5ff6e](https://github.com/graasp/graasp-app-chatbot/commit/ea5ff6e90ac1642cda8e156246ce0efaae03eb2c))
+* use oxlint ([#325](https://github.com/graasp/graasp-app-chatbot/issues/325)) ([114650c](https://github.com/graasp/graasp-app-chatbot/commit/114650c9550ad8dd93e8c8ffbea6d857c8806ac1))
+
 ## [1.2.3](https://github.com/graasp/graasp-app-chatbot/compare/v1.2.2...v1.2.3) (2025-07-15)
 
 
