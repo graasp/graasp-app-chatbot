@@ -45,14 +45,14 @@ export function ChatbotAvatarEditor() {
     if (e.target.files) {
       setIsUploading(true);
       try {
-        // delete previous avatar
-        if (avatarSetting) {
-          await deleteAvatar({ id: avatarSetting.id });
-        }
         await uploadThumbnail({
           file: e.target.files[0],
           name: CHATBOT_AVATAR_APP_SETTING_NAME,
         });
+        // delete previous avatar
+        if (avatarSetting) {
+          await deleteAvatar({ id: avatarSetting.id });
+        }
       } catch (error) {
         console.error(error);
       }
