@@ -1,12 +1,11 @@
-import { useChatbotAvatar } from '../common/useChatbotAvatar';
 import { useConversation } from '../common/useConversation';
 import Conversation from './Conversation';
 
 export const ConversationForUser = ({
   userId,
 }: Readonly<{ userId: string }>) => {
-  const { comments, isLoading, chatbotPrompt } = useConversation(userId);
-  const { avatar } = useChatbotAvatar();
+  const { comments, isLoading, chatbotPrompt, chatbotAvatar } =
+    useConversation(userId);
 
   return (
     <Conversation
@@ -14,7 +13,7 @@ export const ConversationForUser = ({
       comments={comments ?? []}
       threadSx={{ overflow: 'auto', height: '100%' }}
       chatbotPrompt={chatbotPrompt}
-      chatbotAvatar={avatar}
+      chatbotAvatar={chatbotAvatar}
     />
   );
 };

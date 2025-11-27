@@ -1,4 +1,4 @@
-import { ChangeEventHandler, useRef } from 'react';
+import { ChangeEventHandler, useRef, useState } from 'react';
 
 import { Badge, IconButton, styled } from '@mui/material';
 
@@ -36,9 +36,11 @@ export function ChatbotAvatarEditor() {
     mutations.useUploadAppSettingFile();
   const { mutateAsync: deleteAvatar } = mutations.useDeleteAppSetting();
   const { avatar, avatarSetting, isLoading } = useChatbotAvatar();
+  const [isUploading, setIsUploading] = useState(false);
 
   const onChange: ChangeEventHandler<HTMLInputElement> = async (e) => {
     if (e.target.files) {
+      setIsUploading(true);
       try {
         // delete previous avatar
         if (avatarSetting) {
@@ -51,6 +53,7 @@ export function ChatbotAvatarEditor() {
       } catch (error) {
         console.error(error);
       }
+      setIsUploading(false);
     }
   };
 
@@ -80,7 +83,7 @@ export function ChatbotAvatarEditor() {
       <ChatbotAvatar
         size="medium"
         avatar={avatar}
-        isLoading={isPending || isLoading}
+        isLoading={isPending || isLoading || isUploading}
       />
     </Badge>
   );
