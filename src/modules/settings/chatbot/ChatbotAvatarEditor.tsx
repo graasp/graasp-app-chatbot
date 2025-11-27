@@ -1,6 +1,6 @@
 import { ChangeEventHandler, useRef } from 'react';
 
-import { Badge, CircularProgress, IconButton, styled } from '@mui/material';
+import { Badge, IconButton, styled } from '@mui/material';
 
 import { PenIcon } from 'lucide-react';
 
@@ -35,7 +35,7 @@ export function ChatbotAvatarEditor() {
   const { mutateAsync: uploadThumbnail, isPending } =
     mutations.useUploadAppSettingFile();
   const { mutateAsync: deleteAvatar } = mutations.useDeleteAppSetting();
-  const { avatar, avatarSetting } = useChatbotAvatar();
+  const { avatar, avatarSetting, isLoading } = useChatbotAvatar();
 
   const onChange: ChangeEventHandler<HTMLInputElement> = async (e) => {
     if (e.target.files) {
@@ -58,29 +58,30 @@ export function ChatbotAvatarEditor() {
     <Badge
       anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
       badgeContent={
-        isPending ? (
-          <CircularProgress />
-        ) : (
-          <EditButton
-            type="button"
-            color="info"
-            onClick={() => {
-              fileInput?.current?.click();
-            }}
-          >
-            <PenIcon />
-            <VisuallyHiddenInput
-              ref={fileInput}
-              onChange={onChange}
-              type="file"
-              accept="image/png, image/jpeg, image/jpg"
-            />
-          </EditButton>
-        )
+        <EditButton
+          disabled={isPending}
+          type="button"
+          color="info"
+          onClick={() => {
+            fileInput?.current?.click();
+          }}
+        >
+          <PenIcon />
+          <VisuallyHiddenInput
+            ref={fileInput}
+            onChange={onChange}
+            type="file"
+            accept="image/png, image/jpeg, image/jpg"
+          />
+        </EditButton>
       }
       overlap="circular"
     >
-      <ChatbotAvatar avatar={avatar} />
+      <ChatbotAvatar
+        size="medium"
+        avatar={avatar}
+        isLoading={isPending || isLoading}
+      />
     </Badge>
   );
 }

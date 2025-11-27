@@ -26,7 +26,7 @@ export function Comment({
   const commentRef = useRef<HTMLDivElement>(null);
 
   const userAvatar = isBot ? (
-    <ChatbotAvatar avatar={chatbotAvatar} />
+    <ChatbotAvatar size="small" avatar={chatbotAvatar} />
   ) : (
     <CustomAvatar username={username} />
   );
