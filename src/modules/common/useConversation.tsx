@@ -19,6 +19,8 @@ export const useConversation = (accountId?: string) => {
       name: SettingsKeys.ChatbotPrompt,
     });
 
+  const chatbotPrompt = chatbotPromptSettings?.[0]?.data;
+
   // get comments for given user only
   const comments =
     appData
@@ -32,12 +34,10 @@ export const useConversation = (accountId?: string) => {
           isBot,
           body: c.data.content,
           username: isBot
-            ? DEFAULT_BOT_USERNAME
+            ? (chatbotPrompt?.chatbotName ?? DEFAULT_BOT_USERNAME)
             : (c.account.name ?? ANONYMOUS_USER),
         };
       }) ?? [];
-
-  const chatbotPrompt = chatbotPromptSettings?.[0]?.data;
 
   // include cue as comment if there is no comments
   const chatbotCueComment =
