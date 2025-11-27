@@ -35,6 +35,10 @@ function Conversation({
 }>) {
   const { t } = useTranslation();
 
+  if (isLoading) {
+    return <CircularProgress />;
+  }
+
   if (chatbotPrompt) {
     const { chatbotName } = chatbotPrompt;
 
@@ -63,10 +67,6 @@ function Conversation({
         </CommentContainer>
       </Box>
     );
-  }
-
-  if (isLoading) {
-    return <CircularProgress />;
   }
 
   return <Alert severity="warning">{t('CHATBOT_CONFIGURATION_MISSING')}</Alert>;
