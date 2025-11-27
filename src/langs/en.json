@@ -61,6 +61,9 @@
     "FILTER_BY_COMMON_KEYWORDS": "Filter by most frequent keywords",
     "SEARCH_BY_OTHER_KEYWORDS": "Search by other keywords or regex",
     "CHECK_WHOLE_CHAT": "Check the whole chat",
-    "CONFIGURE_BUTTON": "Configure"
+    "CONFIGURE_BUTTON": "Configure",
+    "CLOSE": "Close",
+    "SIGN_OUT_ALERT": "You should be signed in to interact with the chatbot",
+    "ANALYTICS_CONVERSATION_MEMBER": "Conversation"
   }
 }

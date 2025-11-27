@@ -3,7 +3,6 @@ export const TABLE_VIEW_TABLE_CYPRESS = 'table_view_table';
 export const TABLE_VIEW_PANE_CYPRESS = 'table_view_pane';
 export const SETTINGS_VIEW_PANE_CYPRESS = 'settings_view_pane';
 export const ABOUT_VIEW_PANE_CYPRESS = 'about_view_pane';
-export const PLAYER_VIEW_CY = 'player-view';
 export const BUILDER_VIEW_CY = 'builder-view';
 export const ANALYTICS_VIEW_CY = 'analytics_view';
 export const TAB_PRESET_VIEW_CYPRESS = 'tab_preset_view';
@@ -75,7 +74,6 @@ export const buildCommentContainerDataCy = (id: string): string =>
 export const buildChatbotPromptContainerDataCy = (id: string): string =>
   `${CHATBOT_PROMPT_CONTAINER_CY}-${id}`;
 
-export const COMMENT_THREAD_CONTAINER_CYPRESS = 'comment_thread_container';
 export const ORPHAN_BUTTON_CYPRESS = 'orphan_button';
 export const CODE_EDITOR_ID_CY = 'code_editor';
 export const SETTING_MAX_COMMENT_LENGTH = 'setting_max_comment_length';

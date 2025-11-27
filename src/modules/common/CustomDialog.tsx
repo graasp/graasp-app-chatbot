@@ -1,4 +1,9 @@
-import type { MutableRefObject, ReactElement, RefObject } from 'react';
+import type {
+  MutableRefObject,
+  ReactElement,
+  ReactNode,
+  RefObject,
+} from 'react';
 
 import type { Breakpoint } from '@mui/material';
 import {
@@ -38,7 +43,7 @@ const StyledDialogTitle = styled(DialogTitle)({});
 type Props = {
   open: boolean;
   title: string | ReactElement;
-  content: ReactElement | string;
+  children: ReactNode;
   actions?: ReactElement;
   onClose?: () => void;
   dataCy?: string;
@@ -52,7 +57,6 @@ type Props = {
 function CustomDialog({
   open,
   title,
-  content,
   actions,
   onClose,
   dataCy,
@@ -61,6 +65,7 @@ function CustomDialog({
   maxWidth = 'sm',
   noPadding = false,
   anchor = null,
+  children,
 }: Props) {
   return (
     <Dialog
@@ -80,7 +85,7 @@ function CustomDialog({
         data-cy={CUSTOM_DIALOG_CONTENT_CY}
         sx={noPadding ? { py: 0 } : {}}
       >
-        {content}
+        {children}
       </DialogContent>
       <DialogActions data-cy={CUSTOM_DIALOG_ACTIONS_CYPRESS}>
         {actions}

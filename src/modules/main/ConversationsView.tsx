@@ -33,9 +33,9 @@ import {
 } from '@/config/selectors';
 import { ANONYMOUS_USER } from '@/constants';
 import CustomDialog from '@/modules/common/CustomDialog';
-import PlayerView from '@/modules/main/PlayerView';
 import { getOrphans } from '@/utils/comments';
 
+import { ConversationForUser } from '../comment/ConversationForUser';
 import DownloadButtons from '../settings/DownloadButtons';
 import OrphanComments from '../settings/OrphanComments';
 
@@ -113,20 +113,6 @@ function ConversationsView() {
     setOpenCommentView(false);
   };
 
-  // todo: filter app data
-  const renderDialogContent = (): ReactElement => (
-    <>
-      <PlayerView id={currentUser.id} />
-      <IconButton
-        data-cy={TABLE_VIEW_REVIEW_DIALOG_CLOSE_BUTTON_CYPRESS}
-        onClick={onCloseDialog}
-        sx={{ position: 'absolute', top: 0, right: 0, m: 1 }}
-      >
-        <XIcon />
-      </IconButton>
-    </>
-  );
-
   return (
     <Stack spacing={2}>
       <DownloadButtons />
@@ -150,9 +136,17 @@ function ConversationsView() {
         open={openCommentView}
         maxWidth="lg"
         title={t('DISCUSSION_DIALOG_TITLE', { user: currentUser.name })}
-        content={renderDialogContent()}
         onClose={onCloseDialog}
-      />
+      >
+        <ConversationForUser userId={currentUser.id} />
+        <IconButton
+          data-cy={TABLE_VIEW_REVIEW_DIALOG_CLOSE_BUTTON_CYPRESS}
+          onClick={onCloseDialog}
+          sx={{ position: 'absolute', top: 0, right: 0, m: 1 }}
+        >
+          <XIcon />
+        </IconButton>
+      </CustomDialog>
     </Stack>
   );
 }

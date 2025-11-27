@@ -4,7 +4,10 @@ import { useTranslation } from 'react-i18next';
 import {
   Button,
   Chip,
-  Grid2,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogTitle,
   Stack,
   TextField,
   Typography,
@@ -19,9 +22,9 @@ import {
   buildKeywordChipId,
 } from '@/config/selectors';
 
+import { ConversationForUser } from '../comment/ConversationForUser';
 import KeywordChip from '../common/KeywordChip';
 import TextWithHighlightedKeywords from '../common/TextWithHighlightedKeywords';
-import PlayerView from '../main/PlayerView';
 import { createRegexFromString, getTopFrequentWords } from './utils';
 
 type Props = {
@@ -126,43 +129,41 @@ function FrequentWords({
           ))}
         </Stack>
       </Stack>
-      <Grid2 container sx={{ height: '500px' }}>
-        <Grid2
-          size={{ xs: 12, md: 6 }}
-          sx={{ height: '100%', overflowY: 'auto' }}
-        >
-          <Stack spacing={2} p={1}>
-            {commentsMatchSelectedWords.map((ele) => (
-              <TextWithHighlightedKeywords
-                key={ele.id}
-                sentence={ele.data.content}
-                memberName={ele.account.name}
-                words={[...selectedFrequentWords, ...selectedCustomWords]}
-                onClick={() => setChatMemberID(ele.account.id)}
-                buttonId={buildCheckWholeMemberChatButtonId(ele.account.id)}
-              />
-            ))}
+      <Stack spacing={2} p={1}>
+        {commentsMatchSelectedWords.map((ele) => (
+          <TextWithHighlightedKeywords
+            key={ele.id}
+            sentence={ele.data.content}
+            memberName={ele.account.name}
+            words={[...selectedFrequentWords, ...selectedCustomWords]}
+            onClick={() => setChatMemberID(ele.account.id)}
+            buttonId={buildCheckWholeMemberChatButtonId(ele.account.id)}
+          />
+        ))}
 
-            {
-              // oxlint-disable-next-line eslint/yoda
-              commentsMatchSelectedWords.length === 0 && (
-                <Typography mt={2}>{t('NO_RESULTS_MATCH_WORDS')}</Typography>
-              )
-            }
-          </Stack>
-        </Grid2>
-        {chatMemberID && (
-          <Grid2
-            size={{ xs: 12, md: 6 }}
-            sx={{ height: '100%', overflow: 'hidden' }}
-          >
-            <PlayerView
-              id={chatMemberID}
-              threadSx={{ overflow: 'auto', height: '100%' }}
-            />
-          </Grid2>
-        )}
-      </Grid2>
+        {
+          // oxlint-disable-next-line eslint/yoda
+          commentsMatchSelectedWords.length === 0 && (
+            <Typography mt={2}>{t('NO_RESULTS_MATCH_WORDS')}</Typography>
+          )
+        }
+      </Stack>
+      {chatMemberID && (
+        <Dialog
+          open
+          onClose={() => {
+            setChatMemberID('');
+          }}
+        >
+          <DialogTitle>{t('ANALYTICS_CONVERSATION_MEMBER')}</DialogTitle>
+          <DialogContent>
+            <ConversationForUser userId={chatMemberID} />
+          </DialogContent>
+          <DialogActions>
+            <Button>{t('CLOSE')}</Button>
+          </DialogActions>
+        </Dialog>
+      )}
     </Stack>
   );
 }

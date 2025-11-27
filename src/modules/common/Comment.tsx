@@ -1,69 +1,52 @@
 import { useRef } from 'react';
-import { useTranslation } from 'react-i18next';
 
-import type { CardProps } from '@mui/material';
-import { Card, CardContent, CardHeader, styled } from '@mui/material';
+import { Stack, Typography } from '@mui/material';
 
-import { useLocalContext } from '@graasp/apps-query-client';
-import { formatDate } from '@graasp/sdk';
-
-import type { CommentAppData } from '@/config/appData';
-import { AppDataTypes } from '@/config/appData';
-import type { ChatbotPromptSettings } from '@/config/appSetting';
-import { ChatbotPromptSettingsKeys, SettingsKeys } from '@/config/appSetting';
-import { hooks } from '@/config/queryClient';
 import { buildCommentContainerDataCy } from '@/config/selectors';
-import { BIG_BORDER_RADIUS, DEFAULT_BOT_USERNAME } from '@/constants';
 
 import ChatbotAvatar from './ChatbotAvatar';
 import CommentBody from './CommentBody';
 import CustomAvatar from './CustomAvatar';
 
-const CustomCard = styled(Card)<CardProps>({
-  borderRadius: BIG_BORDER_RADIUS,
-});
-
 type Props = {
-  comment: CommentAppData;
+  id: string;
+  body: string;
+  isBot: boolean;
+  username: string;
 };
 
-function Comment({ comment }: Props): JSX.Element {
-  const { i18n } = useTranslation();
-
-  const { accountId } = useLocalContext();
-  const { data: appContext } = hooks.useAppContext();
-  const currentMember = appContext?.members.find((m) => m.id === accountId);
-  const { data: chatbotPrompts } = hooks.useAppSettings<ChatbotPromptSettings>({
-    name: SettingsKeys.ChatbotPrompt,
-  });
-  const chatbotPrompt = chatbotPrompts?.[0];
+export function Comment({
+  id,
+  isBot,
+  body,
+  username,
+}: Readonly<Props>): JSX.Element {
   const commentRef = useRef<HTMLDivElement>(null);
 
-  const isBot = comment.type === AppDataTypes.BotComment;
+  const avatar = isBot ? (
+    <ChatbotAvatar />
+  ) : (
+    <CustomAvatar username={username} />
+  );
 
   return (
-    <CustomCard
-      data-cy={buildCommentContainerDataCy(comment.id)}
-      elevation={0}
-      ref={commentRef}
-    >
-      <CardHeader
-        title={
-          isBot
-            ? (chatbotPrompt?.data[ChatbotPromptSettingsKeys.ChatbotName] ??
-              DEFAULT_BOT_USERNAME)
-            : currentMember?.name
-        }
-        subheader={formatDate(comment.updatedAt, { locale: i18n.language })}
-        avatar={
-          isBot ? <ChatbotAvatar /> : <CustomAvatar member={currentMember} />
-        }
-      />
-      <CardContent sx={{ p: 2, py: 0, '&:last-child': { pb: 0 } }}>
-        <CommentBody>{comment.data.content}</CommentBody>
-      </CardContent>
-    </CustomCard>
+    <Stack data-cy={buildCommentContainerDataCy(id)} ref={commentRef}>
+      <Stack
+        direction={isBot ? 'row' : 'row-reverse'}
+        alignItems="end"
+        justifyContent={isBot ? 'start' : 'end'}
+        gap={1}
+        pl={isBot ? 0 : 10}
+        pr={isBot ? 10 : 0}
+      >
+        <Stack>{avatar}</Stack>
+        <Stack sx={{ py: 0 }} alignItems={isBot ? 'start' : 'end'} gap={1}>
+          <Typography variant="subtitle2">{username}</Typography>
+          <CommentBody background={isBot ? undefined : '#ddd'}>
+            {body}
+          </CommentBody>
+        </Stack>
+      </Stack>
+    </Stack>
   );
 }
-
-export default Comment;
