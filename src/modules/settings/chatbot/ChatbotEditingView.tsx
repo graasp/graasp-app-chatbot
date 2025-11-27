@@ -11,12 +11,14 @@ import ChatbotAvatar from '@/modules/common/ChatbotAvatar';
 import { TextArea } from '@/modules/common/TextArea';
 
 import { ChatbotSetting } from './ChatbotSetting';
+import StarterSuggestions, { InternalSuggestion } from './StarterSuggestions';
 
 type Props = {
   initialValue: {
     name: string;
     cue: string;
     prompt: string;
+    starterSuggestions: string[];
   };
   onSave: (data: ChatbotPromptSettings) => void;
 };
@@ -29,6 +31,10 @@ function ChatbotEditionView({
   const [prompt, setPrompt] = useState(initialValue.prompt);
   const [cue, setCue] = useState(initialValue.cue);
   const [name, setName] = useState(initialValue.name);
+  // create id for suggestions, it is important for managing
+  const [starterSuggestions, setStarterSuggestions] = useState(
+    initialValue.starterSuggestions.map((s, idx) => ({ value: s, id: idx })),
+  );
 
   const [unsavedChanges, setUnsavedChanges] = useState(false);
 
@@ -47,12 +53,23 @@ function ChatbotEditionView({
     setUnsavedChanges(true);
   };
 
+  const handleChangeStarterConversations = (
+    value: InternalSuggestion[],
+  ): void => {
+    setStarterSuggestions(value);
+    setUnsavedChanges(true);
+  };
+
   const handleSave = (): void => {
     if (prompt) {
       const data: ChatbotPromptSettings = {
         initialPrompt: [{ role: ChatbotRole.System, content: prompt }],
         chatbotCue: cue,
         chatbotName: name,
+        // remove empty values and revert to array of string
+        starterSuggestions: starterSuggestions
+          .filter((suggestion) => suggestion.value)
+          .map(({ value }) => value),
       };
       onSave(data);
     }
@@ -96,6 +113,16 @@ function ChatbotEditionView({
           name={t('CHATBOT_CUE_LABEL')}
           value={cue}
           onChange={({ target: { value } }) => handleChangeChatbotCue(value)}
+        />
+      </ChatbotSetting>
+
+      <ChatbotSetting
+        title={t('CHATBOT_STARTER_SUGGESTION_LABEL')}
+        description={t('CHATBOT_STARTER_SUGGESTION_HELPER')}
+      >
+        <StarterSuggestions
+          starterSuggestions={starterSuggestions}
+          onChange={handleChangeStarterConversations}
         />
       </ChatbotSetting>
 

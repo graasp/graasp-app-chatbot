@@ -138,7 +138,7 @@ function ConversationsView() {
         title={t('DISCUSSION_DIALOG_TITLE', { user: currentUser.name })}
         onClose={onCloseDialog}
       >
-        <ConversationForUser userId={currentUser.id} />
+        <ConversationForUser accountId={currentUser.id} />
         <IconButton
           data-cy={TABLE_VIEW_REVIEW_DIALOG_CLOSE_BUTTON_CYPRESS}
           onClick={onCloseDialog}

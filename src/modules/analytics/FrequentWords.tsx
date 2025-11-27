@@ -157,7 +157,7 @@ function FrequentWords({
         >
           <DialogTitle>{t('ANALYTICS_CONVERSATION_MEMBER')}</DialogTitle>
           <DialogContent>
-            <ConversationForUser userId={chatMemberID} />
+            <ConversationForUser accountId={chatMemberID} />
           </DialogContent>
           <DialogActions>
             <Button>{t('CLOSE')}</Button>
