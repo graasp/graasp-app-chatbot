@@ -39,6 +39,7 @@ const useChatbotSetting = () => {
   const { avatar } = useChatbotAvatar();
 
   const initialPrompt = setting?.data?.initialPrompt ?? '';
+  const starterSuggestions = setting?.data.starterSuggestions ?? [];
 
   const saveSetting = useCallback(
     async (data: ChatbotPromptSettings): Promise<void> => {
@@ -63,14 +64,21 @@ const useChatbotSetting = () => {
     chatbotName,
     chatbotAvatar: avatar,
     saveSetting,
+    starterSuggestions,
   };
 };
 
 function ChatbotSettings() {
   const { t } = useTranslation();
 
-  const { saveSetting, chatbotCue, chatbotName, initialPrompt, chatbotAvatar } =
-    useChatbotSetting();
+  const {
+    saveSetting,
+    chatbotCue,
+    chatbotName,
+    initialPrompt,
+    chatbotAvatar,
+    starterSuggestions,
+  } = useChatbotSetting();
   const saveNewAvatar = useSaveAvatar();
 
   const [isEditing, setIsEditing] = useState(false);
@@ -128,6 +136,7 @@ function ChatbotSettings() {
             name: chatbotName,
             cue: chatbotCue,
             prompt: initialPrompt,
+            starterSuggestions,
           }}
           onSave={handleOnSave}
         />

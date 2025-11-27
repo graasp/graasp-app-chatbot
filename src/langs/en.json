@@ -32,6 +32,7 @@
     "CHATBOT_PROMPT_FORMAT_EXAMPLE": "Here is an example",
     "CHATBOT_PROMPT_API_REFERENCE": "See the API reference",
     "CHATBOT_CUE_LABEL": "Conversation Starter",
+    "CHATBOT_STARTER_SUGGESTION_LABEL": "Starter Suggestions",
     "CHATBOT_CUE_HELPER": "This defines the content of the first message of the chatbot. You can change it to better orient the conversation.",
     "CHATBOT_CUE_EMPTY_MESSAGE": "The conversation starter is empty.",
     "SAVE_LABEL": "Save",
@@ -64,6 +65,7 @@
     "CONFIGURE_BUTTON": "Configure",
     "CLOSE": "Close",
     "SIGN_OUT_ALERT": "You should be signed in to interact with the chatbot",
-    "ANALYTICS_CONVERSATION_MEMBER": "Conversation"
+    "ANALYTICS_CONVERSATION_MEMBER": "Conversation",
+    "CHATBOT_STARTER_SUGGESTION_HELPER": "This defines suggested messages the user can send at the beginning of the conversation to the chatbot. You can change it to give ideas of interactions."
   }
 }
