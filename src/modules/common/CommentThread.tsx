@@ -13,11 +13,13 @@ import { type Comment as CommentType } from './useConversation';
 type Props = {
   comments?: CommentType[];
   threadSx?: SxProps<Theme>;
+  chatbotAvatar?: Blob;
 };
 
 function CommentThread({
   comments,
   threadSx,
+  chatbotAvatar,
 }: Readonly<Props>): JSX.Element | null {
   const { i18n } = useTranslation();
 
@@ -60,6 +62,7 @@ function CommentThread({
                     isBot={c.isBot}
                     username={c.username}
                     body={c.body}
+                    chatbotAvatar={chatbotAvatar}
                   />
                 );
               })}

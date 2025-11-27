@@ -22,16 +22,22 @@ function Conversation({
   threadSx,
   comments,
   chatbotPrompt,
+  chatbotAvatar,
   isLoading,
   mode = 'read',
 }: Readonly<{
   chatbotPrompt?: ChatbotPromptSettings;
+  chatbotAvatar?: Blob;
   threadSx?: SxProps<Theme>;
   isLoading?: boolean;
   comments: Comment[];
   mode?: 'read' | 'write';
 }>) {
   const { t } = useTranslation();
+
+  if (isLoading) {
+    return <CircularProgress />;
+  }
 
   if (chatbotPrompt) {
     const { chatbotName } = chatbotPrompt;
@@ -47,9 +53,13 @@ function Conversation({
       >
         <CommentContainer>
           <Stack gap={3} px={2}>
-            <ChatbotHeader name={chatbotName} />
+            <ChatbotHeader avatar={chatbotAvatar} name={chatbotName} />
             <Divider />
-            <CommentThread threadSx={threadSx} comments={comments} />
+            <CommentThread
+              chatbotAvatar={chatbotAvatar}
+              threadSx={threadSx}
+              comments={comments}
+            />
             {'write' === mode && (
               <CommentEditor chatbotPrompt={chatbotPrompt} />
             )}
@@ -57,10 +67,6 @@ function Conversation({
         </CommentContainer>
       </Box>
     );
-  }
-
-  if (isLoading) {
-    return <CircularProgress />;
   }
 
   return <Alert severity="warning">{t('CHATBOT_CONFIGURATION_MISSING')}</Alert>;
