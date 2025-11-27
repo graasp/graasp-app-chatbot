@@ -20,7 +20,7 @@ export const useConversation = (accountId?: string) => {
     hooks.useAppSettings<ChatbotPromptSettings>({
       name: SettingsKeys.ChatbotPrompt,
     });
-  const { avatar } = useChatbotAvatar();
+  const { avatar, isLoading: isAvatarLoading } = useChatbotAvatar();
 
   const chatbotPrompt = chatbotPromptSettings?.[0]?.data;
 
@@ -60,6 +60,6 @@ export const useConversation = (accountId?: string) => {
     comments: [...chatbotCueComment, ...comments],
     chatbotPrompt,
     chatbotAvatar: avatar,
-    isLoading: isAppDataLoading || isChatbotSettingsLoading,
+    isLoading: isAppDataLoading || isChatbotSettingsLoading || isAvatarLoading,
   };
 };
