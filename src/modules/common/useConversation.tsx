@@ -13,7 +13,10 @@ export type Comment = {
   username: string;
 };
 
-export const useConversation = (accountId?: string) => {
+export const useConversation = ({
+  accountId,
+  showSuggestions,
+}: Readonly<{ accountId?: string; showSuggestions?: boolean }>) => {
   const { data: appData, isLoading: isAppDataLoading } =
     hooks.useAppData<CommentData>();
   const { data: chatbotPromptSettings, isLoading: isChatbotSettingsLoading } =
@@ -61,5 +64,10 @@ export const useConversation = (accountId?: string) => {
     chatbotPrompt,
     chatbotAvatar: avatar,
     isLoading: isAppDataLoading || isChatbotSettingsLoading || isAvatarLoading,
+    // get suggestions if we want to show the suggestions and if there are no comments
+    suggestions:
+      showSuggestions && chatbotPrompt && 0 === comments.length
+        ? chatbotPrompt.starterSuggestions
+        : [],
   };
 };

@@ -24,8 +24,7 @@ import {
 } from '@/config/selectors';
 import { SMALL_BORDER_RADIUS } from '@/constants';
 
-import { useAskChatbot } from './useAskChatbot';
-import { useSendMessage } from './useSendMessage';
+import { useSendMessageAndAskChatbot } from './useSendMessageAndAskChatbot';
 
 const TextArea = styled(TextareaAutosize)(({ theme }) => ({
   borderRadius: SMALL_BORDER_RADIUS,
@@ -59,28 +58,10 @@ function CommentEditor({
   const [text, setText] = useState('');
   const [textTooLong, setTextTooLong] = useState('');
 
-  const { generateChatbotAnswer, isLoading: askChatbotLoading } =
-    useAskChatbot(chatbotPrompt);
-  const { sendMessage, isLoading: sendMessageLoading } =
-    useSendMessage(chatbotPrompt);
-
-  const onSendHandler = async (newUserComment: string) => {
-    if (!chatbotPrompt) {
-      throw new Error(
-        "unexpected error, chatbot setting is not present, can't sent to API without it",
-      );
-    }
-
-    try {
-      const userMessage = await sendMessage(newUserComment);
-
-      await generateChatbotAnswer(userMessage.id, newUserComment);
-
-      setText('');
-    } catch (e) {
-      console.error(e);
-    }
-  };
+  const { send, isLoading } = useSendMessageAndAskChatbot({
+    chatbotPrompt,
+    onSend: () => setText(''),
+  });
 
   const handleTextChange = ({
     target: { value },
@@ -118,8 +99,8 @@ function CommentEditor({
           data-cy={COMMENT_EDITOR_SAVE_BUTTON_CYPRESS}
           color="primary"
           variant="contained"
-          onClick={() => onSendHandler(text)}
-          loading={askChatbotLoading || sendMessageLoading}
+          onClick={() => send(text)}
+          loading={isLoading}
           name="send"
         >
           {t('SEND_LABEL')}

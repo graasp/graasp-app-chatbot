@@ -10,8 +10,11 @@ import { useConversation } from '../common/useConversation';
 function PlayerView(): JSX.Element {
   const { t } = useTranslation();
   const { accountId } = useLocalContext();
-  const { chatbotPrompt, comments, isLoading, chatbotAvatar } =
-    useConversation(accountId);
+  const { chatbotPrompt, comments, isLoading, suggestions, chatbotAvatar } =
+    useConversation({
+      accountId,
+      showSuggestions: true,
+    });
 
   if (!accountId) {
     return <Typography>{t('SIGN_OUT_ALERT')}</Typography>;
@@ -24,6 +27,7 @@ function PlayerView(): JSX.Element {
       comments={comments}
       chatbotPrompt={chatbotPrompt}
       chatbotAvatar={chatbotAvatar}
+      suggestions={suggestions}
     />
   );
 }

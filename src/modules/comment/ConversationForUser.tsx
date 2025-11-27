@@ -2,10 +2,11 @@ import { useConversation } from '../common/useConversation';
 import Conversation from './Conversation';
 
 export const ConversationForUser = ({
-  userId,
-}: Readonly<{ userId: string }>) => {
-  const { comments, isLoading, chatbotPrompt, chatbotAvatar } =
-    useConversation(userId);
+  accountId,
+}: Readonly<{ accountId: string }>) => {
+  const { comments, isLoading, chatbotPrompt, chatbotAvatar } = useConversation(
+    { accountId },
+  );
 
   return (
     <Conversation
