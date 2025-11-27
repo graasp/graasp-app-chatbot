@@ -138,4 +138,36 @@ describe('Player View', () => {
     cy.get('#root').should('contain', 'November 18, 2024');
     cy.get('#root').should('contain', 'November 18, 2025');
   });
+
+  it.only('Use a starter suggestion', () => {
+    cy.setUpApi(
+      {
+        appData: [],
+        appSettings: [MOCK_APP_SETTING],
+      },
+      {
+        context: Context.Player,
+        permission: PermissionLevel.Write,
+      },
+    );
+    cy.visit('/');
+
+    const suggestion = MOCK_APP_SETTING.data.starterSuggestions[0];
+    // click suggestion
+    cy.get(`button:contains("${suggestion}")`).click();
+
+    // expect user message
+    cy.get(buildDataCy(buildCommentContainerDataCy('2'))).should(
+      'contain',
+      suggestion,
+    );
+
+    // expect chatbot message
+    cy.get(buildDataCy(buildCommentContainerDataCy('3'))).should(
+      'contain',
+      'i am a bot', // default return value of the mocked chatbot
+    );
+
+    cy.get(`button:contains("${suggestion}")`).should('not.be.visible');
+  });
 });

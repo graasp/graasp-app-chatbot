@@ -14,5 +14,6 @@ export const MOCK_APP_SETTING = {
     chatbotCue: 'cue',
     chatbotName: 'name',
     initialPrompt: [{ role: ChatbotRole.Assistant, content: 'prompt' }],
+    starterSuggestions: ['Can you spell it for me?', 'Can you explain this?'],
   },
 };

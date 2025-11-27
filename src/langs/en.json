@@ -66,6 +66,12 @@
     "CLOSE": "Close",
     "SIGN_OUT_ALERT": "You should be signed in to interact with the chatbot",
     "ANALYTICS_CONVERSATION_MEMBER": "Conversation",
-    "CHATBOT_STARTER_SUGGESTION_HELPER": "This defines suggested messages the user can send at the beginning of the conversation to the chatbot. You can change it to give ideas of interactions."
+    "CHATBOT_STARTER_SUGGESTION_HELPER": "This defines suggested messages the user can send at the beginning of the conversation to the chatbot. You can change it to give ideas of interactions.",
+    "ADD_STARTER_SUGGESTION_BUTTON": "Add",
+    "ADD_STARTER_SUGGESTION_BUTTON_TITLE": "Add starter suggestion",
+    "STARTER_SUGGESTION_NAME": "Starter suggestion number {{nb}}",
+    "DELETE_STARTER_SUGGESTION_BUTTON_TITLE": "Delete suggestion number {{nb}}",
+    "STARTER_SUGGESTION_PLACEHOLDER": "Write a suggestion here",
+    "STARTER_SUGGESTION_PLAYER_BUTTON_ARIA_LABEL": "Ask {{suggestion}}"
   }
 }
