@@ -29,12 +29,14 @@
     "CHATBOT_PROMPT_HELPER_LABEL": "In-depth technical description",
     "CHATBOT_PROMPT_HELPER": "This defines the chatbot's personality and how it should behave.",
     "CHATBOT_PROMPT_FORMAT_HELPER": "To describe the initial situation, create an object at the start of the array with 2 keys: 'role' and 'content'. For the initial description the role must be 'system'. Place your description of the initial situation in the 'content' key. Add interaction examples after that. Add one object per message with the role corresponding to either 'assistant' or 'user'.",
+    "CHATBOT_STARTER_SUGGESTIONS_LABEL": "Starter Suggestions",
+    "CHATBOT_STARTER_SUGGESTIONS_EMPTY_MESSAGE": "-",
     "CHATBOT_PROMPT_FORMAT_EXAMPLE": "Here is an example",
     "CHATBOT_PROMPT_API_REFERENCE": "See the API reference",
     "CHATBOT_CUE_LABEL": "Conversation Starter",
     "CHATBOT_STARTER_SUGGESTION_LABEL": "Starter Suggestions",
     "CHATBOT_CUE_HELPER": "This defines the content of the first message of the chatbot. You can change it to better orient the conversation.",
-    "CHATBOT_CUE_EMPTY_MESSAGE": "The conversation starter is empty.",
+    "CHATBOT_CUE_EMPTY_MESSAGE": "-",
     "SAVE_LABEL": "Save",
     "SAVED_LABEL": "Saved",
     "GENERAL_SETTING_TITLE": "General",
@@ -66,6 +68,12 @@
     "CLOSE": "Close",
     "SIGN_OUT_ALERT": "You should be signed in to interact with the chatbot",
     "ANALYTICS_CONVERSATION_MEMBER": "Conversation",
-    "CHATBOT_STARTER_SUGGESTION_HELPER": "This defines suggested messages the user can send at the beginning of the conversation to the chatbot. You can change it to give ideas of interactions."
+    "CHATBOT_STARTER_SUGGESTION_HELPER": "This defines suggested messages the user can send at the beginning of the conversation to the chatbot. You can change it to give ideas of interactions.",
+    "ADD_STARTER_SUGGESTION_BUTTON": "Add",
+    "ADD_STARTER_SUGGESTION_BUTTON_TITLE": "Add starter suggestion",
+    "STARTER_SUGGESTION_NAME": "Starter suggestion number {{nb}}",
+    "DELETE_STARTER_SUGGESTION_BUTTON_TITLE": "Delete suggestion number {{nb}}",
+    "STARTER_SUGGESTION_PLACEHOLDER": "Write a suggestion here",
+    "STARTER_SUGGESTION_PLAYER_BUTTON_ARIA_LABEL": "Ask {{suggestion}}"
   }
 }

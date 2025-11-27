@@ -6,4 +6,5 @@ export const AppActionsType = {
   Reply: 'reply_comment',
   // chatbot actions
   AskChatbot: 'ask_chatbot',
+  UseStarter: 'use_starter',
 } as const;

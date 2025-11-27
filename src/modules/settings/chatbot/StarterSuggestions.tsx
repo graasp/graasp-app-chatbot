@@ -1,3 +1,5 @@
+import { useTranslation } from 'react-i18next';
+
 import { Button, IconButton, Stack, TextField } from '@mui/material';
 
 import { PlusIcon, TrashIcon } from 'lucide-react';
@@ -11,10 +13,12 @@ function StarterSuggestions({
   starterSuggestions: InternalSuggestion[];
   onChange: (args: InternalSuggestion[]) => void;
 }>) {
+  const { t } = useTranslation();
+
   const add = () => {
     // increase id based on last one
     // this works as long as we don't reorder
-    const lastId = starterSuggestions.at(-1)?.id ?? 0;
+    const lastId = starterSuggestions.at(-1)?.id ?? -1;
     onChange([
       ...starterSuggestions,
       {
@@ -43,18 +47,28 @@ function StarterSuggestions({
           <TextField
             size="small"
             fullWidth
-            placeholder="Write a suggestion here"
+            placeholder={t('STARTER_SUGGESTION_PLACEHOLDER')}
             defaultValue={value}
             onChange={(e) => edit(e.target.value, id)}
+            name={t('STARTER_SUGGESTION_NAME', { nb: id })}
           />
-          <IconButton color="error" onClick={() => remove(id)}>
+          <IconButton
+            title={t('DELETE_STARTER_SUGGESTION_BUTTON_TITLE', { nb: id })}
+            color="error"
+            onClick={() => remove(id)}
+          >
             <TrashIcon />
           </IconButton>
         </Stack>
       ))}
       <span>
-        <Button startIcon={<PlusIcon />} color="primary" onClick={add}>
-          Add
+        <Button
+          startIcon={<PlusIcon />}
+          color="primary"
+          onClick={add}
+          title={t('ADD_STARTER_SUGGESTION_BUTTON_TITLE')}
+        >
+          {t('ADD_STARTER_SUGGESTION_BUTTON')}
         </Button>
       </span>
     </Stack>

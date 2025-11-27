@@ -87,7 +87,7 @@ function CommentEditor({
           value={text}
           onChange={handleTextChange}
           role="textbox"
-          disabled={sendMessageLoading || askChatbotLoading}
+          disabled={isLoading}
           // use default font instead of textarea's monospace font
           style={{ fontFamily: 'unset' }}
         />

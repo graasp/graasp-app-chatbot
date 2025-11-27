@@ -12,5 +12,6 @@ export const MOCK_APP_SETTING = {
     chatbotCue: 'cue',
     chatbotName: 'name',
     initialPrompt: 'prompt',
+    starterSuggestions: ['Can you spell it for me?', 'Can you explain this?'],
   },
 };
