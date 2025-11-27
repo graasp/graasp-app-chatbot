@@ -11,12 +11,14 @@ export const ChatbotPromptSettingsKeys = {
   InitialPrompt: 'initialPrompt',
   ChatbotCue: 'chatbotCue',
   ChatbotName: 'chatbotName',
+  starterSuggestions: 'starterSuggestions',
 } as const;
 
 export type ChatbotPromptSettings = {
   [ChatbotPromptSettingsKeys.InitialPrompt]: ChatBotMessage[];
   [ChatbotPromptSettingsKeys.ChatbotCue]: string;
   [ChatbotPromptSettingsKeys.ChatbotName]: string;
+  [ChatbotPromptSettingsKeys.starterSuggestions]: string[];
   // used to allow access using settings[settingKey] syntax
   // [key: string]: unknown;
 };
