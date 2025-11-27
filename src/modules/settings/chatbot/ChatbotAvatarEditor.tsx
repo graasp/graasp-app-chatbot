@@ -1,23 +1,13 @@
 import { ChangeEventHandler, useRef } from 'react';
 
-import {
-  Avatar,
-  Badge,
-  CircularProgress,
-  IconButton,
-  styled,
-} from '@mui/material';
+import { Badge, CircularProgress, IconButton, styled } from '@mui/material';
 
-import { useLocalContext } from '@graasp/apps-query-client';
-
-import { useMutation } from '@tanstack/react-query';
-import axios from 'axios';
 import { PenIcon } from 'lucide-react';
 
-import { CHATBOT_THUMBNAIL_APP_SETTING_NAME } from '@/config/appSetting';
-import { API_ROUTES, hooks } from '@/config/queryClient';
-
-const { buildUploadAppSettingFilesRoute } = API_ROUTES;
+import { CHATBOT_AVATAR_APP_SETTING_NAME } from '@/config/appSetting';
+import { mutations } from '@/config/queryClient';
+import ChatbotAvatar from '@/modules/common/ChatbotAvatar';
+import { useChatbotAvatar } from '@/modules/common/useChatbotAvatar';
 
 const VisuallyHiddenInput = styled('input')({
   clip: 'rect(0 0 0 0)',
@@ -40,64 +30,29 @@ const EditButton = styled(IconButton)(() => ({
   },
 }));
 
-export const useUploadThumbnail = () => {
-  const { itemId, apiHost } = useLocalContext();
-  const { data: token } = hooks.useAuthToken(itemId);
-  return useMutation({
-    mutationFn: async (args: { file: Blob }) => {
-      const payload = new FormData();
-
-      /* WARNING: this file field needs to be the last one,
-       * otherwise the normal fields can not be read
-       * https://github.com/fastify/fastify-multipart?tab=readme-ov-file#usage
-       */
-      payload.append('name', CHATBOT_THUMBNAIL_APP_SETTING_NAME);
-      payload.append('files', args.file);
-
-      await axios.post(
-        `${apiHost}/${buildUploadAppSettingFilesRoute(itemId)}`,
-        payload,
-        {
-          //   formData: true,
-          //   allowedMetaFields: ['name'],
-          headers: {
-            'Content-Type': 'multipart/form-data',
-            authorization: `Bearer ${token}`,
-          },
-        },
-      );
-    },
-    onSuccess: () => {
-      console.debug('success');
-    },
-    onError: (error: Error) => {
-      console.error(error);
-    },
-  });
-};
-
 export function ChatbotAvatarEditor() {
   const fileInput = useRef<HTMLInputElement>(null);
-  const { mutate: uploadThumbnail, isPending } = useUploadThumbnail();
-  const { data: appSettings } = hooks.useAppSettings({
-    name: CHATBOT_THUMBNAIL_APP_SETTING_NAME,
-  });
-  const thumbnailAppSetting = appSettings?.[0];
-  const { data: thumbnail } = hooks.useAppSettingFile(
-    {
-      appSettingId: thumbnailAppSetting?.id ?? 'invalid',
-    },
-    { enabled: Boolean(thumbnailAppSetting?.id) },
-  );
+  const { mutateAsync: uploadThumbnail, isPending } =
+    mutations.useUploadAppSettingFile();
+  const { mutateAsync: deleteAvatar } = mutations.useDeleteAppSetting();
+  const { avatar, avatarSetting } = useChatbotAvatar();
 
-  const onChange: ChangeEventHandler<HTMLInputElement> = (e) => {
+  const onChange: ChangeEventHandler<HTMLInputElement> = async (e) => {
     if (e.target.files) {
-      uploadThumbnail({ file: e.target.files[0] });
+      try {
+        // delete previous avatar
+        if (avatarSetting) {
+          await deleteAvatar({ id: avatarSetting.id });
+        }
+        await uploadThumbnail({
+          file: e.target.files[0],
+          name: CHATBOT_AVATAR_APP_SETTING_NAME,
+        });
+      } catch (error) {
+        console.error(error);
+      }
     }
   };
-
-  // eslint-disable-next-line no-console
-  console.log(thumbnail);
 
   return (
     <Badge
@@ -107,6 +62,7 @@ export function ChatbotAvatarEditor() {
           <CircularProgress />
         ) : (
           <EditButton
+            type="button"
             color="info"
             onClick={() => {
               fileInput?.current?.click();
@@ -124,16 +80,7 @@ export function ChatbotAvatarEditor() {
       }
       overlap="circular"
     >
-      <Avatar
-        sx={{
-          backgroundColor: 'var(--graasp-primary)',
-          width: 56,
-          height: 56,
-        }}
-        src={thumbnail ? URL.createObjectURL(thumbnail) : 'undefined'}
-      >
-        {/* <BotIcon size={40} color="#fff" /> */}
-      </Avatar>
+      <ChatbotAvatar avatar={avatar} />
     </Badge>
   );
 }

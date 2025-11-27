@@ -24,4 +24,4 @@ export const DEFAULT_GENERAL_SETTINGS = {
   MaxThreadLength: 50,
 };
 
-export const CHATBOT_THUMBNAIL_APP_SETTING_NAME = 'chatbot-thumbnail';
+export const CHATBOT_AVATAR_APP_SETTING_NAME = 'chatbot-avatar';

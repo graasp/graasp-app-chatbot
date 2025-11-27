@@ -22,10 +22,12 @@ function Conversation({
   threadSx,
   comments,
   chatbotPrompt,
+  chatbotAvatar,
   isLoading,
   mode = 'read',
 }: Readonly<{
   chatbotPrompt?: ChatbotPromptSettings;
+  chatbotAvatar?: Blob;
   threadSx?: SxProps<Theme>;
   isLoading?: boolean;
   comments: Comment[];
@@ -47,9 +49,13 @@ function Conversation({
       >
         <CommentContainer>
           <Stack gap={3} px={2}>
-            <ChatbotHeader name={chatbotName} />
+            <ChatbotHeader avatar={chatbotAvatar} name={chatbotName} />
             <Divider />
-            <CommentThread threadSx={threadSx} comments={comments} />
+            <CommentThread
+              chatbotAvatar={chatbotAvatar}
+              threadSx={threadSx}
+              comments={comments}
+            />
             {'write' === mode && (
               <CommentEditor chatbotPrompt={chatbotPrompt} />
             )}
