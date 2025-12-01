@@ -24,6 +24,7 @@ import ChatbotAvatar from '../common/ChatbotAvatar';
 import { useChatbotAvatar } from '../common/useChatbotAvatar';
 import { ChatbotEditionView } from './chatbot/ChatbotEditingView';
 import { ChatbotPromptDisplay } from './chatbot/ChatbotPromptDisplay';
+import { useSaveAvatar } from './useNewAvatar';
 
 const useChatbotSetting = () => {
   const { mutateAsync: postSetting } = mutations.usePostAppSetting();
@@ -70,6 +71,7 @@ function ChatbotSettings() {
 
   const { saveSetting, chatbotCue, chatbotName, initialPrompt, chatbotAvatar } =
     useChatbotSetting();
+  const saveNewAvatar = useSaveAvatar();
 
   const [isEditing, setIsEditing] = useState(false);
 
@@ -77,8 +79,12 @@ function ChatbotSettings() {
     setIsEditing(false);
   };
 
-  const handleOnSave = async (data: ChatbotPromptSettings) => {
+  const handleOnSave = async (data: ChatbotPromptSettings, avatar?: Blob) => {
     await saveSetting(data);
+
+    if (avatar) {
+      await saveNewAvatar(avatar);
+    }
 
     // close the editing view
     doneEditing();

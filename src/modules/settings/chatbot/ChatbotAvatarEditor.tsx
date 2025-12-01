@@ -4,8 +4,6 @@ import { Badge, IconButton, styled } from '@mui/material';
 
 import { PenIcon } from 'lucide-react';
 
-import { CHATBOT_AVATAR_APP_SETTING_NAME } from '@/config/appSetting';
-import { mutations } from '@/config/queryClient';
 import ChatbotAvatar from '@/modules/common/ChatbotAvatar';
 import { useChatbotAvatar } from '@/modules/common/useChatbotAvatar';
 
@@ -30,33 +28,22 @@ const EditButton = styled(IconButton)(() => ({
   },
 }));
 
-export function ChatbotAvatarEditor() {
+export function ChatbotAvatarEditor({
+  onChange,
+}: Readonly<{ onChange: (avatar: Blob) => void }>) {
   const fileInput = useRef<HTMLInputElement>(null);
-  const { mutateAsync: uploadThumbnail } = mutations.useUploadAppSettingFile();
-  const { mutateAsync: deleteAvatar } = mutations.useDeleteAppSetting();
-  const {
-    avatar,
-    avatarSetting,
-    isLoading: isAvatarLoading,
-  } = useChatbotAvatar();
-  const [isUploading, setIsUploading] = useState(false);
 
-  const onChange: ChangeEventHandler<HTMLInputElement> = async (e) => {
+  // currently saved avatar
+  const { avatar, isLoading: isAvatarLoading } = useChatbotAvatar();
+
+  // local avatar to display
+  const [newAvatar, setNewAvatar] = useState<Blob>();
+
+  const onSelect: ChangeEventHandler<HTMLInputElement> = (e) => {
     if (e.target.files) {
-      setIsUploading(true);
-      try {
-        await uploadThumbnail({
-          file: e.target.files[0],
-          name: CHATBOT_AVATAR_APP_SETTING_NAME,
-        });
-        // delete previous avatar
-        if (avatarSetting) {
-          await deleteAvatar({ id: avatarSetting.id });
-        }
-      } catch (error) {
-        console.error(error);
-      }
-      setIsUploading(false);
+      const file = e.target.files[0];
+      onChange(file);
+      setNewAvatar(file);
     }
   };
 
@@ -65,7 +52,6 @@ export function ChatbotAvatarEditor() {
       anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
       badgeContent={
         <EditButton
-          disabled={isUploading}
           type="button"
           color="info"
           onClick={() => {
@@ -75,7 +61,7 @@ export function ChatbotAvatarEditor() {
           <PenIcon />
           <VisuallyHiddenInput
             ref={fileInput}
-            onChange={onChange}
+            onChange={onSelect}
             type="file"
             accept="image/png, image/jpeg, image/jpg"
           />
@@ -85,8 +71,8 @@ export function ChatbotAvatarEditor() {
     >
       <ChatbotAvatar
         size="medium"
-        avatar={avatar}
-        isLoading={isAvatarLoading || isUploading}
+        avatar={newAvatar || avatar}
+        isLoading={isAvatarLoading}
       />
     </Badge>
   );
