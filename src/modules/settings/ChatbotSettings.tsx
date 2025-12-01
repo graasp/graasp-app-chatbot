@@ -7,6 +7,7 @@ import {
   Card,
   CardContent,
   FormLabel,
+  Grid2,
   Stack,
   Typography,
 } from '@mui/material';
@@ -33,8 +34,7 @@ const useChatbotSetting = () => {
   const chatbotCue = setting?.data?.chatbotCue ?? '';
   const chatbotName = setting?.data?.chatbotName ?? DEFAULT_BOT_USERNAME;
 
-  const initialPrompt = setting?.data?.initialPrompt ?? [];
-  const chatbotPrompt = initialPrompt[0]?.content ?? '';
+  const initialPrompt = setting?.data?.initialPrompt ?? '';
 
   const saveSetting = useCallback(
     async (data: ChatbotPromptSettings): Promise<void> => {
@@ -54,10 +54,9 @@ const useChatbotSetting = () => {
   );
 
   return {
-    chatbotPrompt,
+    initialPrompt,
     chatbotCue,
     chatbotName,
-    initialPrompt,
     saveSetting,
   };
 };
@@ -65,7 +64,7 @@ const useChatbotSetting = () => {
 function ChatbotSettings() {
   const { t } = useTranslation();
 
-  const { saveSetting, chatbotCue, chatbotName, chatbotPrompt, initialPrompt } =
+  const { saveSetting, chatbotCue, chatbotName, initialPrompt } =
     useChatbotSetting();
 
   const [isEditing, setIsEditing] = useState(false);
@@ -109,7 +108,7 @@ function ChatbotSettings() {
           {isEditing ? t('CANCEL_LABEL') : t('EDIT_LABEL')}
         </Button>
       </Stack>
-      {!chatbotPrompt && (
+      {!initialPrompt && (
         <Alert severity="warning">{t('CHATBOT_CONFIGURATION_MISSING')}</Alert>
       )}
 
@@ -118,7 +117,7 @@ function ChatbotSettings() {
           initialValue={{
             name: chatbotName,
             cue: chatbotCue,
-            prompt: chatbotPrompt,
+            prompt: initialPrompt,
           }}
           onSave={handleOnSave}
         />
@@ -129,35 +128,38 @@ function ChatbotSettings() {
           data-cy={CHATBOT_SETTINGS_SUMMARY_CY}
         >
           <CardContent sx={{ pb: 0 }}>
-            <Stack direction="column" spacing={1}>
-              <Stack direction="column">
-                <Stack direction="row" spacing={1}>
-                  <FormLabel>
-                    <Typography>{t('CHATBOT_NAME_LABEL')}:</Typography>
-                  </FormLabel>
+            <Grid2 container rowGap={2} spacing={1}>
+              <Grid2 size={{ xs: 12, sm: 4 }}>
+                <FormLabel sx={{ fontWeight: 'bold' }}>
+                  {t('CHATBOT_NAME_LABEL')}
+                </FormLabel>
+              </Grid2>
+              <Grid2 size={{ xs: 12, sm: 8 }}>
+                <Stack direction="row" gap={1}>
                   <Typography>{chatbotName}</Typography>
-                  {chatbotName === DEFAULT_BOT_USERNAME ? (
+                  {chatbotName === DEFAULT_BOT_USERNAME && (
                     <Typography color="text.disabled">
-                      ({t('CHATBOT_NAME_DEFAULT_MESSAGE')})
+                      {t('CHATBOT_NAME_DEFAULT_MESSAGE')}
                     </Typography>
-                  ) : undefined}
+                  )}
                 </Stack>
-                <Typography variant="caption" color="text.secondary">
-                  {t('CHATBOT_NAME_HELPER')}
-                </Typography>
-              </Stack>
+              </Grid2>
 
-              <Stack direction="column">
-                <FormLabel>{t('CHATBOT_PROMPT_LABEL')}</FormLabel>
-                <ChatbotPromptDisplay messages={initialPrompt} />
-              </Stack>
-              <Stack direction="column">
-                <Stack>
-                  <FormLabel>{t('CHATBOT_CUE_LABEL')}:</FormLabel>
-                  <Typography variant="caption" color="text.secondary">
-                    {t('CHATBOT_CUE_HELPER')}
-                  </Typography>
-                </Stack>
+              <Grid2 size={{ xs: 12, sm: 4 }}>
+                <FormLabel sx={{ fontWeight: 'bold' }}>
+                  {t('CHATBOT_PROMPT_LABEL')}
+                </FormLabel>
+              </Grid2>
+              <Grid2 size={{ xs: 12, sm: 8 }}>
+                <ChatbotPromptDisplay prompt={initialPrompt} />
+              </Grid2>
+
+              <Grid2 size={{ xs: 12, sm: 4 }}>
+                <FormLabel sx={{ fontWeight: 'bold' }}>
+                  {t('CHATBOT_CUE_LABEL')}
+                </FormLabel>
+              </Grid2>
+              <Grid2 size={{ xs: 12, sm: 8 }}>
                 {chatbotCue ? (
                   <Typography>{chatbotCue}</Typography>
                 ) : (
@@ -165,8 +167,8 @@ function ChatbotSettings() {
                     {t('CHATBOT_CUE_EMPTY_MESSAGE')}
                   </Typography>
                 )}
-              </Stack>
-            </Stack>
+              </Grid2>
+            </Grid2>
           </CardContent>
         </Card>
       )}

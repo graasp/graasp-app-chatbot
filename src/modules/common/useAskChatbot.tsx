@@ -1,6 +1,7 @@
 import { useCallback } from 'react';
 
 import { ChatbotThreadMessage, buildPrompt } from '@graasp/apps-query-client';
+import { ChatbotRole } from '@graasp/sdk';
 
 import { AppActionsType } from '@/config/appActions';
 import { AppDataTypes } from '@/config/appData';
@@ -32,7 +33,7 @@ export const useAskChatbot = (chatbotPrompt: ChatbotPromptSettings) => {
 
       const prompt = [
         // this is to spread the JSON setting before the messages
-        ...chatbotPrompt.initialPrompt,
+        { role: ChatbotRole.System, content: chatbotPrompt.initialPrompt },
         // this function requests the prompt as the first argument in string format
         // we can not use it in this context as we are using a JSON prompt.
         // if we simplify the prompt in the future we will be able to remove the line above

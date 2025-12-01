@@ -1,5 +1,3 @@
-import { ChatbotRole } from '@graasp/sdk';
-
 import { SettingsKeys } from '@/config/appSetting';
 
 import { MOCK_SERVER_ITEM } from './mockItem';
@@ -13,6 +11,6 @@ export const MOCK_APP_SETTING = {
   data: {
     chatbotCue: 'cue',
     chatbotName: 'name',
-    initialPrompt: [{ role: ChatbotRole.Assistant, content: 'prompt' }],
+    initialPrompt: 'prompt',
   },
 };

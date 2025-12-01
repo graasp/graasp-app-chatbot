@@ -4,8 +4,6 @@ import { useTranslation } from 'react-i18next';
 
 import { Box, Button, Stack, TextField } from '@mui/material';
 
-import { ChatbotRole } from '@graasp/sdk';
-
 import type { ChatbotPromptSettings } from '@/config/appSetting';
 import ChatbotAvatar from '@/modules/common/ChatbotAvatar';
 import { TextArea } from '@/modules/common/TextArea';
@@ -50,7 +48,7 @@ function ChatbotEditionView({
   const handleSave = (): void => {
     if (prompt) {
       const data: ChatbotPromptSettings = {
-        initialPrompt: [{ role: ChatbotRole.System, content: prompt }],
+        initialPrompt: prompt,
         chatbotCue: cue,
         chatbotName: name,
       };
