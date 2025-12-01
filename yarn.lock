@@ -2265,7 +2265,24 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@eslint/eslintrc@npm:3.3.1, @eslint/eslintrc@npm:^3.3.1":
+"@eslint/eslintrc@npm:3.3.3":
+  version: 3.3.3
+  resolution: "@eslint/eslintrc@npm:3.3.3"
+  dependencies:
+    ajv: "npm:^6.12.4"
+    debug: "npm:^4.3.2"
+    espree: "npm:^10.0.1"
+    globals: "npm:^14.0.0"
+    ignore: "npm:^5.2.0"
+    import-fresh: "npm:^3.2.1"
+    js-yaml: "npm:^4.1.1"
+    minimatch: "npm:^3.1.2"
+    strip-json-comments: "npm:^3.1.1"
+  checksum: 10/b586a364ff15ce1b68993aefc051ca330b1fece15fb5baf4a708d00113f9a14895cffd84a5f24c5a97bd4b4321130ab2314f90aa462a250f6b859c2da2cba1f3
+  languageName: node
+  linkType: hard
+
+"@eslint/eslintrc@npm:^3.3.1":
   version: 3.3.1
   resolution: "@eslint/eslintrc@npm:3.3.1"
   dependencies:
@@ -3550,6 +3567,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/babel__generator@npm:7.6.8":
+  version: 7.6.8
+  resolution: "@types/babel__generator@npm:7.6.8"
+  dependencies:
+    "@babel/types": "npm:^7.0.0"
+  checksum: 10/b53c215e9074c69d212402990b0ca8fa57595d09e10d94bda3130aa22b55d796e50449199867879e4ea0ee968f3a2099e009cfb21a726a53324483abbf25cd30
+  languageName: node
+  linkType: hard
+
 "@types/babel__template@npm:*":
   version: 7.4.4
   resolution: "@types/babel__template@npm:7.4.4"
@@ -3895,13 +3921,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/react@npm:18.3.26":
-  version: 18.3.26
-  resolution: "@types/react@npm:18.3.26"
+"@types/react@npm:18.3.27":
+  version: 18.3.27
+  resolution: "@types/react@npm:18.3.27"
   dependencies:
     "@types/prop-types": "npm:*"
-    csstype: "npm:^3.0.2"
-  checksum: 10/04852f5a93f1ac5140313e6c3bb7ce1abad84425709df838154102d0ed3d422c78f7c6ea114c1ee183cba6db0475a371d7dc9c0fdf991697c42da5cc24ca0512
+    csstype: "npm:^3.2.2"
+  checksum: 10/90155820a2af315cad1ff47df695f3f2f568c12ad641a7805746a6a9a9aa6c40b1374e819e50d39afe0e375a6b9160a73176cbdb4e09807262bc6fcdc06e67db
   languageName: node
   linkType: hard
 
@@ -7751,7 +7777,7 @@ __metadata:
     "@emotion/react": "npm:11.14.0"
     "@emotion/styled": "npm:11.14.1"
     "@eslint/compat": "npm:1.4.1"
-    "@eslint/eslintrc": "npm:3.3.1"
+    "@eslint/eslintrc": "npm:3.3.3"
     "@eslint/js": "npm:9.39.1"
     "@graasp/apps-query-client": "npm:4.0.0"
     "@graasp/sdk": "npm:5.16.5"
@@ -7769,7 +7795,7 @@ __metadata:
     "@types/lodash.flatten": "npm:4.4.9"
     "@types/lodash.groupby": "npm:4.6.9"
     "@types/node": "npm:22.19.1"
-    "@types/react": "npm:18.3.26"
+    "@types/react": "npm:18.3.27"
     "@types/react-dom": "npm:18.3.7"
     "@types/stopword": "npm:2.0.3"
     "@types/uuid": "npm:10.0.0"
@@ -7821,7 +7847,7 @@ __metadata:
     uuid: "npm:11.1.0"
     vite: "npm:6.4.1"
     vite-plugin-checker: "npm:0.11.0"
-    vite-plugin-istanbul: "npm:7.2.0"
+    vite-plugin-istanbul: "npm:7.2.1"
     vite-tsconfig-paths: "npm:5.1.4"
     vitest: "npm:3.2.4"
   languageName: unknown
@@ -8791,7 +8817,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"js-yaml@npm:^4.1.0":
+"js-yaml@npm:^4.1.0, js-yaml@npm:^4.1.1":
   version: 4.1.1
   resolution: "js-yaml@npm:4.1.1"
   dependencies:
@@ -13074,12 +13100,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"vite-plugin-istanbul@npm:7.2.0":
-  version: 7.2.0
-  resolution: "vite-plugin-istanbul@npm:7.2.0"
+"vite-plugin-istanbul@npm:7.2.1":
+  version: 7.2.1
+  resolution: "vite-plugin-istanbul@npm:7.2.1"
   dependencies:
     "@babel/generator": "npm:^7.28.0"
     "@istanbuljs/load-nyc-config": "npm:^1.1.0"
+    "@types/babel__generator": "npm:7.6.8"
     espree: "npm:^10.3.0"
     istanbul-lib-instrument: "npm:^6.0.3"
     picocolors: "npm:^1.1.1"
@@ -13087,7 +13114,7 @@ __metadata:
     test-exclude: "npm:^7.0.1"
   peerDependencies:
     vite: ">=4 <=7"
-  checksum: 10/488e279556bf8b314b74301df67ec5bb799c8743edb5598e1bc4ee87f67ac713812e910b2155ef6ca5ec8e97ead29b22e6022b8ce00139e85aaff0396307b84c
+  checksum: 10/1e2f34f42f61436c8e3560c815e830c024d5d4d2ea3ce386cdb90e6a40948d928d6a1571bafff1e0fdcc21d6290e2ef48c7e7b0eb936381c33ce98c4d59b0054
   languageName: node
   linkType: hard
 
