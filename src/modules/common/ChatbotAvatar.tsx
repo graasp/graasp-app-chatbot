@@ -22,7 +22,7 @@ function ChatbotAvatar({
           width: avatarSize,
           height: avatarSize,
         }}
-        src={avatar ? URL.createObjectURL(avatar) : 'undefined'}
+        src={URL.createObjectURL(avatar)}
       />
     );
   }

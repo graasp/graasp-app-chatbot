@@ -11,42 +11,57 @@ import CustomAvatar from './CustomAvatar';
 type Props = {
   id: string;
   body: string;
-  isBot: boolean;
-  username: string;
-  chatbotAvatar?: Blob;
+  name: string;
+  avatar?: Blob;
 };
 
-export function Comment({
-  id,
-  isBot,
-  body,
-  username,
-  chatbotAvatar,
-}: Readonly<Props>): JSX.Element {
+export function Comment({ id, body, name }: Readonly<Props>): JSX.Element {
   const commentRef = useRef<HTMLDivElement>(null);
-
-  const userAvatar = isBot ? (
-    <ChatbotAvatar size="small" avatar={chatbotAvatar} />
-  ) : (
-    <CustomAvatar username={username} />
-  );
 
   return (
     <Stack data-cy={buildCommentContainerDataCy(id)} ref={commentRef}>
       <Stack
-        direction={isBot ? 'row' : 'row-reverse'}
+        direction="row-reverse"
         alignItems="end"
-        justifyContent={isBot ? 'start' : 'end'}
+        justifyContent="end"
         gap={1}
-        pl={isBot ? 0 : 10}
-        pr={isBot ? 10 : 0}
+        pl={10}
       >
-        <Stack>{userAvatar}</Stack>
-        <Stack sx={{ py: 0 }} alignItems={isBot ? 'start' : 'end'} gap={1}>
-          <Typography variant="subtitle2">{username}</Typography>
-          <CommentBody background={isBot ? undefined : '#ddd'}>
-            {body}
-          </CommentBody>
+        <Stack>
+          <CustomAvatar username={name} />
+        </Stack>
+        <Stack sx={{ py: 0 }} alignItems="end" gap={1}>
+          <Typography variant="subtitle2">{name}</Typography>
+          <CommentBody background={'#ddd'}>{body}</CommentBody>
+        </Stack>
+      </Stack>
+    </Stack>
+  );
+}
+
+export function BotComment({
+  id,
+  body,
+  name,
+  avatar,
+}: Readonly<Props>): JSX.Element {
+  const commentRef = useRef<HTMLDivElement>(null);
+
+  return (
+    <Stack data-cy={buildCommentContainerDataCy(id)} ref={commentRef}>
+      <Stack
+        direction="row"
+        alignItems="end"
+        justifyContent="start"
+        gap={1}
+        pr={10}
+      >
+        <Stack>
+          <ChatbotAvatar size="small" avatar={avatar} />;
+        </Stack>
+        <Stack sx={{ py: 0 }} alignItems="start" gap={1}>
+          <Typography variant="subtitle2">{name}</Typography>
+          <CommentBody>{body}</CommentBody>
         </Stack>
       </Stack>
     </Stack>
