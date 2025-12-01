@@ -106,6 +106,9 @@ function CommentEditor({
           value={text}
           onChange={handleTextChange}
           role="textbox"
+          disabled={sendMessageLoading || askChatbotLoading}
+          // use default font instead of textarea's monospace font
+          style={{ fontFamily: 'unset' }}
         />
         <FormHelperText data-cy={COMMENT_EDITOR_TEXTAREA_HELPER_TEXT_CY} error>
           {textTooLong || ' '}

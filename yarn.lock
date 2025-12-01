@@ -2351,9 +2351,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@graasp/apps-query-client@npm:3.8.0":
-  version: 3.8.0
-  resolution: "@graasp/apps-query-client@npm:3.8.0"
+"@graasp/apps-query-client@npm:4.0.0":
+  version: 4.0.0
+  resolution: "@graasp/apps-query-client@npm:4.0.0"
   dependencies:
     "@emotion/react": "npm:11.14.0"
     "@emotion/styled": "npm:11.14.1"
@@ -2375,7 +2375,7 @@ __metadata:
     date-fns: ^3.3.0 || ^4.0.0
     react: ^18.0.0 || ^19.0.0
     react-dom: ^18.0.0 || ^19.0.0
-  checksum: 10/1778df7c7d5bb9722b97fa014f12553dd0c09b511c138ca3185fa1dbb97a93d62f2d40f650fde73d7be61e61d549bbd14553dddc6f9b49698399dfc66229a266
+  checksum: 10/8851af4ef7dc3038a99051831cd6c09bf8f153206c489c6328040d4dfcb291fccae0e63f8d269877bb765445de6e25631853ac5b8ebed6d765b012ab777deba5
   languageName: node
   linkType: hard
 
@@ -7753,7 +7753,7 @@ __metadata:
     "@eslint/compat": "npm:1.4.1"
     "@eslint/eslintrc": "npm:3.3.1"
     "@eslint/js": "npm:9.39.1"
-    "@graasp/apps-query-client": "npm:3.8.0"
+    "@graasp/apps-query-client": "npm:4.0.0"
     "@graasp/sdk": "npm:5.16.5"
     "@graasp/ui": "npm:5.5.4"
     "@mui/icons-material": "npm:6.5.0"

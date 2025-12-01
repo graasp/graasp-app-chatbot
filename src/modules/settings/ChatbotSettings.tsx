@@ -20,8 +20,11 @@ import { hooks, mutations } from '@/config/queryClient';
 import { CHATBOT_SETTINGS_SUMMARY_CY } from '@/config/selectors';
 import { DEFAULT_BOT_USERNAME } from '@/constants';
 
+import ChatbotAvatar from '../common/ChatbotAvatar';
+import { useChatbotAvatar } from '../common/useChatbotAvatar';
 import { ChatbotEditionView } from './chatbot/ChatbotEditingView';
 import { ChatbotPromptDisplay } from './chatbot/ChatbotPromptDisplay';
+import { useSaveAvatar } from './useNewAvatar';
 
 const useChatbotSetting = () => {
   const { mutateAsync: postSetting } = mutations.usePostAppSetting();
@@ -33,6 +36,7 @@ const useChatbotSetting = () => {
   const setting = chatbotPromptSettings?.[0];
   const chatbotCue = setting?.data?.chatbotCue ?? '';
   const chatbotName = setting?.data?.chatbotName ?? DEFAULT_BOT_USERNAME;
+  const { avatar } = useChatbotAvatar();
 
   const initialPrompt = setting?.data?.initialPrompt ?? '';
 
@@ -57,6 +61,7 @@ const useChatbotSetting = () => {
     initialPrompt,
     chatbotCue,
     chatbotName,
+    chatbotAvatar: avatar,
     saveSetting,
   };
 };
@@ -64,8 +69,9 @@ const useChatbotSetting = () => {
 function ChatbotSettings() {
   const { t } = useTranslation();
 
-  const { saveSetting, chatbotCue, chatbotName, initialPrompt } =
+  const { saveSetting, chatbotCue, chatbotName, initialPrompt, chatbotAvatar } =
     useChatbotSetting();
+  const saveNewAvatar = useSaveAvatar();
 
   const [isEditing, setIsEditing] = useState(false);
 
@@ -73,8 +79,12 @@ function ChatbotSettings() {
     setIsEditing(false);
   };
 
-  const handleOnSave = async (data: ChatbotPromptSettings) => {
+  const handleOnSave = async (data: ChatbotPromptSettings, avatar?: Blob) => {
     await saveSetting(data);
+
+    if (avatar) {
+      await saveNewAvatar(avatar);
+    }
 
     // close the editing view
     doneEditing();
@@ -129,6 +139,15 @@ function ChatbotSettings() {
         >
           <CardContent sx={{ pb: 0 }}>
             <Grid2 container rowGap={2} spacing={1}>
+              <Grid2 size={{ xs: 12, sm: 4 }}>
+                <FormLabel sx={{ fontWeight: 'bold' }}>
+                  {t('CHATBOT_AVATAR_LABEL')}
+                </FormLabel>
+              </Grid2>
+              <Grid2 size={{ xs: 12, sm: 8 }}>
+                <ChatbotAvatar avatar={chatbotAvatar} size="small" />
+              </Grid2>
+
               <Grid2 size={{ xs: 12, sm: 4 }}>
                 <FormLabel sx={{ fontWeight: 'bold' }}>
                   {t('CHATBOT_NAME_LABEL')}

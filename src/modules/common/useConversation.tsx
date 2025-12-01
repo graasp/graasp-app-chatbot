@@ -3,6 +3,8 @@ import { ChatbotPromptSettings, SettingsKeys } from '@/config/appSetting';
 import { hooks } from '@/config/queryClient';
 import { ANONYMOUS_USER, DEFAULT_BOT_USERNAME } from '@/constants';
 
+import { useChatbotAvatar } from './useChatbotAvatar';
+
 export type Comment = {
   id: string;
   body: string;
@@ -18,6 +20,7 @@ export const useConversation = (accountId?: string) => {
     hooks.useAppSettings<ChatbotPromptSettings>({
       name: SettingsKeys.ChatbotPrompt,
     });
+  const { avatar, isLoading: isAvatarLoading } = useChatbotAvatar();
 
   const chatbotPrompt = chatbotPromptSettings?.[0]?.data;
 
@@ -56,6 +59,7 @@ export const useConversation = (accountId?: string) => {
   return {
     comments: [...chatbotCueComment, ...comments],
     chatbotPrompt,
-    isLoading: isAppDataLoading || isChatbotSettingsLoading,
+    chatbotAvatar: avatar,
+    isLoading: isAppDataLoading || isChatbotSettingsLoading || isAvatarLoading,
   };
 };

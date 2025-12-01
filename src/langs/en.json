@@ -21,6 +21,7 @@
     "DELETE_LABEL": "Delete",
     "CANCEL_LABEL": "Cancel",
     "SEND_LABEL": "Send",
+    "CHATBOT_AVATAR_LABEL": "Chatbot Avatar",
     "CHATBOT_NAME_LABEL": "Chatbot Name",
     "CHATBOT_NAME_HELPER": "This is the name that users will see when they interact with the chatbot",
     "CHATBOT_NAME_DEFAULT_MESSAGE": "(default)",

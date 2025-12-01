@@ -4,10 +4,10 @@ import { useTranslation } from 'react-i18next';
 
 import { Box, Button, Stack, TextField } from '@mui/material';
 
-import type { ChatbotPromptSettings } from '@/config/appSetting';
-import ChatbotAvatar from '@/modules/common/ChatbotAvatar';
+import { type ChatbotPromptSettings } from '@/config/appSetting';
 import { TextArea } from '@/modules/common/TextArea';
 
+import { ChatbotAvatarEditor } from './ChatbotAvatarEditor';
 import { ChatbotSetting } from './ChatbotSetting';
 
 type Props = {
@@ -16,7 +16,7 @@ type Props = {
     cue: string;
     prompt: string;
   };
-  onSave: (data: ChatbotPromptSettings) => void;
+  onSave: (data: ChatbotPromptSettings, avatar?: Blob) => Promise<void>;
 };
 
 function ChatbotEditionView({
@@ -27,6 +27,8 @@ function ChatbotEditionView({
   const [prompt, setPrompt] = useState(initialValue.prompt);
   const [cue, setCue] = useState(initialValue.cue);
   const [name, setName] = useState(initialValue.name);
+  const [newAvatar, setNewAvatar] = useState<Blob>();
+  const [isSaving, setIsSaving] = useState(false);
 
   const [unsavedChanges, setUnsavedChanges] = useState(false);
 
@@ -45,14 +47,23 @@ function ChatbotEditionView({
     setUnsavedChanges(true);
   };
 
-  const handleSave = (): void => {
+  const onChangeAvatar = (avatar: Blob) => {
+    setNewAvatar(avatar);
+    setUnsavedChanges(true);
+  };
+
+  const handleSave = async () => {
     if (prompt) {
+      setIsSaving(true);
+
       const data: ChatbotPromptSettings = {
         initialPrompt: prompt,
         chatbotCue: cue,
         chatbotName: name,
       };
-      onSave(data);
+      await onSave(data, newAvatar);
+
+      setIsSaving(false);
     }
   };
 
@@ -64,7 +75,7 @@ function ChatbotEditionView({
         alignItems="center"
         gap={2}
       >
-        <ChatbotAvatar />
+        <ChatbotAvatarEditor onChange={onChangeAvatar} />
         <TextField
           name={t('CHATBOT_NAME_LABEL')}
           label={t('CHATBOT_NAME_LABEL')}
@@ -100,8 +111,9 @@ function ChatbotEditionView({
       <Box alignSelf="flex-end">
         <Button
           onClick={handleSave}
-          disabled={!unsavedChanges}
+          disabled={!unsavedChanges || isSaving}
           variant="outlined"
+          loading={isSaving}
         >
           {unsavedChanges ? t('SAVE_LABEL') : t('SAVED_LABEL')}
         </Button>

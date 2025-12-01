@@ -1,15 +1,47 @@
-import { Avatar } from '@mui/material';
+import { Avatar, Skeleton } from '@mui/material';
 
 import { BotIcon } from 'lucide-react';
 
-function ChatbotAvatar() {
+function ChatbotAvatar({
+  avatar,
+  size = 'medium',
+  isLoading,
+}: Readonly<{
+  avatar?: Blob;
+  size?: 'medium' | 'small';
+  isLoading?: boolean;
+}>) {
+  const avatarSize = 'medium' === size ? 56 : undefined;
+  const iconSize = 'medium' === size ? 40 : undefined;
+
+  if (avatar) {
+    return (
+      <Avatar
+        sx={{
+          backgroundColor: 'var(--graasp-primary)',
+          width: avatarSize,
+          height: avatarSize,
+        }}
+        src={URL.createObjectURL(avatar)}
+      />
+    );
+  }
+
+  if (isLoading) {
+    return (
+      <Skeleton variant="circular" width={avatarSize} height={avatarSize} />
+    );
+  }
+
   return (
     <Avatar
       sx={{
+        width: avatarSize,
+        height: avatarSize,
         backgroundColor: 'var(--graasp-primary)',
       }}
     >
-      <BotIcon color="#fff" />
+      <BotIcon size={iconSize} color="#fff" />
     </Avatar>
   );
 }

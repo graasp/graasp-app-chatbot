@@ -7,17 +7,19 @@ import { Stack, Typography } from '@mui/material';
 import { intlFormat } from 'date-fns';
 import groupby from 'lodash.groupby';
 
-import { Comment } from './Comment';
+import { BotComment, Comment } from './Comment';
 import { type Comment as CommentType } from './useConversation';
 
 type Props = {
   comments?: CommentType[];
   threadSx?: SxProps<Theme>;
+  chatbotAvatar?: Blob;
 };
 
 function CommentThread({
   comments,
   threadSx,
+  chatbotAvatar,
 }: Readonly<Props>): JSX.Element | null {
   const { i18n } = useTranslation();
 
@@ -52,17 +54,24 @@ function CommentThread({
               {date}
             </Typography>
             <Stack gap={2}>
-              {commentsForDay.map((c) => {
-                return (
+              {commentsForDay.map((c) =>
+                c.isBot ? (
+                  <BotComment
+                    key={c.id}
+                    id={c.id}
+                    name={c.username}
+                    body={c.body}
+                    avatar={chatbotAvatar}
+                  />
+                ) : (
                   <Comment
                     key={c.id}
                     id={c.id}
-                    isBot={c.isBot}
-                    username={c.username}
+                    name={c.username}
                     body={c.body}
                   />
-                );
-              })}
+                ),
+              )}
             </Stack>
           </Fragment>
         );
