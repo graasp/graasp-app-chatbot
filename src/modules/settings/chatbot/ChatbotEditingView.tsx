@@ -9,12 +9,14 @@ import { TextArea } from '@/modules/common/TextArea';
 
 import { ChatbotAvatarEditor } from './ChatbotAvatarEditor';
 import { ChatbotSetting } from './ChatbotSetting';
+import StarterSuggestions, { InternalSuggestion } from './StarterSuggestions';
 
 type Props = {
   initialValue: {
     name: string;
     cue: string;
     prompt: string;
+    starterSuggestions: string[];
   };
   onSave: (data: ChatbotPromptSettings, avatar?: Blob) => Promise<void>;
 };
@@ -29,6 +31,11 @@ function ChatbotEditionView({
   const [name, setName] = useState(initialValue.name);
   const [newAvatar, setNewAvatar] = useState<Blob>();
   const [isSaving, setIsSaving] = useState(false);
+
+  // create id for suggestions, it is important for managing
+  const [starterSuggestions, setStarterSuggestions] = useState(
+    initialValue.starterSuggestions.map((s, idx) => ({ value: s, id: idx })),
+  );
 
   const [unsavedChanges, setUnsavedChanges] = useState(false);
 
@@ -52,6 +59,13 @@ function ChatbotEditionView({
     setUnsavedChanges(true);
   };
 
+  const handleChangeStarterConversations = (
+    value: InternalSuggestion[],
+  ): void => {
+    setStarterSuggestions(value);
+    setUnsavedChanges(true);
+  };
+
   const handleSave = async () => {
     if (prompt) {
       setIsSaving(true);
@@ -60,6 +74,10 @@ function ChatbotEditionView({
         initialPrompt: prompt,
         chatbotCue: cue,
         chatbotName: name,
+        // remove empty values and revert to array of string
+        starterSuggestions: starterSuggestions
+          .filter((suggestion) => suggestion.value)
+          .map(({ value }) => value),
       };
       await onSave(data, newAvatar);
 
@@ -105,6 +123,16 @@ function ChatbotEditionView({
           name={t('CHATBOT_CUE_LABEL')}
           value={cue}
           onChange={({ target: { value } }) => handleChangeChatbotCue(value)}
+        />
+      </ChatbotSetting>
+
+      <ChatbotSetting
+        title={t('CHATBOT_STARTER_SUGGESTION_LABEL')}
+        description={t('CHATBOT_STARTER_SUGGESTION_HELPER')}
+      >
+        <StarterSuggestions
+          starterSuggestions={starterSuggestions}
+          onChange={handleChangeStarterConversations}
         />
       </ChatbotSetting>
 

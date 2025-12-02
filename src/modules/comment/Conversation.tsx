@@ -14,6 +14,7 @@ import { ChatbotPromptSettings } from '@/config/appSetting';
 
 import CommentEditor from '../common/CommentEditor';
 import CommentThread from '../common/CommentThread';
+import { Suggestions } from '../common/Suggestions';
 import { Comment } from '../common/useConversation';
 import ChatbotHeader from './ChatbotHeader';
 import CommentContainer from './CommentContainer';
@@ -25,6 +26,7 @@ function Conversation({
   chatbotAvatar,
   isLoading,
   mode = 'read',
+  suggestions,
 }: Readonly<{
   chatbotPrompt?: ChatbotPromptSettings;
   chatbotAvatar?: Blob;
@@ -32,6 +34,7 @@ function Conversation({
   isLoading?: boolean;
   comments: Comment[];
   mode?: 'read' | 'write';
+  suggestions?: string[];
 }>) {
   const { t } = useTranslation();
 
@@ -56,6 +59,12 @@ function Conversation({
               threadSx={threadSx}
               comments={comments}
             />
+            {suggestions && (
+              <Suggestions
+                suggestions={suggestions}
+                chatbotPrompt={chatbotPrompt}
+              />
+            )}
             {'write' === mode && (
               <CommentEditor chatbotPrompt={chatbotPrompt} />
             )}

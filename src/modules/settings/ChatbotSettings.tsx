@@ -10,6 +10,7 @@ import {
   Grid2,
   Stack,
   Typography,
+  useTheme,
 } from '@mui/material';
 
 import { Edit, Undo2 } from 'lucide-react';
@@ -39,6 +40,7 @@ const useChatbotSetting = () => {
   const { avatar } = useChatbotAvatar();
 
   const initialPrompt = setting?.data?.initialPrompt ?? '';
+  const starterSuggestions = setting?.data.starterSuggestions ?? [];
 
   const saveSetting = useCallback(
     async (data: ChatbotPromptSettings): Promise<void> => {
@@ -63,14 +65,22 @@ const useChatbotSetting = () => {
     chatbotName,
     chatbotAvatar: avatar,
     saveSetting,
+    starterSuggestions,
   };
 };
 
 function ChatbotSettings() {
+  const theme = useTheme();
   const { t } = useTranslation();
 
-  const { saveSetting, chatbotCue, chatbotName, initialPrompt, chatbotAvatar } =
-    useChatbotSetting();
+  const {
+    saveSetting,
+    chatbotCue,
+    chatbotName,
+    initialPrompt,
+    chatbotAvatar,
+    starterSuggestions,
+  } = useChatbotSetting();
   const saveNewAvatar = useSaveAvatar();
 
   const [isEditing, setIsEditing] = useState(false);
@@ -128,6 +138,7 @@ function ChatbotSettings() {
             name: chatbotName,
             cue: chatbotCue,
             prompt: initialPrompt,
+            starterSuggestions,
           }}
           onSave={handleOnSave}
         />
@@ -184,6 +195,29 @@ function ChatbotSettings() {
                 ) : (
                   <Typography color="text.disabled" fontStyle="italic">
                     {t('CHATBOT_CUE_EMPTY_MESSAGE')}
+                  </Typography>
+                )}
+              </Grid2>
+
+              <Grid2 size={{ xs: 12, sm: 4 }}>
+                <FormLabel sx={{ fontWeight: 'bold' }}>
+                  {t('CHATBOT_STARTER_SUGGESTIONS_LABEL')}
+                </FormLabel>
+              </Grid2>
+              <Grid2 size={{ xs: 12, sm: 8 }}>
+                {starterSuggestions.length ? (
+                  <ul
+                    style={{ marginBlock: 0, paddingInline: theme.spacing(2) }}
+                  >
+                    {starterSuggestions.map((s) => (
+                      <Typography key={s} variant="body1" component="li">
+                        {s}
+                      </Typography>
+                    ))}
+                  </ul>
+                ) : (
+                  <Typography color="text.disabled" fontStyle="italic">
+                    {t('CHATBOT_STARTER_SUGGESTIONS_EMPTY_MESSAGE')}
                   </Typography>
                 )}
               </Grid2>

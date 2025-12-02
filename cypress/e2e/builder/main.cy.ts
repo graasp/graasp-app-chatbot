@@ -14,6 +14,10 @@ const PROMPT_TEXT_AREA = '[name="Chatbot Prompt"]';
 const CUE_TEXT_AREA = '[name="Conversation Starter"]';
 const CHATBOT_NAME_INPUT = '[name="Chatbot Name"]';
 
+const ADD_STARTER_SUGGESTION_BUTTON = '[title="Add starter suggestion"]';
+const buildStarterSuggestionInput = (idx: number) =>
+  `[name="Starter suggestion number ${idx}"]`;
+
 describe('Builder View', () => {
   it('Results table', () => {
     cy.setUpApi(
@@ -46,7 +50,7 @@ describe('Builder View', () => {
     // show default values
     cy.get(buildDataCy(CHATBOT_SETTINGS_SUMMARY_CY))
       .should('contain', 'Graasp Bot')
-      .should('contain', 'The conversation starter is empty');
+      .should('contain', '-');
 
     cy.get(EDIT_SETTINGS_BUTTON).click();
 
@@ -64,7 +68,6 @@ describe('Builder View', () => {
     cy.get(buildDataCy(CHATBOT_SETTINGS_SUMMARY_CY))
       .should('contain', 'Graasp Bot')
       .should('contain', prompt)
-      .should('not.contain', 'The conversation starter is empty')
       .should('contain', cue);
   });
 
@@ -106,7 +109,65 @@ describe('Builder View', () => {
     cy.get(buildDataCy(CHATBOT_SETTINGS_SUMMARY_CY))
       .should('contain', name)
       .should('contain', prompt)
-      .should('not.contain', 'The conversation starter is empty')
       .should('contain', cue);
+  });
+
+  it('Show starter suggestions and edit', () => {
+    cy.setUpApi(
+      { appSettings: [] },
+      {
+        context: Context.Builder,
+        permission: PermissionLevel.Admin,
+      },
+    );
+    cy.visit('/');
+
+    cy.get(buildDataCy(TAB_SETTINGS_VIEW_CYPRESS)).click();
+
+    cy.get(EDIT_SETTINGS_BUTTON).click();
+
+    // change prompt
+    const prompt = 'my new prompt';
+    cy.get(PROMPT_TEXT_AREA).clear().type(prompt);
+
+    const newSuggestions = ['Hello', 'Hello1', 'Hello2'];
+
+    // add suggestions
+    newSuggestions.forEach((s, idx) => {
+      cy.get(ADD_STARTER_SUGGESTION_BUTTON).click();
+      cy.get(buildStarterSuggestionInput(idx)).type(s);
+    });
+
+    cy.get(SAVE_SETTINGS_BUTTON).click();
+
+    // show starter suggestions
+    for (const s of newSuggestions) {
+      cy.get(`li:contains('${s}')`).should('be.visible');
+    }
+
+    cy.wait(1000);
+    cy.get(EDIT_SETTINGS_BUTTON).click();
+
+    // edit suggestions
+    const editedSuggestions = ['newHello0', 'newHello1', 'newHello2'];
+    editedSuggestions.forEach((s, idx) => {
+      cy.get(buildStarterSuggestionInput(idx)).clear().type(s);
+    });
+
+    // delete second suggestion
+    cy.get(`[title="Delete suggestion number 1"]`).click();
+
+    // expect remaining suggestions
+    const remainingSuggestions = [editedSuggestions[0], editedSuggestions[2]];
+    for (const s of remainingSuggestions) {
+      cy.get(`[value="${s}"]`).should('be.visible');
+    }
+
+    cy.get(SAVE_SETTINGS_BUTTON).click();
+
+    // show starter suggestions
+    for (const s of remainingSuggestions) {
+      cy.get(`li:contains('${s}')`).should('be.visible');
+    }
   });
 });
