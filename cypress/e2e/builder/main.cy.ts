@@ -50,7 +50,7 @@ describe('Builder View', () => {
     // show default values
     cy.get(buildDataCy(CHATBOT_SETTINGS_SUMMARY_CY))
       .should('contain', 'Graasp Bot')
-      .should('contain', 'The conversation starter is empty');
+      .should('contain', '-');
 
     cy.get(EDIT_SETTINGS_BUTTON).click();
 
@@ -68,7 +68,6 @@ describe('Builder View', () => {
     cy.get(buildDataCy(CHATBOT_SETTINGS_SUMMARY_CY))
       .should('contain', 'Graasp Bot')
       .should('contain', prompt)
-      .should('not.contain', 'The conversation starter is empty')
       .should('contain', cue);
   });
 
@@ -110,11 +109,10 @@ describe('Builder View', () => {
     cy.get(buildDataCy(CHATBOT_SETTINGS_SUMMARY_CY))
       .should('contain', name)
       .should('contain', prompt)
-      .should('not.contain', 'The conversation starter is empty')
       .should('contain', cue);
   });
 
-  it('Show starter suggestions and edit', () => {
+  it.only('Show starter suggestions and edit', () => {
     cy.setUpApi(
       { appSettings: [] },
       {

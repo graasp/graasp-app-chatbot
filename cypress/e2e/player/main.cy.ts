@@ -37,7 +37,7 @@ describe('Player View', () => {
     cy.visit('/');
 
     // expect previously saved app data
-    const previousAppData = defaultAppData[0];
+    const [previousAppData] = defaultAppData;
     cy.get(buildDataCy(buildCommentContainerDataCy(previousAppData.id))).should(
       'contain',
       previousAppData.data.content,
@@ -152,7 +152,7 @@ describe('Player View', () => {
     );
     cy.visit('/');
 
-    const suggestion = MOCK_APP_SETTING.data.starterSuggestions[0];
+    const [suggestion] = MOCK_APP_SETTING.data.starterSuggestions;
     // click suggestion
     cy.get(`button:contains("${suggestion}")`).click();
 
