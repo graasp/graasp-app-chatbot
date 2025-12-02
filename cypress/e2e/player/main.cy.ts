@@ -139,7 +139,7 @@ describe('Player View', () => {
     cy.get('#root').should('contain', 'November 18, 2025');
   });
 
-  it.only('Use a starter suggestion', () => {
+  it('Use a starter suggestion', () => {
     cy.setUpApi(
       {
         appData: [],
@@ -153,6 +153,7 @@ describe('Player View', () => {
     cy.visit('/');
 
     const [suggestion] = MOCK_APP_SETTING.data.starterSuggestions;
+
     // click suggestion
     cy.get(`button:contains("${suggestion}")`).click();
 
@@ -168,6 +169,6 @@ describe('Player View', () => {
       'i am a bot', // default return value of the mocked chatbot
     );
 
-    cy.get(`button:contains("${suggestion}")`).should('not.be.visible');
+    cy.get('button').should('not.contain', suggestion);
   });
 });

@@ -112,7 +112,7 @@ describe('Builder View', () => {
       .should('contain', cue);
   });
 
-  it.only('Show starter suggestions and edit', () => {
+  it('Show starter suggestions and edit', () => {
     cy.setUpApi(
       { appSettings: [] },
       {

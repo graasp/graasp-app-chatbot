@@ -57,7 +57,7 @@ export function BotComment({
         pr={10}
       >
         <Stack>
-          <ChatbotAvatar size="small" avatar={avatar} />;
+          <ChatbotAvatar size="small" avatar={avatar} />
         </Stack>
         <Stack sx={{ py: 0 }} alignItems="start" gap={1}>
           <Typography variant="subtitle2">{name}</Typography>

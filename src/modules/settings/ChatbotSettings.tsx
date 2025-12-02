@@ -6,7 +6,6 @@ import {
   Button,
   Card,
   CardContent,
-  CircularProgress,
   FormLabel,
   Grid2,
   Stack,
@@ -31,7 +30,7 @@ import { useSaveAvatar } from './useNewAvatar';
 const useChatbotSetting = () => {
   const { mutateAsync: postSetting } = mutations.usePostAppSetting();
   const { mutateAsync: patchSetting } = mutations.usePatchAppSetting();
-  const { data: chatbotPromptSettings, isFetching } =
+  const { data: chatbotPromptSettings } =
     hooks.useAppSettings<ChatbotPromptSettings>({
       name: SettingsKeys.ChatbotPrompt,
     });
@@ -67,7 +66,6 @@ const useChatbotSetting = () => {
     chatbotAvatar: avatar,
     saveSetting,
     starterSuggestions,
-    isFetching,
   };
 };
 
@@ -82,7 +80,6 @@ function ChatbotSettings() {
     initialPrompt,
     chatbotAvatar,
     starterSuggestions,
-    isFetching,
   } = useChatbotSetting();
   const saveNewAvatar = useSaveAvatar();
 
@@ -116,7 +113,6 @@ function ChatbotSettings() {
       >
         <Typography variant="h2" fontWeight="bold" fontSize="1.5rem">
           {t('CHATBOT_SETTING_TITLE')}
-          {isFetching && <CircularProgress size="small" />}
         </Typography>
         <Button
           endIcon={isEditing ? <Undo2 /> : <Edit />}
