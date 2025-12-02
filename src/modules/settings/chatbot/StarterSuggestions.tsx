@@ -61,6 +61,7 @@ function StarterSuggestions({
           </IconButton>
         </Stack>
       ))}
+      {/* the span is used to prevent full width button */}
       <span>
         <Button
           startIcon={<PlusIcon />}
