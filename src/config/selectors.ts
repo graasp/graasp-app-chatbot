@@ -1,8 +1,6 @@
-export const GRAASP_LOGO_CYPRESS = 'graasp_logo';
 export const TABLE_VIEW_TABLE_CYPRESS = 'table_view_table';
 export const TABLE_VIEW_PANE_CYPRESS = 'table_view_pane';
 export const SETTINGS_VIEW_PANE_CYPRESS = 'settings_view_pane';
-export const ABOUT_VIEW_PANE_CYPRESS = 'about_view_pane';
 export const BUILDER_VIEW_CY = 'builder-view';
 export const ANALYTICS_VIEW_CY = 'analytics_view';
 export const TAB_PRESET_VIEW_CYPRESS = 'tab_preset_view';

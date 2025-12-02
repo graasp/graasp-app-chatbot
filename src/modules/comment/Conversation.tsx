@@ -1,23 +1,11 @@
 import { useTranslation } from 'react-i18next';
 
-import {
-  Alert,
-  Box,
-  CircularProgress,
-  Divider,
-  Stack,
-  SxProps,
-  Theme,
-} from '@mui/material';
+import { Alert, Box, CircularProgress } from '@mui/material';
 
 import { ChatbotPromptSettings } from '@/config/appSetting';
 
-import CommentEditor from '../common/CommentEditor';
-import CommentThread from '../common/CommentThread';
-import { Suggestions } from '../common/Suggestions';
 import { Comment } from '../common/useConversation';
-import ChatbotHeader from './ChatbotHeader';
-import CommentContainer from './CommentContainer';
+import { CommentContainer, CommentContainerProps } from './CommentContainer';
 
 function Conversation({
   threadSx,
@@ -28,13 +16,13 @@ function Conversation({
   mode = 'read',
   suggestions,
 }: Readonly<{
-  chatbotPrompt?: ChatbotPromptSettings;
   chatbotAvatar?: Blob;
-  threadSx?: SxProps<Theme>;
-  isLoading?: boolean;
+  chatbotPrompt?: ChatbotPromptSettings;
   comments: Comment[];
-  mode?: 'read' | 'write';
+  isLoading?: boolean;
+  mode?: CommentContainerProps['mode'];
   suggestions?: string[];
+  threadSx?: CommentContainerProps['threadSx'];
 }>) {
   const { t } = useTranslation();
 
@@ -50,26 +38,15 @@ function Conversation({
           height: '100%',
         }}
       >
-        <CommentContainer>
-          <Stack gap={3} px={2}>
-            <ChatbotHeader avatar={chatbotAvatar} name={chatbotName} />
-            <Divider />
-            <CommentThread
-              chatbotAvatar={chatbotAvatar}
-              threadSx={threadSx}
-              comments={comments}
-            />
-            {suggestions && (
-              <Suggestions
-                suggestions={suggestions}
-                chatbotPrompt={chatbotPrompt}
-              />
-            )}
-            {'write' === mode && (
-              <CommentEditor chatbotPrompt={chatbotPrompt} />
-            )}
-          </Stack>
-        </CommentContainer>
+        <CommentContainer
+          chatbotAvatar={chatbotAvatar}
+          chatbotName={chatbotName}
+          threadSx={threadSx}
+          comments={comments}
+          chatbotPrompt={chatbotPrompt}
+          mode={mode}
+          suggestions={suggestions}
+        />
       </Box>
     );
   }

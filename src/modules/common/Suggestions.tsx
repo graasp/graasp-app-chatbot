@@ -3,11 +3,8 @@ import { useTranslation } from 'react-i18next';
 import { Button, Stack, styled } from '@mui/material';
 
 import { AppActionsType } from '@/config/appActions';
-import { ChatbotPromptSettings } from '@/config/appSetting';
 import { mutations } from '@/config/queryClient';
 import { showErrorToast } from '@/utils/toast';
-
-import { useSendMessageAndAskChatbot } from './useSendMessageAndAskChatbot';
 
 const StyledButton = styled(Button)({
   borderRadius: 100,
@@ -16,14 +13,13 @@ const StyledButton = styled(Button)({
 
 export function Suggestions({
   suggestions,
-  chatbotPrompt,
+  send,
 }: Readonly<{
-  chatbotPrompt: ChatbotPromptSettings;
+  send: (message: string) => Promise<void>;
   suggestions: string[];
 }>) {
   const { t } = useTranslation();
   const { mutateAsync: postAction } = mutations.usePostAppAction();
-  const { send } = useSendMessageAndAskChatbot({ chatbotPrompt });
 
   const onClick = async (suggestion: string) => {
     try {

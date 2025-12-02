@@ -2368,9 +2368,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@graasp/apps-query-client@npm:4.0.0":
+"@graasp/apps-query-client@github:graasp/graasp-apps-query-client#delay-chatbot-answer":
   version: 4.0.0
-  resolution: "@graasp/apps-query-client@npm:4.0.0"
+  resolution: "@graasp/apps-query-client@https://github.com/graasp/graasp-apps-query-client.git#commit=fbf9747d5a37bfb585ee0444f8048fdd9c3d84e9"
   dependencies:
     "@emotion/react": "npm:11.14.0"
     "@emotion/styled": "npm:11.14.1"
@@ -2392,7 +2392,7 @@ __metadata:
     date-fns: ^3.3.0 || ^4.0.0
     react: ^18.0.0 || ^19.0.0
     react-dom: ^18.0.0 || ^19.0.0
-  checksum: 10/8851af4ef7dc3038a99051831cd6c09bf8f153206c489c6328040d4dfcb291fccae0e63f8d269877bb765445de6e25631853ac5b8ebed6d765b012ab777deba5
+  checksum: 10/e9f66ac68f5e9952a083ad10e42670e281f3a2aad265c54abf27db67dae826ee4ddbc8027818c6d43fec58a97e63af48c1926b908ff5f1c6ba80e55ebe074805
   languageName: node
   linkType: hard
 
@@ -7778,7 +7778,7 @@ __metadata:
     "@eslint/compat": "npm:1.4.1"
     "@eslint/eslintrc": "npm:3.3.3"
     "@eslint/js": "npm:9.39.1"
-    "@graasp/apps-query-client": "npm:4.0.0"
+    "@graasp/apps-query-client": "github:graasp/graasp-apps-query-client#delay-chatbot-answer"
     "@graasp/sdk": "npm:5.16.5"
     "@graasp/ui": "npm:5.5.4"
     "@mui/icons-material": "npm:6.5.0"

@@ -1,10 +1,10 @@
-import { useState } from 'react';
+import { KeyboardEventHandler, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import {
   Box,
-  Button,
   FormHelperText,
+  IconButton,
   Stack,
   TextareaAutosize,
   styled,
@@ -12,10 +12,7 @@ import {
 
 import { SendHorizonal } from 'lucide-react';
 
-import {
-  ChatbotPromptSettings,
-  DEFAULT_GENERAL_SETTINGS,
-} from '@/config/appSetting';
+import { DEFAULT_GENERAL_SETTINGS } from '@/config/appSetting';
 import {
   COMMENT_EDITOR_CYPRESS,
   COMMENT_EDITOR_SAVE_BUTTON_CYPRESS,
@@ -24,7 +21,14 @@ import {
 } from '@/config/selectors';
 import { SMALL_BORDER_RADIUS } from '@/constants';
 
-import { useSendMessageAndAskChatbot } from './useSendMessageAndAskChatbot';
+const SendButton = styled(IconButton)(({ theme }) => ({
+  background: theme.palette.primary.main,
+  color: 'white',
+
+  '&:hover': {
+    background: '#96CCFF',
+  },
+}));
 
 const TextArea = styled(TextareaAutosize)(({ theme }) => ({
   borderRadius: SMALL_BORDER_RADIUS,
@@ -47,21 +51,18 @@ const TextArea = styled(TextareaAutosize)(({ theme }) => ({
 
 type Props = {
   maxTextLength?: number;
-  chatbotPrompt: ChatbotPromptSettings;
+  send: (message: string) => Promise<void>;
+  isLoading?: boolean;
 };
 
 function CommentEditor({
-  chatbotPrompt,
+  send,
+  isLoading,
   maxTextLength = DEFAULT_GENERAL_SETTINGS.MaxCommentLength,
 }: Readonly<Props>): JSX.Element {
   const { t } = useTranslation();
   const [text, setText] = useState('');
   const [textTooLong, setTextTooLong] = useState('');
-
-  const { send, isLoading } = useSendMessageAndAskChatbot({
-    chatbotPrompt,
-    onSend: () => setText(''),
-  });
 
   const handleTextChange = ({
     target: { value },
@@ -76,9 +77,29 @@ function CommentEditor({
     }
   };
 
+  const onKeyDown: KeyboardEventHandler<HTMLTextAreaElement> = (event) => {
+    const { key, shiftKey } = event;
+    // send message on enter if is not loading
+    if ('Enter' === key && !shiftKey) {
+      event.preventDefault();
+      if (!isLoading) {
+        onSend();
+      }
+    }
+  };
+
+  const onSend = async () => {
+    try {
+      setText('');
+      await send(text);
+    } catch (e) {
+      console.error(e);
+    }
+  };
+
   return (
     <Box sx={{ p: 1 }} data-cy={COMMENT_EDITOR_CYPRESS}>
-      <Stack direction="row" spacing={1}>
+      <Stack direction="row" spacing={1} alignItems="center">
         <TextArea
           data-cy={COMMENT_EDITOR_TEXTAREA_CYPRESS}
           placeholder={t('COMMENT_PLACEHOLDER')}
@@ -87,24 +108,21 @@ function CommentEditor({
           value={text}
           onChange={handleTextChange}
           role="textbox"
-          disabled={isLoading}
           // use default font instead of textarea's monospace font
           style={{ fontFamily: 'unset' }}
+          onKeyDown={onKeyDown}
         />
         <FormHelperText data-cy={COMMENT_EDITOR_TEXTAREA_HELPER_TEXT_CY} error>
           {textTooLong || ' '}
         </FormHelperText>
-        <Button
-          endIcon={<SendHorizonal />}
+        <SendButton
+          onClick={onSend}
           data-cy={COMMENT_EDITOR_SAVE_BUTTON_CYPRESS}
-          color="primary"
-          variant="contained"
-          onClick={() => send(text)}
-          loading={isLoading}
-          name="send"
+          name={t('SEND_MESSAGE_BUTTON')}
+          disabled={isLoading}
         >
-          {t('SEND_LABEL')}
-        </Button>
+          <SendHorizonal />
+        </SendButton>
       </Stack>
     </Box>
   );
