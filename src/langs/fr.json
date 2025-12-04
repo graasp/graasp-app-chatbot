@@ -62,6 +62,8 @@
     "STARTER_SUGGESTION_NAME": "Suggestion de conversation numéro {{nb}}",
     "DELETE_STARTER_SUGGESTION_BUTTON_TITLE": "Supprimer la suggestion de conversation numéro {{nb}}",
     "STARTER_SUGGESTION_PLACEHOLDER": "Écrire une suggestion ici",
-    "STARTER_SUGGESTION_PLAYER_BUTTON_ARIA_LABEL": "Demander {{suggestion}}"
+    "STARTER_SUGGESTION_PLAYER_BUTTON_ARIA_LABEL": "Demander {{suggestion}}",
+    "EDIT_CHATBOT": "Modifier le chatbot",
+    "MESSAGE_INPUT_LABEL": "Message"
   }
 }
