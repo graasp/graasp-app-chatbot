@@ -7,7 +7,6 @@ import { Box, Button, Stack, TextField, Typography } from '@mui/material';
 import { Undo2Icon } from 'lucide-react';
 
 import { type ChatbotPromptSettings } from '@/config/appSetting';
-import { TextArea } from '@/modules/common/TextArea';
 
 import { ChatbotAvatarEditor } from './ChatbotAvatarEditor';
 import { ChatbotSetting } from './ChatbotSetting';
@@ -42,6 +41,10 @@ function ChatbotEditionView({
   );
 
   const [unsavedChanges, setUnsavedChanges] = useState(false);
+
+  // cannot save if there is no change, is saving or if prompt or name are empty
+  const isSaveButtonDisabled =
+    !unsavedChanges || isSaving || 0 === prompt.length || 0 === name.length;
 
   const onChangePrompt = (newValue: string) => {
     setPrompt(newValue);
@@ -97,7 +100,7 @@ function ChatbotEditionView({
         alignItems="flex-end"
       >
         <Typography variant="h5" component="h1" fontWeight="bold">
-          Edit chatbot
+          {t('EDIT_CHATBOT')}
         </Typography>
         <Button endIcon={<Undo2Icon />} variant="outlined" onClick={onCancel}>
           {t('CANCEL_LABEL')}
@@ -116,18 +119,24 @@ function ChatbotEditionView({
           fullWidth
           value={name}
           onChange={({ target: { value } }) => handleChangeChatbotName(value)}
+          required
+          error={0 === name.length}
         />
       </Stack>
 
       <ChatbotSetting
         title={t('CHATBOT_PROMPT_LABEL')}
         description={t('CHATBOT_PROMPT_HELPER')}
+        required
       >
-        <TextArea
+        <TextField
           name={t('CHATBOT_PROMPT_LABEL')}
           value={prompt}
           onChange={({ target: { value } }) => onChangePrompt(value)}
           required
+          fullWidth
+          multiline
+          error={initialValue.prompt !== prompt && 0 === prompt.length}
         />
       </ChatbotSetting>
 
@@ -135,9 +144,11 @@ function ChatbotEditionView({
         title={t('CHATBOT_CUE_LABEL')}
         description={t('CHATBOT_CUE_HELPER')}
       >
-        <TextArea
+        <TextField
           name={t('CHATBOT_CUE_LABEL')}
           value={cue}
+          fullWidth
+          multiline
           onChange={({ target: { value } }) => handleChangeChatbotCue(value)}
         />
       </ChatbotSetting>
@@ -154,8 +165,9 @@ function ChatbotEditionView({
 
       <Box alignSelf="flex-end">
         <Button
+          type="submit"
           onClick={handleSave}
-          disabled={!unsavedChanges || isSaving}
+          disabled={isSaveButtonDisabled}
           variant="outlined"
           loading={isSaving}
         >

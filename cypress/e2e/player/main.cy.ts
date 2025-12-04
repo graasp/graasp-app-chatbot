@@ -22,6 +22,7 @@ const defaultAppData = [
   },
 ];
 
+const MESSAGE_INPUT = 'textarea[name="Message"]';
 const SEND_BUTTON = '[name="Send message"]';
 
 describe('Player View', () => {
@@ -47,7 +48,7 @@ describe('Player View', () => {
 
     // type and send message
     const message = 'My message';
-    cy.get('[role="textbox"]').type(message);
+    cy.get(MESSAGE_INPUT).type(message);
     cy.get(SEND_BUTTON).click();
 
     // expect user message
@@ -84,7 +85,7 @@ describe('Player View', () => {
 
     // type and send message
     const message = 'My message';
-    cy.get('[role="textbox"]').type(message);
+    cy.get(MESSAGE_INPUT).type(message);
     cy.get(SEND_BUTTON).click();
 
     // expect user message
@@ -189,7 +190,7 @@ describe('Player View', () => {
 
     // type and send message with enter key
     const message = 'My message';
-    cy.get('[role="textbox"]').type(message).type('{enter}');
+    cy.get(MESSAGE_INPUT).type(message).type('{enter}');
 
     // expect user message
     cy.get(buildDataCy(buildCommentContainerDataCy('2'))).should(
@@ -199,7 +200,7 @@ describe('Player View', () => {
 
     // type and send message with enter key
     const message1 = 'My second message';
-    cy.get('[role="textbox"]').type(message1, { delay: 20 }).type('{enter}');
+    cy.get(MESSAGE_INPUT).type(message1, { delay: 20 }).type('{enter}');
 
     // expect message to not be sent
     cy.get('[role="log"]').should('not.contain', message1);
@@ -207,7 +208,7 @@ describe('Player View', () => {
     // explicitely wait for chatbot to answer before sending another message
     cy.wait(1000);
 
-    cy.get('[role="textbox"]').type('{enter}');
+    cy.get(MESSAGE_INPUT).type('{enter}');
 
     // expect user message
     cy.get(buildDataCy(buildCommentContainerDataCy('4'))).should(

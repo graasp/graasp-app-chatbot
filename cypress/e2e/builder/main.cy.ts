@@ -9,7 +9,7 @@ import {
 import { MOCK_APP_SETTING } from '../../fixtures/mockSettings';
 
 const EDIT_SETTINGS_BUTTON = '[type="button"]:contains("Edit")';
-const SAVE_SETTINGS_BUTTON = '[type="button"]:contains("Save")';
+const SAVE_SETTINGS_BUTTON = '[type="submit"]:contains("Save")';
 const PROMPT_TEXT_AREA = '[name="Chatbot Prompt"]';
 const CUE_TEXT_AREA = '[name="Conversation Starter"]';
 const CHATBOT_NAME_INPUT = '[name="Chatbot Name"]';
@@ -169,5 +169,40 @@ describe('Builder View', () => {
     for (const s of remainingSuggestions) {
       cy.get(`li:contains('${s}')`).should('be.visible');
     }
+  });
+
+  it('Cannot save empty chatbot name or empty prompt', () => {
+    cy.setUpApi(
+      {},
+      {
+        context: Context.Builder,
+        permission: PermissionLevel.Admin,
+      },
+    );
+    cy.visit('/');
+
+    cy.get(buildDataCy(TAB_SETTINGS_VIEW_CYPRESS)).click();
+
+    cy.get(EDIT_SETTINGS_BUTTON).click();
+
+    cy.get(SAVE_SETTINGS_BUTTON).should('be.disabled');
+
+    // change cue and cannot save despite changes
+    const cue = 'my new cue';
+    cy.get(CUE_TEXT_AREA).clear().type(cue);
+    cy.get(SAVE_SETTINGS_BUTTON).should('be.disabled');
+
+    // change prompt and can save
+    const prompt = 'my new prompt';
+    cy.get(PROMPT_TEXT_AREA).type(prompt);
+    cy.get(SAVE_SETTINGS_BUTTON).should('not.be.disabled');
+
+    // remove name and cannot save
+    cy.get(CHATBOT_NAME_INPUT).clear();
+    cy.get(SAVE_SETTINGS_BUTTON).should('be.disabled');
+
+    // add back a name and can save
+    cy.get(CHATBOT_NAME_INPUT).type('a name');
+    cy.get(SAVE_SETTINGS_BUTTON).should('not.be.disabled');
   });
 });
