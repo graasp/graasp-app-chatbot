@@ -90,81 +90,79 @@ function ChatbotEditionView({
   };
 
   return (
-    <>
-      <Stack spacing={3}>
-        <Stack
-          direction="row"
-          justifyContent="space-between"
-          alignItems="flex-end"
-        >
-          <Typography variant="h5" component="h1" fontWeight="bold">
-            Edit chatbot
-          </Typography>
-          <Button endIcon={<Undo2Icon />} variant="outlined" onClick={onCancel}>
-            {t('CANCEL_LABEL')}
-          </Button>
-        </Stack>
-        <Stack
-          direction="row"
-          justifyContent="center"
-          alignItems="center"
-          gap={2}
-        >
-          <ChatbotAvatarEditor onChange={onChangeAvatar} />
-          <TextField
-            name={t('CHATBOT_NAME_LABEL')}
-            label={t('CHATBOT_NAME_LABEL')}
-            fullWidth
-            value={name}
-            onChange={({ target: { value } }) => handleChangeChatbotName(value)}
-          />
-        </Stack>
-
-        <ChatbotSetting
-          title={t('CHATBOT_PROMPT_LABEL')}
-          description={t('CHATBOT_PROMPT_HELPER')}
-        >
-          <TextArea
-            name={t('CHATBOT_PROMPT_LABEL')}
-            value={prompt}
-            onChange={({ target: { value } }) => onChangePrompt(value)}
-            required
-          />
-        </ChatbotSetting>
-
-        <ChatbotSetting
-          title={t('CHATBOT_CUE_LABEL')}
-          description={t('CHATBOT_CUE_HELPER')}
-        >
-          <TextArea
-            name={t('CHATBOT_CUE_LABEL')}
-            value={cue}
-            onChange={({ target: { value } }) => handleChangeChatbotCue(value)}
-          />
-        </ChatbotSetting>
-
-        <ChatbotSetting
-          title={t('CHATBOT_STARTER_SUGGESTION_LABEL')}
-          description={t('CHATBOT_STARTER_SUGGESTION_HELPER')}
-        >
-          <StarterSuggestions
-            starterSuggestions={starterSuggestions}
-            onChange={handleChangeStarterConversations}
-          />
-        </ChatbotSetting>
-
-        <Box alignSelf="flex-end">
-          <Button
-            onClick={handleSave}
-            disabled={!unsavedChanges || isSaving}
-            variant="outlined"
-            loading={isSaving}
-          >
-            {unsavedChanges ? t('SAVE_LABEL') : t('SAVED_LABEL')}
-          </Button>
-        </Box>
+    <Stack spacing={3}>
+      <Stack
+        direction="row"
+        justifyContent="space-between"
+        alignItems="flex-end"
+      >
+        <Typography variant="h5" component="h1" fontWeight="bold">
+          Edit chatbot
+        </Typography>
+        <Button endIcon={<Undo2Icon />} variant="outlined" onClick={onCancel}>
+          {t('CANCEL_LABEL')}
+        </Button>
       </Stack>
-    </>
+      <Stack
+        direction="row"
+        justifyContent="center"
+        alignItems="center"
+        gap={2}
+      >
+        <ChatbotAvatarEditor onChange={onChangeAvatar} />
+        <TextField
+          name={t('CHATBOT_NAME_LABEL')}
+          label={t('CHATBOT_NAME_LABEL')}
+          fullWidth
+          value={name}
+          onChange={({ target: { value } }) => handleChangeChatbotName(value)}
+        />
+      </Stack>
+
+      <ChatbotSetting
+        title={t('CHATBOT_PROMPT_LABEL')}
+        description={t('CHATBOT_PROMPT_HELPER')}
+      >
+        <TextArea
+          name={t('CHATBOT_PROMPT_LABEL')}
+          value={prompt}
+          onChange={({ target: { value } }) => onChangePrompt(value)}
+          required
+        />
+      </ChatbotSetting>
+
+      <ChatbotSetting
+        title={t('CHATBOT_CUE_LABEL')}
+        description={t('CHATBOT_CUE_HELPER')}
+      >
+        <TextArea
+          name={t('CHATBOT_CUE_LABEL')}
+          value={cue}
+          onChange={({ target: { value } }) => handleChangeChatbotCue(value)}
+        />
+      </ChatbotSetting>
+
+      <ChatbotSetting
+        title={t('CHATBOT_STARTER_SUGGESTION_LABEL')}
+        description={t('CHATBOT_STARTER_SUGGESTION_HELPER')}
+      >
+        <StarterSuggestions
+          starterSuggestions={starterSuggestions}
+          onChange={handleChangeStarterConversations}
+        />
+      </ChatbotSetting>
+
+      <Box alignSelf="flex-end">
+        <Button
+          onClick={handleSave}
+          disabled={!unsavedChanges || isSaving}
+          variant="outlined"
+          loading={isSaving}
+        >
+          {unsavedChanges ? t('SAVE_LABEL') : t('SAVED_LABEL')}
+        </Button>
+      </Box>
+    </Stack>
   );
 }
 export { ChatbotEditionView };
