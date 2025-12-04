@@ -74,6 +74,7 @@
     "STARTER_SUGGESTION_NAME": "Starter suggestion number {{nb}}",
     "DELETE_STARTER_SUGGESTION_BUTTON_TITLE": "Delete suggestion number {{nb}}",
     "STARTER_SUGGESTION_PLACEHOLDER": "Write a suggestion here",
-    "STARTER_SUGGESTION_PLAYER_BUTTON_ARIA_LABEL": "Ask {{suggestion}}"
+    "STARTER_SUGGESTION_PLAYER_BUTTON_ARIA_LABEL": "Ask {{suggestion}}",
+    "SEND_MESSAGE_BUTTON": "Send message"
   }
 }

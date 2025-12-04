@@ -22,6 +22,8 @@ const defaultAppData = [
   },
 ];
 
+const SEND_BUTTON = '[name="Send message"]';
+
 describe('Player View', () => {
   it('Show messages and write a new one', () => {
     cy.setUpApi(
@@ -46,7 +48,7 @@ describe('Player View', () => {
     // type and send message
     const message = 'My message';
     cy.get('[role="textbox"]').type(message);
-    cy.get('[name="send"]').click();
+    cy.get(SEND_BUTTON).click();
 
     // expect user message
     cy.get(buildDataCy(buildCommentContainerDataCy('1'))).should(
@@ -83,7 +85,7 @@ describe('Player View', () => {
     // type and send message
     const message = 'My message';
     cy.get('[role="textbox"]').type(message);
-    cy.get('[name="send"]').click();
+    cy.get(SEND_BUTTON).click();
 
     // expect user message
     cy.get(buildDataCy(buildCommentContainerDataCy('2'))).should(
@@ -170,5 +172,47 @@ describe('Player View', () => {
     );
 
     cy.get('button').should('not.contain', suggestion);
+  });
+
+  it('Type and send messages with enter key', () => {
+    cy.setUpApi(
+      {
+        appData: [],
+        appSettings: [MOCK_APP_SETTING],
+      },
+      {
+        context: Context.Player,
+        permission: PermissionLevel.Write,
+      },
+    );
+    cy.visit('/');
+
+    // type and send message with enter key
+    const message = 'My message';
+    cy.get('[role="textbox"]').type(message).type('{enter}');
+
+    // expect user message
+    cy.get(buildDataCy(buildCommentContainerDataCy('2'))).should(
+      'contain',
+      message,
+    );
+
+    // type and send message with enter key
+    const message1 = 'My second message';
+    cy.get('[role="textbox"]').type(message1, { delay: 20 }).type('{enter}');
+
+    // expect message to not be sent
+    cy.get('[role="log"]').should('not.contain', message1);
+
+    // explicitely wait for chatbot to answer before sending another message
+    cy.wait(1000);
+
+    cy.get('[role="textbox"]').type('{enter}');
+
+    // expect user message
+    cy.get(buildDataCy(buildCommentContainerDataCy('4'))).should(
+      'contain',
+      message1,
+    );
   });
 });

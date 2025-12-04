@@ -2,7 +2,9 @@ import { useState } from 'react';
 import type { JSX } from 'react';
 import { useTranslation } from 'react-i18next';
 
-import { Box, Button, Stack, TextField } from '@mui/material';
+import { Box, Button, Stack, TextField, Typography } from '@mui/material';
+
+import { Undo2Icon } from 'lucide-react';
 
 import { type ChatbotPromptSettings } from '@/config/appSetting';
 import { TextArea } from '@/modules/common/TextArea';
@@ -19,11 +21,13 @@ type Props = {
     starterSuggestions: string[];
   };
   onSave: (data: ChatbotPromptSettings, avatar?: Blob) => Promise<void>;
+  onCancel: () => void;
 };
 
 function ChatbotEditionView({
   initialValue,
   onSave,
+  onCancel,
 }: Readonly<Props>): JSX.Element {
   const { t } = useTranslation();
   const [prompt, setPrompt] = useState(initialValue.prompt);
@@ -87,6 +91,18 @@ function ChatbotEditionView({
 
   return (
     <Stack spacing={3}>
+      <Stack
+        direction="row"
+        justifyContent="space-between"
+        alignItems="flex-end"
+      >
+        <Typography variant="h5" component="h1" fontWeight="bold">
+          Edit chatbot
+        </Typography>
+        <Button endIcon={<Undo2Icon />} variant="outlined" onClick={onCancel}>
+          {t('CANCEL_LABEL')}
+        </Button>
+      </Stack>
       <Stack
         direction="row"
         justifyContent="center"

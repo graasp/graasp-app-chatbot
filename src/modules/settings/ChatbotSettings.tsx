@@ -13,7 +13,7 @@ import {
   useTheme,
 } from '@mui/material';
 
-import { Edit, Undo2 } from 'lucide-react';
+import { Edit } from 'lucide-react';
 
 import type { ChatbotPromptSettings } from '@/config/appSetting';
 import { SettingsKeys } from '@/config/appSetting';
@@ -23,6 +23,7 @@ import { DEFAULT_BOT_USERNAME } from '@/constants';
 
 import ChatbotAvatar from '../common/ChatbotAvatar';
 import { useChatbotAvatar } from '../common/useChatbotAvatar';
+import { About } from '../templates/About';
 import { ChatbotEditionView } from './chatbot/ChatbotEditingView';
 import { ChatbotPromptDisplay } from './chatbot/ChatbotPromptDisplay';
 import { useSaveAvatar } from './useNewAvatar';
@@ -104,127 +105,124 @@ function ChatbotSettings() {
     doneEditing();
   };
 
+  if (isEditing) {
+    return (
+      <ChatbotEditionView
+        onCancel={handleCancel}
+        initialValue={{
+          name: chatbotName,
+          cue: chatbotCue,
+          prompt: initialPrompt,
+          starterSuggestions,
+        }}
+        onSave={handleOnSave}
+      />
+    );
+  }
+
   return (
     <Stack spacing={3}>
+      {!initialPrompt && (
+        <Alert severity="warning">{t('CHATBOT_CONFIGURATION_MISSING')}</Alert>
+      )}
       <Stack
         direction="row"
         justifyContent="space-between"
         alignItems="flex-end"
       >
-        <Typography variant="h2" fontWeight="bold" fontSize="1.5rem">
-          {t('CHATBOT_SETTING_TITLE')}
+        <Typography variant="h4" component="h1" fontWeight="bold">
+          {chatbotName}
         </Typography>
         <Button
-          endIcon={isEditing ? <Undo2 /> : <Edit />}
+          endIcon={<Edit />}
           variant="outlined"
           onClick={() => {
-            if (isEditing) {
-              handleCancel();
-            } else {
-              setIsEditing(true);
-            }
+            setIsEditing(true);
           }}
         >
-          {isEditing ? t('CANCEL_LABEL') : t('EDIT_LABEL')}
+          {t('EDIT_LABEL')}
         </Button>
       </Stack>
-      {!initialPrompt && (
-        <Alert severity="warning">{t('CHATBOT_CONFIGURATION_MISSING')}</Alert>
-      )}
-
-      {isEditing ? (
-        <ChatbotEditionView
-          initialValue={{
-            name: chatbotName,
-            cue: chatbotCue,
-            prompt: initialPrompt,
-            starterSuggestions,
-          }}
-          onSave={handleOnSave}
-        />
-      ) : (
-        <Card
-          elevation={0}
-          variant="outlined"
-          data-cy={CHATBOT_SETTINGS_SUMMARY_CY}
-        >
-          <CardContent sx={{ pb: 0 }}>
-            <Grid2 container rowGap={2} spacing={1}>
-              <Grid2 size={{ xs: 12, sm: 4 }}>
-                <FormLabel sx={{ fontWeight: 'bold' }}>
-                  {t('CHATBOT_AVATAR_LABEL')}
-                </FormLabel>
-              </Grid2>
-              <Grid2 size={{ xs: 12, sm: 8 }}>
-                <ChatbotAvatar avatar={chatbotAvatar} size="small" />
-              </Grid2>
-
-              <Grid2 size={{ xs: 12, sm: 4 }}>
-                <FormLabel sx={{ fontWeight: 'bold' }}>
-                  {t('CHATBOT_NAME_LABEL')}
-                </FormLabel>
-              </Grid2>
-              <Grid2 size={{ xs: 12, sm: 8 }}>
-                <Stack direction="row" gap={1}>
-                  <Typography>{chatbotName}</Typography>
-                  {chatbotName === DEFAULT_BOT_USERNAME && (
-                    <Typography color="text.disabled">
-                      {t('CHATBOT_NAME_DEFAULT_MESSAGE')}
-                    </Typography>
-                  )}
-                </Stack>
-              </Grid2>
-
-              <Grid2 size={{ xs: 12, sm: 4 }}>
-                <FormLabel sx={{ fontWeight: 'bold' }}>
-                  {t('CHATBOT_PROMPT_LABEL')}
-                </FormLabel>
-              </Grid2>
-              <Grid2 size={{ xs: 12, sm: 8 }}>
-                <ChatbotPromptDisplay prompt={initialPrompt} />
-              </Grid2>
-
-              <Grid2 size={{ xs: 12, sm: 4 }}>
-                <FormLabel sx={{ fontWeight: 'bold' }}>
-                  {t('CHATBOT_CUE_LABEL')}
-                </FormLabel>
-              </Grid2>
-              <Grid2 size={{ xs: 12, sm: 8 }}>
-                {chatbotCue ? (
-                  <Typography>{chatbotCue}</Typography>
-                ) : (
-                  <Typography color="text.disabled" fontStyle="italic">
-                    {t('CHATBOT_CUE_EMPTY_MESSAGE')}
-                  </Typography>
-                )}
-              </Grid2>
-
-              <Grid2 size={{ xs: 12, sm: 4 }}>
-                <FormLabel sx={{ fontWeight: 'bold' }}>
-                  {t('CHATBOT_STARTER_SUGGESTIONS_LABEL')}
-                </FormLabel>
-              </Grid2>
-              <Grid2 size={{ xs: 12, sm: 8 }}>
-                {starterSuggestions.length ? (
-                  <ul
-                    style={{ marginBlock: 0, paddingInline: theme.spacing(2) }}
-                  >
-                    {starterSuggestions.map((s) => (
-                      <Typography key={s} variant="body1" component="li">
-                        {s}
-                      </Typography>
-                    ))}
-                  </ul>
-                ) : (
-                  <Typography color="text.disabled" fontStyle="italic">
-                    {t('CHATBOT_STARTER_SUGGESTIONS_EMPTY_MESSAGE')}
-                  </Typography>
-                )}
-              </Grid2>
+      <Card
+        elevation={0}
+        variant="outlined"
+        data-cy={CHATBOT_SETTINGS_SUMMARY_CY}
+      >
+        <CardContent sx={{ pb: 0 }}>
+          <Grid2 container rowGap={2} spacing={1}>
+            <Grid2 size={{ xs: 12, sm: 4 }}>
+              <FormLabel sx={{ fontWeight: 'bold' }}>
+                {t('CHATBOT_AVATAR_LABEL')}
+              </FormLabel>
             </Grid2>
-          </CardContent>
-        </Card>
-      )}
+            <Grid2 size={{ xs: 12, sm: 8 }}>
+              <ChatbotAvatar avatar={chatbotAvatar} size="small" />
+            </Grid2>
+
+            <Grid2 size={{ xs: 12, sm: 4 }}>
+              <FormLabel sx={{ fontWeight: 'bold' }}>
+                {t('CHATBOT_NAME_LABEL')}
+              </FormLabel>
+            </Grid2>
+            <Grid2 size={{ xs: 12, sm: 8 }}>
+              <Stack direction="row" gap={1}>
+                <Typography>{chatbotName}</Typography>
+                {chatbotName === DEFAULT_BOT_USERNAME && (
+                  <Typography color="text.disabled">
+                    {t('CHATBOT_NAME_DEFAULT_MESSAGE')}
+                  </Typography>
+                )}
+              </Stack>
+            </Grid2>
+
+            <Grid2 size={{ xs: 12, sm: 4 }}>
+              <FormLabel sx={{ fontWeight: 'bold' }}>
+                {t('CHATBOT_PROMPT_LABEL')}
+              </FormLabel>
+            </Grid2>
+            <Grid2 size={{ xs: 12, sm: 8 }}>
+              <ChatbotPromptDisplay prompt={initialPrompt} />
+            </Grid2>
+
+            <Grid2 size={{ xs: 12, sm: 4 }}>
+              <FormLabel sx={{ fontWeight: 'bold' }}>
+                {t('CHATBOT_CUE_LABEL')}
+              </FormLabel>
+            </Grid2>
+            <Grid2 size={{ xs: 12, sm: 8 }}>
+              {chatbotCue ? (
+                <Typography>{chatbotCue}</Typography>
+              ) : (
+                <Typography color="text.disabled" fontStyle="italic">
+                  {t('CHATBOT_CUE_EMPTY_MESSAGE')}
+                </Typography>
+              )}
+            </Grid2>
+
+            <Grid2 size={{ xs: 12, sm: 4 }}>
+              <FormLabel sx={{ fontWeight: 'bold' }}>
+                {t('CHATBOT_STARTER_SUGGESTIONS_LABEL')}
+              </FormLabel>
+            </Grid2>
+            <Grid2 size={{ xs: 12, sm: 8 }}>
+              {starterSuggestions.length ? (
+                <ul style={{ marginBlock: 0, paddingInline: theme.spacing(2) }}>
+                  {starterSuggestions.map((s) => (
+                    <Typography key={s} variant="body1" component="li">
+                      {s}
+                    </Typography>
+                  ))}
+                </ul>
+              ) : (
+                <Typography color="text.disabled" fontStyle="italic">
+                  {t('CHATBOT_STARTER_SUGGESTIONS_EMPTY_MESSAGE')}
+                </Typography>
+              )}
+            </Grid2>
+          </Grid2>
+        </CardContent>
+      </Card>
+      <About />
     </Stack>
   );
 }
