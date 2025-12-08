@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.0.1](https://github.com/graasp/graasp-app-chatbot/compare/v2.0.0...v2.0.1) (2025-12-08)
+
+
+### Bug Fixes
+
+* **ci:** remove push to graasp deploy ([#368](https://github.com/graasp/graasp-app-chatbot/issues/368)) ([2e086d3](https://github.com/graasp/graasp-app-chatbot/commit/2e086d3b301acb105565e4a3f0086c185d6e82a5))
+
 ## [2.0.0](https://github.com/graasp/graasp-app-chatbot/compare/v1.2.3...v2.0.0) (2025-12-08)
 
 
