@@ -1,5 +1,39 @@
 # Changelog
 
+## [2.0.0](https://github.com/graasp/graasp-app-chatbot/compare/v1.2.3...v2.0.0) (2025-12-08)
+
+
+### Features
+
+* add chatbot avatar setting ([#353](https://github.com/graasp/graasp-app-chatbot/issues/353)) ([d365df7](https://github.com/graasp/graasp-app-chatbot/commit/d365df74464a288a02433a4e089f5b23d24b6aad))
+* add starter suggestions setting ([#354](https://github.com/graasp/graasp-app-chatbot/issues/354)) ([701d91f](https://github.com/graasp/graasp-app-chatbot/commit/701d91fe0e25a6dadd668862342a65d1cd4e4458))
+* improve initialPrompt structure and view settings layout ([#352](https://github.com/graasp/graasp-app-chatbot/issues/352)) ([3505641](https://github.com/graasp/graasp-app-chatbot/commit/3505641ce218f97ea4ad6cbba5517599dddf48b8))
+* remove chatbot models selection and maximum inputs ([#342](https://github.com/graasp/graasp-app-chatbot/issues/342)) ([d0e650a](https://github.com/graasp/graasp-app-chatbot/commit/d0e650ad5806d38b328bae505bc1f93a1031a79b))
+* remove thread system, message edition ([#344](https://github.com/graasp/graasp-app-chatbot/issues/344)) ([12b927d](https://github.com/graasp/graasp-app-chatbot/commit/12b927d8d8c592fe22c49eaa4f2f83232103eaf6))
+* show edition error and prevent save, use textfield multiline ([#366](https://github.com/graasp/graasp-app-chatbot/issues/366)) ([240e25c](https://github.com/graasp/graasp-app-chatbot/commit/240e25cb263bf592ebb6bdec29be4103fbfccdf0))
+* show loading indicator on bot replying ([#363](https://github.com/graasp/graasp-app-chatbot/issues/363)) ([5ada69f](https://github.com/graasp/graasp-app-chatbot/commit/5ada69f8bd7b2d129f790bb1c101dbc35d9dfcc5))
+* simplify settings view ([#347](https://github.com/graasp/graasp-app-chatbot/issues/347)) ([4b7309d](https://github.com/graasp/graasp-app-chatbot/commit/4b7309df309563745daf28fff3b33468f688a506))
+* translate fr.json via GitLocalize ([#360](https://github.com/graasp/graasp-app-chatbot/issues/360)) ([4c53d99](https://github.com/graasp/graasp-app-chatbot/commit/4c53d99f20ac546538527aa660e28cf93df28c4b))
+* translate fr.json via GitLocalize ([#362](https://github.com/graasp/graasp-app-chatbot/issues/362)) ([0c030dd](https://github.com/graasp/graasp-app-chatbot/commit/0c030dd6b8a1141291b42f565a45165b030773e2))
+* translate it.json via GitLocalize ([#361](https://github.com/graasp/graasp-app-chatbot/issues/361)) ([804c564](https://github.com/graasp/graasp-app-chatbot/commit/804c564db2e554555a5eac482a5166ac697f1ea0))
+* update player view ([#350](https://github.com/graasp/graasp-app-chatbot/issues/350)) ([2b7d7a5](https://github.com/graasp/graasp-app-chatbot/commit/2b7d7a5310edbb8a97329772063f972c63934a54))
+* upgrade yarn, apps query client and graaspsdk ([#345](https://github.com/graasp/graasp-app-chatbot/issues/345)) ([b41524e](https://github.com/graasp/graasp-app-chatbot/commit/b41524e7939aeb7229f77b0f44cdc8e80fdce650))
+
+
+### Bug Fixes
+
+* add new GPT models ([#324](https://github.com/graasp/graasp-app-chatbot/issues/324)) ([c152c5b](https://github.com/graasp/graasp-app-chatbot/commit/c152c5be7e3f039c0bd89b845412c1874d5a4165))
+* **deps:** update dependency @emotion/styled to v11.14.1 ([#312](https://github.com/graasp/graasp-app-chatbot/issues/312)) ([6d70337](https://github.com/graasp/graasp-app-chatbot/commit/6d703378873039075fdf028dd429f11571697578))
+* **deps:** update dependency @sentry/react to v10 ([#309](https://github.com/graasp/graasp-app-chatbot/issues/309)) ([ce95acf](https://github.com/graasp/graasp-app-chatbot/commit/ce95acfa976850ae19c1e2ade8012889a251e300))
+* **deps:** update mui (non-major) to v6.5.0 ([#313](https://github.com/graasp/graasp-app-chatbot/issues/313)) ([3decdbd](https://github.com/graasp/graasp-app-chatbot/commit/3decdbdbad21e11514e5879ee0f7b4d116eb079a))
+* update react packages ([#346](https://github.com/graasp/graasp-app-chatbot/issues/346)) ([ea5ff6e](https://github.com/graasp/graasp-app-chatbot/commit/ea5ff6e90ac1642cda8e156246ce0efaae03eb2c))
+* use oxlint ([#325](https://github.com/graasp/graasp-app-chatbot/issues/325)) ([114650c](https://github.com/graasp/graasp-app-chatbot/commit/114650c9550ad8dd93e8c8ffbea6d857c8806ac1))
+
+
+### Miscellaneous Chores
+
+* release 2.0.0 ([afa9012](https://github.com/graasp/graasp-app-chatbot/commit/afa901282e239a6ff97e87a009cd0a113287f10a))
+
 ## [1.2.3](https://github.com/graasp/graasp-app-chatbot/compare/v1.2.2...v1.2.3) (2025-07-15)
 
 
