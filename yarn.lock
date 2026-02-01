@@ -4041,12 +4041,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node@npm:22.19.3":
-  version: 22.19.3
-  resolution: "@types/node@npm:22.19.3"
+"@types/node@npm:22.19.7":
+  version: 22.19.7
+  resolution: "@types/node@npm:22.19.7"
   dependencies:
     undici-types: "npm:~6.21.0"
-  checksum: 10/ffee06ce6d741fde98a40bc65a57394ed2283c521f57f9143d2356513181162bd4108809be6902a861d098b35e35569f61f14c64d3032e48a0289b74f917669a
+  checksum: 10/0a5c9cc3bdd2a2d8105735b136e280a2dec90136679adfe82faa7e4de375dcc6b4cebaa6b2de35cc6b37e5e135cdc9486373d574782a4ca22f5eeab299111aa6
   languageName: node
   linkType: hard
 
@@ -5225,14 +5225,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"axios@npm:1.13.2":
-  version: 1.13.2
-  resolution: "axios@npm:1.13.2"
+"axios@npm:1.13.4":
+  version: 1.13.4
+  resolution: "axios@npm:1.13.4"
   dependencies:
     follow-redirects: "npm:^1.15.6"
     form-data: "npm:^4.0.4"
     proxy-from-env: "npm:^1.1.0"
-  checksum: 10/ae4e06dcd18289f2fd18179256d550d27f9a53ecb2f9c59f2ccc4efd1d7151839ba8c3e0fb533dac793e4a59a576ca8689a19244dce5c396680837674a47a867
+  checksum: 10/54b7ef71c64837f9d52475832337f520cf6fa85c94612e03a3a2aad7082804a2544741267122696662147e90e6d2746601346984cf531ae715ecdb56d586a04c
   languageName: node
   linkType: hard
 
@@ -7037,14 +7037,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eslint-plugin-cypress@npm:5.2.0":
-  version: 5.2.0
-  resolution: "eslint-plugin-cypress@npm:5.2.0"
+"eslint-plugin-cypress@npm:5.2.1":
+  version: 5.2.1
+  resolution: "eslint-plugin-cypress@npm:5.2.1"
   dependencies:
     globals: "npm:^16.2.0"
   peerDependencies:
     eslint: ">=9"
-  checksum: 10/4701b3e6b6bfba21fdfdabb3551e066d683faf1e0f38d943cb51a2faa409a1bce4e489c6dbcac2bf2a8e498f96059da3c61d41193a0a4d792269fd9c2728f42f
+  checksum: 10/0d832e527da0d465b92b55335799dcaab60c36edda5cdb3080bdd91662afa6ecd97543f885c60e1a999ed2ce93d272a25f493625a9b2523a5539cd00d2f8d486
   languageName: node
   linkType: hard
 
@@ -7133,12 +7133,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eslint-plugin-prettier@npm:5.5.4":
-  version: 5.5.4
-  resolution: "eslint-plugin-prettier@npm:5.5.4"
+"eslint-plugin-prettier@npm:5.5.5":
+  version: 5.5.5
+  resolution: "eslint-plugin-prettier@npm:5.5.5"
   dependencies:
-    prettier-linter-helpers: "npm:^1.0.0"
-    synckit: "npm:^0.11.7"
+    prettier-linter-helpers: "npm:^1.0.1"
+    synckit: "npm:^0.11.12"
   peerDependencies:
     "@types/eslint": ">=8.0.0"
     eslint: ">=8.0.0"
@@ -7149,7 +7149,7 @@ __metadata:
       optional: true
     eslint-config-prettier:
       optional: true
-  checksum: 10/5e39e3b7046d4ba0e1111cc2048630ee9d0aa5d5bb00d6230bef56893fdae37cbe2261babfb26db350cc2ad517c81d283b3f8b04cfee4e5aef7cd4bee72f90de
+  checksum: 10/36c22c2fa2fd7c61ed292af1280e1d8f94dfe1671eacc5a503a249ca4b27fd226dbf6a1820457d611915926946f42729488d2dc7a5c320601e6cf1fad0d28f66
   languageName: node
   linkType: hard
 
@@ -8091,7 +8091,7 @@ __metadata:
     "@types/lodash.countby": "npm:4.6.9"
     "@types/lodash.flatten": "npm:4.4.9"
     "@types/lodash.groupby": "npm:4.6.9"
-    "@types/node": "npm:22.19.3"
+    "@types/node": "npm:22.19.7"
     "@types/react": "npm:18.3.27"
     "@types/react-dom": "npm:18.3.7"
     "@types/stopword": "npm:2.0.3"
@@ -8102,7 +8102,7 @@ __metadata:
     "@visx/scale": "npm:3.12.0"
     "@visx/wordcloud": "npm:3.12.0"
     "@vitejs/plugin-react": "npm:4.7.0"
-    axios: "npm:1.13.2"
+    axios: "npm:1.13.4"
     concurrently: "npm:9.2.1"
     cypress: "npm:14.5.4"
     date-fns: "npm:4.1.0"
@@ -8111,10 +8111,10 @@ __metadata:
     eslint-config-prettier: "npm:10.1.8"
     eslint-config-react-app: "npm:7.0.1"
     eslint-import-resolver-typescript: "npm:4.4.4"
-    eslint-plugin-cypress: "npm:5.2.0"
+    eslint-plugin-cypress: "npm:5.2.1"
     eslint-plugin-import: "npm:2.32.0"
     eslint-plugin-jsx-a11y: "npm:6.10.2"
-    eslint-plugin-prettier: "npm:5.5.4"
+    eslint-plugin-prettier: "npm:5.5.5"
     eslint-plugin-react: "npm:7.37.5"
     eslint-plugin-react-hooks: "npm:5.2.0"
     file-saver: "npm:2.0.5"
@@ -11114,7 +11114,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"prettier-linter-helpers@npm:^1.0.0":
+"prettier-linter-helpers@npm:^1.0.1":
   version: 1.0.1
   resolution: "prettier-linter-helpers@npm:1.0.1"
   dependencies:
@@ -12605,7 +12605,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"synckit@npm:^0.11.7":
+"synckit@npm:^0.11.12":
   version: 0.11.12
   resolution: "synckit@npm:0.11.12"
   dependencies:
