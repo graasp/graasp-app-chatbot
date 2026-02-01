@@ -4473,9 +4473,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@uiw/codemirror-extensions-basic-setup@npm:4.23.13":
-  version: 4.23.13
-  resolution: "@uiw/codemirror-extensions-basic-setup@npm:4.23.13"
+"@uiw/codemirror-extensions-basic-setup@npm:4.23.14":
+  version: 4.23.14
+  resolution: "@uiw/codemirror-extensions-basic-setup@npm:4.23.14"
   dependencies:
     "@codemirror/autocomplete": "npm:^6.0.0"
     "@codemirror/commands": "npm:^6.0.0"
@@ -4492,19 +4492,19 @@ __metadata:
     "@codemirror/search": ">=6.0.0"
     "@codemirror/state": ">=6.0.0"
     "@codemirror/view": ">=6.0.0"
-  checksum: 10/35fd1894f9f7da8f94fa077a70821f92118597e2e2b12782b254b0844f06c1855508421c4cb47de7099a972ef706218c08203116aa93da4e8e1585c8d234015d
+  checksum: 10/9ae172d2df21d3fd6dfc96e78117ab2d70c636f6e31648707a6cfefcf705d35f654a2414119723b4f42ec6bd6ed5cb3d59f8318ae4886b1a97264282dd1b0e96
   languageName: node
   linkType: hard
 
-"@uiw/react-codemirror@npm:4.23.13":
-  version: 4.23.13
-  resolution: "@uiw/react-codemirror@npm:4.23.13"
+"@uiw/react-codemirror@npm:4.23.14":
+  version: 4.23.14
+  resolution: "@uiw/react-codemirror@npm:4.23.14"
   dependencies:
     "@babel/runtime": "npm:^7.18.6"
     "@codemirror/commands": "npm:^6.1.0"
     "@codemirror/state": "npm:^6.1.1"
     "@codemirror/theme-one-dark": "npm:^6.0.0"
-    "@uiw/codemirror-extensions-basic-setup": "npm:4.23.13"
+    "@uiw/codemirror-extensions-basic-setup": "npm:4.23.14"
     codemirror: "npm:^6.0.0"
   peerDependencies:
     "@babel/runtime": ">=7.11.0"
@@ -4514,7 +4514,7 @@ __metadata:
     codemirror: ">=6.0.0"
     react: ">=16.8.0"
     react-dom: ">=16.8.0"
-  checksum: 10/51777d7eb313be0716d3597f829e6ee9982ab2dc3e36dc5219f25cdf680b82a6c0a0951d9adaca85b9c829da92f7971aa6e65bdd50e7610972d89463fe2587a1
+  checksum: 10/978a38774013ca42fde64d698c9fc43a2a04fbe5eb06152498ad997d872891b3aed88f804034808ffaa9890619627755cf6f61521557a1f2622b7fa66e29515e
   languageName: node
   linkType: hard
 
@@ -8098,7 +8098,7 @@ __metadata:
     "@types/uuid": "npm:10.0.0"
     "@typescript-eslint/eslint-plugin": "npm:8.48.1"
     "@typescript-eslint/parser": "npm:8.48.1"
-    "@uiw/react-codemirror": "npm:4.23.13"
+    "@uiw/react-codemirror": "npm:4.23.14"
     "@visx/scale": "npm:3.12.0"
     "@visx/wordcloud": "npm:3.12.0"
     "@vitejs/plugin-react": "npm:4.7.0"
