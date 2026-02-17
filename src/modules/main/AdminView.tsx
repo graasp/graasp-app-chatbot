@@ -45,7 +45,7 @@ function AdminView(): JSX.Element {
     });
 
   return (
-    <Box data-cy={BUILDER_VIEW_CY}>
+    <Box data-cy={BUILDER_VIEW_CY} minHeight={500}>
       <TabContext value={activeTab}>
         <TabList
           textColor="secondary"
