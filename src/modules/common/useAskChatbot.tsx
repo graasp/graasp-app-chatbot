@@ -13,7 +13,13 @@ import { mutations } from '@/config/queryClient';
  * @param chatbotPrompt settings of the chatbot with cue and initial prompt
  * @returns generateChatbotAnswer function
  */
-export const useAskChatbot = (chatbotPrompt: ChatbotPromptSettings) => {
+export const useAskChatbot = ({
+  chatbotPrompt,
+  conversationId,
+}: {
+  chatbotPrompt: ChatbotPromptSettings;
+  conversationId?: string;
+}) => {
   const { mutateAsync: postAppDataAsync, isLoading: isPostAppDataLoading } =
     mutations.usePostAppData();
 
@@ -49,13 +55,14 @@ export const useAskChatbot = (chatbotPrompt: ChatbotPromptSettings) => {
           data: {
             parent: userMessageId,
             content: chatBotRes.completion,
+            conversationId,
           },
           type: AppDataTypes.BotComment,
         });
 
         // save action for asking the chatbot
-        await postAction({
-          data: { prompt, userMessageId },
+        postAction({
+          data: { prompt, userMessageId, conversationId },
           type: AppActionsType.AskChatbot,
         });
       } catch (e) {
@@ -68,6 +75,7 @@ export const useAskChatbot = (chatbotPrompt: ChatbotPromptSettings) => {
       postAction,
       postAppDataAsync,
       postChatBotAsync,
+      conversationId,
     ],
   );
 

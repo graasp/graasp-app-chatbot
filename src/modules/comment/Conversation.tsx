@@ -1,6 +1,6 @@
 import { useTranslation } from 'react-i18next';
 
-import { Alert, Box, CircularProgress } from '@mui/material';
+import { Alert, CircularProgress } from '@mui/material';
 
 import { ChatbotPromptSettings } from '@/config/appSetting';
 
@@ -15,6 +15,7 @@ function Conversation({
   isLoading,
   mode = 'read',
   suggestions,
+  conversationId,
 }: Readonly<{
   chatbotAvatar?: Blob;
   chatbotPrompt?: ChatbotPromptSettings;
@@ -23,6 +24,7 @@ function Conversation({
   mode?: CommentContainerProps['mode'];
   suggestions?: string[];
   threadSx?: CommentContainerProps['threadSx'];
+  conversationId?: string;
 }>) {
   const { t } = useTranslation();
 
@@ -30,24 +32,16 @@ function Conversation({
     const { chatbotName } = chatbotPrompt;
 
     return (
-      <Box
-        sx={{
-          px: { xs: 2, sm: 10 },
-          maxWidth: '100ch',
-          m: 'auto',
-          height: '100%',
-        }}
-      >
-        <CommentContainer
-          chatbotAvatar={chatbotAvatar}
-          chatbotName={chatbotName}
-          threadSx={threadSx}
-          comments={comments}
-          chatbotPrompt={chatbotPrompt}
-          mode={mode}
-          suggestions={suggestions}
-        />
-      </Box>
+      <CommentContainer
+        chatbotAvatar={chatbotAvatar}
+        chatbotName={chatbotName}
+        threadSx={threadSx}
+        comments={comments}
+        chatbotPrompt={chatbotPrompt}
+        mode={mode}
+        suggestions={suggestions}
+        conversationId={conversationId}
+      />
     );
   }
 

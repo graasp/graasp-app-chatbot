@@ -46,7 +46,14 @@ function FrequentWords({
 
   const [selectedCustomWords, setSelectedCustomWords] = useState<string[]>([]);
   const [customWord, setCustomWord] = useState('');
-  const [chatMemberID, setChatMemberID] = useState('');
+  const [selectedConversation, setSelectedConversation] = useState<null | {
+    accountId: string;
+    conversationId?: string;
+  }>(null);
+
+  const closeConversation = () => {
+    setSelectedConversation(null);
+  };
 
   const isAllSelected = mostFrequentWords.every(
     (ele) => -1 < selectedFrequentWords.indexOf(ele),
@@ -136,7 +143,12 @@ function FrequentWords({
             sentence={ele.data.content}
             memberName={ele.account.name}
             words={[...selectedFrequentWords, ...selectedCustomWords]}
-            onClick={() => setChatMemberID(ele.account.id)}
+            onClick={() =>
+              setSelectedConversation({
+                accountId: ele.account.id,
+                conversationId: ele.data.conversationId,
+              })
+            }
             buttonId={buildCheckWholeMemberChatButtonId(ele.account.id)}
           />
         ))}
@@ -148,19 +160,17 @@ function FrequentWords({
           )
         }
       </Stack>
-      {chatMemberID && (
-        <Dialog
-          open
-          onClose={() => {
-            setChatMemberID('');
-          }}
-        >
+      {selectedConversation && (
+        <Dialog open onClose={closeConversation}>
           <DialogTitle>{t('ANALYTICS_CONVERSATION_MEMBER')}</DialogTitle>
           <DialogContent>
-            <ConversationForUser accountId={chatMemberID} />
+            <ConversationForUser
+              accountId={selectedConversation.accountId}
+              conversationId={selectedConversation.conversationId}
+            />
           </DialogContent>
           <DialogActions>
-            <Button>{t('CLOSE')}</Button>
+            <Button onClick={closeConversation}>{t('CLOSE')}</Button>
           </DialogActions>
         </Dialog>
       )}
