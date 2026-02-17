@@ -1,9 +1,9 @@
 import { AppDataTypes, CommentData } from '@/config/appData';
-import { ChatbotPromptSettings, SettingsKeys } from '@/config/appSetting';
 import { hooks } from '@/config/queryClient';
 import { ANONYMOUS_USER, DEFAULT_BOT_USERNAME } from '@/constants';
 
 import { useChatbotAvatar } from './useChatbotAvatar';
+import { useChatbotPrompt } from './useChatbotPrompt';
 
 export type Comment = {
   id: string;
@@ -16,21 +16,29 @@ export type Comment = {
 export const useConversation = ({
   accountId,
   showSuggestions,
-}: Readonly<{ accountId?: string; showSuggestions?: boolean }>) => {
+  conversationId,
+}: Readonly<{
+  accountId?: string;
+  showSuggestions?: boolean;
+  conversationId?: string | null;
+}>) => {
   const { data: appData, isLoading: isAppDataLoading } =
     hooks.useAppData<CommentData>();
-  const { data: chatbotPromptSettings, isLoading: isChatbotSettingsLoading } =
-    hooks.useAppSettings<ChatbotPromptSettings>({
-      name: SettingsKeys.ChatbotPrompt,
-    });
+  const { data: chatbotPrompt, isLoading: isChatbotSettingsLoading } =
+    useChatbotPrompt();
   const { avatar, isLoading: isAvatarLoading } = useChatbotAvatar();
 
-  const chatbotPrompt = chatbotPromptSettings?.[0]?.data;
-
-  // get comments for given user only
   const comments =
     appData
-      ?.filter((res) => res.creator?.id === accountId)
+      ?.filter(
+        (res) =>
+          // get comments for given user only
+          res.creator?.id === accountId &&
+          // get comments for given conversation
+          (res.data.conversationId === conversationId ||
+            // handle legacy messages
+            ('undefined' === conversationId && !res.data.conversationId)),
+      )
       ?.toSorted((c1, c2) => (c1.createdAt > c2.createdAt ? 1 : -1))
       ?.map((c) => {
         const isBot = c.type === AppDataTypes.BotComment;

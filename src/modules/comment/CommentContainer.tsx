@@ -1,22 +1,15 @@
-import { Divider, Stack, SxProps, Theme, styled } from '@mui/material';
+import { Divider, Stack, SxProps, Theme } from '@mui/material';
 
 import { ChatbotPromptSettings } from '@/config/appSetting';
 
-import { BIG_BORDER_RADIUS } from '../../constants';
 import { ChatbotTyping } from '../common/ChatbotTyping';
 import CommentEditor from '../common/CommentEditor';
 import CommentThread from '../common/CommentThread';
 import { Suggestions } from '../common/Suggestions';
 import { Comment } from '../common/useConversation';
 import { useSendMessageAndAskChatbot } from '../common/useSendMessageAndAskChatbot';
+import { ChatbotContainer } from './ChatbotContainer';
 import ChatbotHeader from './ChatbotHeader';
-
-const Container = styled('div')(({ theme }) => ({
-  backgroundColor: 'white',
-  border: 'solid silver 1px',
-  padding: theme.spacing(3, 0),
-  borderRadius: BIG_BORDER_RADIUS,
-}));
 
 export type CommentContainerProps = Readonly<{
   chatbotAvatar?: Blob;
@@ -26,6 +19,7 @@ export type CommentContainerProps = Readonly<{
   mode?: 'read' | 'write';
   suggestions?: string[];
   threadSx?: SxProps<Theme>;
+  conversationId?: string;
 }>;
 
 export function CommentContainer({
@@ -36,14 +30,16 @@ export function CommentContainer({
   chatbotAvatar,
   mode = 'read',
   suggestions,
+  conversationId,
 }: CommentContainerProps) {
   const { send, isLoading: isSendingMessageAndAsking } =
     useSendMessageAndAskChatbot({
       chatbotPrompt,
+      conversationId,
     });
 
   return (
-    <Container>
+    <ChatbotContainer>
       <Stack gap={3} px={2}>
         <Stack role="log" gap={3}>
           <ChatbotHeader avatar={chatbotAvatar} name={chatbotName} />
@@ -64,6 +60,6 @@ export function CommentContainer({
           )}
         </Stack>
       </Stack>
-    </Container>
+    </ChatbotContainer>
   );
 }

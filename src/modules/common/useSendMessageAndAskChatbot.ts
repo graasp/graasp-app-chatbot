@@ -12,14 +12,19 @@ import { useSendMessage } from './useSendMessage';
 export const useSendMessageAndAskChatbot = ({
   chatbotPrompt,
   onSend,
+  conversationId,
 }: {
   chatbotPrompt: ChatbotPromptSettings;
   onSend?: () => void;
+  conversationId?: string;
 }) => {
-  const { generateChatbotAnswer, isLoading: askChatbotLoading } =
-    useAskChatbot(chatbotPrompt);
-  const { sendMessage, isLoading: sendMessageLoading } =
-    useSendMessage(chatbotPrompt);
+  const { generateChatbotAnswer, isLoading: askChatbotLoading } = useAskChatbot(
+    { chatbotPrompt, conversationId },
+  );
+  const { sendMessage, isLoading: sendMessageLoading } = useSendMessage({
+    chatbotCue: chatbotPrompt.chatbotCue,
+    conversationId,
+  });
 
   const send = useCallback(
     async (newUserComment: string) => {
