@@ -9,6 +9,7 @@ import {
   TableBody,
   TableCell,
   TableContainer,
+  TableHead,
   TableRow,
   Typography,
 } from '@mui/material';
@@ -35,7 +36,6 @@ const useConversations = () => {
   if (messages) {
     const conversations = groupBy(messages, (c) => c.data.conversationId);
     return Object.entries(conversations)
-      .toSorted((a, b) => (a[0] > b[0] ? 1 : -1))
       .map(([id, m]) => {
         const sortedMessages = m.toSorted((a, b) =>
           a.createdAt > b.createdAt ? 1 : -1,
@@ -46,6 +46,7 @@ const useConversations = () => {
           id,
           name: sortedMessages[0].data.content,
           messages: m,
+          lastMessageCreatedAt: creationDate ?? '',
           lastMessageDate: creationDate
             ? intlFormat(
                 creationDate,
@@ -60,7 +61,10 @@ const useConversations = () => {
               )
             : '',
         };
-      });
+      })
+      .toSorted((a, b) =>
+        a.lastMessageCreatedAt < b.lastMessageCreatedAt ? 1 : -1,
+      );
   }
 
   return [];
@@ -88,7 +92,13 @@ export function Conversations({
         <Stack gap={3}>
           <ChatbotHeader avatar={chatbotAvatar} name={chatbotName} />
           <TableContainer data-cy={TABLE_VIEW_TABLE_CYPRESS}>
-            <Table aria-label="conversations table">
+            <Table aria-label={t('List of Conversations')}>
+              {/* hide headers visually */}
+              <TableHead sx={{ position: 'absolute', clip: 'rect(0 0 0 0)' }}>
+                <TableCell>{t('Conversation Name')}</TableCell>
+                <TableCell>{t('Last Message Date')}</TableCell>
+                <TableCell>{t('Actions')}</TableCell>
+              </TableHead>
               <TableBody data-cy={TABLE_VIEW_BODY_USERS_CYPRESS}>
                 {conversations.map((c) => (
                   <TableRow key={c.id}>
@@ -110,6 +120,7 @@ export function Conversations({
                     </TableCell>
                     <TableCell align="right">
                       <IconButton
+                        title={t('Open conversation')}
                         onClick={() => {
                           console.debug(`Open conversation ${c.id}`);
                           onSelect(c.id);
