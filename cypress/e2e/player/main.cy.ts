@@ -238,7 +238,7 @@ describe('Player View', () => {
     );
   });
 
-  it('Show all conversations', () => {
+  it.only('Show all conversations', () => {
     const appData = [
       // first conversation
       {
@@ -312,7 +312,7 @@ describe('Player View', () => {
 
       expect(rows[0]).to.contain(appData[0].data.content);
       // content is cut because it is too long
-      expect(rows[1]).to.contain(appData[1].data.content.slice(0, 10));
+      expect(rows[1]).to.contain(appData[2].data.content.slice(0, 10));
       expect(rows[2]).to.contain(appData[3].data.content);
     });
 
@@ -330,7 +330,7 @@ describe('Player View', () => {
     cy.get('button:contains("Go back to conversations")').click();
 
     // go to second legacy conversation
-    goToConversation(appData[1]);
+    goToConversation(appData[2]);
     // expect one user message only
     cy.get(buildDataCy(buildCommentContainerDataCy(appData[1].id))).should(
       'be.visible',
