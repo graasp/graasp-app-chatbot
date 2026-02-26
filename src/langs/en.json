@@ -77,6 +77,11 @@
     "STARTER_SUGGESTION_PLAYER_BUTTON_ARIA_LABEL": "Ask {{suggestion}}",
     "SEND_MESSAGE_BUTTON": "Send message",
     "EDIT_CHATBOT": "Edit chatbot",
-    "MESSAGE_INPUT_LABEL": "Message"
+    "MESSAGE_INPUT_LABEL": "Message",
+    "List of Conversations": "List of Conversations",
+    "Conversation Name": "Conversation Name",
+    "Last Message Date": "Last Message Date",
+    "Actions": "Actions",
+    "Open conversation": "Open conversation"
   }
 }

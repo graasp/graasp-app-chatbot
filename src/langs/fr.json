@@ -64,6 +64,11 @@
     "STARTER_SUGGESTION_PLACEHOLDER": "Écrire une suggestion ici",
     "STARTER_SUGGESTION_PLAYER_BUTTON_ARIA_LABEL": "Demander {{suggestion}}",
     "EDIT_CHATBOT": "Modifier le chatbot",
-    "MESSAGE_INPUT_LABEL": "Message"
+    "MESSAGE_INPUT_LABEL": "Message",
+    "List of Conversations": "Liste des discussions",
+    "Conversation Name": "Nom de la discussion",
+    "Last Message Date": "Date du dernier message",
+    "Actions": "Actions",
+    "Open conversation": "Ouvrir la discussion"
   }
 }

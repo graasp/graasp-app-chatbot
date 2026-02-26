@@ -3,9 +3,10 @@ import Conversation from './Conversation';
 
 export const ConversationForUser = ({
   accountId,
-}: Readonly<{ accountId: string }>) => {
+  conversationId,
+}: Readonly<{ accountId: string; conversationId?: string }>) => {
   const { comments, isLoading, chatbotPrompt, chatbotAvatar } = useConversation(
-    { accountId },
+    { accountId, conversationId },
   );
 
   return (
