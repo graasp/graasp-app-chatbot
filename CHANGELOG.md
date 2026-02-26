@@ -1,5 +1,20 @@
 # Changelog
 
+## [2.1.0](https://github.com/graasp/graasp-app-chatbot/compare/v2.0.0...v2.1.0) (2026-02-26)
+
+
+### Features
+
+* manage messages in conversations ([#388](https://github.com/graasp/graasp-app-chatbot/issues/388)) ([523f145](https://github.com/graasp/graasp-app-chatbot/commit/523f145b383d5b2bcae7af985f4646d962dfa7ae))
+
+
+### Bug Fixes
+
+* **ci:** remove push to graasp deploy ([#368](https://github.com/graasp/graasp-app-chatbot/issues/368)) ([2e086d3](https://github.com/graasp/graasp-app-chatbot/commit/2e086d3b301acb105565e4a3f0086c185d6e82a5))
+* **deps:** update dependency @sentry/react to v10.39.0 ([#358](https://github.com/graasp/graasp-app-chatbot/issues/358)) ([bde9c05](https://github.com/graasp/graasp-app-chatbot/commit/bde9c051e3fe26dc667bab2c87dc67619fdc7921))
+* **deps:** update dependency @uiw/react-codemirror to v4.23.14 ([#382](https://github.com/graasp/graasp-app-chatbot/issues/382)) ([8d9c841](https://github.com/graasp/graasp-app-chatbot/commit/8d9c841d730ccb3d7c3a4b49105cfe68c7216eac))
+* force minimum height for admin view ([#386](https://github.com/graasp/graasp-app-chatbot/issues/386)) ([c7975bd](https://github.com/graasp/graasp-app-chatbot/commit/c7975bd5ef3009178cee49e974e7021a95298422))
+
 ## [2.0.0](https://github.com/graasp/graasp-app-chatbot/compare/v1.2.3...v2.0.0) (2025-12-08)
 
 
