@@ -1,5 +1,22 @@
 # Changelog
 
+## [2.2.0](https://github.com/graasp/graasp-app-chatbot/compare/v2.1.0...v2.2.0) (2026-05-06)
+
+
+### Features
+
+* add delete conversation ([#397](https://github.com/graasp/graasp-app-chatbot/issues/397)) ([3236a4d](https://github.com/graasp/graasp-app-chatbot/commit/3236a4d549f28d173ce56aa88dfa5d8ac74169de))
+
+
+### Bug Fixes
+
+* add regression test for cue message ([#399](https://github.com/graasp/graasp-app-chatbot/issues/399)) ([1825161](https://github.com/graasp/graasp-app-chatbot/commit/1825161d79d6794d1a6d64fff45779b18967612e))
+* **deps:** update tanstack-query monorepo to v4.40.2 ([#396](https://github.com/graasp/graasp-app-chatbot/issues/396)) ([a9f786a](https://github.com/graasp/graasp-app-chatbot/commit/a9f786a684ad8cc5c7f201ff070df61fe524c6a3))
+* ignore claude directory ([bb10e14](https://github.com/graasp/graasp-app-chatbot/commit/bb10e148b5836cc568ab6cc6b0a2b8b7c10b63ad))
+* improve bundle size by splitting views in chunks ([#402](https://github.com/graasp/graasp-app-chatbot/issues/402)) ([2766ebe](https://github.com/graasp/graasp-app-chatbot/commit/2766ebeb22e77ee316ac1dacd82daab177b45301))
+* remove unused dependencies ([#401](https://github.com/graasp/graasp-app-chatbot/issues/401)) ([4b8b13d](https://github.com/graasp/graasp-app-chatbot/commit/4b8b13d3dca6af37fa302972a043dacc97a9637b))
+* update action versions ([#400](https://github.com/graasp/graasp-app-chatbot/issues/400)) ([b9c4e92](https://github.com/graasp/graasp-app-chatbot/commit/b9c4e922c2d876b8e2fc072e5cd44b92869c57f8))
+
 ## [2.1.0](https://github.com/graasp/graasp-app-chatbot/compare/v2.0.0...v2.1.0) (2026-02-26)
 
 
