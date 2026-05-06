@@ -7,4 +7,6 @@ export const AppActionsType = {
   // chatbot actions
   AskChatbot: 'ask_chatbot',
   UseStarter: 'use_starter',
+  // conversation actions
+  DeleteConversation: 'delete_conversation',
 } as const;

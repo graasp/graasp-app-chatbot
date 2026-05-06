@@ -87,3 +87,8 @@ export const buildKeywordChipId = (keyword: string): string =>
 export const buildCheckWholeMemberChatButtonId = (memberId: string): string =>
   `check_member_chat_button_id_${memberId}`;
 export const CHATBOT_SETTINGS_SUMMARY_CY = 'chatbotSettingsSummary';
+
+export const DELETE_CONVERSATION_BUTTON_CY = 'delete_conversation_button';
+export const DELETE_CONVERSATION_DIALOG_CY = 'delete_conversation_dialog';
+export const DELETE_CONVERSATION_CONFIRM_BUTTON_CY =
+  'delete_conversation_confirm_button';

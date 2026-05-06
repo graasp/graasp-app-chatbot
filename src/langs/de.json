@@ -48,6 +48,8 @@
     "NO_COMMENTS_PLACEHOLDER": "Keine Kommentare",
     "ABOUT_TITLE": "Über die Chatbot App",
     "ABOUT_DESCRIPTION": "Die Chatbot-App verwendet das ChatGPT-Modell von OpenAI als Grundlage für die Chatbot-Integration. Benutzerantworten werden über die API an OpenAI übermittelt, um dort verarbeitet und Antworten generiert zu werden. Es werden keine anderen Benutzerdaten übermittelt. Wenn Benutzer in ihren Nachrichten personenbezogene Daten angeben, können wir nichts tun, um diese Daten zu schützen.",
-    "ABOUT_PRIVACY_POLICY_OPENAI": "Siehe die <1>OpenAI-Datenschutzrichtlinie für EU-Benutzer</1>."
+    "ABOUT_PRIVACY_POLICY_OPENAI": "Siehe die <1>OpenAI-Datenschutzrichtlinie für EU-Benutzer</1>.",
+    "Delete conversation": "Gespräch löschen",
+    "DELETE_CONVERSATION_CONFIRM_MESSAGE": "Möchten Sie dieses Gespräch wirklich löschen? Diese Aktion kann nicht rückgängig gemacht werden."
   }
 }

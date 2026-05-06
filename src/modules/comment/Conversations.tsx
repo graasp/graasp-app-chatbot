@@ -1,8 +1,14 @@
+import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import {
   Button,
   Container,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogContentText,
+  DialogTitle,
   IconButton,
   Stack,
   Table,
@@ -16,15 +22,19 @@ import {
 
 import { intlFormat } from 'date-fns';
 import groupBy from 'lodash.groupby';
-import { MessagesSquareIcon, PlusIcon } from 'lucide-react';
+import { MessagesSquareIcon, PlusIcon, Trash2Icon } from 'lucide-react';
 import { v4 } from 'uuid';
 
 import type { CommentData } from '@/config/appData';
 import { hooks } from '@/config/queryClient';
 import {
+  DELETE_CONVERSATION_BUTTON_CY,
+  DELETE_CONVERSATION_CONFIRM_BUTTON_CY,
+  DELETE_CONVERSATION_DIALOG_CY,
   TABLE_VIEW_BODY_USERS_CYPRESS,
   TABLE_VIEW_TABLE_CYPRESS,
 } from '@/config/selectors';
+import { useDeleteConversation } from '@/modules/common/useDeleteConversation';
 
 import { ChatbotContainer } from './ChatbotContainer';
 import ChatbotHeader from './ChatbotHeader';
@@ -81,9 +91,20 @@ export function Conversations({
 }>) {
   const { t } = useTranslation();
   const conversations = useConversations();
+  const { deleteConversation } = useDeleteConversation();
+  const [conversationToDelete, setConversationToDelete] = useState<
+    string | null
+  >(null);
 
   const startNewConversation = () => {
     onSelect(v4());
+  };
+
+  const handleDeleteConfirm = async () => {
+    if (conversationToDelete) {
+      await deleteConversation(conversationToDelete);
+      setConversationToDelete(null);
+    }
   };
 
   return (
@@ -122,11 +143,18 @@ export function Conversations({
                       <IconButton
                         title={t('Open conversation')}
                         onClick={() => {
-                          console.debug(`Open conversation ${c.id}`);
                           onSelect(c.id);
                         }}
                       >
                         <MessagesSquareIcon />
+                      </IconButton>
+                      <IconButton
+                        title={t('Delete conversation')}
+                        color="error"
+                        data-cy={DELETE_CONVERSATION_BUTTON_CY}
+                        onClick={() => setConversationToDelete(c.id)}
+                      >
+                        <Trash2Icon />
                       </IconButton>
                     </TableCell>
                   </TableRow>
@@ -145,6 +173,31 @@ export function Conversations({
           </Stack>
         </Stack>
       </ChatbotContainer>
+      <Dialog
+        open={Boolean(conversationToDelete)}
+        onClose={() => setConversationToDelete(null)}
+        data-cy={DELETE_CONVERSATION_DIALOG_CY}
+      >
+        <DialogTitle>{t('Delete conversation')}</DialogTitle>
+        <DialogContent>
+          <DialogContentText>
+            {t('DELETE_CONVERSATION_CONFIRM_MESSAGE')}
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={() => setConversationToDelete(null)}>
+            {t('CANCEL_LABEL')}
+          </Button>
+          <Button
+            color="error"
+            variant="contained"
+            onClick={handleDeleteConfirm}
+            data-cy={DELETE_CONVERSATION_CONFIRM_BUTTON_CY}
+          >
+            {t('DELETE_LABEL')}
+          </Button>
+        </DialogActions>
+      </Dialog>
     </Container>
   );
 }

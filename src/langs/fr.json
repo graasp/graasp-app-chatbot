@@ -69,6 +69,8 @@
     "Conversation Name": "Nom de la discussion",
     "Last Message Date": "Date du dernier message",
     "Actions": "Actions",
-    "Open conversation": "Ouvrir la discussion"
+    "Open conversation": "Ouvrir la discussion",
+    "Delete conversation": "Supprimer la discussion",
+    "DELETE_CONVERSATION_CONFIRM_MESSAGE": "Êtes-vous sûr de vouloir supprimer cette discussion ? Cette action est irréversible."
   }
 }

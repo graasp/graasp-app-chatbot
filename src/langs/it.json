@@ -74,6 +74,8 @@
     "STARTER_SUGGESTION_NAME": "Numero di suggerimento iniziale {{nb}}",
     "DELETE_STARTER_SUGGESTION_BUTTON_TITLE": "Elimina il suggerimento numero {{nb}}",
     "STARTER_SUGGESTION_PLACEHOLDER": "Scrivi un suggerimento qui",
-    "STARTER_SUGGESTION_PLAYER_BUTTON_ARIA_LABEL": "Chiedi {{suggerimento}}"
+    "STARTER_SUGGESTION_PLAYER_BUTTON_ARIA_LABEL": "Chiedi {{suggerimento}}",
+    "Delete conversation": "Elimina conversazione",
+    "DELETE_CONVERSATION_CONFIRM_MESSAGE": "Sei sicuro di voler eliminare questa conversazione? Questa azione non può essere annullata."
   }
 }

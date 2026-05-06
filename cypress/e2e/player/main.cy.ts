@@ -2,6 +2,9 @@ import { AppDataVisibility, Context, PermissionLevel } from '@graasp/sdk';
 
 import type { CommentAppData } from '../../../src/config/appData';
 import {
+  DELETE_CONVERSATION_BUTTON_CY,
+  DELETE_CONVERSATION_CONFIRM_BUTTON_CY,
+  DELETE_CONVERSATION_DIALOG_CY,
   buildCommentContainerDataCy,
   buildDataCy,
 } from '../../../src/config/selectors';
@@ -238,7 +241,7 @@ describe('Player View', () => {
     );
   });
 
-  it.only('Show all conversations', () => {
+  it('Show all conversations', () => {
     const appData = [
       // first conversation
       {
@@ -341,5 +344,82 @@ describe('Player View', () => {
     cy.get(buildDataCy(buildCommentContainerDataCy(appData[3].id))).should(
       'not.exist',
     );
+  });
+
+  describe('Delete conversation', () => {
+    const conversationAppData = [
+      {
+        account: CURRENT_MEMBER,
+        createdAt: '2025-11-18T16:35:22.010Z',
+        creator: CURRENT_MEMBER,
+        data: { content: 'First message', conversationId: 'conv-1' },
+        id: 'dce688ee-d3e3-4839-8d6f-40b7112c9451',
+        item: MOCK_SERVER_ITEM,
+        type: 'comment',
+        updatedAt: '2025-11-18T16:35:22.010Z',
+        visibility: AppDataVisibility.Member,
+      },
+      {
+        account: CURRENT_MEMBER,
+        createdAt: '2025-11-18T16:36:00.000Z',
+        creator: CURRENT_MEMBER,
+        data: { content: 'Second message', conversationId: 'conv-1' },
+        id: 'd7bb1914-ab1d-4242-b67f-11b23b6669f3',
+        item: MOCK_SERVER_ITEM,
+        type: 'comment',
+        updatedAt: '2025-11-18T16:36:00.000Z',
+        visibility: AppDataVisibility.Member,
+      },
+      {
+        account: CURRENT_MEMBER,
+        createdAt: '2025-10-01T10:00:00.000Z',
+        creator: CURRENT_MEMBER,
+        data: { content: 'Another conversation', conversationId: 'conv-2' },
+        id: 'de37b417-c56a-4b04-a165-44470669246e',
+        item: MOCK_SERVER_ITEM,
+        type: 'comment',
+        updatedAt: '2025-10-01T10:00:00.000Z',
+        visibility: AppDataVisibility.Member,
+      },
+    ];
+
+    beforeEach(() => {
+      cy.setUpApi(
+        { appData: conversationAppData, appSettings: [MOCK_APP_SETTING] },
+        { context: Context.Player, permission: PermissionLevel.Write },
+      );
+      cy.visit('/');
+    });
+
+    it('shows a delete button for each conversation', () => {
+      cy.get('tr').should('have.length', 2);
+      cy.get(buildDataCy(DELETE_CONVERSATION_BUTTON_CY)).should(
+        'have.length',
+        2,
+      );
+    });
+
+    it('opens a confirmation dialog when delete is clicked', () => {
+      cy.get(buildDataCy(DELETE_CONVERSATION_DIALOG_CY)).should('not.exist');
+      cy.get(buildDataCy(DELETE_CONVERSATION_BUTTON_CY)).first().click();
+      cy.get(buildDataCy(DELETE_CONVERSATION_DIALOG_CY)).should('be.visible');
+    });
+
+    it('cancels deletion and keeps the conversation', () => {
+      cy.get(buildDataCy(DELETE_CONVERSATION_BUTTON_CY)).first().click();
+      cy.get(buildDataCy(DELETE_CONVERSATION_DIALOG_CY)).should('be.visible');
+      cy.contains('button', 'Cancel').click();
+      cy.get(buildDataCy(DELETE_CONVERSATION_DIALOG_CY)).should('not.exist');
+      cy.get('tr').should('have.length', 2);
+    });
+
+    it('deletes a conversation and removes it from the list', () => {
+      cy.get('tr').should('have.length', 2);
+      cy.get(buildDataCy(DELETE_CONVERSATION_BUTTON_CY)).first().click();
+      cy.get(buildDataCy(DELETE_CONVERSATION_CONFIRM_BUTTON_CY)).click();
+      cy.get(buildDataCy(DELETE_CONVERSATION_DIALOG_CY)).should('not.exist');
+      cy.get('tr').should('have.length', 1);
+      cy.get('tr').should('contain', 'Another conversation');
+    });
   });
 });
