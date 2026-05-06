@@ -9,7 +9,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
 
       - name: Yarn Install and Cache
         uses: graasp/graasp-deploy/.github/actions/yarn-install-and-cache@v1
@@ -27,7 +27,7 @@ jobs:
           VITE_VERSION: cypress-tests
 
       - name: Cypress Run
-        uses: cypress-io/github-action@v6
+        uses: cypress-io/github-action@v7
         env:
           VITE_PORT: 3000
           VITE_API_HOST: http://localhost:3636
@@ -43,7 +43,7 @@ jobs:
           # point to new cypress@10 config file
           config-file: cypress.config.ts
 
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v7
         if: failure()
         with:
           name: cypress-screenshots
