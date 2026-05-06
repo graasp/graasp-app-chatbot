@@ -2483,9 +2483,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@graasp/sdk@npm:5.16.5":
-  version: 5.16.5
-  resolution: "@graasp/sdk@npm:5.16.5"
+"@graasp/sdk@npm:5.18.1":
+  version: 5.18.1
+  resolution: "@graasp/sdk@npm:5.18.1"
   dependencies:
     "@faker-js/faker": "npm:9.9.0"
     filesize: "npm:10.1.6"
@@ -2493,7 +2493,7 @@ __metadata:
   peerDependencies:
     date-fns: ^4.0.0
     uuid: ^11.0.0
-  checksum: 10/be066539252aac129befa28fc95e23e2c0d10ab9fa25b2f079b124fccedcf14cb594a02fb2c05ccb537719e1e14a99809a50e04212661f1739bcd912f1d0b4d8
+  checksum: 10/bba3034a609111fdb9b4b2858b2ba3e49c28da77affcf7f632a76fd7e6166672fcb8092bddd7849d51c39710cef2de7a415884310dc607c8f328eabb0348e097
   languageName: node
   linkType: hard
 
@@ -2785,22 +2785,6 @@ __metadata:
     "@types/react":
       optional: true
   checksum: 10/429a2f7f05b9a3228428cadf7751ec0f2322f0f66115d58036b6fccb044e8e67075b56e1540a3c4c66f0f86ed6c48cd19b8b6e66fcfc26db5d34165457831b20
-  languageName: node
-  linkType: hard
-
-"@mui/icons-material@npm:6.5.0":
-  version: 6.5.0
-  resolution: "@mui/icons-material@npm:6.5.0"
-  dependencies:
-    "@babel/runtime": "npm:^7.26.0"
-  peerDependencies:
-    "@mui/material": ^6.5.0
-    "@types/react": ^17.0.0 || ^18.0.0 || ^19.0.0
-    react: ^17.0.0 || ^18.0.0 || ^19.0.0
-  peerDependenciesMeta:
-    "@types/react":
-      optional: true
-  checksum: 10/9472113feb6fc2e9cb86f19da36379e34388b5eda7aa6817566183d4332ea873fec453a1258536cc39a870514b92f94601a55e4f9c003a328cf33a420a573af5
   languageName: node
   linkType: hard
 
@@ -7908,9 +7892,8 @@ __metadata:
     "@eslint/eslintrc": "npm:3.3.3"
     "@eslint/js": "npm:9.39.2"
     "@graasp/apps-query-client": "npm:4.1.0"
-    "@graasp/sdk": "npm:5.16.5"
+    "@graasp/sdk": "npm:5.18.1"
     "@graasp/ui": "npm:5.5.4"
-    "@mui/icons-material": "npm:6.5.0"
     "@mui/lab": "npm:6.0.0-dev.240424162023-9968b4889d"
     "@mui/material": "npm:6.5.0"
     "@sentry/react": "npm:10.39.0"
