@@ -346,6 +346,76 @@ describe('Player View', () => {
     );
   });
 
+  describe('Ghost message (cue) in second conversation', () => {
+    const firstConversationAppData = [
+      {
+        account: CURRENT_MEMBER,
+        createdAt: '2025-11-18T16:35:22.010Z',
+        creator: CURRENT_MEMBER,
+        data: { content: 'First question', conversationId: 'conv-1' },
+        id: '0',
+        item: MOCK_SERVER_ITEM,
+        type: 'comment',
+        updatedAt: '2025-11-18T16:35:22.010Z',
+        visibility: AppDataVisibility.Member,
+      },
+      {
+        account: CURRENT_MEMBER,
+        createdAt: '2025-11-18T16:35:25.010Z',
+        creator: CURRENT_MEMBER,
+        data: { content: 'Bot answer', conversationId: 'conv-1' },
+        id: '1',
+        item: MOCK_SERVER_ITEM,
+        type: 'bot-comment',
+        updatedAt: '2025-11-18T16:35:25.010Z',
+        visibility: AppDataVisibility.Member,
+      },
+    ];
+
+    beforeEach(() => {
+      cy.setUpApi(
+        { appData: firstConversationAppData, appSettings: [MOCK_APP_SETTING] },
+        { context: Context.Player, permission: PermissionLevel.Write },
+      );
+      cy.visit('/');
+    });
+
+    it('shows ghost message when a new conversation is created after a first one already exists', () => {
+      createConversation();
+
+      cy.get(buildDataCy(buildCommentContainerDataCy('cue'))).should(
+        'contain',
+        MOCK_APP_SETTING.data.chatbotCue,
+      );
+    });
+
+    it('persists the cue as first message when sending in a second conversation', () => {
+      createConversation();
+
+      const message = 'My second conversation message';
+      cy.get(MESSAGE_INPUT).type(message);
+      cy.get(SEND_BUTTON).click();
+
+      // cue should be persisted as first real message (id '2', after the two pre-existing messages)
+      cy.get(buildDataCy(buildCommentContainerDataCy('2'))).should(
+        'contain',
+        MOCK_APP_SETTING.data.chatbotCue,
+      );
+
+      // user message follows
+      cy.get(buildDataCy(buildCommentContainerDataCy('3'))).should(
+        'contain',
+        message,
+      );
+
+      // bot response follows
+      cy.get(buildDataCy(buildCommentContainerDataCy('4'))).should(
+        'contain',
+        'i am a bot',
+      );
+    });
+  });
+
   describe('Delete conversation', () => {
     const conversationAppData = [
       {
