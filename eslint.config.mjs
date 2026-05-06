@@ -34,6 +34,7 @@ export default [
       '**/commitlint.config.cjs',
       'cypress.config.ts',
       'eslint.config.mjs',
+      '.claude',
     ],
   },
   ...fixupConfigRules(
