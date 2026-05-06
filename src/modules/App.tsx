@@ -1,12 +1,14 @@
-import { useEffect } from 'react';
+import { Suspense, lazy, useEffect } from 'react';
 
 import { useLocalContext } from '@graasp/apps-query-client';
 import { Context } from '@graasp/sdk';
 
 import i18n, { DEFAULT_LANGUAGE } from '../config/i18n';
-import AnalyticsView from './main/AnalyticsView';
-import BuilderView from './main/BuilderView';
-import PlayerView from './main/PlayerView';
+import Loader from './common/Loader';
+
+const AnalyticsView = lazy(() => import('./main/AnalyticsView'));
+const BuilderView = lazy(() => import('./main/BuilderView'));
+const PlayerView = lazy(() => import('./main/PlayerView'));
 
 function App(): JSX.Element {
   const context = useLocalContext();
@@ -19,17 +21,20 @@ function App(): JSX.Element {
     }
   }, [context]);
 
+  let view: JSX.Element;
   switch (context.context) {
     case Context.Builder:
-      return <BuilderView />;
-
+      view = <BuilderView />;
+      break;
     case Context.Analytics:
-      return <AnalyticsView />;
-
+      view = <AnalyticsView />;
+      break;
     case Context.Player:
     default:
-      return <PlayerView />;
+      view = <PlayerView />;
   }
+
+  return <Suspense fallback={<Loader>App</Loader>}>{view}</Suspense>;
 }
 
 export default App;

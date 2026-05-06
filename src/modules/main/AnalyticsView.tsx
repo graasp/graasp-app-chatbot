@@ -1,14 +1,12 @@
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
-import CloudIcon from '@mui/icons-material/Cloud';
-import CommentIcon from '@mui/icons-material/Comment';
-import PeopleIcon from '@mui/icons-material/People';
 import { Alert, Box, Button, Grid2, Typography } from '@mui/material';
 
 import type { AppAction } from '@graasp/sdk';
 
 import groupBy from 'lodash.groupby';
+import { CloudIcon, MessageSquareIcon, UsersIcon } from 'lucide-react';
 
 import { AppActionsType } from '@/config/appActions';
 import type { CommentData } from '@/config/appData';
@@ -53,7 +51,12 @@ function AnalyticsView(): JSX.Element {
               >
                 <Grid2 size={{ xs: 12, sm: 4 }}>
                   <StatisticCard
-                    icon={<CommentIcon fontSize="large" color="primary" />}
+                    icon={
+                      <MessageSquareIcon
+                        size={36}
+                        color="var(--mui-palette-primary-main)"
+                      />
+                    }
                     title={t('STATISTIC_TOTAL_USER_COMMENTS_TITLE')}
                   >
                     <Typography
@@ -67,7 +70,12 @@ function AnalyticsView(): JSX.Element {
                 </Grid2>
                 <Grid2 size={{ xs: 12, sm: 4 }}>
                   <StatisticCard
-                    icon={<PeopleIcon fontSize="large" color="primary" />}
+                    icon={
+                      <UsersIcon
+                        size={36}
+                        color="var(--mui-palette-primary-main)"
+                      />
+                    }
                     title={t('STATISTIC_AVERAGE_USER_COMMENTS_TITLE')}
                   >
                     <Typography variant="h5" component="div">
@@ -78,7 +86,12 @@ function AnalyticsView(): JSX.Element {
                 </Grid2>
                 <Grid2 size={{ xs: 12, sm: 4 }}>
                   <StatisticCard
-                    icon={<CloudIcon fontSize="large" color="primary" />}
+                    icon={
+                      <CloudIcon
+                        size={36}
+                        color="var(--mui-palette-primary-main)"
+                      />
+                    }
                     title={t('WORDS_FREQUENCY')}
                   >
                     <Button

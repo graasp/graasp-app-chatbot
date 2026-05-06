@@ -1,9 +1,10 @@
 import { useTranslation } from 'react-i18next';
 
-import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import { Box, IconButton, Tooltip, Typography, styled } from '@mui/material';
 
 import { stringToColor } from '@graasp/ui/apps';
+
+import { ArrowRightIcon } from 'lucide-react';
 
 import { createRegexFromString } from '../analytics/utils';
 
@@ -72,7 +73,7 @@ function TextWithHighlightedKeywords({
       </Box>
       <Tooltip title={t('CHECK_WHOLE_CHAT')}>
         <IconButton onClick={onClick} id={buttonId}>
-          <ArrowForwardIcon fontSize="small" />
+          <ArrowRightIcon size={18} />
         </IconButton>
       </Tooltip>
     </StyledBox>
