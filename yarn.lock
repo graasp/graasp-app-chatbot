@@ -3748,24 +3748,24 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@tanstack/react-query-devtools@npm:4.40.1":
-  version: 4.40.1
-  resolution: "@tanstack/react-query-devtools@npm:4.40.1"
+"@tanstack/react-query-devtools@npm:4.40.2":
+  version: 4.40.2
+  resolution: "@tanstack/react-query-devtools@npm:4.40.2"
   dependencies:
     "@tanstack/match-sorter-utils": "npm:^8.7.0"
     superjson: "npm:^1.10.0"
     use-sync-external-store: "npm:^1.2.0"
   peerDependencies:
-    "@tanstack/react-query": ^4.40.1
+    "@tanstack/react-query": ^4.40.2
     react: ^16.8.0 || ^17.0.0 || ^18.0.0
     react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0
-  checksum: 10/825041b6a5ca71abb1277f671d3e6134c9978f30d95cc83f4f5865360a9e827b33a4156c99cc561af060218148128aa8c22fb82a2e9d2d1f9d1812d28b476aea
+  checksum: 10/e7fb73ddd5a79c26bcbf7be7b52818b196321098e1af9f1f3d9a88a646fc123b73777ed8494615c52ecd9062427ca9398695c627801e4692936719e3a95fce8c
   languageName: node
   linkType: hard
 
-"@tanstack/react-query@npm:4.40.1":
-  version: 4.40.1
-  resolution: "@tanstack/react-query@npm:4.40.1"
+"@tanstack/react-query@npm:4.40.2":
+  version: 4.40.2
+  resolution: "@tanstack/react-query@npm:4.40.2"
   dependencies:
     "@tanstack/query-core": "npm:4.40.0"
     use-sync-external-store: "npm:^1.2.0"
@@ -3778,7 +3778,7 @@ __metadata:
       optional: true
     react-native:
       optional: true
-  checksum: 10/893cbf7ab0e22f11dd5bfc6d4def34e394f0a1524f4f067619c2790f4db7bf7ca5baf7732a7f41af2f28c46d0e0d1efaa3d74c27e6c7d1a1940673f8016e2f6e
+  checksum: 10/a5d0ac7c6ef1d128f8abb7aa76227de7220a4f568f840d8e4f8a996de6172e140f1622b6971fdebf32f42012ec07333c7bebb88ebd73087db2057220581204fc
   languageName: node
   linkType: hard
 
@@ -8178,8 +8178,8 @@ __metadata:
     "@mui/lab": "npm:6.0.0-dev.240424162023-9968b4889d"
     "@mui/material": "npm:6.5.0"
     "@sentry/react": "npm:10.39.0"
-    "@tanstack/react-query": "npm:4.40.1"
-    "@tanstack/react-query-devtools": "npm:4.40.1"
+    "@tanstack/react-query": "npm:4.40.2"
+    "@tanstack/react-query-devtools": "npm:4.40.2"
     "@trivago/prettier-plugin-sort-imports": "npm:5.2.2"
     "@types/file-saver": "npm:2.0.7"
     "@types/i18n": "npm:0.13.12"
