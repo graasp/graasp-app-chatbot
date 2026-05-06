@@ -15,15 +15,21 @@ export const useSendMessage = ({
   chatbotCue?: string;
   conversationId?: string;
 }) => {
-  const { data: comments } = hooks.useAppData<CommentData>();
+  const { data: allComments } = hooks.useAppData<CommentData>();
   const { mutateAsync: postAppDataAsync, isLoading } =
     mutations.usePostAppData();
   const { mutateAsync: postAppActionAsync } = mutations.usePostAppAction();
 
+  const conversationComments = allComments?.filter(
+    (c) =>
+      c.data.conversationId === conversationId ||
+      ('undefined' === conversationId && !c.data.conversationId),
+  );
+
   const sendMessage = useCallback(
     async (newUserComment: string) => {
-      // save cue on first comment
-      if (chatbotCue && 0 === comments?.length) {
+      // save cue on first comment of this conversation
+      if (chatbotCue && 0 === (conversationComments?.length ?? 0)) {
         await postAppDataAsync({
           data: {
             content: chatbotCue,
@@ -49,7 +55,7 @@ export const useSendMessage = ({
       return userMessage;
     },
     [
-      comments?.length,
+      conversationComments?.length,
       chatbotCue,
       postAppDataAsync,
       postAppActionAsync,
