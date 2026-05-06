@@ -11,7 +11,7 @@
   "homepage": ".",
   "type": "module",
   "dependencies": {
-    "@codemirror/lang-javascript": "6.2.4",
+    "@codemirror/lang-javascript": "6.2.5",
     "@emotion/react": "11.14.0",
     "@emotion/styled": "11.14.1",
     "@graasp/apps-query-client": "4.1.0",
