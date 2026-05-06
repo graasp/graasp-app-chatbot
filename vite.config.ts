@@ -1,6 +1,6 @@
 /// <reference types="./src/env"/>
 import react from '@vitejs/plugin-react';
-import type { UserConfigExport} from 'vite';
+import type { UserConfigExport } from 'vite';
 import { defineConfig, loadEnv } from 'vite';
 import checker from 'vite-plugin-checker';
 import istanbul from 'vite-plugin-istanbul';
@@ -33,7 +33,7 @@ export default ({ mode }: { mode: string }): UserConfigExport => {
     },
     plugins: [
       tsconfigPaths(),
-      'test' === mode 
+      'test' === mode
         ? undefined
         : checker({
             overlay: { position: 'br', initialIsOpen: false },
