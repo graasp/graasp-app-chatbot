@@ -11,7 +11,6 @@
   "homepage": ".",
   "type": "module",
   "dependencies": {
-    "@codemirror/lang-javascript": "6.2.4",
     "@emotion/react": "11.14.0",
     "@emotion/styled": "11.14.1",
     "@graasp/apps-query-client": "4.1.0",
@@ -23,7 +22,6 @@
     "@sentry/react": "10.39.0",
     "@tanstack/react-query": "4.40.2",
     "@tanstack/react-query-devtools": "4.40.2",
-    "@uiw/react-codemirror": "4.23.14",
     "@visx/scale": "3.12.0",
     "@visx/wordcloud": "3.12.0",
     "date-fns": "4.1.0",
@@ -38,7 +36,6 @@
     "react-dom": "19.1.0",
     "react-i18next": "15.5.3",
     "react-markdown": "9.1.0",
-    "react-mde": "12.0.8",
     "react-toastify": "11.0.5",
     "remark-breaks": "4.0.0",
     "remark-gfm": "4.0.1",
