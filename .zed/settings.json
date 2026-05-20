@@ -1,0 +1,23 @@
+{
+  "lsp": {
+    "oxc": {
+      "binary": {
+        "path": "node_modules/.bin/oxc_language_server"
+      }
+    }
+  },
+  "languages": {
+    "TypeScript": {
+      "language_servers": ["typescript-language-server", "oxc", "..."]
+    },
+    "TSX": {
+      "language_servers": ["typescript-language-server", "oxc", "..."]
+    },
+    "JavaScript": {
+      "language_servers": ["typescript-language-server", "oxc", "..."]
+    },
+    "JSX": {
+      "language_servers": ["typescript-language-server", "oxc", "..."]
+    }
+  }
+}
