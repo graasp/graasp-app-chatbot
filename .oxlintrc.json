@@ -64,7 +64,7 @@
       "declaration",
       { "allowArrowFunctions": true }
     ],
-    "eslint/yoda": ["error", "always", { "exceptRange": true }],
+    "eslint/yoda": ["error", "always", { "onlyEquality": true }],
     "typescript/await-thenable": "error",
     "typescript/no-array-delete": "error",
     "typescript/no-base-to-string": "error",

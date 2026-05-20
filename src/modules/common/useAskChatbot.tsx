@@ -1,12 +1,11 @@
 import { useCallback } from 'react';
 
 import { ChatbotThreadMessage, buildPrompt } from '@graasp/apps-query-client';
-import { ChatbotRole } from '@graasp/sdk';
 
 import { AppActionsType } from '@/config/appActions';
-import { AppDataTypes } from '@/config/appData';
+import { AppDataTypes, CommentData } from '@/config/appData';
 import { ChatbotPromptSettings } from '@/config/appSetting';
-import { mutations } from '@/config/queryClient';
+import { hooks, mutations } from '@/config/queryClient';
 
 /**
  * Returns a function that save a chatbot answer based on the user message
@@ -27,25 +26,41 @@ export const useAskChatbot = ({
     mutations.usePostChatBot();
   const { mutate: postAction } = mutations.usePostAppAction();
 
+  const { data: allComments } = hooks.useAppData<CommentData>();
+  const conversationComments = allComments
+    ?.filter(
+      (c) =>
+        c.data.conversationId === conversationId ||
+        ('undefined' === conversationId && !c.data.conversationId),
+    )
+    ?.toSorted((c1, c2) => (c1.createdAt > c2.createdAt ? 1 : -1));
+
   const generateChatbotAnswer = useCallback(
     async (userMessageId: string, newUserComment: string) => {
-      const threadMessages: ChatbotThreadMessage[] = [
-        {
-          botDataType: AppDataTypes.BotComment,
-          msgType: AppDataTypes.BotComment,
-          data: chatbotPrompt.chatbotCue,
-        },
-      ];
+      // When there are stored messages, use them as the full thread history
+      // (the closure captures conversationComments from the render before sendMessage ran,
+      // so it excludes the just-saved user message which buildPrompt appends itself).
+      // On the very first message the list is empty, so fall back to the cue.
+      const threadMessages: ChatbotThreadMessage[] =
+        (conversationComments?.length ?? 0) > 0
+          ? conversationComments!.map((c) => ({
+              botDataType: AppDataTypes.BotComment,
+              msgType: c.type,
+              data: c.data.content,
+            }))
+          : [
+              {
+                botDataType: AppDataTypes.BotComment,
+                msgType: AppDataTypes.BotComment,
+                data: chatbotPrompt.chatbotCue,
+              },
+            ];
 
-      const prompt = [
-        // this is to spread the JSON setting before the messages
-        { role: ChatbotRole.System, content: chatbotPrompt.initialPrompt },
-        // this function requests the prompt as the first argument in string format
-        // we can not use it in this context as we are using a JSON prompt.
-        // if we simplify the prompt in the future we will be able to remove the line above
-        // and this function solely
-        ...buildPrompt(undefined, threadMessages, newUserComment),
-      ];
+      const prompt = buildPrompt(
+        chatbotPrompt.initialPrompt,
+        threadMessages,
+        newUserComment,
+      );
 
       try {
         const chatBotRes = await postChatBotAsync(prompt);
@@ -70,6 +85,7 @@ export const useAskChatbot = ({
       }
     },
     [
+      conversationComments,
       chatbotPrompt.chatbotCue,
       chatbotPrompt.initialPrompt,
       postAction,
