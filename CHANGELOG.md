@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.2.1](https://github.com/graasp/graasp-app-chatbot/compare/v2.2.0...v2.2.1) (2026-05-20)
+
+
+### Bug Fixes
+
+* message history bug ([#404](https://github.com/graasp/graasp-app-chatbot/issues/404)) ([73cc49b](https://github.com/graasp/graasp-app-chatbot/commit/73cc49b6128c2711fa46c46dbec7124730eaf075))
+
 ## [2.2.0](https://github.com/graasp/graasp-app-chatbot/compare/v2.1.0...v2.2.0) (2026-05-06)
 
 
