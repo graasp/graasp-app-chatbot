@@ -7944,8 +7944,8 @@ __metadata:
     oxlint-tsgolint: "npm:0.14.0"
     prettier: "npm:3.8.1"
     prism-react-renderer: "npm:2.4.1"
-    react: "npm:19.1.0"
-    react-dom: "npm:19.1.0"
+    react: "npm:19.1.8"
+    react-dom: "npm:19.1.8"
     react-i18next: "npm:15.5.3"
     react-markdown: "npm:9.1.0"
     react-toastify: "npm:11.0.5"
@@ -11045,14 +11045,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-dom@npm:19.1.0":
-  version: 19.1.0
-  resolution: "react-dom@npm:19.1.0"
+"react-dom@npm:19.1.8":
+  version: 19.1.8
+  resolution: "react-dom@npm:19.1.8"
   dependencies:
     scheduler: "npm:^0.26.0"
   peerDependencies:
-    react: ^19.1.0
-  checksum: 10/c5b58605862c7b0bb044416b01c73647bb8e89717fb5d7a2c279b11815fb7b49b619fe685c404e59f55eb52c66831236cc565c25ee1c2d042739f4a2cc538aa2
+    react: ^19.1.8
+  checksum: 10/b2aea119daad57e617b9ffac5c9b4943cd614eba60e3544f85344b520f234da7752b5cf1409c0418437f6757c5fe895a472e4d267da4f7cac99a0c2bc5420d3e
   languageName: node
   linkType: hard
 
@@ -11188,10 +11188,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react@npm:19.1.0":
-  version: 19.1.0
-  resolution: "react@npm:19.1.0"
-  checksum: 10/d0180689826fd9de87e839c365f6f361c561daea397d61d724687cae88f432a307d1c0f53a0ee95ddbe3352c10dac41d7ff1ad85530fb24951b27a39e5398db4
+"react@npm:19.1.8":
+  version: 19.1.8
+  resolution: "react@npm:19.1.8"
+  checksum: 10/1ace45fbd09cf010caa0e40f6a3dfa1ce7d7c69493ba1877d61979b023461b93c81644eef47ffadf8e4340adeaa88c30c0297978600020ddd3a1780e3db2547d
   languageName: node
   linkType: hard
 
